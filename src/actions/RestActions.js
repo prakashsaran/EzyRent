@@ -98,6 +98,26 @@ export const addProperty = (data,media=null) => async (dispatch) => {
   }
 
 }
+
+export const editProperty = (data,media=null) => async (dispatch) => {
+  if(media){
+    console.log("media is ok",media)
+    /* formData = formMultipartData("property_image",media,data);
+    const response = await EzyRent.admin.addPropertyWithImage(formData);
+    if(response && response.data){
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+    } */
+  } else {
+    formData = formUrlencodedData(data);
+    const response = await EzyRent.admin.addPropertyNoneImage(formData);
+    if(response && response.data){
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+    }
+
+  }
+
+}
+
 /**
  * @name getPropertiesForLandlord
  * @description getPropertiesForLandlord using get list of propertes with keyword,offset,limit
