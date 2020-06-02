@@ -1,0 +1,46 @@
+[
+    {
+        "name":"House No. 74 SFS Merrie Pink",
+        "image":"https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg",
+        "location":"Kuravarkonam, Trivandrum Keral",
+        "paying_date":"Wed Mar 26 2020 05:30:00 GMT+0530 (India Standard Time)",
+        "amount":"15000",
+        "status":"pending",
+        "process":"due"
+    },
+    {
+        "name":"SFS cyber palms",
+        "image":"https://cdn.pixabay.com/photo/2015/05/15/14/21/architecture-768432_960_720.jpg",
+        "location":"Kuravarkonam, Trivandrum Keral",
+        "paying_date":"Wed May 25 2020 05:30:00 GMT+0530 (India Standard Time)",
+        "amount":"14000",
+        "status":"pending",
+        "process":"waiting"
+    },
+    {
+        "name":"Semi Furnished 3BHK in Kulathoor",
+        "image":"https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg",
+        "location":"Kuravarkonam, Trivandrum Keral",
+        "paying_date":"Wed May 18 2015 05:30:00 GMT+0530 (India Standard Time)",
+        "amount":"15000",
+        "status":"paid",
+        "process":"complete"
+    },
+    {
+        "name":"House No. 75 SFS Merrie Pink",
+        "image":"https://cdn.pixabay.com/photo/2015/05/15/14/21/architecture-768432_960_720.jpg",
+        "location":"Kuravarkonam, Trivandrum Keral",
+        "paying_date":"Wed Apr 25 2010 05:30:00 GMT+0530 (India Standard Time)",
+        "amount":"15700",
+        "status":"paid",
+        "process":"complete"
+    },
+    {
+        "name":"House No. 76 SFS Merrie Pink",
+        "location":"Kuravarkonam, Trivandrum Keral",
+        "paying_date":"Wed Mar 25 2010 05:30:00 GMT+0530 (India Standard Time)",
+        "amount":"15700",
+        "status":"pending",
+        "process":"due"
+    }
+]

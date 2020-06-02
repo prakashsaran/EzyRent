@@ -1,0 +1,1556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E2D566C0B7443095789DE9 /* secure_payment.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1B10D4B4BE462BA492A2BC /* secure_payment.png */; };
+		00E356F31AD99517003FC87E /* EzyRentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EzyRentTests.m */; };
+		036679CDA96F4171AF59EF33 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F957FD415B9437282B6017A /* Montserrat-LightItalic.ttf */; };
+		04E2EA82EC7F4967ABB15F2A /* nav_more_active.png in Resources */ = {isa = PBXBuildFile; fileRef = F88C9C1D51D94730947261CD /* nav_more_active.png */; };
+		0611A38487F544EDA3FDE171 /* ezyrent-footer-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */; };
+		065C21D92F1E4A6796F1C33C /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D23C093E15F3455499C6B09D /* right-arrow.png */; };
+		07E9683ACC3A4406BD1EB67F /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EF792FCF0694F13BF5DDB36 /* Montserrat-Medium.ttf */; };
+		0AE67EDA60BE409683D08291 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = C68843B218E3470081D142EB /* arrow_left.png */; };
+		0BBD8A5DEEE04864BEE4058F /* sample_image_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D33B979C2246DEA4700C42 /* sample_image_2.png */; };
+		0C61F2D13DDC4B18B0F1AFE8 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4B3C560A61C4647B07C027C /* Montserrat-SemiBoldItalic.ttf */; };
+		129EE5EBC08A4825AF4EAB68 /* double_tick.png in Resources */ = {isa = PBXBuildFile; fileRef = CFD23AA9426A48F38A28A7A8 /* double_tick.png */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		15056D8D03C14E1D86B1163E /* edit-green.png in Resources */ = {isa = PBXBuildFile; fileRef = A51A025ADBBD4C24B12309B3 /* edit-green.png */; };
+		156FA5C4DA0B4C0EA6644756 /* indicator_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = A22BC333A3E749D894CE74D5 /* indicator_inactive.png */; };
+		16D41C37604147E6BA985FE0 /* single_tick_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 49E194C971FF4BB88BA40225 /* single_tick_light.png */; };
+		17AD3DA584BB40C2A9D7D504 /* dashboard_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DB7B679C080347138BDDD378 /* dashboard_bg.jpg */; };
+		185350A960074ECEB322FF45 /* sample_image_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 244289C5F7B6453DBB5A87A9 /* sample_image_1.png */; };
+		18656546246E465300DC7015 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18656545246E465300DC7015 /* StoreKit.framework */; };
+		188DE7D799564FC298A0667B /* delete-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = E5036A71A7564FB982828F91 /* delete-transparent.png */; };
+		190C45D5092948E0ABC6353F /* dues_label.png in Resources */ = {isa = PBXBuildFile; fileRef = 667C1AEE759E49DE8F926F5D /* dues_label.png */; };
+		1E2EEC79E27C4892B88AB495 /* navigation.png in Resources */ = {isa = PBXBuildFile; fileRef = 034DE87A75A04B9BB4A36F22 /* navigation.png */; };
+		224FC7FE436B40DBA078C8D2 /* nav_notifications_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CFF1C5DDD3445959ACB4313 /* nav_notifications_inactive.png */; };
+		22FD621B149E42619B7E4717 /* walkthrough_landloard.png in Resources */ = {isa = PBXBuildFile; fileRef = 0387827188984AEA841F26F9 /* walkthrough_landloard.png */; };
+		23F8FC77C57C4CF0AD260938 /* green-box.png in Resources */ = {isa = PBXBuildFile; fileRef = E22E8A557B004632B9D517F9 /* green-box.png */; };
+		24F841A2B65D46B1B155B4E1 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB98D9CDD7B0467783BCCA86 /* Montserrat-BoldItalic.ttf */; };
+		26221054582E2EB97ED15EAB /* libPods-EzyRent-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 410DA23F7CC30B794BECAF3E /* libPods-EzyRent-tvOSTests.a */; };
+		27F2B7AD0BF042E4A43E6F5F /* three-dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A8D6CAF1F8E49DCB4BAAD58 /* three-dot.png */; };
+		2CCA3F4EA2D247B28EE01BAB /* paginat.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F5B2024F98D4A6AB8FBA2E1 /* paginat.png */; };
+		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* EzyRentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EzyRentTests.m */; };
+		2FA64B8B0EAB4DC3A7B7A9D9 /* my-tenants.png in Resources */ = {isa = PBXBuildFile; fileRef = D5976FA4897A460D853B7831 /* my-tenants.png */; };
+		2FF41C3393D0424EB5D17C12 /* dashboard_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = B1EF235D035C4FD7B608748C /* dashboard_inactive.png */; };
+		3736379BE77442E5A5600DDC /* map_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A2B23AD2F34C028EAED5EB /* map_ellipse.png */; };
+		381C00E5EC084EDC9F3C941E /* back-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 28059469EDC94F23B1448E9D /* back-blue.png */; };
+		39249146E4F44BD7A0FF7074 /* properties_item_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 98A8259B6D0C4BC79A85BA21 /* properties_item_bg.png */; };
+		3BE2D595B9734BFCA675D794 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DA0DBE11BC44D2D845F757A /* Montserrat-MediumItalic.ttf */; };
+		3D1F447AE6644268BFD0314D /* dashboard_my_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = B435A16BB6D64839A4D55F44 /* dashboard_my_profile.png */; };
+		3EE695DDECCC4CEC895AC66D /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F095E829FBE43C5B840757E /* close.png */; };
+		44763C4498AC48A4A1CFD983 /* dashboard_active.png in Resources */ = {isa = PBXBuildFile; fileRef = DC3987F6A3404F49BA66DF47 /* dashboard_active.png */; };
+		45BF2ADBC9F546E8B8257D3C /* nav_more_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B6915D232748B98DB220E4 /* nav_more_inactive.png */; };
+		45DAD0AD60F34B139A599FB0 /* nav_rent_active.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8BC45464F64843BF8D7337 /* nav_rent_active.png */; };
+		4643D92D51D2428F0258A114 /* libPods-EzyRent-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 579DE0F7C338C22BF9D1CD95 /* libPods-EzyRent-tvOS.a */; };
+		469989DEB29B4C14B9AA68A6 /* my-bank.png in Resources */ = {isa = PBXBuildFile; fileRef = B6B29CF895F84B72923BD290 /* my-bank.png */; };
+		4A42A204903A4178A92E44FF /* ezyrent_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 042D6396D740493CA6A2C985 /* ezyrent_logo.png */; };
+		4C17A1B8F1C64B839DD5B308 /* tever-thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B5E3EA6870C4705A8C8C065 /* tever-thomas.png */; };
+		4EAFE55C415A4203A0F59E46 /* nav_property_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FA79BF09F145B8BADA9EBC /* nav_property_inactive.png */; };
+		4EEF16E07AE3CCD278593086 /* libPods-EzyRent-EzyRentTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03746816D9974E67E74CE1CD /* libPods-EzyRent-EzyRentTests.a */; };
+		533FCA40359F4D9A9F862A37 /* bkp_dashboard_data_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAA902D5AEB4F939F77668B /* bkp_dashboard_data_bg.png */; };
+		53D39A6D682A45F3ACA15CBC /* my-leaderboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 02931056C7CC4717AA84DC9F /* my-leaderboard.png */; };
+		569932FAE2D248BABBE3AA0E /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B86DDAE115B842B080ED10BB /* Oxygen-Bold.ttf */; };
+		56CA1E77AA98464A9D064C36 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = F46C72347F64440680657832 /* arrow_right.png */; };
+		572E3B61A2C74D5A802F67CA /* step-round.png in Resources */ = {isa = PBXBuildFile; fileRef = E85EBCA4CC4F49D1A70B49D4 /* step-round.png */; };
+		57730604C3184C5EBDF96FEE /* james.png in Resources */ = {isa = PBXBuildFile; fileRef = 86D3F5DB657A42B5BA5892D5 /* james.png */; };
+		57FE4396D4F042C2A85AE4C0 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C1D9576C4EE1A8367A39 /* Montserrat-Bold.ttf */; };
+		5BB185A85D424F188901CEBE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CD6D5DC0694BEAABA3392A /* Montserrat-Regular.ttf */; };
+		61F5E8B809A9BE412204B960 /* libPods-EzyRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF21C216D617409F70D66C6 /* libPods-EzyRent.a */; };
+		6553D6B2072B491795914760 /* edit-white.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D53D4F6DE4586987B04EA /* edit-white.png */; };
+		65BA1C25DC904009932BCBD8 /* sample_image_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7DAA0612774D60B4D99E8F /* sample_image_3.png */; };
+		673A3FF5295748CCBDE52FC4 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD6A57EE3A84710B51CD1CA /* plus.png */; };
+		67F992534D06459D8076CE08 /* bank-account-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB079AD7A674CFC88CE4A1D /* bank-account-icon.png */; };
+		699101D61F214968A7606DF1 /* securetext_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E025C5B52E4D9BB6867087 /* securetext_hidden.png */; };
+		6A1E15297B7144A58953DD33 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47F8127611AD408B862296ED /* Montserrat-SemiBold.ttf */; };
+		6CED7164E86742588FB9E146 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B51BEB7B0EF44829A9838D91 /* Montserrat-BlackItalic.ttf */; };
+		6D164D0E6BDB445989C28A2A /* securetext_show.png in Resources */ = {isa = PBXBuildFile; fileRef = EE1A47AB480944A9921C609F /* securetext_show.png */; };
+		6D56A9421F564E1C9E5603E7 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 189F228F60AA4003A9DD8B55 /* search.png */; };
+		6D92CE52D82B403AA6143A90 /* nav_rent_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFBB3E21B2743779C1B241A /* nav_rent_inactive.png */; };
+		6F67EDC28A0946729F54F911 /* edit-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = EEEA59807F964FE69DCC20F8 /* edit-transparent.png */; };
+		70B55E2062A14B7C97BBD6ED /* ezyrent-footer-icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 85544B923E3A49DA9CC80624 /* ezyrent-footer-icon copy.png */; };
+		7135B9C0866946B6A3CF7C70 /* arrow_next.png in Resources */ = {isa = PBXBuildFile; fileRef = C664073012DC4996A38E3B73 /* arrow_next.png */; };
+		781888872B6643DBBBF104E7 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0E3AE409253414F936B7EFA /* Montserrat-ExtraBold.ttf */; };
+		78C98FC82E2C499B984BEEB1 /* congrats.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F50301390F4036BFCE97D7 /* congrats.png */; };
+		7EA93B84EEA940B29C0153EC /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DD60B7F064AE2B116240A /* Oxygen-Light.ttf */; };
+		7FE45EFFD702412895999D5D /* arrow-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 894DADE43FA849E1BBC33732 /* arrow-down.png */; };
+		8543AB8E139E45E09583DD99 /* back-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 927A8F4B869640C6855996CF /* back-white.png */; };
+		8A458CAD5642496CBD572E9A /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06084B05E05F46CFBF7996C4 /* Montserrat-Italic.ttf */; };
+		8D25842E408C4EAB8D782A6C /* arrowdown_picker.png in Resources */ = {isa = PBXBuildFile; fileRef = FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */; };
+		9007EAB59AC744C8BA80510E /* dashboard_bg copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5BCF11BE84D3281440102 /* dashboard_bg copy.png */; };
+		95B7B65485D649798853CB70 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A19010E65134BA1887FF3A9 /* Oxygen-Regular.ttf */; };
+		988C29F4DCAE4202B626D1E2 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */; };
+		9F43E5EC11C842D28DC641EC /* credit_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 719FFBFD9B17479E981FF941 /* credit_card.png */; };
+		9FF6C68B1B90449BB68BA159 /* dash-bar-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E8055FCD2E4CB1A10CC58B /* dash-bar-line.png */; };
+		A620625F9D8F4CBBA8F0594F /* property_view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7086420B9A41838280B9CB /* property_view_bg.png */; };
+		AC5B36F4FBA743A29030460A /* three-dot-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 031A3F79FFB1491AB92CCD68 /* three-dot-light.png */; };
+		AFC72E064267410FA738D6EA /* log-out.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A3BC3BBB474B7CBE4E1569 /* log-out.png */; };
+		B3ACF9805ADC4EDCB5F61B4A /* paid_label.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DFD79879764BFEB8E45FDA /* paid_label.png */; };
+		B6617B1DD3CE47B1A09A1169 /* add_properties.png in Resources */ = {isa = PBXBuildFile; fileRef = 04628F43674547E2AAF9B23A /* add_properties.png */; };
+		B70B4B4B629C48E29987F2A9 /* calendar_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = A57B0F404480424DBBB6FAB8 /* calendar_ellipse.png */; };
+		B7CE84A995C7408C9CB756CD /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = CABBFC94C9E8444F887EF19D /* round.png */; };
+		BC5C0CB1317C40898C212F39 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E97F37E73B2449FBAAE38364 /* Montserrat-ExtraLight.ttf */; };
+		BD03B74E8BD6405A92B8AD90 /* new-user-dashboard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28BBBC114C8C4A2A9FE9BA1A /* new-user-dashboard.jpg */; };
+		BFC9287369D5420DAD88E76F /* erase.png in Resources */ = {isa = PBXBuildFile; fileRef = ACD808ED5729447D9C2AD675 /* erase.png */; };
+		C3BE45D914F94720B1E1FB65 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 854C7B8876214B40B7B150DB /* filter.png */; };
+		C7500EEF1A754017BC297375 /* dashboard_data_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CC802A73F3B4439B9812CCA8 /* dashboard_data_bg.png */; };
+		C84F410B541141D7A81D62A9 /* due_label.png in Resources */ = {isa = PBXBuildFile; fileRef = C22ED23F43EB40008D65DD53 /* due_label.png */; };
+		C91F71134CFB415EA6D0C5C9 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB410B7BB445FDBD77FF98 /* Montserrat-Light.ttf */; };
+		C9269142F7084BF1A8C3B304 /* contact_book.png in Resources */ = {isa = PBXBuildFile; fileRef = C1182A7A288F4E64B1BC4348 /* contact_book.png */; };
+		C9897DCD11844B22A3FECB3A /* walkthrough_tenant.png in Resources */ = {isa = PBXBuildFile; fileRef = A77E4820FFCC47A4985787C7 /* walkthrough_tenant.png */; };
+		CB8EB31291DC4F6E93109B21 /* call.png in Resources */ = {isa = PBXBuildFile; fileRef = B08DB5CB816D4D1D997A869C /* call.png */; };
+		CCA28F1DE6CF40BDA9B67F65 /* dashed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D02A7E40FDA24DE8B3B8A96A /* dashed_bg.png */; };
+		CE70FB78A0914EB5AB73AD10 /* pay-rent.png in Resources */ = {isa = PBXBuildFile; fileRef = D7073839859B4E4A9FFDE3C3 /* pay-rent.png */; };
+		CE8162F7570944818674934C /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7151A805C5C2434EB2005CD5 /* Montserrat-ExtraLightItalic.ttf */; };
+		D60A10A983134BA2B90AEC85 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 604C43F9442545618A584F60 /* Montserrat-Black.ttf */; };
+		D97050D54C524960BFADFCD8 /* new-user-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD05DBAD033415493FD4186 /* new-user-dashboard.png */; };
+		DAE3939B81F246908EC48F8C /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B65ACA67B7BA492FBBE42DE9 /* Montserrat-ExtraBoldItalic.ttf */; };
+		E2CB398056DB46B3B3C35631 /* gps_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = A6413D903A5841E0927FABAE /* gps_dark.png */; };
+		E499CF53D05E4C10963FE002 /* dashboard_add_properties.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C058C24F82B43BFA4DDE1BF /* dashboard_add_properties.png */; };
+		E5FCF11CB9F04DF282721025 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = AF155178F0194DD28381FE7B /* arrow_down.png */; };
+		EE3090469D5B4B94ABDF70AB /* dashboard_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6989D10B99624746A2AB517E /* dashboard_bg.png */; };
+		EEDC63E5B38A43F4BD566427 /* dashboard_plant_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CE27AD9D0124116BCFAF1CC /* dashboard_plant_graph.png */; };
+		F03A0E66E11E403992C94892 /* gps.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD92D5457944323A7030400 /* gps.png */; };
+		F2C57693653C4185AA6D3DF7 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C4CB0CAC9E4DD7ADD17587 /* email.png */; };
+		F2F5726F9BCB4DEEB01982B9 /* properties_item_bg_light.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF14BF1AC47402FB02CAD5D /* properties_item_bg_light.png */; };
+		F4CF9206ACDC4211AB1AB2DA /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB6B4653F0AA41B2968EA48C /* Montserrat-ThinItalic.ttf */; };
+		F8D27A14985F439895CEE5F4 /* paginat-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A3511C94ED443A2B47666C8 /* paginat-active.png */; };
+		FA0438D31C5A438294FDCBC7 /* nav_property_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C63B4FBAE1F44B9BA631005 /* nav_property_active.png */; };
+		FC39690C9CC94280829F3E2B /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 202630596B1E48B7B89C2590 /* address.png */; };
+		FC6AA41FA4F340B98DA71B73 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A5129BBE37154612A2B9CF76 /* download.png */; };
+		FF2ABB91B37F43E8B9A7C7B5 /* nav_notifications_active.png in Resources */ = {isa = PBXBuildFile; fileRef = F563B397FA964D17BB550EFD /* nav_notifications_active.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = EzyRent;
+		};
+		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
+			remoteInfo = "EzyRent-tvOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* EzyRentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EzyRentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* EzyRentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EzyRentTests.m; sourceTree = "<group>"; };
+		01D4C1D9576C4EE1A8367A39 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		02931056C7CC4717AA84DC9F /* my-leaderboard.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "my-leaderboard.png"; path = "../src/assets/images/my-leaderboard.png"; sourceTree = "<group>"; };
+		031A3F79FFB1491AB92CCD68 /* three-dot-light.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "three-dot-light.png"; path = "../src/assets/images/three-dot-light.png"; sourceTree = "<group>"; };
+		03444282D63F40029BEAA37F /* MONTSERRAT-THIN_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-THIN_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-THIN_0.TTF"; sourceTree = "<group>"; };
+		034DE87A75A04B9BB4A36F22 /* navigation.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = navigation.png; path = ../src/assets/images/navigation.png; sourceTree = "<group>"; };
+		03746816D9974E67E74CE1CD /* libPods-EzyRent-EzyRentTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-EzyRentTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0387827188984AEA841F26F9 /* walkthrough_landloard.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = walkthrough_landloard.png; path = ../src/assets/images/walkthrough_landloard.png; sourceTree = "<group>"; };
+		042D6396D740493CA6A2C985 /* ezyrent_logo.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ezyrent_logo.png; path = ../src/assets/images/ezyrent_logo.png; sourceTree = "<group>"; };
+		04628F43674547E2AAF9B23A /* add_properties.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = add_properties.png; path = ../src/assets/images/add_properties.png; sourceTree = "<group>"; };
+		06084B05E05F46CFBF7996C4 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Italic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		0C63B4FBAE1F44B9BA631005 /* nav_property_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_property_active.png; path = ../src/assets/images/nav_property_active.png; sourceTree = "<group>"; };
+		0CFF1C5DDD3445959ACB4313 /* nav_notifications_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_notifications_inactive.png; path = ../src/assets/images/nav_notifications_inactive.png; sourceTree = "<group>"; };
+		0F6B74B9708B45D0B563F329 /* MONTSERRAT-EXTRALIGHT_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRALIGHT_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRALIGHT_0.TTF"; sourceTree = "<group>"; };
+		12B6915D232748B98DB220E4 /* nav_more_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_more_inactive.png; path = ../src/assets/images/nav_more_inactive.png; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* EzyRent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EzyRent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EzyRent/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EzyRent/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EzyRent/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EzyRent/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EzyRent/main.m; sourceTree = "<group>"; };
+		15FA79BF09F145B8BADA9EBC /* nav_property_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_property_inactive.png; path = ../src/assets/images/nav_property_inactive.png; sourceTree = "<group>"; };
+		18656544246E462200DC7015 /* EzyRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EzyRent.entitlements; path = EzyRent/EzyRent.entitlements; sourceTree = "<group>"; };
+		18656545246E465300DC7015 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		189F228F60AA4003A9DD8B55 /* search.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = search.png; path = ../src/assets/images/search.png; sourceTree = "<group>"; };
+		1A8D6CAF1F8E49DCB4BAAD58 /* three-dot.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "three-dot.png"; path = "../src/assets/images/three-dot.png"; sourceTree = "<group>"; };
+		1CD6A57EE3A84710B51CD1CA /* plus.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = plus.png; path = ../src/assets/images/plus.png; sourceTree = "<group>"; };
+		1CE27AD9D0124116BCFAF1CC /* dashboard_plant_graph.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_plant_graph.png; path = ../src/assets/images/dashboard_plant_graph.png; sourceTree = "<group>"; };
+		1DA0DBE11BC44D2D845F757A /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-MediumItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
+		1E7DAA0612774D60B4D99E8F /* sample_image_3.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sample_image_3.png; path = ../src/assets/images/sample/sample_image_3.png; sourceTree = "<group>"; };
+		1FD05DBAD033415493FD4186 /* new-user-dashboard.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "new-user-dashboard.png"; path = "../src/assets/images/new-user-dashboard.png"; sourceTree = "<group>"; };
+		202630596B1E48B7B89C2590 /* address.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = address.png; path = ../src/assets/images/address.png; sourceTree = "<group>"; };
+		244289C5F7B6453DBB5A87A9 /* sample_image_1.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sample_image_1.png; path = ../src/assets/images/sample/sample_image_1.png; sourceTree = "<group>"; };
+		26E8055FCD2E4CB1A10CC58B /* dash-bar-line.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "dash-bar-line.png"; path = "../src/assets/images/dash-bar-line.png"; sourceTree = "<group>"; };
+		28059469EDC94F23B1448E9D /* back-blue.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "back-blue.png"; path = "../src/assets/images/back-blue.png"; sourceTree = "<group>"; };
+		283EB172769798C49F0ADE10 /* Pods-EzyRent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent.release.xcconfig"; path = "Target Support Files/Pods-EzyRent/Pods-EzyRent.release.xcconfig"; sourceTree = "<group>"; };
+		28BBBC114C8C4A2A9FE9BA1A /* new-user-dashboard.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "new-user-dashboard.jpg"; path = "../src/assets/images/new-user-dashboard.jpg"; sourceTree = "<group>"; };
+		2B278958ED08F24E2489FDE9 /* Pods-EzyRent-EzyRentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-EzyRentTests.release.xcconfig"; path = "Target Support Files/Pods-EzyRent-EzyRentTests/Pods-EzyRent-EzyRentTests.release.xcconfig"; sourceTree = "<group>"; };
+		2B5E3EA6870C4705A8C8C065 /* tever-thomas.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "tever-thomas.png"; path = "../src/assets/images/tever-thomas.png"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* EzyRent-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzyRent-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* EzyRent-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EzyRent-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon.png"; path = "../src/assets/images/ezyrent-footer-icon.png"; sourceTree = "<group>"; };
+		2F957FD415B9437282B6017A /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-LightItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
+		323EC4A453D54EA3801BBA31 /* MONTSERRAT-BOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BOLDITALIC_0.TTF"; sourceTree = "<group>"; };
+		34A882E5B4134ABAB8AF6836 /* infographic_tourscreen_1_As_Lanlord_Add.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = infographic_tourscreen_1_As_Lanlord_Add.svg; path = ../src/assets/images/infographic_tourscreen_1_As_Lanlord_Add.svg; sourceTree = "<group>"; };
+		364DDA48BFD948F3AFF751CC /* MONTSERRAT-EXTRALIGHTITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; sourceTree = "<group>"; };
+		3C058C24F82B43BFA4DDE1BF /* dashboard_add_properties.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_add_properties.png; path = ../src/assets/images/dashboard_add_properties.png; sourceTree = "<group>"; };
+		3D0EBCF4753544BD80D6357B /* MONTSERRAT-THINITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-THINITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-THINITALIC_0.TTF"; sourceTree = "<group>"; };
+		410DA23F7CC30B794BECAF3E /* libPods-EzyRent-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4185ABE599106F560864CF4E /* Pods-EzyRent-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOSTests/Pods-EzyRent-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		46A2B23AD2F34C028EAED5EB /* map_ellipse.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = map_ellipse.png; path = ../src/assets/images/map_ellipse.png; sourceTree = "<group>"; };
+		47F8127611AD408B862296ED /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		49E194C971FF4BB88BA40225 /* single_tick_light.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = single_tick_light.png; path = ../src/assets/images/single_tick_light.png; sourceTree = "<group>"; };
+		4CF21C216D617409F70D66C6 /* libPods-EzyRent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EF792FCF0694F13BF5DDB36 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		4F5B2024F98D4A6AB8FBA2E1 /* paginat.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = paginat.png; path = ../src/assets/images/paginat.png; sourceTree = "<group>"; };
+		50F50301390F4036BFCE97D7 /* congrats.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = congrats.png; path = ../src/assets/images/congrats.png; sourceTree = "<group>"; };
+		55DFD79879764BFEB8E45FDA /* paid_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = paid_label.png; path = ../src/assets/images/paid_label.png; sourceTree = "<group>"; };
+		57329EA7557F96A4076A40C1 /* Pods-EzyRent-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOS/Pods-EzyRent-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		579DE0F7C338C22BF9D1CD95 /* libPods-EzyRent-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
+		5CDE3F64AF776F3D5EDCB1D5 /* Pods-EzyRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent/Pods-EzyRent.debug.xcconfig"; sourceTree = "<group>"; };
+		5F095E829FBE43C5B840757E /* close.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = close.png; path = ../src/assets/images/close.png; sourceTree = "<group>"; };
+		5F5DC9C5B11F4EB4A9B4EEA8 /* walkthrough_landloard.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = walkthrough_landloard.svg; path = ../src/assets/images/walkthrough_landloard.svg; sourceTree = "<group>"; };
+		604C43F9442545618A584F60 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		6359486EDFE94AA1AA85879E /* MONTSERRAT-BLACK_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BLACK_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BLACK_0.TTF"; sourceTree = "<group>"; };
+		6528A421882741AF939938F9 /* MONTSERRAT-BLACKITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BLACKITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BLACKITALIC_0.TTF"; sourceTree = "<group>"; };
+		667C1AEE759E49DE8F926F5D /* dues_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dues_label.png; path = ../src/assets/images/dues_label.png; sourceTree = "<group>"; };
+		6989D10B99624746A2AB517E /* dashboard_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_bg.png; path = ../src/assets/images/dashboard_bg.png; sourceTree = "<group>"; };
+		6D0DD60B7F064AE2B116240A /* Oxygen-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oxygen-Light.ttf"; path = "../src/assets/fonts/Oxygen/Oxygen-Light.ttf"; sourceTree = "<group>"; };
+		6EFE2D871FC84F45B6FD1055 /* MONTSERRAT-REGULAR.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-REGULAR.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-REGULAR.TTF"; sourceTree = "<group>"; };
+		6F1B10D4B4BE462BA492A2BC /* secure_payment.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = secure_payment.png; path = ../src/assets/images/secure_payment.png; sourceTree = "<group>"; };
+		7151A805C5C2434EB2005CD5 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		719FFBFD9B17479E981FF941 /* credit_card.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = credit_card.png; path = ../src/assets/images/credit_card.png; sourceTree = "<group>"; };
+		73C4CB0CAC9E4DD7ADD17587 /* email.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = email.png; path = ../src/assets/images/email.png; sourceTree = "<group>"; };
+		76421BCA9B9F479A9E59FE6C /* OXYGEN-LIGHT.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-LIGHT.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-LIGHT.TTF"; sourceTree = "<group>"; };
+		7A19010E65134BA1887FF3A9 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oxygen-Regular.ttf"; path = "../src/assets/fonts/Oxygen/Oxygen-Regular.ttf"; sourceTree = "<group>"; };
+		7DDB410B7BB445FDBD77FF98 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		854C7B8876214B40B7B150DB /* filter.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = filter.png; path = ../src/assets/images/filter.png; sourceTree = "<group>"; };
+		85544B923E3A49DA9CC80624 /* ezyrent-footer-icon copy.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon copy.png"; path = "../src/assets/images/ezyrent-footer-icon copy.png"; sourceTree = "<group>"; };
+		86D3F5DB657A42B5BA5892D5 /* james.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = james.png; path = ../src/assets/images/sample/james.png; sourceTree = "<group>"; };
+		894DADE43FA849E1BBC33732 /* arrow-down.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "arrow-down.png"; path = "../src/assets/images/arrow-down.png"; sourceTree = "<group>"; };
+		8A3511C94ED443A2B47666C8 /* paginat-active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "paginat-active.png"; path = "../src/assets/images/paginat-active.png"; sourceTree = "<group>"; };
+		8BD92D5457944323A7030400 /* gps.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = gps.png; path = ../src/assets/images/gps.png; sourceTree = "<group>"; };
+		8FA5BCF11BE84D3281440102 /* dashboard_bg copy.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "dashboard_bg copy.png"; path = "../src/assets/images/dashboard_bg copy.png"; sourceTree = "<group>"; };
+		927A8F4B869640C6855996CF /* back-white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "back-white.png"; path = "../src/assets/images/back-white.png"; sourceTree = "<group>"; };
+		98A8259B6D0C4BC79A85BA21 /* properties_item_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = properties_item_bg.png; path = ../src/assets/images/properties_item_bg.png; sourceTree = "<group>"; };
+		9AB079AD7A674CFC88CE4A1D /* bank-account-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "bank-account-icon.png"; path = "../src/assets/images/bank-account-icon.png"; sourceTree = "<group>"; };
+		9B8EF5A190C54A0E9B875184 /* OXYGEN-BOLD.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-BOLD.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-BOLD.TTF"; sourceTree = "<group>"; };
+		9FAB40C6425B450882DB99B0 /* MONTSERRAT-LIGHTITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-LIGHTITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-LIGHTITALIC_0.TTF"; sourceTree = "<group>"; };
+		A22BC333A3E749D894CE74D5 /* indicator_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = indicator_inactive.png; path = ../src/assets/images/indicator_inactive.png; sourceTree = "<group>"; };
+		A2D946A5E9774F3C809829AB /* MONTSERRAT-SEMIBOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-SEMIBOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-SEMIBOLDITALIC_0.TTF"; sourceTree = "<group>"; };
+		A3DC4CDF00CFD38AD075BF7E /* Pods-EzyRent-EzyRentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-EzyRentTests.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-EzyRentTests/Pods-EzyRent-EzyRentTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4B3C560A61C4647B07C027C /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		A4D33B979C2246DEA4700C42 /* sample_image_2.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sample_image_2.png; path = ../src/assets/images/sample/sample_image_2.png; sourceTree = "<group>"; };
+		A5129BBE37154612A2B9CF76 /* download.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = download.png; path = ../src/assets/images/download.png; sourceTree = "<group>"; };
+		A51A025ADBBD4C24B12309B3 /* edit-green.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "edit-green.png"; path = "../src/assets/images/edit-green.png"; sourceTree = "<group>"; };
+		A57B0F404480424DBBB6FAB8 /* calendar_ellipse.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = calendar_ellipse.png; path = ../src/assets/images/calendar_ellipse.png; sourceTree = "<group>"; };
+		A5D24C29F65D4CE4B49258AB /* MONTSERRAT-SEMIBOLD_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-SEMIBOLD_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-SEMIBOLD_0.TTF"; sourceTree = "<group>"; };
+		A6413D903A5841E0927FABAE /* gps_dark.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = gps_dark.png; path = ../src/assets/images/gps_dark.png; sourceTree = "<group>"; };
+		A77E4820FFCC47A4985787C7 /* walkthrough_tenant.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = walkthrough_tenant.png; path = ../src/assets/images/walkthrough_tenant.png; sourceTree = "<group>"; };
+		ACD808ED5729447D9C2AD675 /* erase.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = erase.png; path = ../src/assets/images/erase.png; sourceTree = "<group>"; };
+		AE55055EF1994283B660DECA /* MONTSERRAT-EXTRABOLD_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRABOLD_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRABOLD_0.TTF"; sourceTree = "<group>"; };
+		AF155178F0194DD28381FE7B /* arrow_down.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_down.png; path = ../src/assets/images/arrow_down.png; sourceTree = "<group>"; };
+		AFAA902D5AEB4F939F77668B /* bkp_dashboard_data_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_dashboard_data_bg.png; path = ../src/assets/images/bkp_dashboard_data_bg.png; sourceTree = "<group>"; };
+		AFC12140E7D94771B87AD454 /* MONTSERRAT-BOLD.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BOLD.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BOLD.TTF"; sourceTree = "<group>"; };
+		AFFBB3E21B2743779C1B241A /* nav_rent_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_rent_inactive.png; path = ../src/assets/images/nav_rent_inactive.png; sourceTree = "<group>"; };
+		B08DB5CB816D4D1D997A869C /* call.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = call.png; path = ../src/assets/images/call.png; sourceTree = "<group>"; };
+		B1EF235D035C4FD7B608748C /* dashboard_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_inactive.png; path = ../src/assets/images/dashboard_inactive.png; sourceTree = "<group>"; };
+		B435A16BB6D64839A4D55F44 /* dashboard_my_profile.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_my_profile.png; path = ../src/assets/images/dashboard_my_profile.png; sourceTree = "<group>"; };
+		B51BEB7B0EF44829A9838D91 /* Montserrat-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BlackItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-BlackItalic.ttf"; sourceTree = "<group>"; };
+		B5A3BC3BBB474B7CBE4E1569 /* log-out.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "log-out.png"; path = "../src/assets/images/log-out.png"; sourceTree = "<group>"; };
+		B5CD6D5DC0694BEAABA3392A /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		B65ACA67B7BA492FBBE42DE9 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		B6ADD5B27FB9B82B623E677F /* Pods-EzyRent-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOSTests/Pods-EzyRent-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		B6B29CF895F84B72923BD290 /* my-bank.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "my-bank.png"; path = "../src/assets/images/my-bank.png"; sourceTree = "<group>"; };
+		B86DDAE115B842B080ED10BB /* Oxygen-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oxygen-Bold.ttf"; path = "../src/assets/fonts/Oxygen/Oxygen-Bold.ttf"; sourceTree = "<group>"; };
+		BBE9E65396364F4FAA890332 /* MONTSERRAT-MEDIUM_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-MEDIUM_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-MEDIUM_0.TTF"; sourceTree = "<group>"; };
+		C1182A7A288F4E64B1BC4348 /* contact_book.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = contact_book.png; path = ../src/assets/images/contact_book.png; sourceTree = "<group>"; };
+		C151D132D0B08ACBA5380AB0 /* Pods-EzyRent-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOS/Pods-EzyRent-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		C22ED23F43EB40008D65DD53 /* due_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = due_label.png; path = ../src/assets/images/due_label.png; sourceTree = "<group>"; };
+		C664073012DC4996A38E3B73 /* arrow_next.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_next.png; path = ../src/assets/images/arrow_next.png; sourceTree = "<group>"; };
+		C68843B218E3470081D142EB /* arrow_left.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_left.png; path = ../src/assets/images/arrow_left.png; sourceTree = "<group>"; };
+		C845560FFBF841B7B9E87479 /* MONTSERRAT-MEDIUMITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-MEDIUMITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-MEDIUMITALIC_0.TTF"; sourceTree = "<group>"; };
+		CABBFC94C9E8444F887EF19D /* round.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = round.png; path = ../src/assets/images/round.png; sourceTree = "<group>"; };
+		CC802A73F3B4439B9812CCA8 /* dashboard_data_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_data_bg.png; path = ../src/assets/images/dashboard_data_bg.png; sourceTree = "<group>"; };
+		CEF14BF1AC47402FB02CAD5D /* properties_item_bg_light.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = properties_item_bg_light.png; path = ../src/assets/images/properties_item_bg_light.png; sourceTree = "<group>"; };
+		CFD23AA9426A48F38A28A7A8 /* double_tick.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = double_tick.png; path = ../src/assets/images/double_tick.png; sourceTree = "<group>"; };
+		D01D6988B4AE4596BFF5B733 /* MONTSERRAT-LIGHT_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-LIGHT_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-LIGHT_0.TTF"; sourceTree = "<group>"; };
+		D02A7E40FDA24DE8B3B8A96A /* dashed_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashed_bg.png; path = ../src/assets/images/dashed_bg.png; sourceTree = "<group>"; };
+		D0E025C5B52E4D9BB6867087 /* securetext_hidden.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = securetext_hidden.png; path = ../src/assets/images/securetext_hidden.png; sourceTree = "<group>"; };
+		D0E3AE409253414F936B7EFA /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D23C093E15F3455499C6B09D /* right-arrow.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "right-arrow.png"; path = "../src/assets/images/right-arrow.png"; sourceTree = "<group>"; };
+		D5976FA4897A460D853B7831 /* my-tenants.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "my-tenants.png"; path = "../src/assets/images/my-tenants.png"; sourceTree = "<group>"; };
+		D7073839859B4E4A9FFDE3C3 /* pay-rent.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "pay-rent.png"; path = "../src/assets/images/pay-rent.png"; sourceTree = "<group>"; };
+		DB7B679C080347138BDDD378 /* dashboard_bg.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_bg.jpg; path = ../src/assets/images/dashboard_bg.jpg; sourceTree = "<group>"; };
+		DC3987F6A3404F49BA66DF47 /* dashboard_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_active.png; path = ../src/assets/images/dashboard_active.png; sourceTree = "<group>"; };
+		E0C695279488495BA2BEDC89 /* OXYGEN-REGULAR.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-REGULAR.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-REGULAR.TTF"; sourceTree = "<group>"; };
+		E22E8A557B004632B9D517F9 /* green-box.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "green-box.png"; path = "../src/assets/images/green-box.png"; sourceTree = "<group>"; };
+		E5036A71A7564FB982828F91 /* delete-transparent.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "delete-transparent.png"; path = "../src/assets/images/delete-transparent.png"; sourceTree = "<group>"; };
+		E6CA8D6608E44F76BFCC5296 /* infographic_tourscreen_lanlord.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = infographic_tourscreen_lanlord.png; path = ../src/assets/images/infographic_tourscreen_lanlord.png; sourceTree = "<group>"; };
+		E829358BD68F4AE488ED1E7B /* MONTSERRAT-ITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-ITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-ITALIC_0.TTF"; sourceTree = "<group>"; };
+		E85EBCA4CC4F49D1A70B49D4 /* step-round.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "step-round.png"; path = "../src/assets/images/step-round.png"; sourceTree = "<group>"; };
+		E97F37E73B2449FBAAE38364 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		EB6B4653F0AA41B2968EA48C /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ThinItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
+		EB98D9CDD7B0467783BCCA86 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		ED8BC45464F64843BF8D7337 /* nav_rent_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_rent_active.png; path = ../src/assets/images/nav_rent_active.png; sourceTree = "<group>"; };
+		EE1A47AB480944A9921C609F /* securetext_show.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = securetext_show.png; path = ../src/assets/images/securetext_show.png; sourceTree = "<group>"; };
+		EEEA59807F964FE69DCC20F8 /* edit-transparent.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "edit-transparent.png"; path = "../src/assets/images/edit-transparent.png"; sourceTree = "<group>"; };
+		EF0D53D4F6DE4586987B04EA /* edit-white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "edit-white.png"; path = "../src/assets/images/edit-white.png"; sourceTree = "<group>"; };
+		F46C72347F64440680657832 /* arrow_right.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_right.png; path = ../src/assets/images/arrow_right.png; sourceTree = "<group>"; };
+		F563B397FA964D17BB550EFD /* nav_notifications_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_notifications_active.png; path = ../src/assets/images/nav_notifications_active.png; sourceTree = "<group>"; };
+		F88C9C1D51D94730947261CD /* nav_more_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_more_active.png; path = ../src/assets/images/nav_more_active.png; sourceTree = "<group>"; };
+		FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrowdown_picker.png; path = ../src/assets/images/arrowdown_picker.png; sourceTree = "<group>"; };
+		FE7086420B9A41838280B9CB /* property_view_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = property_view_bg.png; path = ../src/assets/images/property_view_bg.png; sourceTree = "<group>"; };
+		FF07DAD081BB41F6BFF67C20 /* MONTSERRAT-EXTRABOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRABOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRABOLDITALIC_0.TTF"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00E356EB1AD99517003FC87E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EEF16E07AE3CCD278593086 /* libPods-EzyRent-EzyRentTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61F5E8B809A9BE412204B960 /* libPods-EzyRent.a in Frameworks */,
+				18656546246E465300DC7015 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4643D92D51D2428F0258A114 /* libPods-EzyRent-tvOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26221054582E2EB97ED15EAB /* libPods-EzyRent-tvOSTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* EzyRentTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* EzyRentTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = EzyRentTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* EzyRent */ = {
+			isa = PBXGroup;
+			children = (
+				18656544246E462200DC7015 /* EzyRent.entitlements */,
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = EzyRent;
+			sourceTree = "<group>";
+		};
+		187232D5D82241318063E258 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34A882E5B4134ABAB8AF6836 /* infographic_tourscreen_1_As_Lanlord_Add.svg */,
+				E6CA8D6608E44F76BFCC5296 /* infographic_tourscreen_lanlord.png */,
+				6359486EDFE94AA1AA85879E /* MONTSERRAT-BLACK_0.TTF */,
+				6528A421882741AF939938F9 /* MONTSERRAT-BLACKITALIC_0.TTF */,
+				AFC12140E7D94771B87AD454 /* MONTSERRAT-BOLD.TTF */,
+				323EC4A453D54EA3801BBA31 /* MONTSERRAT-BOLDITALIC_0.TTF */,
+				AE55055EF1994283B660DECA /* MONTSERRAT-EXTRABOLD_0.TTF */,
+				FF07DAD081BB41F6BFF67C20 /* MONTSERRAT-EXTRABOLDITALIC_0.TTF */,
+				0F6B74B9708B45D0B563F329 /* MONTSERRAT-EXTRALIGHT_0.TTF */,
+				364DDA48BFD948F3AFF751CC /* MONTSERRAT-EXTRALIGHTITALIC_0.TTF */,
+				E829358BD68F4AE488ED1E7B /* MONTSERRAT-ITALIC_0.TTF */,
+				D01D6988B4AE4596BFF5B733 /* MONTSERRAT-LIGHT_0.TTF */,
+				9FAB40C6425B450882DB99B0 /* MONTSERRAT-LIGHTITALIC_0.TTF */,
+				BBE9E65396364F4FAA890332 /* MONTSERRAT-MEDIUM_0.TTF */,
+				C845560FFBF841B7B9E87479 /* MONTSERRAT-MEDIUMITALIC_0.TTF */,
+				6EFE2D871FC84F45B6FD1055 /* MONTSERRAT-REGULAR.TTF */,
+				A5D24C29F65D4CE4B49258AB /* MONTSERRAT-SEMIBOLD_0.TTF */,
+				A2D946A5E9774F3C809829AB /* MONTSERRAT-SEMIBOLDITALIC_0.TTF */,
+				03444282D63F40029BEAA37F /* MONTSERRAT-THIN_0.TTF */,
+				3D0EBCF4753544BD80D6357B /* MONTSERRAT-THINITALIC_0.TTF */,
+				9B8EF5A190C54A0E9B875184 /* OXYGEN-BOLD.TTF */,
+				76421BCA9B9F479A9E59FE6C /* OXYGEN-LIGHT.TTF */,
+				E0C695279488495BA2BEDC89 /* OXYGEN-REGULAR.TTF */,
+				5F5DC9C5B11F4EB4A9B4EEA8 /* walkthrough_landloard.svg */,
+				04628F43674547E2AAF9B23A /* add_properties.png */,
+				202630596B1E48B7B89C2590 /* address.png */,
+				AF155178F0194DD28381FE7B /* arrow_down.png */,
+				C68843B218E3470081D142EB /* arrow_left.png */,
+				C664073012DC4996A38E3B73 /* arrow_next.png */,
+				F46C72347F64440680657832 /* arrow_right.png */,
+				894DADE43FA849E1BBC33732 /* arrow-down.png */,
+				FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */,
+				28059469EDC94F23B1448E9D /* back-blue.png */,
+				927A8F4B869640C6855996CF /* back-white.png */,
+				9AB079AD7A674CFC88CE4A1D /* bank-account-icon.png */,
+				AFAA902D5AEB4F939F77668B /* bkp_dashboard_data_bg.png */,
+				A57B0F404480424DBBB6FAB8 /* calendar_ellipse.png */,
+				B08DB5CB816D4D1D997A869C /* call.png */,
+				5F095E829FBE43C5B840757E /* close.png */,
+				50F50301390F4036BFCE97D7 /* congrats.png */,
+				C1182A7A288F4E64B1BC4348 /* contact_book.png */,
+				719FFBFD9B17479E981FF941 /* credit_card.png */,
+				26E8055FCD2E4CB1A10CC58B /* dash-bar-line.png */,
+				DC3987F6A3404F49BA66DF47 /* dashboard_active.png */,
+				3C058C24F82B43BFA4DDE1BF /* dashboard_add_properties.png */,
+				8FA5BCF11BE84D3281440102 /* dashboard_bg copy.png */,
+				DB7B679C080347138BDDD378 /* dashboard_bg.jpg */,
+				6989D10B99624746A2AB517E /* dashboard_bg.png */,
+				CC802A73F3B4439B9812CCA8 /* dashboard_data_bg.png */,
+				B1EF235D035C4FD7B608748C /* dashboard_inactive.png */,
+				B435A16BB6D64839A4D55F44 /* dashboard_my_profile.png */,
+				1CE27AD9D0124116BCFAF1CC /* dashboard_plant_graph.png */,
+				D02A7E40FDA24DE8B3B8A96A /* dashed_bg.png */,
+				E5036A71A7564FB982828F91 /* delete-transparent.png */,
+				CFD23AA9426A48F38A28A7A8 /* double_tick.png */,
+				A5129BBE37154612A2B9CF76 /* download.png */,
+				C22ED23F43EB40008D65DD53 /* due_label.png */,
+				667C1AEE759E49DE8F926F5D /* dues_label.png */,
+				A51A025ADBBD4C24B12309B3 /* edit-green.png */,
+				EEEA59807F964FE69DCC20F8 /* edit-transparent.png */,
+				EF0D53D4F6DE4586987B04EA /* edit-white.png */,
+				73C4CB0CAC9E4DD7ADD17587 /* email.png */,
+				ACD808ED5729447D9C2AD675 /* erase.png */,
+				042D6396D740493CA6A2C985 /* ezyrent_logo.png */,
+				85544B923E3A49DA9CC80624 /* ezyrent-footer-icon copy.png */,
+				2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */,
+				854C7B8876214B40B7B150DB /* filter.png */,
+				A6413D903A5841E0927FABAE /* gps_dark.png */,
+				8BD92D5457944323A7030400 /* gps.png */,
+				E22E8A557B004632B9D517F9 /* green-box.png */,
+				A22BC333A3E749D894CE74D5 /* indicator_inactive.png */,
+				B5A3BC3BBB474B7CBE4E1569 /* log-out.png */,
+				46A2B23AD2F34C028EAED5EB /* map_ellipse.png */,
+				B6B29CF895F84B72923BD290 /* my-bank.png */,
+				02931056C7CC4717AA84DC9F /* my-leaderboard.png */,
+				D5976FA4897A460D853B7831 /* my-tenants.png */,
+				F88C9C1D51D94730947261CD /* nav_more_active.png */,
+				12B6915D232748B98DB220E4 /* nav_more_inactive.png */,
+				F563B397FA964D17BB550EFD /* nav_notifications_active.png */,
+				0CFF1C5DDD3445959ACB4313 /* nav_notifications_inactive.png */,
+				0C63B4FBAE1F44B9BA631005 /* nav_property_active.png */,
+				15FA79BF09F145B8BADA9EBC /* nav_property_inactive.png */,
+				ED8BC45464F64843BF8D7337 /* nav_rent_active.png */,
+				AFFBB3E21B2743779C1B241A /* nav_rent_inactive.png */,
+				034DE87A75A04B9BB4A36F22 /* navigation.png */,
+				28BBBC114C8C4A2A9FE9BA1A /* new-user-dashboard.jpg */,
+				1FD05DBAD033415493FD4186 /* new-user-dashboard.png */,
+				8A3511C94ED443A2B47666C8 /* paginat-active.png */,
+				4F5B2024F98D4A6AB8FBA2E1 /* paginat.png */,
+				55DFD79879764BFEB8E45FDA /* paid_label.png */,
+				D7073839859B4E4A9FFDE3C3 /* pay-rent.png */,
+				1CD6A57EE3A84710B51CD1CA /* plus.png */,
+				CEF14BF1AC47402FB02CAD5D /* properties_item_bg_light.png */,
+				98A8259B6D0C4BC79A85BA21 /* properties_item_bg.png */,
+				FE7086420B9A41838280B9CB /* property_view_bg.png */,
+				D23C093E15F3455499C6B09D /* right-arrow.png */,
+				CABBFC94C9E8444F887EF19D /* round.png */,
+				86D3F5DB657A42B5BA5892D5 /* james.png */,
+				244289C5F7B6453DBB5A87A9 /* sample_image_1.png */,
+				A4D33B979C2246DEA4700C42 /* sample_image_2.png */,
+				1E7DAA0612774D60B4D99E8F /* sample_image_3.png */,
+				189F228F60AA4003A9DD8B55 /* search.png */,
+				6F1B10D4B4BE462BA492A2BC /* secure_payment.png */,
+				D0E025C5B52E4D9BB6867087 /* securetext_hidden.png */,
+				EE1A47AB480944A9921C609F /* securetext_show.png */,
+				49E194C971FF4BB88BA40225 /* single_tick_light.png */,
+				E85EBCA4CC4F49D1A70B49D4 /* step-round.png */,
+				2B5E3EA6870C4705A8C8C065 /* tever-thomas.png */,
+				031A3F79FFB1491AB92CCD68 /* three-dot-light.png */,
+				1A8D6CAF1F8E49DCB4BAAD58 /* three-dot.png */,
+				0387827188984AEA841F26F9 /* walkthrough_landloard.png */,
+				A77E4820FFCC47A4985787C7 /* walkthrough_tenant.png */,
+				B86DDAE115B842B080ED10BB /* Oxygen-Bold.ttf */,
+				6D0DD60B7F064AE2B116240A /* Oxygen-Light.ttf */,
+				7A19010E65134BA1887FF3A9 /* Oxygen-Regular.ttf */,
+				604C43F9442545618A584F60 /* Montserrat-Black.ttf */,
+				B51BEB7B0EF44829A9838D91 /* Montserrat-BlackItalic.ttf */,
+				01D4C1D9576C4EE1A8367A39 /* Montserrat-Bold.ttf */,
+				EB98D9CDD7B0467783BCCA86 /* Montserrat-BoldItalic.ttf */,
+				D0E3AE409253414F936B7EFA /* Montserrat-ExtraBold.ttf */,
+				B65ACA67B7BA492FBBE42DE9 /* Montserrat-ExtraBoldItalic.ttf */,
+				E97F37E73B2449FBAAE38364 /* Montserrat-ExtraLight.ttf */,
+				7151A805C5C2434EB2005CD5 /* Montserrat-ExtraLightItalic.ttf */,
+				06084B05E05F46CFBF7996C4 /* Montserrat-Italic.ttf */,
+				7DDB410B7BB445FDBD77FF98 /* Montserrat-Light.ttf */,
+				2F957FD415B9437282B6017A /* Montserrat-LightItalic.ttf */,
+				4EF792FCF0694F13BF5DDB36 /* Montserrat-Medium.ttf */,
+				1DA0DBE11BC44D2D845F757A /* Montserrat-MediumItalic.ttf */,
+				B5CD6D5DC0694BEAABA3392A /* Montserrat-Regular.ttf */,
+				47F8127611AD408B862296ED /* Montserrat-SemiBold.ttf */,
+				A4B3C560A61C4647B07C027C /* Montserrat-SemiBoldItalic.ttf */,
+				5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */,
+				EB6B4653F0AA41B2968EA48C /* Montserrat-ThinItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18656545246E465300DC7015 /* StoreKit.framework */,
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+				4CF21C216D617409F70D66C6 /* libPods-EzyRent.a */,
+				03746816D9974E67E74CE1CD /* libPods-EzyRent-EzyRentTests.a */,
+				579DE0F7C338C22BF9D1CD95 /* libPods-EzyRent-tvOS.a */,
+				410DA23F7CC30B794BECAF3E /* libPods-EzyRent-tvOSTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A45EA853EF24DFD6F01D3AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CDE3F64AF776F3D5EDCB1D5 /* Pods-EzyRent.debug.xcconfig */,
+				283EB172769798C49F0ADE10 /* Pods-EzyRent.release.xcconfig */,
+				A3DC4CDF00CFD38AD075BF7E /* Pods-EzyRent-EzyRentTests.debug.xcconfig */,
+				2B278958ED08F24E2489FDE9 /* Pods-EzyRent-EzyRentTests.release.xcconfig */,
+				57329EA7557F96A4076A40C1 /* Pods-EzyRent-tvOS.debug.xcconfig */,
+				C151D132D0B08ACBA5380AB0 /* Pods-EzyRent-tvOS.release.xcconfig */,
+				4185ABE599106F560864CF4E /* Pods-EzyRent-tvOSTests.debug.xcconfig */,
+				B6ADD5B27FB9B82B623E677F /* Pods-EzyRent-tvOSTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A /* EzyRent */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* EzyRentTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				6A45EA853EF24DFD6F01D3AB /* Pods */,
+				187232D5D82241318063E258 /* Resources */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* EzyRent.app */,
+				00E356EE1AD99517003FC87E /* EzyRentTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* EzyRent-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* EzyRent-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00E356ED1AD99517003FC87E /* EzyRentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EzyRentTests" */;
+			buildPhases = (
+				C4EC9DE0C122F3376D92B65E /* [CP] Check Pods Manifest.lock */,
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+				FC2D57220D4E3267AD77F1D4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00E356F51AD99517003FC87E /* PBXTargetDependency */,
+			);
+			name = EzyRentTests;
+			productName = EzyRentTests;
+			productReference = 00E356EE1AD99517003FC87E /* EzyRentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* EzyRent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EzyRent" */;
+			buildPhases = (
+				1FBA76D76D27F2AB3FCF2133 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				0D75466DA090ABCF5A41AC71 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EzyRent;
+			productName = EzyRent;
+			productReference = 13B07F961A680F5B00A75B9A /* EzyRent.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E47A1E0B4A5D006451C7 /* EzyRent-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EzyRent-tvOS" */;
+			buildPhases = (
+				803910FD1D1612000DFF51BF /* [CP] Check Pods Manifest.lock */,
+				FD10A7F122414F3F0027D42C /* Start Packager */,
+				2D02E4771E0B4A5D006451C7 /* Sources */,
+				2D02E4781E0B4A5D006451C7 /* Frameworks */,
+				2D02E4791E0B4A5D006451C7 /* Resources */,
+				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EzyRent-tvOS";
+			productName = "EzyRent-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* EzyRent-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E48F1E0B4A5D006451C7 /* EzyRent-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EzyRent-tvOSTests" */;
+			buildPhases = (
+				451BAA822FB648F4EB42B9F8 /* [CP] Check Pods Manifest.lock */,
+				2D02E48C1E0B4A5D006451C7 /* Sources */,
+				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
+				2D02E48E1E0B4A5D006451C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
+			);
+			name = "EzyRent-tvOSTests";
+			productName = "EzyRent-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* EzyRent-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				TargetAttributes = {
+					00E356ED1AD99517003FC87E = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = HMZ9APRZAU;
+						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
+					};
+					2D02E47A1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					2D02E48F1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EzyRent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* EzyRent */,
+				00E356ED1AD99517003FC87E /* EzyRentTests */,
+				2D02E47A1E0B4A5D006451C7 /* EzyRent-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* EzyRent-tvOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				B6617B1DD3CE47B1A09A1169 /* add_properties.png in Resources */,
+				FC39690C9CC94280829F3E2B /* address.png in Resources */,
+				E5FCF11CB9F04DF282721025 /* arrow_down.png in Resources */,
+				0AE67EDA60BE409683D08291 /* arrow_left.png in Resources */,
+				7135B9C0866946B6A3CF7C70 /* arrow_next.png in Resources */,
+				56CA1E77AA98464A9D064C36 /* arrow_right.png in Resources */,
+				7FE45EFFD702412895999D5D /* arrow-down.png in Resources */,
+				8D25842E408C4EAB8D782A6C /* arrowdown_picker.png in Resources */,
+				381C00E5EC084EDC9F3C941E /* back-blue.png in Resources */,
+				8543AB8E139E45E09583DD99 /* back-white.png in Resources */,
+				67F992534D06459D8076CE08 /* bank-account-icon.png in Resources */,
+				533FCA40359F4D9A9F862A37 /* bkp_dashboard_data_bg.png in Resources */,
+				B70B4B4B629C48E29987F2A9 /* calendar_ellipse.png in Resources */,
+				CB8EB31291DC4F6E93109B21 /* call.png in Resources */,
+				3EE695DDECCC4CEC895AC66D /* close.png in Resources */,
+				78C98FC82E2C499B984BEEB1 /* congrats.png in Resources */,
+				C9269142F7084BF1A8C3B304 /* contact_book.png in Resources */,
+				9F43E5EC11C842D28DC641EC /* credit_card.png in Resources */,
+				9FF6C68B1B90449BB68BA159 /* dash-bar-line.png in Resources */,
+				44763C4498AC48A4A1CFD983 /* dashboard_active.png in Resources */,
+				E499CF53D05E4C10963FE002 /* dashboard_add_properties.png in Resources */,
+				9007EAB59AC744C8BA80510E /* dashboard_bg copy.png in Resources */,
+				17AD3DA584BB40C2A9D7D504 /* dashboard_bg.jpg in Resources */,
+				EE3090469D5B4B94ABDF70AB /* dashboard_bg.png in Resources */,
+				C7500EEF1A754017BC297375 /* dashboard_data_bg.png in Resources */,
+				2FF41C3393D0424EB5D17C12 /* dashboard_inactive.png in Resources */,
+				3D1F447AE6644268BFD0314D /* dashboard_my_profile.png in Resources */,
+				EEDC63E5B38A43F4BD566427 /* dashboard_plant_graph.png in Resources */,
+				CCA28F1DE6CF40BDA9B67F65 /* dashed_bg.png in Resources */,
+				188DE7D799564FC298A0667B /* delete-transparent.png in Resources */,
+				129EE5EBC08A4825AF4EAB68 /* double_tick.png in Resources */,
+				FC6AA41FA4F340B98DA71B73 /* download.png in Resources */,
+				C84F410B541141D7A81D62A9 /* due_label.png in Resources */,
+				190C45D5092948E0ABC6353F /* dues_label.png in Resources */,
+				15056D8D03C14E1D86B1163E /* edit-green.png in Resources */,
+				6F67EDC28A0946729F54F911 /* edit-transparent.png in Resources */,
+				6553D6B2072B491795914760 /* edit-white.png in Resources */,
+				F2C57693653C4185AA6D3DF7 /* email.png in Resources */,
+				BFC9287369D5420DAD88E76F /* erase.png in Resources */,
+				4A42A204903A4178A92E44FF /* ezyrent_logo.png in Resources */,
+				70B55E2062A14B7C97BBD6ED /* ezyrent-footer-icon copy.png in Resources */,
+				0611A38487F544EDA3FDE171 /* ezyrent-footer-icon.png in Resources */,
+				C3BE45D914F94720B1E1FB65 /* filter.png in Resources */,
+				E2CB398056DB46B3B3C35631 /* gps_dark.png in Resources */,
+				F03A0E66E11E403992C94892 /* gps.png in Resources */,
+				23F8FC77C57C4CF0AD260938 /* green-box.png in Resources */,
+				156FA5C4DA0B4C0EA6644756 /* indicator_inactive.png in Resources */,
+				AFC72E064267410FA738D6EA /* log-out.png in Resources */,
+				3736379BE77442E5A5600DDC /* map_ellipse.png in Resources */,
+				469989DEB29B4C14B9AA68A6 /* my-bank.png in Resources */,
+				53D39A6D682A45F3ACA15CBC /* my-leaderboard.png in Resources */,
+				2FA64B8B0EAB4DC3A7B7A9D9 /* my-tenants.png in Resources */,
+				04E2EA82EC7F4967ABB15F2A /* nav_more_active.png in Resources */,
+				45BF2ADBC9F546E8B8257D3C /* nav_more_inactive.png in Resources */,
+				FF2ABB91B37F43E8B9A7C7B5 /* nav_notifications_active.png in Resources */,
+				224FC7FE436B40DBA078C8D2 /* nav_notifications_inactive.png in Resources */,
+				FA0438D31C5A438294FDCBC7 /* nav_property_active.png in Resources */,
+				4EAFE55C415A4203A0F59E46 /* nav_property_inactive.png in Resources */,
+				45DAD0AD60F34B139A599FB0 /* nav_rent_active.png in Resources */,
+				6D92CE52D82B403AA6143A90 /* nav_rent_inactive.png in Resources */,
+				1E2EEC79E27C4892B88AB495 /* navigation.png in Resources */,
+				BD03B74E8BD6405A92B8AD90 /* new-user-dashboard.jpg in Resources */,
+				D97050D54C524960BFADFCD8 /* new-user-dashboard.png in Resources */,
+				F8D27A14985F439895CEE5F4 /* paginat-active.png in Resources */,
+				2CCA3F4EA2D247B28EE01BAB /* paginat.png in Resources */,
+				B3ACF9805ADC4EDCB5F61B4A /* paid_label.png in Resources */,
+				CE70FB78A0914EB5AB73AD10 /* pay-rent.png in Resources */,
+				673A3FF5295748CCBDE52FC4 /* plus.png in Resources */,
+				F2F5726F9BCB4DEEB01982B9 /* properties_item_bg_light.png in Resources */,
+				39249146E4F44BD7A0FF7074 /* properties_item_bg.png in Resources */,
+				A620625F9D8F4CBBA8F0594F /* property_view_bg.png in Resources */,
+				065C21D92F1E4A6796F1C33C /* right-arrow.png in Resources */,
+				B7CE84A995C7408C9CB756CD /* round.png in Resources */,
+				57730604C3184C5EBDF96FEE /* james.png in Resources */,
+				185350A960074ECEB322FF45 /* sample_image_1.png in Resources */,
+				0BBD8A5DEEE04864BEE4058F /* sample_image_2.png in Resources */,
+				65BA1C25DC904009932BCBD8 /* sample_image_3.png in Resources */,
+				6D56A9421F564E1C9E5603E7 /* search.png in Resources */,
+				00E2D566C0B7443095789DE9 /* secure_payment.png in Resources */,
+				699101D61F214968A7606DF1 /* securetext_hidden.png in Resources */,
+				6D164D0E6BDB445989C28A2A /* securetext_show.png in Resources */,
+				16D41C37604147E6BA985FE0 /* single_tick_light.png in Resources */,
+				572E3B61A2C74D5A802F67CA /* step-round.png in Resources */,
+				4C17A1B8F1C64B839DD5B308 /* tever-thomas.png in Resources */,
+				AC5B36F4FBA743A29030460A /* three-dot-light.png in Resources */,
+				27F2B7AD0BF042E4A43E6F5F /* three-dot.png in Resources */,
+				22FD621B149E42619B7E4717 /* walkthrough_landloard.png in Resources */,
+				C9897DCD11844B22A3FECB3A /* walkthrough_tenant.png in Resources */,
+				569932FAE2D248BABBE3AA0E /* Oxygen-Bold.ttf in Resources */,
+				7EA93B84EEA940B29C0153EC /* Oxygen-Light.ttf in Resources */,
+				95B7B65485D649798853CB70 /* Oxygen-Regular.ttf in Resources */,
+				D60A10A983134BA2B90AEC85 /* Montserrat-Black.ttf in Resources */,
+				6CED7164E86742588FB9E146 /* Montserrat-BlackItalic.ttf in Resources */,
+				57FE4396D4F042C2A85AE4C0 /* Montserrat-Bold.ttf in Resources */,
+				24F841A2B65D46B1B155B4E1 /* Montserrat-BoldItalic.ttf in Resources */,
+				781888872B6643DBBBF104E7 /* Montserrat-ExtraBold.ttf in Resources */,
+				DAE3939B81F246908EC48F8C /* Montserrat-ExtraBoldItalic.ttf in Resources */,
+				BC5C0CB1317C40898C212F39 /* Montserrat-ExtraLight.ttf in Resources */,
+				CE8162F7570944818674934C /* Montserrat-ExtraLightItalic.ttf in Resources */,
+				8A458CAD5642496CBD572E9A /* Montserrat-Italic.ttf in Resources */,
+				C91F71134CFB415EA6D0C5C9 /* Montserrat-Light.ttf in Resources */,
+				036679CDA96F4171AF59EF33 /* Montserrat-LightItalic.ttf in Resources */,
+				07E9683ACC3A4406BD1EB67F /* Montserrat-Medium.ttf in Resources */,
+				3BE2D595B9734BFCA675D794 /* Montserrat-MediumItalic.ttf in Resources */,
+				5BB185A85D424F188901CEBE /* Montserrat-Regular.ttf in Resources */,
+				6A1E15297B7144A58953DD33 /* Montserrat-SemiBold.ttf in Resources */,
+				0C61F2D13DDC4B18B0F1AFE8 /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				988C29F4DCAE4202B626D1E2 /* Montserrat-Thin.ttf in Resources */,
+				F4CF9206ACDC4211AB1AB2DA /* Montserrat-ThinItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4791E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		0D75466DA090ABCF5A41AC71 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EzyRent/Pods-EzyRent-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EzyRent/Pods-EzyRent-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1FBA76D76D27F2AB3FCF2133 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EzyRent-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		451BAA822FB648F4EB42B9F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EzyRent-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		803910FD1D1612000DFF51BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EzyRent-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4EC9DE0C122F3376D92B65E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EzyRent-EzyRentTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC2D57220D4E3267AD77F1D4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EzyRent-EzyRentTests/Pods-EzyRent-EzyRentTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EzyRent-EzyRentTests/Pods-EzyRent-EzyRentTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F122414F3F0027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E356EA1AD99517003FC87E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E356F31AD99517003FC87E /* EzyRentTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4771E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48C1E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DCD954D1E0B4F2C00145EB5 /* EzyRentTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* EzyRent */;
+			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D02E47A1E0B4A5D006451C7 /* EzyRent-tvOS */;
+			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13B07FB21A68108700A75B9A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			path = EzyRent;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00E356F61AD99517003FC87E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3DC4CDF00CFD38AD075BF7E /* Pods-EzyRent-EzyRentTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = EzyRentTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		00E356F71AD99517003FC87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B278958ED08F24E2489FDE9 /* Pods-EzyRent-EzyRentTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = EzyRentTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CDE3F64AF776F3D5EDCB1D5 /* Pods-EzyRent.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = EzyRent/EzyRent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = HMZ9APRZAU;
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"FB_SONARKIT_ENABLED=1",
+				);
+				INFOPLIST_FILE = EzyRent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.4;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = local.test.EzyRent;
+				PRODUCT_NAME = EzyRent;
+				PROVISIONING_PROFILE_SPECIFIER = Dev_EzyRent;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VALID_ARCHS = "arm64 arm64e";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 283EB172769798C49F0ADE10 /* Pods-EzyRent.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = EzyRent/EzyRent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = HMZ9APRZAU;
+				INFOPLIST_FILE = EzyRent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.4;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = local.test.EzyRent;
+				PRODUCT_NAME = EzyRent;
+				PROVISIONING_PROFILE_SPECIFIER = Dev_EzyRent;
+				SWIFT_VERSION = 5.0;
+				VALID_ARCHS = "arm64 arm64e";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2D02E4971E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57329EA7557F96A4076A40C1 /* Pods-EzyRent-tvOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "EzyRent-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.EzyRent-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		2D02E4981E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C151D132D0B08ACBA5380AB0 /* Pods-EzyRent-tvOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "EzyRent-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.EzyRent-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		2D02E4991E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4185ABE599106F560864CF4E /* Pods-EzyRent-tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "EzyRent-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.EzyRent-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EzyRent-tvOS.app/EzyRent-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		2D02E49A1E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6ADD5B27FB9B82B623E677F /* Pods-EzyRent-tvOSTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "EzyRent-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.EzyRent-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EzyRent-tvOS.app/EzyRent-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EzyRentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00E356F61AD99517003FC87E /* Debug */,
+				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EzyRent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EzyRent-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4971E0B4A5E006451C7 /* Debug */,
+				2D02E4981E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EzyRent-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4991E0B4A5E006451C7 /* Debug */,
+				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EzyRent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}
