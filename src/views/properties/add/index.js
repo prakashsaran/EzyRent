@@ -371,16 +371,16 @@ renderHeader(){
       <View style={styles.headerContainer(theme)}>
         <View style={styles.headerContext}>
           <TouchableOpacity onPress={()=>NavigationService.goBack()} style={theme.typography.backbtmcontainer}>
-            {propertyImage ?
-              <Image style={styles.backscreen} resizeMode={'stretch'} source={}></Image>
-            :
             <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
-          }
             <Text style={styles.pageTitle(theme)}>Add New Property/Tenant</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.headerBanner(theme)}>
+          {propertyImage?
+            <Image style={styles.headerBannerImage(theme)} source={{uri:propertyImage.uri}}/>
+            :
             <Image style={styles.headerBannerImage(theme)} source={require('../../../assets/images/add_properties.png')}/>
+          }
             <TouchableOpacity style={styles.edit_icon} onPress={()=>this.browseImage()}>
               <Image style={{width:25,height:25}} source={require('../../../assets/images/edit-transparent.png')}/>
             </TouchableOpacity>

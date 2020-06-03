@@ -78,6 +78,8 @@ export const signUp = (mobiledata,data) => async (dispatch) => {
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
 
+    console.log("post is signUp",userId,formData);
+
     // send request to server
     const response = await EzyRent.guest.setupAccountComplete(userId,formData);
     console.log("response, signUp",response)
@@ -138,21 +140,22 @@ export const signupMobile = (mobilenumber,dialcode='0091') => async (dispatch) =
 
 /**
  * @description resendMobileOtp method : resend Otp at create account
- * @param mobilenumber object
+ * @param user object
  * @param type string
  * @returns avoid
  * @callback NavigationService.navigate();
  **/
-export const resendMobileOtp = (mobilenumber,type) => async (dispatch) => {
+export const resendMobileOtp = (user,type) => async (dispatch) => {
   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
   try {
-    console.log("mobilenumber ===",mobilenumber);
+    console.log("user ===",user);
     // send otp proccess
       // form data
       const data = {
-        "id": mobilenumber.id,
+        "id": user.id,
         "type": type,
       }
+      console.log(" resendMobileOtp data",data)
       // form data convert to application/x-www-form-urlencoded
       const formData = formUrlencodedData(data);
 

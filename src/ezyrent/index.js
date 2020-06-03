@@ -63,6 +63,7 @@ class EzyRentClass {
   getAuthorization(){
     return `${this.getTokenType()} ${this.getAccessToken()}`;
   }
+
   requestGet(url, params, authentication=null,type){
     let authorization = authentication;
     if(ADMIN_TYPE==type && authentication==null){
@@ -112,6 +113,59 @@ class EzyRentClass {
       
   }
 
+  requestGetSingleResponse(url, params, authentication=null,type){
+    let authorization = authentication;
+    if(ADMIN_TYPE==type && authentication==null){
+      authorization = this.getAuthorization();
+    }
+
+    let uri = `${this.base_url}${url}`;
+    if (params) {
+      let separator = '?';
+      Object.keys(params).forEach((key) => {
+        uri += `${separator}${key}=${params[key]}`;
+        separator = '&';
+      });
+    }
+
+    const headers = {
+      "Authorization": authorization,
+      'Accept': 'application/json',
+      "content-type": "application/x-www-form-urlencoded",
+      "cache-control": "no-cache",
+    }
+    console.log("requestGet uri",uri,headers)
+    return new Promise((resolve, reject) => {
+      fetch(uri, { "method": "GET", headers,})
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        // Possible 401 or other network error
+        return response.json().then(errorResponse => Promise.reject(errorResponse));
+      })
+      .then((responseData) => {
+        console.log("requestPost responseData",responseData)
+        // debugger;
+        resolve(responseData);
+      })
+      .catch((error) => {
+       resolve(null)
+      });
+
+    })
+      
+  }
+
+  /**
+   * @name requestPost
+   * @description requestPost is return value with extra UI activity ex. screen warning or alerts
+   * @param {*} url 
+   * @param {*} data 
+   * @param {*} authentication 
+   * @param {*} type 
+   */
+
   requestPost(url, data, authentication=null,type) {
     let authorization = authentication;
     if(ADMIN_TYPE==type && authentication==null){
@@ -152,6 +206,58 @@ class EzyRentClass {
     })
   }
 
+  /**
+   * @name requestPostSingleResponse
+   * @description requestPostSingleResponse is return only value and avaid do extra UI activity
+   * @param {*} url 
+   * @param {*} data 
+   * @param {*} authentication 
+   * @param {*} type 
+   */
+  requestPostSingleResponse(url, data, authentication=null,type) {
+    let authorization = authentication;
+    if(ADMIN_TYPE==type && authentication==null){
+      authorization = this.getAuthorization();
+    }
+
+    let uri = `${this.base_url}${url}`;
+    const headers = {
+      "Authorization": authorization,
+      'Accept': 'application/json',
+      "content-type": "application/x-www-form-urlencoded",
+      "cache-control": "no-cache",
+    }
+
+    return new Promise((resolve, reject) => {
+      fetch(uri, { "method": "POST", headers, body: data})
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        // Possible 401 or other network error
+        return response.json().then(errorResponse => Promise.reject(errorResponse));
+      })
+      .then((responseData) => {
+        console.log("requestPost responseData",responseData)
+        // debugger;
+        resolve(responseData);
+      })
+      .catch((error) => {
+       resolve(null)
+      });
+
+    })
+  }
+
+  /**
+   * @name requestMultipartPost
+   * @description post Multipart form data ex. image,file,content
+   * @param {*} url 
+   * @param {*} data 
+   * @param {*} authentication 
+   * @param {string} type 
+   * @param {string} requestMethod 
+   */
   requestMultipartPost(url, data, authentication=null,type,requestMethod="POST") {
     let authorization = authentication;
     if(ADMIN_TYPE==type && authentication==null){
