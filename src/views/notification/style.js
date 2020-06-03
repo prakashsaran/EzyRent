@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
-import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: theme => ({
@@ -68,13 +67,13 @@ export default StyleSheet.create({
     tabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(22),
+      fontSize:22,
       paddingHorizontal:10,
     }),
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(22),
+      fontSize:22,
       paddingHorizontal:10,
       color:theme.colors.seconderyHeadingColor,
       textAlign:'center'
@@ -82,7 +81,7 @@ export default StyleSheet.create({
     Activetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(22),
+      fontSize:22,
       paddingHorizontal:10,
       color:theme.colors.secondry,
       textAlign:'center'
@@ -137,7 +136,7 @@ export default StyleSheet.create({
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(16),
+      fontSize:16,
       width:'50%',
       alignSelf:'center',
       color:theme.colors.primaryTitleColor,
@@ -147,7 +146,7 @@ export default StyleSheet.create({
     itemNameAct:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(16),
+      fontSize:16,
       width:'50%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
@@ -182,21 +181,21 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'92%',
-      fontSize:normalize(16),
+      fontSize:16,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextValue: theme=>({
       color:theme.colors.primary,
       paddingHorizontal:1,
-      fontSize:normalize(16),
+      fontSize:16,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextWarnValue: theme=>({
       color:theme.colors.errorColor,
       paddingHorizontal:1,
-      fontSize:normalize(14),
+      fontSize:14,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -205,8 +204,8 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:normalize(13),
-      lineHeight:normalize(19),
+      fontSize:13,
+      lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -215,8 +214,8 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:normalize(13),
-      lineHeight:normalize(19),
+      fontSize:13,
+      lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -225,7 +224,7 @@ export default StyleSheet.create({
       color:theme.colors.secondry,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightSemiBold,
-      fontSize:normalize(14),
+      fontSize:14,
     }),
     nextscreen:theme=>({
       position:'absolute',
@@ -260,7 +259,7 @@ export default StyleSheet.create({
       bottom:0,
       textAlign:'right',
       padding:10,
-      fontSize:normalize(12),
+      fontSize:12,
       color:theme.colors.textValueColor,
       fontFamily:theme.typography.fontFamilyOxygenLight,
     }),

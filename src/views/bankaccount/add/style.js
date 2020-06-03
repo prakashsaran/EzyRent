@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
-import { normalize } from "../../../components";
 
 export default StyleSheet.create({
     container: {
@@ -15,7 +14,7 @@ export default StyleSheet.create({
     },
     rectWrapp:{
       backgroundColor:theme.colors.lightBackgrountColor,
-      marginTop:normalize(80),
+      marginTop:80,
       minHeight:theme.dimens.defaultScreenMinHeight,
     },
     backscreen:{
@@ -26,14 +25,14 @@ export default StyleSheet.create({
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.fontFamilyOxygenBold,
-      fontSize:normalize(14),
+      fontSize:14,
       //fontWeight:theme.typography.fontWeightBold,
       width:'100%',
       textAlign:'left',
     }),
     fieldWrapp:theme=>({
       width:'100%',
-      marginTop:normalize(15),
+      marginTop:15,
       borderWidth:1,
       borderColor:'transparent',
     }),
@@ -50,7 +49,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:0,
       paddingVertical:5,
@@ -62,7 +61,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
       paddingVertical:5,
@@ -84,7 +83,7 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.primBtnTextColor,
       fontFamily:theme.typography.primaryFont,
-      fontSize:normalize(22),
+      fontSize:22,
       fontWeight:theme.typography.fontWeightSemiBold,
       textDecoration:'none',
     }),

@@ -11,7 +11,7 @@ export default StyleSheet.create({
   image: {
     width: 200,
     height: 200,
-    marginTop: normalize(50),
+    marginTop: 50,
     alignSelf: "center",
   },
   mobileWrapper: theme=> ({

@@ -8,15 +8,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
-  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH
+  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
 } from '../../../navigation/routes';
-
+import { getPropertiesForTenant } from '../../../actions';
 class NewDashboard extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
     super();
     StatusBar.setBarStyle("light-content");
     StatusBar.setHidden(false)
+  }
+  UNSAFE_componentWillMount(){
+    const {getPropertiesForTenant} = this.props
+    getPropertiesForTenant("",0,10);
+
+    console.log("============================= ============= test request componentWillMount")
   }
   componentDidMount(){
     const {customer,status}=this.props
@@ -83,6 +89,7 @@ NewDashboard.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  getPropertiesForTenant: PropTypes.func.isRequired,
 };
 
 NewDashboard.defaultProps = {
@@ -93,4 +100,4 @@ NewDashboard.defaultProps = {
   customer:null,
 };
 
-export default connect(mapStateToProps, {})(NewDashboard);
+export default connect(mapStateToProps, {getPropertiesForTenant})(NewDashboard);

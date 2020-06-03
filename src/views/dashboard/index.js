@@ -31,17 +31,17 @@ class myDashBoard extends React.Component {
     const {customer,status}=this.props
     console.log("customer =>",customer)
     if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({dashboardType:customer.type});
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({dashboardType:customer.user_type});
         } else{
-          this.setState({dashboardType:'new'});
+          this.setState({dashboardType:'U'});
         }
       } else{
-        this.setState({dashboardType:"new"});
+        this.setState({dashboardType:"U"});
       }
     } else{
-      this.setState({dashboardType:"new"});
+      this.setState({dashboardType:"U"});
     }
   }
   addPropertyTenant(){
@@ -54,16 +54,16 @@ class myDashBoard extends React.Component {
     const theme = this.context;
     const {dashboardType} =this.state
     switch(dashboardType){
-      case "landlord":
+      case "L":
         return <LandlordDashboard/>;
         break;
-      case "lessee":
+      case "B":
         return <LesseeDashboard/>;
         break;
-      case "tenant":
+      case "T":
         return <TenantDashboard/>;
         break;
-      case "new":
+      case "U":
         return <NewDashboard/>;
         break;
       default:

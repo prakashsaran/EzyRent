@@ -1,12 +1,5 @@
-import { StyleSheet,Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import {normalize} from '../../../../components'
-function isLessMarshmallow(){
-  const dvcHeight = Dimensions.get('window').height;
-  if(dvcHeight < 600){
-    return true;
-  }
-  return false;
-}
 
 export default StyleSheet.create({
   container: theme => ({
@@ -14,14 +7,13 @@ export default StyleSheet.create({
     backgroundColor: theme.colors.primBackgroundColor,
   }),
   image: {
-    width: isLessMarshmallow()?150:200,
-    height: isLessMarshmallow()?150:200,
-    marginTop: isLessMarshmallow()?20:50,
-    marginBottom:isLessMarshmallow()?-40:0,
+    width: 200,
+    height: 200,
+    marginTop: 50,
     alignSelf: "center",
   },
   proplabel: theme=> ({
-    fontSize: normalize(14),
+    fontSize: 14,
     color: theme.colors.descriptionColor,
     fontFamily:theme.typography.secondaryFont,
     fontWeight:theme.typography.fontWeightRegular,
@@ -35,13 +27,13 @@ export default StyleSheet.create({
   mobileWrapper: theme=> ({
     width: '50%',
     alignSelf: "center",
-    height: isLessMarshmallow()?20:60,
+    height: 60,
     marginVertical:theme.spacing.large,
   }),
   mobileInput: theme=> ({
     borderBottomWidth:2,
     borderColor:theme.colors.secondry,
-    fontSize: normalize(22),
+    fontSize: 22,
     fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
     marginTop:7,
@@ -63,12 +55,12 @@ export default StyleSheet.create({
   }),
 
   cnfrmSignText: theme =>({
-    fontSize:normalize(14),
+    fontSize:14,
     color:theme.colors.descriptionColor,
     fontFamily: theme.typography.secondaryFont,
 }),
 signLink: theme =>({
-    fontSize:normalize(14),
+    fontSize:14,
     color:theme.colors.secondry,
     paddingLeft:theme.spacing.tiny,
     fontFamily: theme.typography.primaryFont,
@@ -80,7 +72,7 @@ signLink: theme =>({
     borderBottomWidth: 1,
     color:theme.colors.descriptionColor,
     borderColor:theme.colors.descriptionColor,
-    fontSize:normalize(22),
+    fontSize:22,
       fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
 }),
@@ -92,7 +84,7 @@ signLink: theme =>({
     marginTop:theme.spacing.small,
   }),
   changeMobileText: theme =>({
-    fontSize:normalize(14),
+    fontSize:14,
     color:theme.colors.secondry,
     fontFamily:theme.typography.secondaryFont,
     fontWeight:theme.typography.fontWeightRegular,

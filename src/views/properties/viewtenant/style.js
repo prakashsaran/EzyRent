@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
 import { isIphoneX} from '../../../components';
-import { normalize } from "../../../components";
 export default StyleSheet.create({
   container: theme => ({
     flex: 1,
@@ -33,7 +32,7 @@ export default StyleSheet.create({
   },
   gpsTitle:theme=>({
     color:theme.colors.primary,
-    fontSize:normalize(16),
+    fontSize:16,
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightRegular,
 
@@ -70,18 +69,18 @@ export default StyleSheet.create({
   },
   pageTitle: theme =>({
     color:theme.colors.secondry,
-    fontSize:normalize(19),
+    fontSize:19,
     fontFamily:theme.typography.fontFamilyMontserratSemi,
   }),
   payTime: theme =>({
     color:theme.colors.underQuickStats,
-    fontSize:normalize(12),
+    fontSize:12,
     fontFamily:theme.typography.fontFamilyOxygenBold,
     fontWeight: theme.typography.fontWeightBold,
   }),
   payTimebld: theme =>({
     color:theme.colors.underQuickStats,
-    fontSize:normalize(12),
+    fontSize:12,
     fontFamily:theme.typography.fontFamilyOxygenBold,
   }),
   ownerInfo:{
@@ -98,13 +97,13 @@ export default StyleSheet.create({
   },
   textLabel:theme=>({
     color:theme.colors.labelColor,
-    fontSize:normalize(13),
+    fontSize:13,
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeight,
   }),
   textLabel2:theme=>({
     color:'#6c6c6c',
-    fontSize:normalize(11),
+    fontSize:11,
     paddingTop:4,
   }),
   propertyInfo:theme =>({
@@ -131,7 +130,7 @@ export default StyleSheet.create({
   },
   textValue:theme=>({
     color:theme.colors.primaryTitleColor,
-    fontSize:normalize(16),
+    fontSize:16,
     fontFamily:theme.typography.fontFamilyOxygenBold,
     fontWeight: theme.typography.fontWeightSemiBold,
     marginHorizontal:5,
@@ -144,14 +143,14 @@ export default StyleSheet.create({
   }),
   primaryBtnText:theme=>({
     color:theme.colors.primBtnTextColor,
-    fontSize:normalize(15),
+    fontSize:15,
     fontFamily:theme.typography.fontFamilyOxygenBold,
     fontWeight: theme.typography.fontWeightSemiBold,
     marginHorizontal:5,
   }),
   banktitle:theme=>({
     color:'#6e6e6e',
-    fontSize:normalize(14),
+    fontSize:14,
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightRegular,
   }),
@@ -164,7 +163,7 @@ export default StyleSheet.create({
   },
   textLabelXl: theme =>({
     color:theme.colors.primaryTitleColor,
-    fontSize:normalize(15),
+    fontSize:15,
     fontFamily:theme.typography.fontFamilyOxygenBold,    
   }),
 

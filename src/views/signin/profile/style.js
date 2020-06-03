@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
-import { normalize } from "../../../components";
+
 export default StyleSheet.create({
   container: theme => ({
     flex: 1,
@@ -28,13 +28,13 @@ export default StyleSheet.create({
   pintitle: theme =>({
     fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
-    fontSize:normalize(16),
+    fontSize:16,
     color:theme.colors.descriptionColor,
   }),
   mobileInput: theme=> ({
     borderBottomWidth:2,
     borderColor:theme.colors.secondry,
-    fontSize: normalize(22),
+    fontSize: 22,
     fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
     marginTop:7,
@@ -48,12 +48,12 @@ export default StyleSheet.create({
   }),
 
   cnfrmSignText: theme =>({
-    fontSize:normalize(16),
+    fontSize:16,
     color:theme.colors.descriptionColor,
     fontFamily: theme.typography.secondaryFont,
 }),
 signLink: theme =>({
-    fontSize:normalize(18),
+    fontSize:18,
     color:theme.colors.primary,
     paddingLeft:theme.spacing.tiny,
     fontFamily: theme.typography.primaryFont,
@@ -86,7 +86,7 @@ underlineStyleBase: theme => ({
   borderBottomWidth: 1,
   color:theme.colors.descriptionColor,
   borderColor:theme.colors.descriptionColor,
-  fontSize:normalize(22),
+  fontSize:22,
     fontFamily:theme.typography.primaryFont,
   fontWeight:theme.typography.fontWeightRegular,
 }),

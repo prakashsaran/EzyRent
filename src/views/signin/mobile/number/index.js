@@ -41,7 +41,7 @@ const onChangePhoneNumber = (number) =>{
 
         <Text style={theme.typography.stepmessage}>Please Enter Your Mobile Number</Text>
 
-        <Text style={theme.typography.mobelTitle2}>MOBILE</Text>
+        <Text style={theme.typography.mobelTitle}>MOBILE</Text>
 
         <View style={styles.twocolumn}>
             <View style={styles.fielcountrylabel(theme)}>

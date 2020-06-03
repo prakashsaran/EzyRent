@@ -1,18 +1,10 @@
 import {
-  StyleSheet,Dimensions,
+  StyleSheet,
 } from "react-native";
-import { normalize } from "../../../components";
-function isLessMarshmallow(){
-  const dvcHeight = Dimensions.get('window').height;
-  if(dvcHeight < 600){
-    return true;
-  }
-  return false;
-}
 
 export default StyleSheet.create({
   container: theme => ({
-    flex: 1,
+  	flex: 1,
     backgroundColor:theme.colors.primBackgroundColor,
   }),
   skipwalkthrough:{
@@ -32,7 +24,7 @@ export default StyleSheet.create({
   }),
   landloardimage:{
     width:'80%',
-    height:isLessMarshmallow()?200:330,
+    height:330,
     alignSelf:'center',
   },
   itemcontainer:{
@@ -50,12 +42,12 @@ export default StyleSheet.create({
     fontFamily:theme.typography.fontFamilyMontserratBold,
   }),
   pageInfo: theme =>({
-    minHeight:normalize(130),
+    minHeight:130,
     color:theme.colors.descriptionColor,
     textAlign:'center',
     fontSize:theme.typography.font_16,
-    marginVertical:normalize(10),
-    paddingHorizontal:normalize(10),
+    marginVertical:10,
+    paddingHorizontal:10,
     paddingTop:5,
     fontWeight:theme.typography.fontWeightRegular,
     fontFamily:theme.typography.secondaryFont,
@@ -63,7 +55,7 @@ export default StyleSheet.create({
     width:'90%',
     marginLeft:'auto',
     marginRight:'auto',
-    lineHeight:normalize(25),
+    lineHeight:25,
   }),
   btncontainer: theme =>({
     backgroundColor: theme.colors.secondry,
@@ -84,14 +76,14 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.35,
     shadowRadius: 5,
-    marginTop:isLessMarshmallow()?0:55,
+    marginTop:55,
     height:45,
   }),
   walkIndicator:{
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
-    marginVertical:normalize(20),
+    marginVertical:20,
     width:50,
     alignSelf:'center',
 

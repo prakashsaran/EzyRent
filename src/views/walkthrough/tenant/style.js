@@ -1,17 +1,10 @@
 import {
-  StyleSheet,Dimensions,
+  StyleSheet,
 } from "react-native";
-import { normalize } from "../../../components";
-function isLessMarshmallow(){
-  const dvcHeight = Dimensions.get('window').height;
-  if(dvcHeight < 600){
-    return true;
-  }
-  return false;
-}
+
 export default StyleSheet.create({
   container: theme => ({
-    flex: 1,
+  	flex: 1,
     backgroundColor:theme.colors.primBackgroundColor,
   }),
   skipwalkthrough:{
@@ -28,7 +21,7 @@ export default StyleSheet.create({
   }),
   landloardimage:{
     width:'80%',
-    height:isLessMarshmallow()?200:330,
+    height:330,
     alignSelf:'center',
   },
   itemcontainer: theme =>({
@@ -52,7 +45,7 @@ export default StyleSheet.create({
     fontWeight:theme.typography.fontWeightRegular,
     fontFamily:theme.typography.secondaryFont,
     marginTop:theme.spacing.small,
-    lineHeight:normalize(25),
+    lineHeight:25,
     minHeight:90,
   }),
   btncontainer: theme =>({
@@ -74,7 +67,7 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.35,
     shadowRadius: 5,
-    marginTop:isLessMarshmallow()?-39:30,
+    marginTop:theme.spacing.extraLarge,
     height:45,
   }),
   walkIndicator: theme =>({

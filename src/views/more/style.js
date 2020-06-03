@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { normalize } from "../../components";
+
 export default StyleSheet.create({
     container: {
       flex: 1,
@@ -13,12 +13,12 @@ export default StyleSheet.create({
 
     ImageWrap:{
       flexDirection:'row',
-      paddingHorizontal:normalize(20),
-      marginBottom:normalize(20),
+      paddingHorizontal:20,
+      marginBottom:20,
     },
     imageLeft:{
-      width:normalize(100),
-      height:normalize(100),
+      width:100,
+      height:100,
     },
     profilebg:{
       alignContent:'center',
@@ -46,13 +46,13 @@ export default StyleSheet.create({
     textHeading: theme =>({
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyMontserratSemi,
-      fontSize:normalize(18),
+      fontSize:18,
       textTransform:'uppercase',
       paddingBottom:6,
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
-      fontSize:normalize(13),
+      fontSize:13,
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
@@ -101,16 +101,16 @@ export default StyleSheet.create({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
       marginBottom:0,
-      lineHeight:normalize(30),
+      lineHeight:30,
     }),
     MoreLinksItemlog: theme =>({
       color:theme.colors.secondry,
-      fontSize:normalize(25),
+      fontSize:25,
     }),
     MoreLinksItemSub: theme =>({
       color:theme.colors.under_more,
-      fontSize:normalize(14),
-      lineHeight:normalize(14),
+      fontSize:14,
+      lineHeight:14,
     }),
     MoreLinksItemLogout: theme =>({
       paddingTop:8,
@@ -118,8 +118,8 @@ export default StyleSheet.create({
     view_Wrap:{
       width:'100%',
       backgroundColor:'#fff',
-      marginTop:normalize(80),
-      paddingBottom:normalize(80),
+      marginTop:80,
+      paddingBottom:80,
     },
     rectView2:{
       width:'94%',

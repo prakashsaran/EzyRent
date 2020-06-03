@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
 import { Dimensions } from 'react-native';
 import { isIphoneX } from '../../components';
-import { normalize } from "../../components";
 
 function getTabDimension() {
   const devicesWidth = Dimensions.get('window').width;
@@ -95,13 +94,13 @@ export default StyleSheet.create({
     tabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(22),
+      fontSize:22,
       paddingHorizontal:0,
     }),
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(15),
+      fontSize:15,
       textAlign:'center',
       width:'100%',
       paddingHorizontal:10,
@@ -110,7 +109,7 @@ export default StyleSheet.create({
     Activetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(15),
+      fontSize:15,
       textAlign:'center',
       width:'100%',
       paddingHorizontal:10,
@@ -124,7 +123,7 @@ export default StyleSheet.create({
     },
     inActivetabitem: theme=>({
       width:getTabDimension(),
-      fontSize:normalize(15),
+      fontSize:15,
       textAlign:'center',
       paddingBottom:4,
     }),
@@ -177,7 +176,7 @@ export default StyleSheet.create({
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(16),
+      fontSize:16,
       width:'50%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
@@ -212,8 +211,8 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:normalize(13),
-      lineHeight:normalize(19),
+      fontSize:13,
+      lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -223,8 +222,8 @@ export default StyleSheet.create({
       paddingRight:10,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:normalize(13),
-      lineHeight:normalize(19),
+      fontSize:13,
+      lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -233,8 +232,8 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:normalize(13),
-      lineHeight:normalize(19),
+      fontSize:13,
+      lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -244,8 +243,8 @@ export default StyleSheet.create({
       paddingRight:10,
       flexWrap:'wrap',
       width:'88%',
-      lineHeight:normalize(19),
-      fontSize:normalize(13),
+      lineHeight:19,
+      fontSize:13,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -264,7 +263,7 @@ export default StyleSheet.create({
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyOxygenBold,
       fontWeight:theme.typography.fontWeightSemiBold,
-      fontSize:normalize(14),
+      fontSize:14,
       alignItems:'center',
       flexDirection:'row',
     }),
@@ -343,7 +342,7 @@ export default StyleSheet.create({
     },
     congrats_head:{
       color:'#44b21b',
-      fontSize:normalize(15),
+      fontSize:15,
       alignSelf:'center',
       fontFamily:'Montserrat-SemiBold',
       marginTop:5,
@@ -370,11 +369,11 @@ export default StyleSheet.create({
     },
     total_amount:{
       textAlign:'center',
-      fontSize:normalize(18),
+      fontSize:18,
     },
     total_amount_price:{
       color:'#315add',
-      fontSize:normalize(20),
+      fontSize:20,
       fontFamily:'Oxygen-Bold',
       textAlign:'center',
       //lineHeight:20,
@@ -383,13 +382,13 @@ export default StyleSheet.create({
     total_amount_light:{
       color:'#333',
       fontFamily:'Oxygen',
-      lineHeight:normalize(20),
-      fontSize:normalize(14),
+      lineHeight:20,
+      fontSize:14,
       textAlign:'center',
     },
     banktitle:theme=>({
       color:'#6e6e6e',
-      fontSize:normalize(14),
+      fontSize:14,
       fontFamily:theme.typography.secondaryFont,
       fontWeight: theme.typography.fontWeightRegular,
       marginHorizontal:5,
@@ -397,29 +396,29 @@ export default StyleSheet.create({
     }),
     payTime: theme =>({
       color:"#333333",
-      fontSize:normalize(18),
+      fontSize:18,
       fontFamily:theme.typography.fontFamilyOxygen,
     }),
     timePeriodExtra: theme =>({
       color:'#6e6e6e',
-      fontSize:normalize(12),
+      fontSize:12,
       fontFamily:theme.typography.secondaryFont,
       fontWeight: theme.typography.fontWeightRegular,
     }),
     textLabelXl: theme =>({
       color:theme.colors.propertyHeading,
-      fontSize:normalize(14),
+      fontSize:14,
       fontFamily:theme.typography.secondaryFont,
       //fontWeight: theme.typography.fontWeightSemiBold,
       marginHorizontal:5,
     }),
     reject:{
       color:'#d72424',
-      fontSize:normalize(16),
+      fontSize:16,
     },
     accept:{
       color:'#44b21b',
-      fontSize:normalize(116),
+      fontSize:16,
     },
     visiblemodal:{
       //borderRadius:20,
@@ -428,7 +427,7 @@ export default StyleSheet.create({
       flexDirection:'column',
     },
     title:{
-      fontSize:normalize(15),
+      fontSize:15,
     },
     textWrapper:{
       //width:260,

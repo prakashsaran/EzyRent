@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
-import { normalize } from "../../../components";
 
 export default StyleSheet.create({
     container: {
@@ -46,7 +45,7 @@ export default StyleSheet.create({
       justifyContent:'center',
     },
     detailHeading:theme=>({
-      fontSize:normalize(20),
+      fontSize:20,
       color:'#315add',
       textAlign:'center',
       marginTop:10,
@@ -56,7 +55,7 @@ export default StyleSheet.create({
       marginBottom:5,
     }),
     detail_inner:{
-      fontSize:normalize(16),
+      fontSize:16,
       paddingHorizontal:10,
       flexDirection:'row',
       justifyContent:'flex-start',
@@ -109,13 +108,13 @@ export default StyleSheet.create({
     },
     quick_stats_heading:{
       color:theme.colors.propertyHeading,
-      fontSize:normalize(18),
+      fontSize:18,
       fontFamily:theme.typography.fontFamilyMontserratSemi,
       fontWeight:theme.typography.fontWeightSemiBold,
     },
     content:theme=>({
       color:theme.colors.descriptionColor,
-      fontSize:normalize(14),
+      fontSize:14,
       paddingBottom:10,
       paddingTop:10,
       fontFamily:theme.typography.secondaryFont,
@@ -146,7 +145,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#315add',
-      fontSize:normalize(24),
+      fontSize:24,
       fontFamily:theme.typography.fontFamilyOxygenLight,
       fontWeight:theme.typography.fontWeightRegular,
     },
@@ -154,7 +153,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#333',
-      fontSize:normalize(14),
+      fontSize:14,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     },
@@ -172,10 +171,10 @@ export default StyleSheet.create({
     greenText:{
       textAlign:'center',
       color:'#44b21b',
-      fontSize:normalize(14),
+      fontSize:14,
     },
     greenText100:{
-      fontSize:normalize(20),
+      fontSize:20,
     },
 
   });

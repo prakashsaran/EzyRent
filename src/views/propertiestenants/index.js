@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FloatingAction } from "react-native-floating-action";
 import NavigationService from '../../navigation/NavigationService';
@@ -18,6 +18,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
+import { EzyRent } from '../../ezyrent';
 import {  getPropertiesForLandlord, getPropertiesForTenant } from '../../actions';
 class PropertiesTenants extends React.Component {
   static contextType = ThemeContext;
@@ -94,13 +95,10 @@ class PropertiesTenants extends React.Component {
       this.setState({activeTab:1})
     } else if(AccountType=="L"){
       this.setState({activeTab:2})
-      return "Properties I am Collecting Rent";
     } else if(AccountType=="B"){
       this.setState({activeTab:1})
-      return "Properties/Tenants";
     } else{
       this.setState({activeTab:1})
-      return "Properties I am Paying Rent";
     }
   }
 
@@ -134,17 +132,27 @@ class PropertiesTenants extends React.Component {
   * @params String
   * @return String
   */
-  getDateFormat(str){
+  getDateFormat(item){
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
-    const unixTimeZero = Date.parse(str);
-    const date = new Date(unixTimeZero);
-    const dt = date.getDate();
-    const fmt = monthNames[date.getMonth()]
-    const fly = date.getFullYear();
-    const fdt = dt < 10 ? '0' + dt : '' + dt;
-     return fdt+ ' '+fmt +' '+fly;
+    const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    switch(item.rent_period_id){
+      case "1":
+        return dayNames[item.rent_day_date];
+        break;
+      case "2":
+        return item.rent_day_date;
+        break;
+      case "3":
+        return item.rent_day_date;
+        break;
+      case "4":
+        return item.rent_day_date;
+        break;
+      default:
+        return null;
+    }
   }
   PayRent(){
     NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
@@ -237,12 +245,8 @@ class PropertiesTenants extends React.Component {
           <SafeAreaView style={styles.container(theme)}>
             {this.renderHeader()}
                 {this.renderTabBar()}
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  >
                 {this.renderProperties()}
                 {this.renderModelView()}
-              </ScrollView>
               <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addPropertyTenant()} showBackground={false} visible={activeTab==2?true:false} color={theme.colors.primary} position={'right'}/>
 
           </SafeAreaView>
@@ -262,22 +266,27 @@ class PropertiesTenants extends React.Component {
   }
 
   renderPayingPropertiest(){
-    return(
+    const {propertiesTenant} = this.props
+    if(propertiesTenant.items.length >0 ){
+     return <FlatList 
+        data={propertiesTenant.items}
+        renderItem={({ item,index }) => this.renderPayingItems(item,index)}
+        keyExtractor={item => item.id}
+      />
+    }
+    /* return(
       <View style={styles.properties(theme)}>
         {this.renderPayingItems()}
       </View>
-    )
+    ) */
   }
 
-  renderPayingItems(){
-    const {payingRent} = this.state
-
-    return payingRent.map((item,inx)=>{
+  renderPayingItems(item,indx){
       return (
-        <View key={inx} style={styles.loopitem}>
+        <View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.name}</Text>
+            <Text style={styles.itemName(theme)}>{item.house_number} {'\n'} {item.building_name}</Text>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant()} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -292,19 +301,19 @@ class PropertiesTenants extends React.Component {
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
-                      {item.process=="waiting"?
+                      {item.process=="A"?
                       <Text style={styles.propItemattrvalue(theme)}>Awaiting your Approval</Text>
                       :
-                      <Text style={item.process=="due"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.amount,0)} due on {this.getDateFormat(item.paying_date)}</Text>
+                      <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
                       }
                     </View>
-                    {item.process=="due"&&
+                    {item.property_status=="O"&&
                       <View style={styles.markwrap}>
                         <TouchableOpacity onPress={()=>this.PayRent()}>
                           <Text style={styles.marktext(theme)}>PAY NOW <Image style={styles.right_arrow} source={require('../../assets/images/arrow_next.png')}></Image></Text>
                         </TouchableOpacity>
                       </View>}
-                      {item.process=="waiting"&&
+                      {item.property_status=="A"&&
                       <View style={styles.waitingWrap}>
                         <TouchableOpacity onPress={()=>this.setState({visiblemodal:true})}>
                           <Text style={styles.marktext(theme)}>REVIEW TOTAL AMOUNT <Image style={styles.right_arrow} source={require('../../assets/images/arrow_next.png')}></Image></Text>
@@ -317,7 +326,6 @@ class PropertiesTenants extends React.Component {
           </ImageBackground>
         </View>
       )
-    })
   }
   renderCollectingItems(){
     const {payingRent} = this.state
@@ -371,11 +379,11 @@ class PropertiesTenants extends React.Component {
     })
   }
   fasterImageRender(item){
-    //console.log("loop itm in side fasterImageRender",item.image)
-    if(!item.image || item.image==null || item.image==''){
+    console.log("loop itm in side fasterImageRender",item)
+    if(!item.property_image || item.property_image==null || item.property_image==''){
       return require('../../assets/images/sample/sample_image_1.png');
     }
-    return {uri:item.image};
+    return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`};
   }
   renderCollectingPropertiest(){
     return(

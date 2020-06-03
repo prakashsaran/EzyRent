@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
-import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: {
@@ -19,13 +18,13 @@ export default StyleSheet.create({
     },
     rectWrapp:{
       backgroundColor:theme.colors.lightBackgrountColor,
-      marginTop:normalize(80),
+      marginTop:80,
       minHeight:theme.dimens.defaultScreenMinHeight,
     },
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.fontFamilyOxygenBold,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightBold,
       width:'100%',
       textAlign:'left',
@@ -82,7 +81,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
     }),
@@ -92,7 +91,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
       padding:0,
@@ -106,7 +105,7 @@ export default StyleSheet.create({
     pintitle: theme =>({
       fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(16),
+      fontSize:16,
       color:theme.colors.descriptionColor,
     }),
     pincontainer: theme => ({
@@ -133,7 +132,7 @@ export default StyleSheet.create({
       borderBottomWidth: 1,
       color:theme.colors.descriptionColor,
       borderColor:theme.colors.descriptionColor,
-      fontSize:normalize(22),
+      fontSize:22,
         fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -157,7 +156,7 @@ export default StyleSheet.create({
     fieltext:theme=>({
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:normalize(16),
+      fontSize:16,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:2,
       paddingBottom:2,
@@ -199,7 +198,7 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.primBtnTextColor,
       fontFamily:theme.typography.primaryFont,
-      fontSize:normalize(22),
+      fontSize:22,
       fontWeight:theme.typography.fontWeightSemiBold,
       textTransform:'uppercase',
     }),
@@ -207,9 +206,9 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.secondaryFont,
-      fontSize:normalize(12),
+      fontSize:12,
       fontWeight:theme.typography.fontWeightRegular,
-      lineHeight:normalize(20),
+      lineHeight:20,
     }),
     fieldWrappLast:{
       marginBottom:20,

@@ -17,6 +17,7 @@ import {
   EZYRENT_GET_BANK_ACCOUNTS,
   EZYRENT_GET_PROPERTIES_AS_LANDLORD,
   EZYRENT_ADD_BANK_ACCOUNTS,
+  EZYRENT_GET_PROPERTIES_AS_TENANT,
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -166,10 +167,16 @@ export const getPropertiesForTenant = (keyword,offset,limit=10) => async (dispat
   dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : false});
   try{
     // set params for filtring
-    const params = {keyword,offset,limit};
+    const params = {offset,limit};
+    if(keyword){
+      params.keyword = keyword;
+    }
     // request to server
     const response = await EzyRent.admin.getPropertiesForTenant(params);
     console.log("getPropertiesForTenant response",response)
+    if(response && response.data){
+      dispatch({type:EZYRENT_GET_PROPERTIES_AS_TENANT,payload : response.data});
+    }
     dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : false});
   } catch(e){
     console.error(e)

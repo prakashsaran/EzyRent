@@ -121,7 +121,7 @@ getMonthNames(){
   return {1:'January',2:'February',3:'March',4:'April',5:'May',6:'June',7:'July',8:'August',9:'September',10:'October',11:'November',12:'December'};
 }
 getMonthDates(){
-  return {1:'1st of Month',2:'2nd of Month',3:'3rd of Month',4:'4th of Month',5:'5th of Month',6:'6th of Month',7:'7th of Month',8:'8th of Month',9:'9th of Month',10:'10th of Month',11:'11th of Month',12:'12th of Month',13:'13th of Month',14:'14th of Month',15:'15th of Month',16:'16th of Month',17:'17th of Month',18:'18th of Month',19:'19th of Month',20:'20th of Month',21:'21st of Month',22:'22nd of Month',23:'23rd of Month',24:'24th of Month',25:'25th of Month',26:'26th of Month',27:'27th of Month',28:'28th of Month',29:'29th of Month',30:'30th of Month',31:'31st of Month'};
+  return {1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,10:10,11:11,12:12,13:13,14:14,15:15,16:16,17:17,18:18,19:19,20:20,21:21,22:22,23:23,24:24,25:25,26:26,27:27,28:28,29:29,30:30,31:31};
 }
 componentDidMount(){
   const {buildingData,bankData} = this.props
@@ -433,7 +433,7 @@ renderHeader(){
 
 
                        <View style={styles.formcolumn}>
-                          <Text style={styles.columntitle(theme)}>PROPERTY INFORMATION</Text>
+                          <Text style={styles.columntitle(theme)}>TENANT INFORMATION</Text>
 
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Tenant House Number (Ex: Flat 101, TC 6/1564) *</Text>
@@ -531,7 +531,7 @@ renderHeader(){
 
 
                           <View style={styles.fieldWrapp} >
-                             <Text style={theme.typography.tooltip}>Your (Recipient) Bank Account *</Text>
+                             <Text style={theme.typography.tooltip}>Recipient Bank Account *</Text>
                              <View style={styles.fieldWrappAccount(theme)} ref={(ref) => this._bankAccountEntry = ref} >
                                 <RNPickerSelect
                                       placeholder={{
