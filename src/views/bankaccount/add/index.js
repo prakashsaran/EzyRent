@@ -6,6 +6,9 @@ import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
 import { PickerSelect,DropDownHolder } from '../../../components';
+import {addBank} from '../../../actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
@@ -65,7 +68,8 @@ validateAndSetAttribute(value, attribute) {
 }
 
 submitForm(){
-  const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode} = this.state
+  const {addBank} = this.props;
+  const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode,additionalDetails} = this.state
   const formIsValid =
           this.validateAndSetAttribute(nameofBank, this._nameofBankEntry) &
           this.validateAndSetAttribute(accountNumber, this._accountNumberEntry) &
@@ -74,7 +78,8 @@ submitForm(){
           this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
           this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
   if(formIsValid){
-    NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
+    const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,account_type:typeOfAc,ifsc_code:ifscCode,additional_details:additionalDetails}
+    addBank(formdata);
   }else{
     DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
   }
@@ -168,7 +173,6 @@ submitForm(){
   }
 
 }
-export default AddBankAccount;
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 18,
@@ -193,3 +197,25 @@ const pickerSelectStyles = StyleSheet.create({
     right: 0,
   },
 });
+
+
+const mapStateToProps = ({ bankAccount }) => {
+  const { error, success,loading } = bankAccount;
+
+  return { error, success,loading  };
+};
+
+AddBankAccount.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType(PropTypes.string, null),
+  success: PropTypes.oneOfType(PropTypes.string, null),
+  addBank: PropTypes.func,
+};
+
+AddBankAccount.defaultProps = {
+  error: null,
+  success: null,
+  loading: false,
+};
+
+export default connect(mapStateToProps, {addBank})(AddBankAccount);

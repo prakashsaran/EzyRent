@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback,FlatList } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback,FlatList,ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -25,7 +25,7 @@ class MyBankaccount extends React.Component {
     StatusBar.setBarStyle("dark-content");
   }
 
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     const { getBanks } = this.props
     getBanks("",0,10);
     console.log("componentWillMount hello test")
@@ -92,7 +92,10 @@ class MyBankaccount extends React.Component {
   }
   render(){
     const theme = this.context;
-    const {bankData} = this.props;
+    const {bankData,loading} = this.props;
+    if(loading){
+      return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={'#315ADD'} size={'large'} /></View>)
+    }
       return (
         <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
           <SafeAreaView style={styles.container}>
@@ -103,7 +106,7 @@ class MyBankaccount extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.addNewBankAccount()}><Image style={styles.plus} source={require('../../../assets/images/plus.png')}></Image></TouchableOpacity>
           </View>
-         
+              {!bankData.length > 0 && <Text style={{textAlign:'center'}}>Currently no bank account available</Text>}
                 <FlatList
                   data={bankData}
                   renderItem={({ item,index }) => this.renderItem(item,index)}
