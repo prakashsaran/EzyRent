@@ -9,7 +9,7 @@ export default StyleSheet.create({
     titleWrapper:{
       width:'90%',
       alignSelf:'center',
-      marginVertical:20,
+      marginVertical:normalize(20),
       flexDirection:'column',
     },
     rectWrapp:{
@@ -19,7 +19,7 @@ export default StyleSheet.create({
       padding:0,
     },
     quickLinks:theme=>({
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightSemiBold,
       color:theme.colors.primaryTitleColor,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     congrats: theme =>({
       width: '100%',
       color: "rgba(68,178,27,1)",
-      fontSize: 22,
+      fontSize: normalize(22),
       fontFamily: theme.typography.primaryFont,
       //fontFamily: "montserrat",
       fontWeight:'600',
@@ -41,7 +41,7 @@ export default StyleSheet.create({
     statusMessage: {
       width: '100%',
       color: "rgba(110,110,110,1)",
-      fontSize: 18,
+      fontSize: normalize(18),
       fontFamily: "Oxygen",
       fontWeight:'normal',
       textAlign: "center",
@@ -64,28 +64,28 @@ export default StyleSheet.create({
     },
     statusText:{
       color: "rgba(110,110,110,1)",
-      fontSize: 18,
+      fontSize: normalize(18),
       fontFamily: "Oxygen",
       fontWeight:'normal',
       textAlign: "center"
     },
     totalAmount:{
       color: "rgba(50,90,220,1)",
-      fontSize: 23,
+      fontSize: normalize(23),
       fontFamily: "Oxygen",
       fontWeight:'normal',
       textAlign: "center"
     },
     textLabel:{
       color: "rgba(110,110,110,1)",
-      fontSize: 16,
+      fontSize: normalize(16),
       fontFamily: "Oxygen",
       fontWeight:'normal',
       lineHeight:23,
     },
     textValue:{
       color: "rgba(51,51,51,1)",
-      fontSize: 15,
+      fontSize: normalize(15),
       fontFamily: "Oxygen",
       marginTop: 0,
       fontFamily:'Oxygen',
@@ -112,7 +112,7 @@ export default StyleSheet.create({
     },
     cardName:{
       color: "rgba(51,51,51,1)",
-      fontSize: 17,
+      fontSize: normalize(17),
       fontFamily: "Oxygen",
       fontWeight:'normal',
     },
@@ -145,7 +145,7 @@ export default StyleSheet.create({
     },
     secureText:{
       color:"#44b21b",
-      fontSize:18,
+      fontSize:normalize(18),
       fontFamily: "Oxygen",
       fontWeight:'normal',
       paddingLeft:10,
@@ -164,10 +164,10 @@ export default StyleSheet.create({
       paddingLeft:20,
       paddingTop:0,
       color: "#333",
-      fontSize: 15,
+      fontSize: normalize(15),
       fontFamily: "Oxygen",
       fontWeight:'normal',
-      lineHeight:22,
+      lineHeight:normalize(22),
     },
     myDashBoard:theme=>({
       width:'100%',

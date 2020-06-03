@@ -103,7 +103,7 @@ signLink: theme =>({
     width: 309,
     color: theme.colors.descriptionColor,
     borderWidth: 0,
-    fontSize: 14,
+    fontSize: normalize(14),
     fontFamily: theme.typography.primaryFont,
     letterSpacing: 0,
     textAlign: "center",

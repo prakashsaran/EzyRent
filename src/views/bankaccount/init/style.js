@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
+import { normalize } from "../../../components";
 
 export default StyleSheet.create({
     container: {
@@ -14,7 +15,7 @@ export default StyleSheet.create({
       marginVertical:20,
       flexDirection:'row',
       justifyContent:'space-between',
-      paddingTop:10,
+      paddingTop:normalize(10),
     },
     back_button:{
       width:30,
@@ -27,14 +28,14 @@ export default StyleSheet.create({
     },
     textHeading: theme =>({
       color:theme.colors.secondry,
-      fontSize:18,
+      fontSize:normalize(18),
       textTransform:'uppercase',
       fontWeight:'bold',
       paddingBottom:6,
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
-      fontSize:14,
+      fontSize:normalize(14),
       color:theme.colors.descriptionColor,
     }),
     gps_dark_icon:{
@@ -50,7 +51,7 @@ export default StyleSheet.create({
       overflow:'hidden',
     },
     morelinksmall:{
-      fontSize:14,
+      fontSize:normalize(14),
     },
     shadow:{
     backgroundColor: "#fff",
@@ -92,13 +93,13 @@ export default StyleSheet.create({
     },
     MoreLinksItem: theme =>({
       color:'#000',
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightSemiBold,
     }),
     MoreLinksItemSub: theme =>({
       color:theme.colors.descriptionColor,
-      fontSize:14,
+      fontSize:normalize(14),
       paddingLeft:4,
       paddingTop:2,
       fontFamily:theme.typography.fontFamilyOxygen,
@@ -106,7 +107,7 @@ export default StyleSheet.create({
     }),
     AccountNo: theme =>({
       color:'#333',
-      fontSize:16,
+      fontSize:normalize(16),
       paddingLeft:1,
       paddingTop:10,
       fontFamily:theme.typography.fontFamilyOxygen,
@@ -164,7 +165,7 @@ export default StyleSheet.create({
       color:theme.colors.propertyHeading,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:18,
+      fontSize:normalize(18),
       marginVertical:0,
     },
     delete:{

@@ -1,8 +1,14 @@
-import { Platform } from 'react-native';
+import { Platform,Dimensions } from 'react-native';
 import colors from './colors';
 import spacing from './spacing';
 import dimens from './dimens';
-
+function isLessMarshmallow(){
+  const dvcHeight = Dimensions.get('window').height;
+  if(dvcHeight < 600){
+    return true;
+  }
+  return false;
+}
 const fontFamilyMontserrat = 'Montserrat-Regular';
 const fontFamilyMontserratSemi = 'Montserrat-SemiBold';
 const fontFamilyMontserratLight = 'Montserrat-Light';
@@ -81,6 +87,14 @@ export default {
      marginTop:spacing.extraLarge*2,
      fontFamily:fontFamilyMontserrat,
    },
+   mobelTitle2: {
+     width: '80%',
+     alignSelf: "center",
+     color:colors.secondry,
+     fontSize:font_12,
+     marginTop:isLessMarshmallow()?15:spacing.extraLarge*2,
+     fontFamily:fontFamilyMontserrat,
+   },
    in_active_mobelTitle: {
      width: '80%',
      alignSelf: "center",
@@ -108,7 +122,7 @@ export default {
       shadowColor: "#000",
       shadowOpacity: 0.35,
       shadowRadius: 5,
-      marginTop:spacing.extraLarge*2,
+      marginTop:isLessMarshmallow()?22:spacing.extraLarge*2,
       //lineHeight:20,
       height:45,
     },
@@ -130,7 +144,7 @@ export default {
       shadowColor: "#000",
       shadowOpacity: 0.35,
       shadowRadius: 5,
-      marginTop:spacing.extraLarge*2,
+      marginTop:isLessMarshmallow()?22:spacing.extraLarge*2,
       height:45,
     },
     caption: {

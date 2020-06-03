@@ -28,7 +28,7 @@ const theme = useContext(ThemeContext);
     setEnableButton(false);
     setResendEnable(false);
     setResendTimeOut(120);
-    props.resendMobileOtp(number,dialcode);
+    props.resendMobileOtp(number,"SU");
   }
 
   const submitOtp = () =>{

@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
+import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: theme => ({
@@ -75,13 +76,13 @@ export default StyleSheet.create({
     tabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:22,
+      fontSize:normalize(22),
       paddingHorizontal:10,
     }),
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:18,
+      fontSize:normalize(18),
       paddingHorizontal:10,
       color:theme.colors.seconderyHeadingColor,
       textAlign:'center'
@@ -89,7 +90,7 @@ export default StyleSheet.create({
     Activetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:18,
+      fontSize:normalize(18),
       paddingHorizontal:10,
       color:theme.colors.secondry,
       textAlign:'center'
@@ -141,7 +142,7 @@ export default StyleSheet.create({
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:16,
+      fontSize:normalize(16),
       width:'50%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
@@ -179,21 +180,21 @@ export default StyleSheet.create({
       paddingLeft:2,
       flexWrap:'wrap',
       width:'92%',
-      fontSize:13,
+      fontSize:normalize(13),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextValue: theme=>({
       color:theme.colors.primary,
       paddingHorizontal:1,
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextWarnValue: theme=>({
       color:theme.colors.errorColor,
       paddingHorizontal:1,
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -202,7 +203,7 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:13,
+      fontSize:normalize(13),
       lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
@@ -212,7 +213,7 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'100%',
-      fontSize:13,
+      fontSize:normalize(13),
       lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
@@ -222,7 +223,7 @@ export default StyleSheet.create({
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyOxygenBold,
       fontWeight:theme.typography.fontWeightSemiBold,
-      fontSize:14,
+      fontSize:normalize(14),
       float:'right',
     }),
     nextscreen:theme=>({

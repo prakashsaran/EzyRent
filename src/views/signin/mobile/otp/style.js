@@ -13,7 +13,7 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
   proplabel: theme=> ({
-    fontSize: 14,
+    fontSize: normalize(14),
     color: theme.colors.descriptionColor,
     fontFamily:theme.typography.secondaryFont,
     fontWeight:theme.typography.fontWeightRegular,
@@ -33,7 +33,7 @@ export default StyleSheet.create({
   mobileInput: theme=> ({
     borderBottomWidth:2,
     borderColor:theme.colors.secondry,
-    fontSize: 22,
+    fontSize: normalize(22),
     fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
     marginTop:7,
@@ -55,12 +55,12 @@ export default StyleSheet.create({
   }),
 
   cnfrmSignText: theme =>({
-    fontSize:14,
+    fontSize:normalize(14),
     color:theme.colors.descriptionColor,
     fontFamily: theme.typography.secondaryFont,
 }),
 signLink: theme =>({
-    fontSize:14,
+    fontSize:normalize(14),
     color:theme.colors.secondry,
     paddingLeft:theme.spacing.tiny,
     fontFamily: theme.typography.primaryFont,
@@ -72,7 +72,7 @@ signLink: theme =>({
     borderBottomWidth: 1,
     color:theme.colors.descriptionColor,
     borderColor:theme.colors.descriptionColor,
-    fontSize:22,
+    fontSize:normalize(22),
       fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,
 }),
@@ -84,7 +84,7 @@ signLink: theme =>({
     marginTop:theme.spacing.small,
   }),
   changeMobileText: theme =>({
-    fontSize:14,
+    fontSize:normalize(14),
     color:theme.colors.secondry,
     fontFamily:theme.typography.secondaryFont,
     fontWeight:theme.typography.fontWeightRegular,
