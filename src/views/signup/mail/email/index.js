@@ -14,14 +14,13 @@ function SignUpMail(props) {
   let keyboardBehavior = null;
 
   const theme = useContext(ThemeContext);
-  const {mobile} = props
   const onChangeEmailAdress = (email) =>{
     setEmailAddress(email);
     //console.log("current mail status",isValidEmail(email))
     setEnableButton(isValidEmail(email));
   }
   const submit = () =>{
-    props.signupMail(mobile,emailaddress);
+    props.signupMail(emailaddress);
   }
   useEffect(() => {
     // ComponentDidMount
@@ -81,9 +80,9 @@ function SignUpMail(props) {
 }
 
 const mapStateToProps = ({ signup }) => {
-  const { error, success, loading,mobile } = signup;
+  const { error, success, loading } = signup;
 
-  return { error, success, loading,mobile };
+  return { error, success, loading };
 };
 
 SignUpMail.propTypes = {
@@ -92,14 +91,12 @@ SignUpMail.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   signupMail: PropTypes.func.isRequired,
   isValidEmail: PropTypes.func.isRequired,
-  mobile: PropTypes.object,
 };
 
 SignUpMail.defaultProps = {
   error: null,
   success: null,
   loading: false,
-  mobile:{},
 };
 
 export default connect(mapStateToProps, { signupMail })(SignUpMail);
