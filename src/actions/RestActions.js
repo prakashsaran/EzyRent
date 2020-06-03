@@ -15,10 +15,14 @@ import {
   EZYRENT_PROPERTIES_AS_TENANT_LOADING,
   EZYRENT_BANK_ACCOUNTS_LOADING,
   EZYRENT_GET_BANK_ACCOUNTS,
+  EZYRENT_GET_PROPERTIES_AS_LANDLORD,
+  EZYRENT_ADD_BANK_ACCOUNTS,
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
-  NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH
+  NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH,
+  NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../navigation/routes';
 
 export const initEzyRent = () => {
@@ -82,6 +86,30 @@ export const updateUserProfle = (customer,data) => async (dispatch) =>{
 
 export const addProperty = (data,media=null) => async (dispatch) => {
   if(media){
+    formData = formMultipartData("property_image",media,data);
+    const response = await EzyRent.admin.addPropertyWithImage(formData);
+    console.log("media data is ok",response)
+    if(response && response.data){
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+    }
+    /* formData = formMultipartData("property_image",media,data);
+    const response = await EzyRent.admin.addPropertyWithImage(formData);
+    if(response && response.data){
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+    } */
+  } else {
+    formData = formUrlencodedData(data);
+    const response = await EzyRent.admin.addPropertyNoneImage(formData);
+    if(response && response.data){
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+    }
+
+  }
+
+}
+
+export const editProperty = (data,media=null) => async (dispatch) => {
+  if(media){
     console.log("media is ok",media)
     /* formData = formMultipartData("property_image",media,data);
     const response = await EzyRent.admin.addPropertyWithImage(formData);
@@ -98,6 +126,7 @@ export const addProperty = (data,media=null) => async (dispatch) => {
   }
 
 }
+
 /**
  * @name getPropertiesForLandlord
  * @description getPropertiesForLandlord using get list of propertes with keyword,offset,limit
@@ -110,11 +139,15 @@ export const getPropertiesForLandlord = (keyword,offset,limit=10) => async (disp
   dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
   try{
     // set params for filtring
-    const params = {keyword,offset,limit};
-    console.log("getPropertiesForLandlord params",params)
+    const params = {offset,limit};
+    if(keyword){
+      params.keyword = keyword;
+    }
     // request to server
     const response = await EzyRent.admin.getPropertiesForLandlord(params);
-    console.log("getPropertiesForLandlord response",response)
+    if(response && response.data){
+      dispatch({type:EZYRENT_GET_PROPERTIES_AS_LANDLORD,payload : response.data});
+    }
     dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
   } catch(e){
     console.error(e)
@@ -160,6 +193,8 @@ export const getBanks = (keyword,offset,limit=10) => async (dispatch) => {
     const response = await EzyRent.admin.getBanks(params);
     if(response && response.data){
       dispatch({ type: EZYRENT_GET_BANK_ACCOUNTS, payload: response.data });
+    } else{
+      dispatch({ type: EZYRENT_GET_BANK_ACCOUNTS, payload: [] });
     }
     dispatch({type:EZYRENT_BANK_ACCOUNTS_LOADING,payload : false});
   } catch(e){
@@ -168,6 +203,42 @@ export const getBanks = (keyword,offset,limit=10) => async (dispatch) => {
   }
 }
 
+export const addBank = (data) => async (dispatch) => {
+  dispatch({type:EZYRENT_BANK_ACCOUNTS_LOADING,payload : true});
+  try{
+    // set data format
+    const formData = formUrlencodedData(data);
+    // request to server
+    const response = await EzyRent.admin.addBank(formData);
+    if(response && response.data){
+      const currentBankAccount = response.data;
+      currentBankAccount.mode = "A";
+      console.log("currentBankAccount reseted",currentBankAccount)
+      dispatch({type:EZYRENT_ADD_BANK_ACCOUNTS,payload : currentBankAccount});
+      NavigationService.navigate(NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH);
+    } 
+    console.log("add bank",response);
+   
+    dispatch({type:EZYRENT_BANK_ACCOUNTS_LOADING,payload : false});
+  } catch(e){
+    console.error(e)
+    dispatch({type:EZYRENT_BANK_ACCOUNTS_LOADING,payload : false});
+  }
+}
+export const bankVerify = (bankdata,data) => async (dispatch) =>{
+  //set user id
+  const bankid = bankdata.id;
+  //set data post format
+  const formData = formUrlencodedData(data);
+
+  //request post to server
+  const response = await EzyRent.admin.bankVerify(bankid,formData);
+    if(response && response.message){
+      NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
+    }
+    console.log("bankVerify response",response);
+
+}
 // FORM DATA SET EXICUTIVE FROMAT
 const formMultipartData = (keyValue,photo, extraData=null) => {
   const data = new FormData();

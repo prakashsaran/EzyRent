@@ -6,39 +6,35 @@ import OTPInputView from '@twotalltotems/react-native-otp-input'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
-import { resendMailOtp } from '../../../../actions';
+import { resendMailOtp,signupMailOtp } from '../../../../actions';
 import {NAVIGATION_SIGN_UP_MAIL_ID_PATH,NAVIGATION_SIGN_UP_PROFILE_PATH} from '../../../../navigation/routes';
 import NavigationService from '../../../../navigation/NavigationService';
 import { DropDownHolder } from '../../../../components';
 
-function SignUpMobile(props) {
-const {email,otp} = props.mail;
-const [enablebtn, setEnableButton] = useState(false);
-const [resendEnable, setResendEnable] = useState(false);
-const [resendtimeout, setResendTimeOut] = useState(0);
-const [inputOtp, setInputOtp] = useState(null);
-
-const theme = useContext(ThemeContext);
-  const onCodeFilled = (code) =>{
-    setEnableButton(true);
-    setInputOtp(code);
-  }
-  const resendSubmit = (code) =>{
-    setEnableButton(false);
-    setResendEnable(false);
-    setResendTimeOut(120);
-    props.resendMailOtp(email);
-  }
-
-  const submitOtp = () =>{
-    if (otp==inputOtp) {
-      // DropDownHolder.alert('success', 'Successfull', 'Brand/Make has been saved successfully.')
-      NavigationService.navigate(NAVIGATION_SIGN_UP_PROFILE_PATH)
-    }else{
-      DropDownHolder.alert('error', 'Error', 'Invalid OTP code.')
+function SignUpMailVerify(props) {
+  const {mobile,mail} = props;
+  const [enablebtn, setEnableButton] = useState(false);
+  const [resendEnable, setResendEnable] = useState(false);
+  const [resendtimeout, setResendTimeOut] = useState(0);
+  const [inputOtp, setInputOtp] = useState(null);
+  
+  const theme = useContext(ThemeContext);
+    const onCodeFilled = (code) =>{
+      setEnableButton(true);
+      setInputOtp(code);
     }
-  }
-
+    const resendSubmit = (code) =>{
+      setEnableButton(false);
+      setResendEnable(false);
+      setResendTimeOut(120);
+      props.resendMailOtp(mobile,mail.email);
+  
+    }
+  
+    const submitOtp = () =>{
+      props.signupMailOtp(mobile,mail,inputOtp);
+    }
+  
   return (
     <SafeAreaView style={styles.container(theme)}>
       <ScrollView>
@@ -53,7 +49,7 @@ const theme = useContext(ThemeContext);
 
         <Text style={theme.typography.signstep}>STEP 4 OF 5</Text>
         <Text style={styles.propvalue(theme)}>Validate Your Email Address</Text>
-        <Text style={[styles.stepmessage(theme),{marginTop:5}]}>We have sent an OTP to your email <Text style={theme.typography.stepmessage}>{email}</Text></Text>
+        <Text style={[styles.stepmessage(theme),{marginTop:5}]}>We have sent an OTP to your email <Text style={theme.typography.stepmessage}>{mail.email}</Text></Text>
         <Text style={[styles.stepmessage(theme),{marginTop:5}]}>Please enter the OTP below</Text>
 
         <OTPInputView
@@ -111,22 +107,22 @@ const theme = useContext(ThemeContext);
 }
 
 const mapStateToProps = ({ signup }) => {
-  const { error, success, loading,mail } = signup;
-
-  return { error, success, loading,mail };
+  const { error, success, loading,mail,mobile } = signup;
+  return { error, success, loading,mail,mobile };
 };
 
-SignUpMobile.propTypes = {
+SignUpMailVerify.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
   resendMailOtp: PropTypes.func.isRequired,
+  signupMailOtp: PropTypes.func.isRequired,
 };
 
-SignUpMobile.defaultProps = {
+SignUpMailVerify.defaultProps = {
   error: null,
   success: null,
   loading: false,
 };
 
-export default connect(mapStateToProps, { resendMailOtp })(SignUpMobile);
+export default connect(mapStateToProps, { resendMailOtp,signupMailOtp })(SignUpMailVerify);

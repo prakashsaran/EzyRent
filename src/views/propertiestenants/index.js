@@ -41,21 +41,22 @@ class PropertiesTenants extends React.Component {
 
   UNSAFE_componentWillMount(){
     const {customer,status}=this.props
+    console.log("UNSAFE_componentWillMount customer.user_type",customer.user_type)
     this.loadUserDataAccordingAccountType(customer)
     const properties = SampleData.getPropeties() || [];
     this.setState({payingRent:properties,collectingRent:properties})
     if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
         } else{
-          this.setState({AccountType:'new'});
+          this.setState({AccountType:'U'});
         }
       } else{
-        this.setState({AccountType:"new"});
+        this.setState({AccountType:"U"});
       }
     } else{
-      this.setState({AccountType:"new"});
+      this.setState({AccountType:"U"});
     }
 
   }
@@ -89,12 +90,12 @@ class PropertiesTenants extends React.Component {
   componentDidMount(){
     const {AccountType} = this.state
     //console.log("AccountType =>",AccountType)
-    if(AccountType=="tenant"){
+    if(AccountType=="U"){
       this.setState({activeTab:1})
-    } else if(AccountType=="landlord"){
+    } else if(AccountType=="L"){
       this.setState({activeTab:2})
       return "Properties I am Collecting Rent";
-    } else if(AccountType=="lessee"){
+    } else if(AccountType=="B"){
       this.setState({activeTab:1})
       return "Properties/Tenants";
     } else{
@@ -158,12 +159,11 @@ class PropertiesTenants extends React.Component {
   }
   renderTitile(){
     const {AccountType} = this.state
-    console.log("AccountType =>",AccountType)
-    if(AccountType=="tenant"){
+    if(AccountType=="T"){
       return "Properties I am Paying Rent";
-    } else if(AccountType=="landlord"){
+    } else if(AccountType=="L"){
       return "Properties I am Collecting Rent";
-    } else if(AccountType=="lessee"){
+    } else if(AccountType=="B"){
       return "Properties/Tenants";
     } else{
       return "Properties I am Paying Rent";
@@ -181,7 +181,7 @@ class PropertiesTenants extends React.Component {
   renderHeader(){
     const {visibleSearch,searchQuery,AccountType} = this.state
     return(
-      <View style={AccountType=="lessee"?styles.headWrapp:styles.headWrappSingle}>
+      <View style={AccountType=="B"?styles.headWrapp:styles.headWrappSingle}>
         <View style={styles.headcontainer}>
           <View style={styles.textWrapper}>
             <Text numberOfLines={1} style={[theme.typography.title]}>
@@ -208,7 +208,7 @@ class PropertiesTenants extends React.Component {
 
   renderTabBar(){
     const {activeTab,AccountType} = this.state
-    if(AccountType!="lessee"){
+    if(AccountType!="B"){
       return null;
     }
     return(
@@ -321,12 +321,14 @@ class PropertiesTenants extends React.Component {
   }
   renderCollectingItems(){
     const {payingRent} = this.state
-    return payingRent.map((item,inx)=>{
+    const {propertiesLandlord} = this.props;
+    return propertiesLandlord.items.map((item,inx)=>{
+      console.log("propertiesLandlord looping",item)
       return (
         <View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.name}</Text>
+              <Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text>
                <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -341,9 +343,9 @@ class PropertiesTenants extends React.Component {
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
-                      {item.process=="waiting"&&<Text style={styles.awaitingforapproval(theme)}>Awaiting approval from Tenant</Text>}
+                      {item.awaiting_text&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
                       {item.process=="reject"&&<Text style={styles.propItemattrvalueError(theme)}>Contract Rejected by Tenant</Text>}
-                      {(item.process!="waiting" && item.process!="reject") &&
+                      {(!item.awaiting_text && item.process!="reject") &&
                         <Text style={item.process=="due"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.amount,0)} due on {this.getDateFormat(item.paying_date)}</Text>
                       }
                     </View>
@@ -481,10 +483,9 @@ PropertiesTenants.navigationOptions = ({ navigation }) => ({
   title: 'Properties/Tenants',
 })
 
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account,propertiesLandlord,propertiesTenant }) => {
   const { error, success, loading,status,customer } = account;
-
-  return { error, success, loading, status, customer };
+  return { error, success, loading, status, customer,propertiesLandlord,propertiesTenant };
 };
 
 PropertiesTenants.propTypes = {
@@ -495,6 +496,8 @@ PropertiesTenants.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  propertiesLandlord: PropTypes.object,
+  propertiesTenant: PropTypes.object,
 };
 
 PropertiesTenants.defaultProps = {
@@ -503,6 +506,8 @@ PropertiesTenants.defaultProps = {
   loading: false,
   status:false,
   customer:null,
+  propertiesLandlord:{items: [],refreshing: false,error: "",success: "",loading: false,},
+  propertiesTenant:{items: [],refreshing: false,error: "",success: "",loading: false,}
 };
 
 export default connect(mapStateToProps, {getPropertiesForLandlord,getPropertiesForTenant})(PropertiesTenants);

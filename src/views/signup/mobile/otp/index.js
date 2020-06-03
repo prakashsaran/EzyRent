@@ -6,18 +6,18 @@ import OTPInputView from '@twotalltotems/react-native-otp-input'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
-import { resendMobileOtp } from '../../../../actions';
+import { resendMobileOtp,signupMobileOtp,getCountryCodeFormat } from '../../../../actions';
 import {NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH,NAVIGATION_SIGN_UP_MAIL_ID_PATH} from '../../../../navigation/routes';
 import NavigationService from '../../../../navigation/NavigationService';
 import { DropDownHolder } from '../../../../components';
 
-function SignUpMobile(props) {
-const {number,dialcode,otp} = props.mobile;
-const [enablebtn, setEnableButton] = useState(false);
-const [resendEnable, setResendEnable] = useState(false);
-const [resendtimeout, setResendTimeOut] = useState(0);
-const [inputOtp, setInputOtp] = useState(null);
-let keyboardBehavior = null;
+function SignUpMobileVerify(props) {
+  const {mobile} = props;
+  const [enablebtn, setEnableButton] = useState(false);
+  const [resendEnable, setResendEnable] = useState(false);
+  const [resendtimeout, setResendTimeOut] = useState(0);
+  const [inputOtp, setInputOtp] = useState(null);
+  let keyboardBehavior = null;
 
 const theme = useContext(ThemeContext);
   const onCodeFilled = (code) =>{
@@ -28,16 +28,13 @@ const theme = useContext(ThemeContext);
     setEnableButton(false);
     setResendEnable(false);
     setResendTimeOut(120);
-    props.resendMobileOtp(number,"SU");
+    
+    props.resendMobileOtp(mobile,'SU');
+
   }
 
   const submitOtp = () =>{
-    if (otp==inputOtp) {
-      // DropDownHolder.alert('success', 'Successfull', 'Brand/Make has been saved successfully.')
-      NavigationService.navigate(NAVIGATION_SIGN_UP_MAIL_ID_PATH)
-    }else{
-      DropDownHolder.alert('error', 'Error', 'Invalid OTP code.')
-    }
+    props.signupMobileOtp(mobile,inputOtp);
   }
   useEffect(() => {
     // ComponentDidMount
@@ -45,17 +42,6 @@ const theme = useContext(ThemeContext);
     if (Platform.OS == 'android') {
         keyboardBehavior = 'height'
     }
-    //// back action list
-    const backAction = () => {
-      console.log("SignUpMobile back")
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
 
   }, []);
 
@@ -75,7 +61,7 @@ const theme = useContext(ThemeContext);
             <Text style={theme.typography.signstep}>STEP 2 OF 5</Text>
             <View style={styles.preprops(theme)}>
               <Text style={styles.propvalue(theme)}>Validate Your Mobile Number </Text>
-              <Text style={theme.typography.stepmessage}>We have sent an OTP to <Text style={styles.propvalue(theme)}>{dialcode} - {number}</Text></Text>
+              <Text style={theme.typography.stepmessage}>We have sent an OTP to <Text style={styles.propvalue(theme)}>{getCountryCodeFormat(mobile.dialcode)} - {mobile.number}</Text></Text>
             </View>
             <Text style={theme.typography.stepmessage}>Please enter the OTP below</Text>
 
@@ -139,17 +125,18 @@ const mapStateToProps = ({ signup }) => {
   return { error, success, loading,mobile };
 };
 
-SignUpMobile.propTypes = {
+SignUpMobileVerify.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
   resendMobileOtp: PropTypes.func.isRequired,
+  signupMobileOtp: PropTypes.func.isRequired,
 };
 
-SignUpMobile.defaultProps = {
+SignUpMobileVerify.defaultProps = {
   error: null,
   success: null,
   loading: false,
 };
 
-export default connect(mapStateToProps, { resendMobileOtp })(SignUpMobile);
+export default connect(mapStateToProps, { resendMobileOtp,signupMobileOtp })(SignUpMobileVerify);
