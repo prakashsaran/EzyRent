@@ -51,6 +51,8 @@ export const NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH = 'add-bank-ac-more-
 export const NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH = 'edit-bank-ac-more-view';
 export const NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH = 'edit-my-profile-more-view';
 
+export const NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH ='verification-bank-ac-more-view';
+
 // Switch Navigator AFTER ACCOUNT SIGNIN/SIGNUP SUCCESSFULL
 export const SWITCH_NAVIGATION_AUTHORIZED_ACCOUNT_PATH = 'Authorized';
 

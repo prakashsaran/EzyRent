@@ -42,3 +42,4 @@ export const EZYRENT_GET_PROPERTIES_AS_TENANT = 'ezyrent-get-properties-as-tenan
 // BANK ACCOUNT CONTROLLERS
 export const EZYRENT_BANK_ACCOUNTS_LOADING = 'ezyrent-bank-accounts-loading';
 export const EZYRENT_GET_BANK_ACCOUNTS = 'ezyrent-get-bank-accounts';
+export const EZYRENT_ADD_BANK_ACCOUNTS = 'ezyrent-add-bank-accounts';

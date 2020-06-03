@@ -52,6 +52,7 @@ import MyBankaccount from '../views/bankaccount/init';
 import MyProfile from '../views/myprofile';
 import AddBankAccount from '../views/bankaccount/add';
 import EditBankAccount from '../views/bankaccount/edit';
+import BankVerification from '../views/bankaccount/verification';
 import EditMyProfile from '../views/editprofile';
 // MORE -> Transaction SCREENS
 import TransactionSuccessful from '../views/transaction/success';
@@ -104,6 +105,7 @@ import {
   NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
   NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH,
+  NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH,
   NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH,
   NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
@@ -194,6 +196,7 @@ const MoreStack = createStackNavigator({
   [NAVIGATION_MORE_MY_PROFILE_VIEW_PATH]: MyProfile,
   [NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH]: AddBankAccount,
   [NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH]: EditBankAccount,
+  [NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH]: BankVerification,
   [NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH]: EditMyProfile,
 }, {
   initialRouteName: NAVIGATION_MORE_INIT_VIEW_PATH,
