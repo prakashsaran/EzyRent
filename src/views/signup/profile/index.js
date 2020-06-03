@@ -8,13 +8,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements'
 import { signUp,isValidName } from '../../../actions';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
-import DeviceInfo from 'react-native-device-info';
+import OTPInputView from '@twotalltotems/react-native-otp-input'
 const secureTextHidden = '../../../assets/images/securetext_hidden.png';
 const secureTextShow = '../../../assets/images/securetext_show.png';
 function SignUpProfile(props) {
-  const device_token = DeviceInfo.getUniqueId();
-  const device_type = DeviceInfo.getDeviceId();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [profilename, setProfileName] = useState('');
   const [appin, setAppPin] = useState('');
@@ -52,9 +49,8 @@ function SignUpProfile(props) {
 
   const submit = () =>{
     const {mobile,mail} = props
-    const userdata = {full_name:profilename,mpin:appin,device_token,device_type};
-    console.log("userdata submit",userdata)
-    props.signUp(mobile,userdata);
+    const userdata = {mobile:mobile.number,email:mail.email,name:profilename,password:appin};
+    props.signUp(userdata);
   }
   onFocusInput = (elementSlected)=>{
     elementSlected.setNativeProps({
