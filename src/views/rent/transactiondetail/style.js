@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
-import {isIphoneX,normalize} from "../../../components"
+import {isIphoneX,normalize} from "../../../components";
 export default StyleSheet.create({
     container: theme => ({
       flex: 1,
@@ -31,7 +31,7 @@ export default StyleSheet.create({
     }),
    pageTitle: theme =>({
       color:theme.colors.primaryScreenTitle,
-      fontSize:20,
+      fontSize:normalize(20),
       fontFamily:theme.typography.primaryFont,
       fontWeight: theme.typography.fontWeightRegular,
       marginLeft:15,
@@ -72,7 +72,7 @@ export default StyleSheet.create({
       width:'100%',
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       lineHeight:20,
       fontWeight:theme.typography.fontWeightRegular,
       marginVertical:theme.spacing.medium,
@@ -81,8 +81,8 @@ export default StyleSheet.create({
 
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserrat,
-      fontSize:16,
-      lineHeight:16,
+      fontSize:normalize(16),
+      lineHeight:normalize(16),
       color:theme.colors.secondry,
       alignSelf:'flex-start',
     }),
@@ -94,7 +94,7 @@ export default StyleSheet.create({
     propItemattrLocation: theme=>({
       color:theme.colors.descriptionColor,
       paddingHorizontal:5,
-      fontSize:14,
+      fontSize:normalize(14),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:2,
@@ -102,7 +102,7 @@ export default StyleSheet.create({
     statusTextValue: theme=>({
       color:theme.colors.primary,
       paddingHorizontal:1,
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -164,7 +164,7 @@ export default StyleSheet.create({
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.fontFamilyMontserratSemi,
-      fontSize:16,
+      fontSize:normalize(16),
       width:'100%',
       textAlign:'left',
     }),

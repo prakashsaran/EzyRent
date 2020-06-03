@@ -9,7 +9,7 @@ export default StyleSheet.create({
   image: {
     width: 200,
     height: 200,
-    marginTop: 50,
+    marginTop: normalize(50),
     alignSelf: "center",
   },
   proplabel: theme=> ({
