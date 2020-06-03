@@ -1,15 +1,22 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimensions } from "react-native";
 import {normalize} from '../../../../components'
-
+function isLessMarshmallow(){
+  const dvcHeight = Dimensions.get('window').height;
+  if(dvcHeight < 600){
+    return true;
+  }
+  return false;
+}
 export default StyleSheet.create({
   container: theme => ({
     flex: 1,
     backgroundColor: theme.colors.primBackgroundColor,
   }),
   image: {
-    width: 200,
-    height: 200,
-    marginTop: normalize(50),
+    width: isLessMarshmallow()?150:200,
+    height: isLessMarshmallow()?150:200,
+    marginTop: isLessMarshmallow()?20:50,
+    marginBottom:isLessMarshmallow()?-40:0,
     alignSelf: "center",
   },
   proplabel: theme=> ({
@@ -27,7 +34,7 @@ export default StyleSheet.create({
   mobileWrapper: theme=> ({
     width: '50%',
     alignSelf: "center",
-    height: 60,
+    height: isLessMarshmallow()?20:60,
     marginVertical:theme.spacing.large,
   }),
   mobileInput: theme=> ({
