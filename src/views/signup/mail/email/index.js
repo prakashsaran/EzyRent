@@ -17,7 +17,6 @@ function SignUpMail(props) {
   const {mobile} = props
   const onChangeEmailAdress = (email) =>{
     setEmailAddress(email);
-    //console.log("current mail status",isValidEmail(email))
     setEnableButton(isValidEmail(email));
   }
   const submit = () =>{
@@ -48,7 +47,7 @@ function SignUpMail(props) {
 
               <Text style={theme.typography.stepmessage}>Please Enter Your Email Address</Text>
 
-              <Text style={theme.typography.mobelTitle}>EMAIL ID</Text>
+              <Text style={theme.typography.mobelTitle2}>EMAIL ID</Text>
 
               <View style={styles.mobileWrapper(theme)}>
                 <TextInput

@@ -14,7 +14,8 @@ import {
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { EzyRent } from '../../ezyrent';
+import {  getRentsForLandlord,getRentsForTenant } from '../../actions';
 
 class RentList extends React.Component {
   static contextType = ThemeContext;
@@ -30,41 +31,75 @@ class RentList extends React.Component {
     }
     StatusBar.setBarStyle('dark-content');
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     const {customer,status}=this.props
     const properties = SampleData.getPropeties() || [];
     this.setState({payingRent:properties,collectingRent:properties})
-
-    console.log("customer =>",customer)
     if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
         } else{
-          this.setState({AccountType:'new'});
+          this.setState({AccountType:'U'});
         }
       } else{
-        this.setState({AccountType:"new"});
+        this.setState({AccountType:"U"});
       }
     } else{
-      this.setState({AccountType:"new"});
+      this.setState({AccountType:"U"});
+    }
+    this.loadUserDataAccordingAccountType(customer);
+
+  }
+
+    /**
+   * @name loadUserDataAccordingAccountType
+   * @description this function load data according user type
+   * @param {JSON} customer 
+   */
+  loadUserDataAccordingAccountType(customer){
+    const {getRentsForLandlord,getRentsForTenant}=this.props
+    const {searchQuery} = this.state;
+    switch(customer.user_type){
+      case "B":
+        getRentsForLandlord(customer,searchQuery,0,10);
+        getRentsForTenant(customer,searchQuery,0,10);
+        break;
+      case "L":
+        getRentsForLandlord(customer,searchQuery,0,10);
+        break;
+      case "T":
+        getRentsForTenant(customer,searchQuery,0,10);
+        break;
+      default:
+        console.log("current user is new user")
+        break;
     }
 
   }
+
+  onSearchProperties(searchQuery){
+    const {getRentsForTenant,getRentsForLandlord,customer}=this.props
+    const {activeTab} = this.state
+    if(activeTab==1){
+      getRentsForTenant(customer,searchQuery,0,10);
+    } else {
+      getRentsForLandlord(customer,searchQuery,0,10);
+    }
+    
+   // this.setState({searchQuery})
+  }
+
   componentDidMount(){
     const {AccountType} = this.state
-    //console.log("AccountType =>",AccountType)
-    if(AccountType=="tenant"){
+    if(AccountType=="T"){
       this.setState({activeTab:1})
-    } else if(AccountType=="landlord"){
+    } else if(AccountType=="L"){
       this.setState({activeTab:2})
-      return "Properties I am Collecting Rent";
-    } else if(AccountType=="lessee"){
+    } else if(AccountType=="B"){
       this.setState({activeTab:1})
-      return "Properties/Tenants";
     } else{
       this.setState({activeTab:1})
-      return "Properties I am Paying Rent";
     }
 
   }
@@ -120,12 +155,11 @@ class RentList extends React.Component {
 
   renderTitile(){
     const {AccountType} = this.state
-    console.log("AccountType =>",AccountType)
-    if(AccountType=="tenant"){
+    if(AccountType=="T"){
       return "Rent I am Paying ";
-    } else if(AccountType=="landlord"){
+    } else if(AccountType=="L"){
       return "Rent I am Collecting";
-    } else if(AccountType=="lessee"){
+    } else if(AccountType=="B"){
       return "Rent";
     } else{
       return "Rent I am Paying";
@@ -135,7 +169,7 @@ class RentList extends React.Component {
   renderHeader(){
     const {visibleSearch,AccountType} = this.state
     return(
-      <View style={AccountType=="lessee"?styles.headWrapp:styles.headWrappSingle}>
+      <View style={AccountType=="B"?styles.headWrapp:styles.headWrappSingle}>
         <View style={styles.headcontainer}>
           <View style={styles.textWrapper}>
             <Text numberOfLines={1} style={theme.typography.title}>
@@ -154,7 +188,7 @@ class RentList extends React.Component {
         </View>
         {visibleSearch && <View style={styles.searchWrap}>
             <View style={styles.inputStyleStack(theme)}>
-              <TextInput placeholder="Search" style={styles.searchinputStyle}></TextInput>
+              <TextInput placeholder="Search" onChangeText={(searchQuery)=>this.onSearchProperties(searchQuery)} style={styles.searchinputStyle}></TextInput>
             </View>
         </View>}
       </View>
@@ -162,7 +196,7 @@ class RentList extends React.Component {
   }
   renderTabBar(){
     const {activeTab,AccountType} = this.state
-    if(AccountType!="lessee"){
+    if(AccountType!="B"){
       return null;
     }
     return(
@@ -224,14 +258,18 @@ class RentList extends React.Component {
 
   renderPayingItems(){
     const {payingRent} = this.state
+    const {tenant_items} = this.props
 
-    return payingRent.map((item,inx)=>{
+    if(!tenant_items.length){
+      return(<Text style={{textAlign:'center'}}>Properties Not Available</Text>)
+    }
+    return tenant_items.map((item,inx)=>{
       if(item.process=="due"){
         return (
           <View key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)}>{item.name}</Text>
+                 <Text style={styles.itemName(theme)}>{item.building_name}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.process=="due"?
@@ -247,9 +285,9 @@ class RentList extends React.Component {
                       </View>
                       <View style={styles.propInfoAttrb}>
                       {item.process=="due"?
-                       <TouchableOpacity onPress={()=>this.PayRent()} style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> due from {this.getDateFormat(item.paying_date)} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:11,height:11,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
+                       <TouchableOpacity onPress={()=>this.PayRent()} style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:11,height:11,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                       :
-                        <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.amount,0)}</Text> on {this.getDateFormat(item.paying_date)}</Text>
+                        <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.Total_amount,0)}</Text> on {item.date}</Text>
                       }
                       </View>
                     </View>
@@ -263,7 +301,7 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.name}</Text>
+               <Text style={styles.itemName(theme)}>{item.building_name}</Text>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
                     {item.process=="due"?
@@ -280,9 +318,9 @@ class RentList extends React.Component {
 
                     <View style={styles.propInfoAttrb}>
                     {item.process=="due"?
-                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> due on {this.getDateFormat(item.paying_date)} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
+                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                     :
-                      <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.amount,0)}</Text> on {this.getDateFormat(item.paying_date)}</Text>
+                      <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
                     }
                     </View>
 
@@ -299,14 +337,19 @@ class RentList extends React.Component {
 
   renderCollectingItems(){
     const {payingRent} = this.state
-
-    return payingRent.map((item,inx)=>{
+    const {landlord_items} = this.props
+    if(!landlord_items.length){
+      return(
+        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
+      )
+    }
+    return landlord_items.map((item,inx)=>{
       if(item.process=="due"){
         return (
           <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                <Text style={styles.itemName(theme)}>{item.name}</Text>
+                <Text style={styles.itemName(theme)}>{item.building_name}</Text>
                 <View style={styles.propertygnInfo}>
 
                     <View style={styles.propInforowleft}>
@@ -327,9 +370,9 @@ class RentList extends React.Component {
 
                       <View style={styles.propInfoAttrb}>
                       {item.process=="due"?
-                      <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> due from {this.getDateFormat(item.paying_date)} </Text>
+                      <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
                       :
-                        <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.amount,0)}</Text> on {this.getDateFormat(item.paying_date)}</Text>
+                        <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
                       }
                       </View>
 
@@ -346,7 +389,7 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-              <Text style={styles.itemName(theme)}>{item.name}</Text>
+              <Text style={styles.itemName(theme)}>{item.building_name}</Text>
               <View style={styles.propertygnInfo}>
 
                   <View style={styles.propInforowleft}>
@@ -367,9 +410,9 @@ class RentList extends React.Component {
 
                     <View style={styles.propInfoAttrb}>
                     {item.process=="due"?
-                    <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> due from {this.getDateFormat(item.paying_date)} </Text>
+                    <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
                     :
-                      <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.amount,0)}</Text> on {this.getDateFormat(item.paying_date)}</Text>
+                      <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
                     }
                     </View>
 
@@ -385,11 +428,10 @@ class RentList extends React.Component {
     })
   }
   fasterImageRender(item){
-    //console.log("loop itm in side fasterImageRender",item.image)
     if(!item.image || item.image==null || item.image==''){
       return require('../../assets/images/sample/sample_image_1.png');
-    }
-    return {uri:item.image};
+      } 
+      return {uri:'${EzyRent.getMediaUrl()}${item.module_data[0].property_image}'}; 
   }
   renderCollectingPropertiest(){
     return(
@@ -406,10 +448,12 @@ RentList.navigationOptions = ({ navigation }) => ({
 })
 
 
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account,rentLandlord ,rentTenant}) => {
   const { error, success, loading,status,customer } = account;
 
-  return { error, success, loading, status, customer };
+  const {landlord_items,landlord_loading} = rentLandlord
+  const {tenant_items,tenant_loading} = rentTenant
+  return { error, success, loading, status, customer,landlord_items,landlord_loading,tenant_items,tenant_loading };
 };
 
 RentList.propTypes = {
@@ -418,6 +462,10 @@ RentList.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  getRentsForLandlord: PropTypes.func.isRequired,
+  getRentsForTenant: PropTypes.func.isRequired,
+  landlord_items: PropTypes.object,
+  tenant_items: PropTypes.object,
 };
 
 RentList.defaultProps = {
@@ -426,6 +474,8 @@ RentList.defaultProps = {
   loading: false,
   status:false,
   customer:null,
+  landlord_items:[],
+  tenant_items:[],
 };
 
-export default connect(mapStateToProps, {})(RentList);
+export default connect(mapStateToProps, {getRentsForLandlord,getRentsForTenant})(RentList);

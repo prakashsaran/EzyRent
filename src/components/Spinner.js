@@ -12,7 +12,7 @@ const Spinner = ({
     <View style={[styles.spinnerStyle, style]}>
       <ActivityIndicator
         size={size}
-        color={theme.colors.secondary}
+        color={theme.colors.secondry}
       />
     </View>
   );

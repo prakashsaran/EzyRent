@@ -44,10 +44,6 @@ import {
                     <View>
                     {this.renderHeader(theme)}
                     <View style={styles.detailContainer}>
-                        <View style={styles.gpsWrapp}>
-                            <TouchableOpacity style={styles.gpscontainer(theme)}><Image style={styles.gpsIcon} resizeMode={'contain'} source={require('../../../assets/images/gps.png')}></Image></TouchableOpacity>
-                            <Text style={styles.gpsTitle(theme)}>View Map</Text>
-                        </View>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styles.infoContainer}>
                                 <View style={styles.propertyInfo(theme)}>
@@ -69,7 +65,7 @@ import {
                                     <View>
                                         <View style={styles.payamountPeriod}>
                                             <Text style={styles.pageTitle(theme)}>INR 25,0000</Text>
-                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme)]}> Per month</Text>
+                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
                                         <Text style={styles.payTime(theme)}>Next Rent due on 01 March 2020</Text>
                                     </View>

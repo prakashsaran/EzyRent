@@ -74,6 +74,7 @@
 		67F992534D06459D8076CE08 /* bank-account-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB079AD7A674CFC88CE4A1D /* bank-account-icon.png */; };
 		699101D61F214968A7606DF1 /* securetext_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E025C5B52E4D9BB6867087 /* securetext_hidden.png */; };
 		6A1E15297B7144A58953DD33 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47F8127611AD408B862296ED /* Montserrat-SemiBold.ttf */; };
+		6C465AFE2E4740208028B1F5 /* bkp-ezyrent-footer-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CFCD0D5FB74A83A92DC862 /* bkp-ezyrent-footer-icon.png */; };
 		6CED7164E86742588FB9E146 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B51BEB7B0EF44829A9838D91 /* Montserrat-BlackItalic.ttf */; };
 		6D164D0E6BDB445989C28A2A /* securetext_show.png in Resources */ = {isa = PBXBuildFile; fileRef = EE1A47AB480944A9921C609F /* securetext_show.png */; };
 		6D56A9421F564E1C9E5603E7 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 189F228F60AA4003A9DD8B55 /* search.png */; };
@@ -83,14 +84,19 @@
 		7135B9C0866946B6A3CF7C70 /* arrow_next.png in Resources */ = {isa = PBXBuildFile; fileRef = C664073012DC4996A38E3B73 /* arrow_next.png */; };
 		781888872B6643DBBBF104E7 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0E3AE409253414F936B7EFA /* Montserrat-ExtraBold.ttf */; };
 		78C98FC82E2C499B984BEEB1 /* congrats.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F50301390F4036BFCE97D7 /* congrats.png */; };
+		7DDBCFDE3F0F4A6C99EDD468 /* bkp_credit_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 93B1EC1FC03E4588A2BE7445 /* bkp_credit_card.png */; };
+		7E872E2CFE9E4D099F12B778 /* ezyrent-footer-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A82861633794445ABF55BCEA /* ezyrent-footer-icon.jpg */; };
 		7EA93B84EEA940B29C0153EC /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DD60B7F064AE2B116240A /* Oxygen-Light.ttf */; };
 		7FE45EFFD702412895999D5D /* arrow-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 894DADE43FA849E1BBC33732 /* arrow-down.png */; };
 		8543AB8E139E45E09583DD99 /* back-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 927A8F4B869640C6855996CF /* back-white.png */; };
+		899E98B990774F548807D857 /* bkp_dashboard_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = DAFF4E9949C54A60BE142859 /* bkp_dashboard_inactive.png */; };
 		8A458CAD5642496CBD572E9A /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06084B05E05F46CFBF7996C4 /* Montserrat-Italic.ttf */; };
 		8D25842E408C4EAB8D782A6C /* arrowdown_picker.png in Resources */ = {isa = PBXBuildFile; fileRef = FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */; };
 		9007EAB59AC744C8BA80510E /* dashboard_bg copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA5BCF11BE84D3281440102 /* dashboard_bg copy.png */; };
+		90ABD01BF5C8447DA0C8849E /* checkbox_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CA0F3CD08343D89FE65F71 /* checkbox_active.png */; };
 		95B7B65485D649798853CB70 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A19010E65134BA1887FF3A9 /* Oxygen-Regular.ttf */; };
 		988C29F4DCAE4202B626D1E2 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */; };
+		9D87EB7AEA2247D78FF01C19 /* checkbox_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 989567039799442183228EF1 /* checkbox_inactive.png */; };
 		9F43E5EC11C842D28DC641EC /* credit_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 719FFBFD9B17479E981FF941 /* credit_card.png */; };
 		9FF6C68B1B90449BB68BA159 /* dash-bar-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E8055FCD2E4CB1A10CC58B /* dash-bar-line.png */; };
 		A620625F9D8F4CBBA8F0594F /* property_view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7086420B9A41838280B9CB /* property_view_bg.png */; };
@@ -100,12 +106,14 @@
 		B6617B1DD3CE47B1A09A1169 /* add_properties.png in Resources */ = {isa = PBXBuildFile; fileRef = 04628F43674547E2AAF9B23A /* add_properties.png */; };
 		B70B4B4B629C48E29987F2A9 /* calendar_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = A57B0F404480424DBBB6FAB8 /* calendar_ellipse.png */; };
 		B7CE84A995C7408C9CB756CD /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = CABBFC94C9E8444F887EF19D /* round.png */; };
+		B813D0074F8B44B9A6900ABD /* my-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 701CB9812F544624A18AA7DD /* my-profile.png */; };
 		BC5C0CB1317C40898C212F39 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E97F37E73B2449FBAAE38364 /* Montserrat-ExtraLight.ttf */; };
 		BD03B74E8BD6405A92B8AD90 /* new-user-dashboard.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28BBBC114C8C4A2A9FE9BA1A /* new-user-dashboard.jpg */; };
 		BFC9287369D5420DAD88E76F /* erase.png in Resources */ = {isa = PBXBuildFile; fileRef = ACD808ED5729447D9C2AD675 /* erase.png */; };
 		C3BE45D914F94720B1E1FB65 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 854C7B8876214B40B7B150DB /* filter.png */; };
 		C7500EEF1A754017BC297375 /* dashboard_data_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CC802A73F3B4439B9812CCA8 /* dashboard_data_bg.png */; };
 		C84F410B541141D7A81D62A9 /* due_label.png in Resources */ = {isa = PBXBuildFile; fileRef = C22ED23F43EB40008D65DD53 /* due_label.png */; };
+		C8DAA7FDF3BB4962BE2A9122 /* bkp_walkthrough_tenant.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A162CB5256B4CC18199D68A /* bkp_walkthrough_tenant.png */; };
 		C91F71134CFB415EA6D0C5C9 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DDB410B7BB445FDBD77FF98 /* Montserrat-Light.ttf */; };
 		C9269142F7084BF1A8C3B304 /* contact_book.png in Resources */ = {isa = PBXBuildFile; fileRef = C1182A7A288F4E64B1BC4348 /* contact_book.png */; };
 		C9897DCD11844B22A3FECB3A /* walkthrough_tenant.png in Resources */ = {isa = PBXBuildFile; fileRef = A77E4820FFCC47A4985787C7 /* walkthrough_tenant.png */; };
@@ -113,6 +121,7 @@
 		CCA28F1DE6CF40BDA9B67F65 /* dashed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D02A7E40FDA24DE8B3B8A96A /* dashed_bg.png */; };
 		CE70FB78A0914EB5AB73AD10 /* pay-rent.png in Resources */ = {isa = PBXBuildFile; fileRef = D7073839859B4E4A9FFDE3C3 /* pay-rent.png */; };
 		CE8162F7570944818674934C /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7151A805C5C2434EB2005CD5 /* Montserrat-ExtraLightItalic.ttf */; };
+		D55FE58AE5994A8D802CAD18 /* bkp_double_tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CA7B4CC73CA4A9DBEFB4298 /* bkp_double_tick.png */; };
 		D60A10A983134BA2B90AEC85 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 604C43F9442545618A584F60 /* Montserrat-Black.ttf */; };
 		D97050D54C524960BFADFCD8 /* new-user-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD05DBAD033415493FD4186 /* new-user-dashboard.png */; };
 		DAE3939B81F246908EC48F8C /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B65ACA67B7BA492FBBE42DE9 /* Montserrat-ExtraBoldItalic.ttf */; };
@@ -179,6 +188,7 @@
 		18656544246E462200DC7015 /* EzyRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EzyRent.entitlements; path = EzyRent/EzyRent.entitlements; sourceTree = "<group>"; };
 		18656545246E465300DC7015 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		189F228F60AA4003A9DD8B55 /* search.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = search.png; path = ../src/assets/images/search.png; sourceTree = "<group>"; };
+		1A0727EE5B594043A4C158F8 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		1A8D6CAF1F8E49DCB4BAAD58 /* three-dot.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "three-dot.png"; path = "../src/assets/images/three-dot.png"; sourceTree = "<group>"; };
 		1CD6A57EE3A84710B51CD1CA /* plus.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = plus.png; path = ../src/assets/images/plus.png; sourceTree = "<group>"; };
 		1CE27AD9D0124116BCFAF1CC /* dashboard_plant_graph.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_plant_graph.png; path = ../src/assets/images/dashboard_plant_graph.png; sourceTree = "<group>"; };
@@ -193,6 +203,7 @@
 		28BBBC114C8C4A2A9FE9BA1A /* new-user-dashboard.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "new-user-dashboard.jpg"; path = "../src/assets/images/new-user-dashboard.jpg"; sourceTree = "<group>"; };
 		2B278958ED08F24E2489FDE9 /* Pods-EzyRent-EzyRentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-EzyRentTests.release.xcconfig"; path = "Target Support Files/Pods-EzyRent-EzyRentTests/Pods-EzyRent-EzyRentTests.release.xcconfig"; sourceTree = "<group>"; };
 		2B5E3EA6870C4705A8C8C065 /* tever-thomas.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "tever-thomas.png"; path = "../src/assets/images/tever-thomas.png"; sourceTree = "<group>"; };
+		2CA7B4CC73CA4A9DBEFB4298 /* bkp_double_tick.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_double_tick.png; path = ../src/assets/images/bkp_double_tick.png; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* EzyRent-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzyRent-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* EzyRent-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EzyRent-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon.png"; path = "../src/assets/images/ezyrent-footer-icon.png"; sourceTree = "<group>"; };
@@ -202,9 +213,12 @@
 		364DDA48BFD948F3AFF751CC /* MONTSERRAT-EXTRALIGHTITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; sourceTree = "<group>"; };
 		3C058C24F82B43BFA4DDE1BF /* dashboard_add_properties.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_add_properties.png; path = ../src/assets/images/dashboard_add_properties.png; sourceTree = "<group>"; };
 		3D0EBCF4753544BD80D6357B /* MONTSERRAT-THINITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-THINITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-THINITALIC_0.TTF"; sourceTree = "<group>"; };
+		3FA6B984B8D24E519835BBA9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		410DA23F7CC30B794BECAF3E /* libPods-EzyRent-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4185ABE599106F560864CF4E /* Pods-EzyRent-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOSTests/Pods-EzyRent-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4274FAF24823456183CBFE62 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		46A2B23AD2F34C028EAED5EB /* map_ellipse.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = map_ellipse.png; path = ../src/assets/images/map_ellipse.png; sourceTree = "<group>"; };
+		46CFCD0D5FB74A83A92DC862 /* bkp-ezyrent-footer-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "bkp-ezyrent-footer-icon.png"; path = "../src/assets/images/bkp-ezyrent-footer-icon.png"; sourceTree = "<group>"; };
 		47F8127611AD408B862296ED /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		49E194C971FF4BB88BA40225 /* single_tick_light.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = single_tick_light.png; path = ../src/assets/images/single_tick_light.png; sourceTree = "<group>"; };
 		4CF21C216D617409F70D66C6 /* libPods-EzyRent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +228,8 @@
 		55DFD79879764BFEB8E45FDA /* paid_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = paid_label.png; path = ../src/assets/images/paid_label.png; sourceTree = "<group>"; };
 		57329EA7557F96A4076A40C1 /* Pods-EzyRent-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOS/Pods-EzyRent-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		579DE0F7C338C22BF9D1CD95 /* libPods-EzyRent-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58CE455B16714DAB957315B1 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		5A08F338CD8A4265A0088B32 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Thin.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
 		5CDE3F64AF776F3D5EDCB1D5 /* Pods-EzyRent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent/Pods-EzyRent.debug.xcconfig"; sourceTree = "<group>"; };
 		5F095E829FBE43C5B840757E /* close.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = close.png; path = ../src/assets/images/close.png; sourceTree = "<group>"; };
@@ -223,24 +239,33 @@
 		6528A421882741AF939938F9 /* MONTSERRAT-BLACKITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BLACKITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BLACKITALIC_0.TTF"; sourceTree = "<group>"; };
 		667C1AEE759E49DE8F926F5D /* dues_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dues_label.png; path = ../src/assets/images/dues_label.png; sourceTree = "<group>"; };
 		6989D10B99624746A2AB517E /* dashboard_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_bg.png; path = ../src/assets/images/dashboard_bg.png; sourceTree = "<group>"; };
+		6A164E007BC94BEEA0C40C58 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		6D0DD60B7F064AE2B116240A /* Oxygen-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oxygen-Light.ttf"; path = "../src/assets/fonts/Oxygen/Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		6EFE2D871FC84F45B6FD1055 /* MONTSERRAT-REGULAR.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-REGULAR.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-REGULAR.TTF"; sourceTree = "<group>"; };
 		6F1B10D4B4BE462BA492A2BC /* secure_payment.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = secure_payment.png; path = ../src/assets/images/secure_payment.png; sourceTree = "<group>"; };
+		701CB9812F544624A18AA7DD /* my-profile.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "my-profile.png"; path = "../src/assets/images/my-profile.png"; sourceTree = "<group>"; };
 		7151A805C5C2434EB2005CD5 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		719FFBFD9B17479E981FF941 /* credit_card.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = credit_card.png; path = ../src/assets/images/credit_card.png; sourceTree = "<group>"; };
 		73C4CB0CAC9E4DD7ADD17587 /* email.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = email.png; path = ../src/assets/images/email.png; sourceTree = "<group>"; };
+		73CA0F3CD08343D89FE65F71 /* checkbox_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = checkbox_active.png; path = ../src/assets/images/checkbox_active.png; sourceTree = "<group>"; };
+		7402136461354B589090F38D /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		76421BCA9B9F479A9E59FE6C /* OXYGEN-LIGHT.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-LIGHT.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-LIGHT.TTF"; sourceTree = "<group>"; };
 		7A19010E65134BA1887FF3A9 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oxygen-Regular.ttf"; path = "../src/assets/fonts/Oxygen/Oxygen-Regular.ttf"; sourceTree = "<group>"; };
 		7DDB410B7BB445FDBD77FF98 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		854C7B8876214B40B7B150DB /* filter.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = filter.png; path = ../src/assets/images/filter.png; sourceTree = "<group>"; };
 		85544B923E3A49DA9CC80624 /* ezyrent-footer-icon copy.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon copy.png"; path = "../src/assets/images/ezyrent-footer-icon copy.png"; sourceTree = "<group>"; };
+		85C0FFCD5CAF44C0B614F49F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		86D3F5DB657A42B5BA5892D5 /* james.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = james.png; path = ../src/assets/images/sample/james.png; sourceTree = "<group>"; };
 		894DADE43FA849E1BBC33732 /* arrow-down.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "arrow-down.png"; path = "../src/assets/images/arrow-down.png"; sourceTree = "<group>"; };
 		8A3511C94ED443A2B47666C8 /* paginat-active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "paginat-active.png"; path = "../src/assets/images/paginat-active.png"; sourceTree = "<group>"; };
 		8BD92D5457944323A7030400 /* gps.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = gps.png; path = ../src/assets/images/gps.png; sourceTree = "<group>"; };
+		8C8543714C984155B0133B17 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		8FA5BCF11BE84D3281440102 /* dashboard_bg copy.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "dashboard_bg copy.png"; path = "../src/assets/images/dashboard_bg copy.png"; sourceTree = "<group>"; };
 		927A8F4B869640C6855996CF /* back-white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "back-white.png"; path = "../src/assets/images/back-white.png"; sourceTree = "<group>"; };
+		93B1EC1FC03E4588A2BE7445 /* bkp_credit_card.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_credit_card.png; path = ../src/assets/images/bkp_credit_card.png; sourceTree = "<group>"; };
+		989567039799442183228EF1 /* checkbox_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = checkbox_inactive.png; path = ../src/assets/images/checkbox_inactive.png; sourceTree = "<group>"; };
 		98A8259B6D0C4BC79A85BA21 /* properties_item_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = properties_item_bg.png; path = ../src/assets/images/properties_item_bg.png; sourceTree = "<group>"; };
+		9A162CB5256B4CC18199D68A /* bkp_walkthrough_tenant.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_walkthrough_tenant.png; path = ../src/assets/images/bkp_walkthrough_tenant.png; sourceTree = "<group>"; };
 		9AB079AD7A674CFC88CE4A1D /* bank-account-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "bank-account-icon.png"; path = "../src/assets/images/bank-account-icon.png"; sourceTree = "<group>"; };
 		9B8EF5A190C54A0E9B875184 /* OXYGEN-BOLD.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-BOLD.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-BOLD.TTF"; sourceTree = "<group>"; };
 		9FAB40C6425B450882DB99B0 /* MONTSERRAT-LIGHTITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-LIGHTITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-LIGHTITALIC_0.TTF"; sourceTree = "<group>"; };
@@ -254,7 +279,10 @@
 		A57B0F404480424DBBB6FAB8 /* calendar_ellipse.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = calendar_ellipse.png; path = ../src/assets/images/calendar_ellipse.png; sourceTree = "<group>"; };
 		A5D24C29F65D4CE4B49258AB /* MONTSERRAT-SEMIBOLD_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-SEMIBOLD_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-SEMIBOLD_0.TTF"; sourceTree = "<group>"; };
 		A6413D903A5841E0927FABAE /* gps_dark.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = gps_dark.png; path = ../src/assets/images/gps_dark.png; sourceTree = "<group>"; };
+		A6A65EA6B9D34FC188EC9913 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		A77E4820FFCC47A4985787C7 /* walkthrough_tenant.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = walkthrough_tenant.png; path = ../src/assets/images/walkthrough_tenant.png; sourceTree = "<group>"; };
+		A785BAB9BD6C49BDAEAADB82 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		A82861633794445ABF55BCEA /* ezyrent-footer-icon.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon.jpg"; path = "../src/assets/images/ezyrent-footer-icon.jpg"; sourceTree = "<group>"; };
 		ACD808ED5729447D9C2AD675 /* erase.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = erase.png; path = ../src/assets/images/erase.png; sourceTree = "<group>"; };
 		AE55055EF1994283B660DECA /* MONTSERRAT-EXTRABOLD_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRABOLD_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRABOLD_0.TTF"; sourceTree = "<group>"; };
 		AF155178F0194DD28381FE7B /* arrow_down.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_down.png; path = ../src/assets/images/arrow_down.png; sourceTree = "<group>"; };
@@ -275,6 +303,7 @@
 		C1182A7A288F4E64B1BC4348 /* contact_book.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = contact_book.png; path = ../src/assets/images/contact_book.png; sourceTree = "<group>"; };
 		C151D132D0B08ACBA5380AB0 /* Pods-EzyRent-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOS/Pods-EzyRent-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		C22ED23F43EB40008D65DD53 /* due_label.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = due_label.png; path = ../src/assets/images/due_label.png; sourceTree = "<group>"; };
+		C5AE8116F76B4A6FBCEA9152 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		C664073012DC4996A38E3B73 /* arrow_next.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_next.png; path = ../src/assets/images/arrow_next.png; sourceTree = "<group>"; };
 		C68843B218E3470081D142EB /* arrow_left.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_left.png; path = ../src/assets/images/arrow_left.png; sourceTree = "<group>"; };
 		C845560FFBF841B7B9E87479 /* MONTSERRAT-MEDIUMITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-MEDIUMITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-MEDIUMITALIC_0.TTF"; sourceTree = "<group>"; };
@@ -282,13 +311,16 @@
 		CC802A73F3B4439B9812CCA8 /* dashboard_data_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_data_bg.png; path = ../src/assets/images/dashboard_data_bg.png; sourceTree = "<group>"; };
 		CEF14BF1AC47402FB02CAD5D /* properties_item_bg_light.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = properties_item_bg_light.png; path = ../src/assets/images/properties_item_bg_light.png; sourceTree = "<group>"; };
 		CFD23AA9426A48F38A28A7A8 /* double_tick.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = double_tick.png; path = ../src/assets/images/double_tick.png; sourceTree = "<group>"; };
+		CFEAA0CE713F4CD9ACAC07F5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		D01D6988B4AE4596BFF5B733 /* MONTSERRAT-LIGHT_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-LIGHT_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-LIGHT_0.TTF"; sourceTree = "<group>"; };
 		D02A7E40FDA24DE8B3B8A96A /* dashed_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashed_bg.png; path = ../src/assets/images/dashed_bg.png; sourceTree = "<group>"; };
 		D0E025C5B52E4D9BB6867087 /* securetext_hidden.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = securetext_hidden.png; path = ../src/assets/images/securetext_hidden.png; sourceTree = "<group>"; };
 		D0E3AE409253414F936B7EFA /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		D23C093E15F3455499C6B09D /* right-arrow.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "right-arrow.png"; path = "../src/assets/images/right-arrow.png"; sourceTree = "<group>"; };
+		D478F4B302754AE0A9870488 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D5976FA4897A460D853B7831 /* my-tenants.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "my-tenants.png"; path = "../src/assets/images/my-tenants.png"; sourceTree = "<group>"; };
 		D7073839859B4E4A9FFDE3C3 /* pay-rent.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "pay-rent.png"; path = "../src/assets/images/pay-rent.png"; sourceTree = "<group>"; };
+		DAFF4E9949C54A60BE142859 /* bkp_dashboard_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_dashboard_inactive.png; path = ../src/assets/images/bkp_dashboard_inactive.png; sourceTree = "<group>"; };
 		DB7B679C080347138BDDD378 /* dashboard_bg.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_bg.jpg; path = ../src/assets/images/dashboard_bg.jpg; sourceTree = "<group>"; };
 		DC3987F6A3404F49BA66DF47 /* dashboard_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_active.png; path = ../src/assets/images/dashboard_active.png; sourceTree = "<group>"; };
 		E0C695279488495BA2BEDC89 /* OXYGEN-REGULAR.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OXYGEN-REGULAR.TTF"; path = "../src/assets/fonts/Oxygen/OXYGEN-REGULAR.TTF"; sourceTree = "<group>"; };
@@ -306,8 +338,10 @@
 		EE1A47AB480944A9921C609F /* securetext_show.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = securetext_show.png; path = ../src/assets/images/securetext_show.png; sourceTree = "<group>"; };
 		EEEA59807F964FE69DCC20F8 /* edit-transparent.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "edit-transparent.png"; path = "../src/assets/images/edit-transparent.png"; sourceTree = "<group>"; };
 		EF0D53D4F6DE4586987B04EA /* edit-white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "edit-white.png"; path = "../src/assets/images/edit-white.png"; sourceTree = "<group>"; };
+		F144F2D184C8425BBE26C55E /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		F46C72347F64440680657832 /* arrow_right.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrow_right.png; path = ../src/assets/images/arrow_right.png; sourceTree = "<group>"; };
 		F563B397FA964D17BB550EFD /* nav_notifications_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_notifications_active.png; path = ../src/assets/images/nav_notifications_active.png; sourceTree = "<group>"; };
+		F781429FDF734E0CBD25E8B4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		F88C9C1D51D94730947261CD /* nav_more_active.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_more_active.png; path = ../src/assets/images/nav_more_active.png; sourceTree = "<group>"; };
 		FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrowdown_picker.png; path = ../src/assets/images/arrowdown_picker.png; sourceTree = "<group>"; };
 		FE7086420B9A41838280B9CB /* property_view_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = property_view_bg.png; path = ../src/assets/images/property_view_bg.png; sourceTree = "<group>"; };
@@ -519,6 +553,31 @@
 				A4B3C560A61C4647B07C027C /* Montserrat-SemiBoldItalic.ttf */,
 				5C480FFEB3D145F9BADF1885 /* Montserrat-Thin.ttf */,
 				EB6B4653F0AA41B2968EA48C /* Montserrat-ThinItalic.ttf */,
+				93B1EC1FC03E4588A2BE7445 /* bkp_credit_card.png */,
+				DAFF4E9949C54A60BE142859 /* bkp_dashboard_inactive.png */,
+				2CA7B4CC73CA4A9DBEFB4298 /* bkp_double_tick.png */,
+				9A162CB5256B4CC18199D68A /* bkp_walkthrough_tenant.png */,
+				46CFCD0D5FB74A83A92DC862 /* bkp-ezyrent-footer-icon.png */,
+				73CA0F3CD08343D89FE65F71 /* checkbox_active.png */,
+				989567039799442183228EF1 /* checkbox_inactive.png */,
+				A82861633794445ABF55BCEA /* ezyrent-footer-icon.jpg */,
+				701CB9812F544624A18AA7DD /* my-profile.png */,
+				7402136461354B589090F38D /* AntDesign.ttf */,
+				3FA6B984B8D24E519835BBA9 /* Entypo.ttf */,
+				85C0FFCD5CAF44C0B614F49F /* EvilIcons.ttf */,
+				C5AE8116F76B4A6FBCEA9152 /* Feather.ttf */,
+				A785BAB9BD6C49BDAEAADB82 /* FontAwesome.ttf */,
+				5A08F338CD8A4265A0088B32 /* FontAwesome5_Brands.ttf */,
+				CFEAA0CE713F4CD9ACAC07F5 /* FontAwesome5_Regular.ttf */,
+				1A0727EE5B594043A4C158F8 /* FontAwesome5_Solid.ttf */,
+				6A164E007BC94BEEA0C40C58 /* Fontisto.ttf */,
+				58CE455B16714DAB957315B1 /* Foundation.ttf */,
+				4274FAF24823456183CBFE62 /* Ionicons.ttf */,
+				F781429FDF734E0CBD25E8B4 /* MaterialCommunityIcons.ttf */,
+				D478F4B302754AE0A9870488 /* MaterialIcons.ttf */,
+				8C8543714C984155B0133B17 /* Octicons.ttf */,
+				A6A65EA6B9D34FC188EC9913 /* SimpleLineIcons.ttf */,
+				F144F2D184C8425BBE26C55E /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -840,6 +899,15 @@
 				0C61F2D13DDC4B18B0F1AFE8 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				988C29F4DCAE4202B626D1E2 /* Montserrat-Thin.ttf in Resources */,
 				F4CF9206ACDC4211AB1AB2DA /* Montserrat-ThinItalic.ttf in Resources */,
+				7DDBCFDE3F0F4A6C99EDD468 /* bkp_credit_card.png in Resources */,
+				899E98B990774F548807D857 /* bkp_dashboard_inactive.png in Resources */,
+				D55FE58AE5994A8D802CAD18 /* bkp_double_tick.png in Resources */,
+				C8DAA7FDF3BB4962BE2A9122 /* bkp_walkthrough_tenant.png in Resources */,
+				6C465AFE2E4740208028B1F5 /* bkp-ezyrent-footer-icon.png in Resources */,
+				90ABD01BF5C8447DA0C8849E /* checkbox_active.png in Resources */,
+				9D87EB7AEA2247D78FF01C19 /* checkbox_inactive.png in Resources */,
+				7E872E2CFE9E4D099F12B778 /* ezyrent-footer-icon.jpg in Resources */,
+				B813D0074F8B44B9A6900ABD /* my-profile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

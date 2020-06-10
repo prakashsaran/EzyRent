@@ -56,7 +56,7 @@ function SignUpProfile(props) {
 
         <Text style={theme.typography.stepmessage}>Enter your full name and set a 4 digit app pin of your choice</Text>
 
-        <Text style={theme.typography.mobelTitle}>YOUR FULL NAME</Text>
+        <Text style={theme.typography.mobelTitle2}>YOUR FULL NAME</Text>
 
         <View style={styles.mobileWrapper(theme)}>
           <TextInput

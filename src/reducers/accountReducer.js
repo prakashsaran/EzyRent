@@ -8,12 +8,14 @@ import {
   EZYRENT_AUTHENTICATION_TOKEN_TYPE,
   EZYRENT_UPDATE_CUSTOMER_ACCOUNT,
   EZYRENT_ACCOUNT_LOADING,
+  EZYRENT_UPDATING_FIELD_ACCOUNT,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   customer: null,
   status:false,
   data:null,
+  updating:{},
   access_token:null,
   refresh_token:null,
   token_type:"Bearer",
@@ -51,6 +53,9 @@ export default (state = INITIAL_STATE, action) => {
     }
     case EZYRENT_UPDATE_CUSTOMER_ACCOUNT:{
       return {...state,customer: action.payload};
+    }
+    case EZYRENT_UPDATING_FIELD_ACCOUNT: {
+      return {...state,updating: action.payload};
     }
     default:
       return state;

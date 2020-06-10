@@ -23,7 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import {normalize} from '../../components'
 const App: () => React$Node = () => {
   return (
     <>
@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: normalize(24),
     fontWeight: '600',
     color: Colors.black,
   },
   sectionDescription: {
     marginTop: 8,
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: '400',
     color: Colors.dark,
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     color: Colors.dark,
-    fontSize: 12,
+    fontSize: normalize(12),
     fontWeight: '600',
     padding: 4,
     paddingRight: 12,

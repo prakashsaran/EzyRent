@@ -31,6 +31,7 @@ import DashboardInit from '../views/dashboard';
 // PROPERTIES AND TENANTS SCREEN
 import PropertiesTenants from '../views/propertiestenants';
 import AddPropertyTenant from '../views/properties/add';
+import EditProperty from '../views/properties/edit';
 import ViewPropertyTenant from '../views/properties/viewtenant';
 import ViewPropertyLandlord from '../views/properties/viewlandlord'
 import ViewPropertyDetail from '../views/properties/viewdetail';
@@ -97,6 +98,7 @@ import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
   NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_EDIT_PROPERTIES_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH,
   NAVIGATION_RENT_INIT_VIEW_PATH,
@@ -161,6 +163,7 @@ const DashboardStack = createStackNavigator({
 const PropertiesTenantsStack = createStackNavigator({
   [NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH]: PropertiesTenants,
   [NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH]: AddPropertyTenant,
+  [NAVIGATION_EDIT_PROPERTIES_VIEW_PATH]: EditProperty,
   [NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH]: ViewPropertyDetail,
   [NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH]: ViewPropertyTenant,
   [NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH]: ViewPropertyLandlord,
@@ -217,7 +220,7 @@ const MainAppNavigator = createBottomTabNavigator(
     [NAVIGATION_PROPERTIES_TENANTS_STACK_PATH]: {
       screen: PropertiesTenantsStack,
       navigationOptions: () => ({
-        tabBarLabel: 'Properties/Tenants',
+        tabBarLabel: 'Properties',
         headerTitle:'Properties/Tenants',
         tabBarIcon: ({ focused }) => <Image resizeMode={'contain'} style={imageStyle} source={focused ? imagePropertyActive : imagePropertyInActive} />,
       }),

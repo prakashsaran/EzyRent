@@ -5,3 +5,4 @@ export * from './iphonex';
 export * from './RightIconTextbox';
 export * from './normalize';
 export * from './pickerSelect';
+export * from './DateMonthPicker';

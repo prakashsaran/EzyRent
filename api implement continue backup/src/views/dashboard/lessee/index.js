@@ -20,9 +20,6 @@ class LesseeDashboard extends React.Component {
     StatusBar.setBarStyle("light-content");
     StatusBar.setHidden(false)
   }
-  componentDidMount(){
-    const {customer,status}=this.props
-  }
   addPropertyTenant(){
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
   }
@@ -32,9 +29,59 @@ class LesseeDashboard extends React.Component {
   payRent(){
     NavigationService.navigate(NAVIGATION_RENT_INIT_VIEW_PATH);
   }
+//======================================================//
+//============ start common function ====================//
+//======================================================//
 
+getCollectionRent(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.rent_collect;
+  }
+  return "0";
+}
+
+getCollectionTotalRent(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.total_rent_collect;
+  }
+  return "0";
+}
+getConsistencyRentCollect(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.consistency_rent_collect;
+  }
+  return "0";
+}
+
+getTotalRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.total_rent_pay;
+  }
+  return "0";
+}
+
+
+getRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+getConsistencyRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+
+//======================================================//
+//============ end common function ====================//
+//======================================================//
   render(){
     const theme = this.context;
+    const {customer}=this.props
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
@@ -87,15 +134,15 @@ class LesseeDashboard extends React.Component {
                         <Text style={styles.statsDesc(theme)}>A quick summary of your account on EzyRent as landlord.</Text>
                         <View style={styles.statsdata(theme)}>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>12</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getCollectionRent(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Properties I am Collecting Rent</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>80K</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getCollectionTotalRent(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Total Rent I have to Receive</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>100%</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getConsistencyRentCollect(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Consistency in Collecting Rent</Text>
                           </View>
                         </View>
@@ -108,15 +155,15 @@ class LesseeDashboard extends React.Component {
                         <Text style={styles.statsDesc(theme)}>A quick summary of your account on EzyRent as tenant.</Text>
                         <View style={styles.statsdata(theme)}>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>12</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getRentPay(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Properties I am Paying Rent</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>80K</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getTotalRentPay(customer)}K</Text>
                             <Text style={styles.itemInfo(theme)}>Total Rent I have to Pay</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>100%</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getConsistencyRentPay(customer)}%</Text>
                             <Text style={styles.itemInfo(theme)}>Consistency in Paying Rent</Text>
                           </View>
                         </View>

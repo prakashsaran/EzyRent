@@ -17,7 +17,17 @@ import {
   EZYRENT_AUTHENTICATION_ACCESS_TOKEN,
   EZYRENT_AUTHENTICATION_REFRESH_TOKEN,
   EZYRENT_AUTHENTICATION_TOKEN_TYPE,
+  EZYRENT_BUILDING_SET_LIST_VIEW,
+  EZYRENT_GET_PROPERTIES_AS_LANDLORD,
+  EZYRENT_GET_PROPERTIES_AS_TENANT,
+  EZYRENT_GET_SINGLE_PROPERTY,
+  EZYRENT_GET_BANK_ACCOUNTS,
+  EZYRENT_GET_RENTS_AS_LANDLORD,
+  EZYRENT_GET_RENTS_AS_TENANT,
+  EZYRENT_GET_NOTIFICATION,
+  EZYRENT_SET_CURRENT_TENANT_PROFILE,
 } from './types';
+
 import NavigationService from '../navigation/NavigationService';
 import {
   NAVIGATION_SIGN_UP_MOBILE_OTP_PATH,
@@ -77,6 +87,8 @@ export const signUp = (mobiledata,data) => async (dispatch) => {
 
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
+
+    console.log("post is signUp",userId,formData);
 
     // send request to server
     const response = await EzyRent.guest.setupAccountComplete(userId,formData);
@@ -138,21 +150,22 @@ export const signupMobile = (mobilenumber,dialcode='0091') => async (dispatch) =
 
 /**
  * @description resendMobileOtp method : resend Otp at create account
- * @param mobilenumber object
+ * @param user object
  * @param type string
  * @returns avoid
  * @callback NavigationService.navigate();
  **/
-export const resendMobileOtp = (mobilenumber,type) => async (dispatch) => {
+export const resendMobileOtp = (user,type) => async (dispatch) => {
   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
   try {
-    console.log("mobilenumber ===",mobilenumber);
+    console.log("user ===",user);
     // send otp proccess
       // form data
       const data = {
-        "id": mobilenumber.id,
+        "id": user.id,
         "type": type,
       }
+      console.log(" resendMobileOtp data",data)
       // form data convert to application/x-www-form-urlencoded
       const formData = formUrlencodedData(data);
 
@@ -372,11 +385,12 @@ export const errorMessage = error => ({ type: EZYRENT_AUTHENTICATION_ERROR, payl
 
 const authSuccess = async (dispatch, userData) => {
   try {
-    console.log("userData access_token ",userData.access_token);
     await AsyncStorage.setItem('userData', JSON.stringify(userData));
     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
     if(userData.hasOwnProperty("access_token")){
-      dispatch({ type: EZYRENT_AUTHENTICATION_ACCESS_TOKEN, payload: userData.access_token });
+        EzyRent.setAccessToken(userData.access_token);
+        EzyRent.setTokenType(userData.token_type);
+        dispatch({ type: EZYRENT_AUTHENTICATION_ACCESS_TOKEN, payload: userData.access_token });
       await AsyncStorage.setItem('access_token', userData.access_token);
     }
     if(userData.hasOwnProperty("refresh_token")){
@@ -395,7 +409,6 @@ const authSuccess = async (dispatch, userData) => {
 
 
 export const setCurrentCustomer = (userData) => async (dispatch, getState) => {
-  console.log("setCurrentCustomer userData",userData)
   const currentAc = userData.user;
   dispatch({ type: EZYRENT_SIGN_IN_SUCCESS, payload: currentAc });
   dispatch({ type: EZYRENT_SIGN_UP_SETUP_COMPLETE_ACCOUNT, payload: userData });
@@ -427,6 +440,15 @@ export const isAuth  = (customer,access_token,navigation) => async (dispatch) =>
 
 export const logout = () => async (dispatch) => {
   try {
+    dispatch({ type: EZYRENT_BUILDING_SET_LIST_VIEW, payload: [] });
+    dispatch({ type: EZYRENT_GET_PROPERTIES_AS_LANDLORD, payload: [] });
+    dispatch({ type: EZYRENT_GET_PROPERTIES_AS_TENANT, payload: [] });
+    dispatch({ type: EZYRENT_GET_SINGLE_PROPERTY, payload: {} });
+    dispatch({ type: EZYRENT_GET_BANK_ACCOUNTS, payload: [] });
+    dispatch({ type: EZYRENT_GET_RENTS_AS_LANDLORD, payload: [] });
+    dispatch({ type: EZYRENT_GET_RENTS_AS_TENANT, payload: [] });
+    dispatch({ type: EZYRENT_GET_NOTIFICATION, payload: [] });
+    dispatch({ type: EZYRENT_SET_CURRENT_TENANT_PROFILE, payload: {} });
     const keys = await AsyncStorage.getAllKeys();
     await AsyncStorage.multiRemove(keys);
     NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);

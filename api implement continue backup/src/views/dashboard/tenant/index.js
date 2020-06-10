@@ -15,13 +15,14 @@ import {
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
 } from '../../../navigation/routes';
+import {getPropertiesForTenant,getPropertyById,getCountryCodeFormat,tenantSubmissionOnProperty,getMyProfile} from '../../../actions';
 
 class TenantDashboard extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
     super();
     this.state={
-      visiblemodal:true
+      visiblemodal:false
     }
     StatusBar.setBarStyle("light-content");
     StatusBar.setHidden(false)
@@ -47,8 +48,62 @@ class TenantDashboard extends React.Component {
     NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH)
   }
 
+
+  UNSAFE_componentWillMount(){
+    const {getPropertiesForTenant} = this.props
+    getPropertiesForTenant("",0,10);
+
+    console.log("============================= ============= test request componentWillMount",this.props.customer)
+  }
+  UNSAFE_componentWillReceiveProps(nextProps){
+    const {items,getPropertyById} = this.props
+    if(nextProps.items != items){
+      const slectedProperty = nextProps.items.find(function(item){
+        if(item.property_status=="A"){
+            return item;
+        }
+        return null;
+      });
+      if(slectedProperty){
+        getPropertyById(slectedProperty.id);
+        this.setState({visiblemodal:true})
+      }
+    }
+  }
+  //======================================================//
+//============ start common function ====================//
+//======================================================//
+
+getTotalRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.total_rent_pay;
+  }
+  return "0";
+}
+
+
+getRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+getConsistencyRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+
+//======================================================//
+//============ end common function ====================//
+//======================================================//
+
   render(){
     const theme = this.context;
+    const {customer} = this.props
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
@@ -82,15 +137,15 @@ class TenantDashboard extends React.Component {
                         <Text style={styles.statsDesc(theme)}>A quick summary of your account on EzyRent. </Text>
                         <View style={styles.statsdata(theme)}>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>12</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getRentPay(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Properties I am Paying Rent</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>80K</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getTotalRentPay(customer)}K</Text>
                             <Text style={styles.itemInfo(theme)}>Total Rent I have to Pay</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>100%</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getConsistencyRentPay(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Consistency in Paying Rent</Text>
                           </View>
                         </View>
@@ -128,76 +183,119 @@ class TenantDashboard extends React.Component {
      </View>
     )
    }
+   descriptionBankCharge(bankCharges){
+    return(
+     <View>
+       <Text style={styles.payTime(theme)}>{bankCharges.net_banking.amount}</Text>
+       <Text style={styles.timePeriodExtra(theme)}>INR {bankCharges.net_banking.rate} on using Net Banking/UPI</Text>
+       <Text style={styles.payTime(theme)}>{bankCharges.debit_card.amount}</Text>
+       <Text style={styles.timePeriodExtra(theme)}>{bankCharges.debit_card.rate}% on using Debit Card (1.25% of A includes 18% GST)</Text>
+       <Text style={styles.payTime(theme)}>{bankCharges.credit_card.amount}</Text>
+       <Text style={styles.timePeriodExtra(theme)}>{bankCharges.credit_card.rate}% on using Credit Card (1.95% of A, includes 18% GST)</Text>
+     </View>
+    )
+   }
  
+   AcceptProperty(item){
+    const {tenantSubmissionOnProperty} = this.props
+    tenantSubmissionOnProperty(item.id,"A");
+    this.setState({visiblemodal:false})
+  }
+
+  RejectProperty(item){
+    const {tenantSubmissionOnProperty} = this.props
+    tenantSubmissionOnProperty(item.id,"R");
+    this.setState({visiblemodal:false})
+  }
+
   renderModelView()
     {
+      const {property_currentItem,property_loading} = this.props
+      if(!property_loading && !Object.keys(property_currentItem).length){
+        return null;
+      }
+      console.log("=========property_currentItem property_currentItem property_currentItem=========",JSON.stringify(property_currentItem));
+      
       return(
         <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
-            <View style={styles.PopupContainer}>
-            <Image style={styles.congrats_img(theme)} resizeMode={'stretch'} source={require('../../../assets/images/congrats.png')}/>
-              <Text style={styles.congrats_head} adjustsFontSizeToFit>Congrats!</Text>
-              <ScrollView style={{height:theme.dimens.popupHeight}}>
-                  <View style={styles.congrats_content(theme)}>
-                    <Text style={styles.light_color} adjustsFontSizeToFit>You have been added as Tenant of </Text>
-                    <TouchableOpacity onPress={()=>this.goToPropertyDetail()}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}} adjustsFontSizeToFit>House No. 7A</Text></TouchableOpacity>
-                    <Text style={styles.light_color} adjustsFontSizeToFit> in Building SFS Merrie Pink, Kuravankonam by Landlord  </Text>
-                    <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail()}><Text adjustsFontSizeToFit style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>Red Rows Properties</Text></TouchableOpacity>
-                    <Text adjustsFontSizeToFit style={[styles.light_color,{fontWeight:'bold'}]}> (+91-976242342)</Text>
-                  </View>
-                  <View style={styles.congrats_content(theme)}>
-                    <Text style={styles.alertMsg} adjustsFontSizeToFit>Please confirm the Total Amount Payable monthly</Text>
-                  </View>
-                  <Image style={styles.dash_bar_img(theme)} resizeMode={'stretch'} source={require('../../../assets/images/dash-bar-line.png')}/>
-                  <View style={styles.bankacInfo}>
-                      <Text adjustsFontSizeToFit style={styles.banktitle(theme)}>Added Date</Text>
-                  </View>
-                  <View style={styles.bankacInfo}>
-                      <Text adjustsFontSizeToFit style={styles.textLabelXl(theme)}>15 March 2020</Text><Text style={styles.textLabelXl(theme)}>|    05:30PM</Text>
-                  </View>
-                  <View style={{height:280,width:'100%',paddingHorizontal:20,marginVertical:10}}>
-                      <Timeline
-                          showTime={false}
-                          circleSize={20}
-                          circleColor={theme.colors.secondry}
-                          innerCircle={'icon'}
-                          lineColor={theme.colors.secondry}
-                          separatorStyle={{backgroundColor:'transparent',height:5,}}
-                          separator={true}
-                          style={{width:'100%',marginLeft:-10,}}
-                          titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
-                          descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
-                          data={[
-                            {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem('INR 30,000',"Per Month"), icon: require('../../../assets/images/step-round.png')},
-                            {time: '07:17', title: 'Bank charges', description: this.descriptionLoopItem('INR 450',"1.5% of the Rent Amount and Maintenance Charge"), icon: require('../../../assets/images/step-round.png')},
-                            {time: '07:17', title: 'Service Charges', description: 'INR 28', icon: require('../../../assets/images/step-round.png')},
-                        ]}
-                      />
-                    </View>
-                  <View style={styles.total_warp}>
-                    <Text style={styles.total_amount} adjustsFontSizeToFit>TOTAL AMOUNT PAYABLE</Text>
-                    <Text style={styles.total_amount_light} adjustsFontSizeToFit>Per Month</Text>
-                    <Text style={styles.total_amount_price} adjustsFontSizeToFit>INR 35,553</Text>
-                    <Text style={styles.total_amount_light} adjustsFontSizeToFit>(Rent Amount + Bank Charges + Service Charge)</Text>
-                  </View>
-              </ScrollView>
-              <View style={styles.PopupbtnWrapper}>
-                  <TouchableOpacity onPress={()=>this.rejectConfirm()}>
-                    <Text adjustsFontSizeToFit style={styles.reject}>REJECT</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.setState({visiblemodal:false})}>
-                    <Text adjustsFontSizeToFit style={styles.accept}>ACCEPT</Text>
-                  </TouchableOpacity>
+
+            {property_loading ?
+            <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>
+              <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
               </View>
-            </View>
+              :
+              <View style={styles.PopupContainer}>
+                <Image style={styles.congrats_img(theme)} resizeMode={'stretch'} source={require('../../../assets/images/congrats.png')}/>
+                  <Text style={styles.congrats_head}>Congrats!</Text>
+                  <ScrollView style={{height:theme.dimens.popupHeight}}>
+                    <View style={styles.congrats_content(theme)}>
+                      <Text style={styles.light_color}>You have been added as Tenant of </Text>
+                      <TouchableOpacity onPress={()=>this.goToPropertyDetail()}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}> {property_currentItem.house_number}</Text></TouchableOpacity>
+                      <Text style={styles.light_color}> in Building {property_currentItem.building_name} by Landlord  </Text>
+                      <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail()}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>{property_currentItem.landlord_details[0].landlord_name} Properties</Text></TouchableOpacity>
+                      <Text style={[styles.light_color,{fontWeight:'bold'}]}> ({getCountryCodeFormat(property_currentItem.landlord_details[0].landlord_ccd)}-{property_currentItem.landlord_details[0].landlord_mobile})</Text>
+                    </View>
+                    <View style={styles.congrats_content(theme)}>
+                      <Text style={styles.light_color}>Please confirm the Total Amount Payable monthly</Text>
+                    </View>
+                  <Image style={styles.dash_bar_img(theme)} resizeMode={'stretch'} source={require('../../../assets/images/dash-bar-line.png')}/>
+                    <View style={styles.bankacInfo}>
+                        <Text style={styles.banktitle(theme)}>Added Date</Text>
+                    </View>
+                    <View style={styles.bankacInfo}>
+                        <Text style={styles.textLabelXl(theme)}>15 March 2020</Text><Text style={styles.textLabelXl(theme)}>|    05:30PM</Text>
+                    </View>
+                    <View style={styles.timeline}>
+                        <Timeline
+                            showTime={false}
+                            circleSize={20}
+                            circleColor={theme.colors.secondry}
+                            innerCircle={'icon'}
+                            lineColor={theme.colors.secondry}
+                            separatorStyle={{backgroundColor:'transparent',height:1,}}
+                            separator={true}
+                            style={{width:'100%',marginLeft:-10,}}
+                            titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
+                            descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
+                            data={[
+                                {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,"Per Month"), icon: require('../../../assets/images/step-round.png')},
+                                {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../../assets/images/step-round.png')},
+                                {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../../assets/images/step-round.png')},
+                            ]}
+                        />
+                      </View>
+                    <View style={styles.total_warp}>
+                      <Text style={styles.total_amount}>TOTAL AMOUNT PAYABLE</Text>
+                      <Text style={styles.total_amount_light}>Per Month</Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.net_banking.amount}</Text>
+                      <Text style={styles.paymType}>on using Net Banking/UPI </Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.debit_card.amount}</Text>
+                      <Text style={styles.paymType}>on using Debit Card </Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.credit_card.amount}</Text>
+                      <Text style={styles.paymType}>on using Credit Card </Text>
+                      <Text style={styles.total_amount_light}>(Rent Amount + Bank charge + Service Charge)</Text>
+                    </View>
+                  </ScrollView>
+                  <View style={styles.PopupbtnWrapper}>
+                      <TouchableOpacity onPress={()=>this.rejectConfirm(property_currentItem)}>
+                        <Text style={styles.reject}>REJECT</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={()=>this.AcceptProperty(property_currentItem)}>
+                        <Text style={styles.accept}>ACCEPT</Text>
+                      </TouchableOpacity>
+                  </View>
+                </View>
+              }
         </Modal>
       )
-    }
+  }
 }
 
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account,propertiesTenant,properties }) => {
   const { error, success, loading,status,customer } = account;
-
-  return { error, success, loading, status, customer };
+  const {items} = propertiesTenant;
+  const {property_currentItem} = properties;
+  return { error, success, loading, status, customer,items,property_currentItem };
 };
 
 TenantDashboard.propTypes = {
@@ -206,6 +304,12 @@ TenantDashboard.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  getPropertiesForTenant: PropTypes.func.isRequired,
+  getPropertyById: PropTypes.func.isRequired,
+  tenantSubmissionOnProperty: PropTypes.func.isRequired,
+  getMyProfile: PropTypes.func.isRequired,
+  items:PropTypes.object,
+  property_currentItem:PropTypes.object,
 };
 
 TenantDashboard.defaultProps = {
@@ -214,6 +318,8 @@ TenantDashboard.defaultProps = {
   loading: false,
   status:false,
   customer:null,
+  items:[],
+  property_currentItem:{},
 };
 
-export default connect(mapStateToProps, {})(TenantDashboard);
+export default connect(mapStateToProps, {getPropertiesForTenant,getPropertyById,tenantSubmissionOnProperty,getMyProfile})(TenantDashboard);

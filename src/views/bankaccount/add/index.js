@@ -75,10 +75,10 @@ submitForm(){
           this.validateAndSetAttribute(accountNumber, this._accountNumberEntry) &
           this.validateAndSetAttribute(crmAcNumber, this._crmAcNumberEntry) &
           this.validateAndSetAttribute(acHolderName, this._acHolderNameEntry) &
-          this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
+          //this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
           this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
   if(formIsValid){
-    const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,account_type:typeOfAc,ifsc_code:ifscCode,additional_details:additionalDetails}
+    const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails}
     addBank(formdata);
   }else{
     DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
@@ -110,47 +110,78 @@ submitForm(){
                           <Text style={styles.columntitle(theme)}>ADD YOUR BANK ACCOUNT DETAILS</Text>
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Name of Bank *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._nameofBankEntry)} onBlur={()=>this.onBlurInput(this._nameofBankEntry)} ref={(ref) => this._nameofBankEntry = ref} onChangeText={(nameofBank) =>{this.setState({nameofBank})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={nameofBank} placeholder={'Name of Bank'}/>
+                              <TextInput
+                               onFocus={()=>this.onFocusInput(this._nameofBankEntry)} 
+                               onBlur={()=>this.onBlurInput(this._nameofBankEntry)} 
+                               ref={(ref) => this._nameofBankEntry = ref} 
+                               onChangeText={(nameofBank) =>{this.setState({nameofBank})}} 
+                               autoCorrect={false} style={styles.textInputStyleSec(theme)} 
+                               value={nameofBank} placeholder={'Name of Bank'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._accountNumberEntry.focus() }}
+                               />
                           </View>
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Account Number *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._accountNumberEntry)} onBlur={()=>this.onBlurInput(this._accountNumberEntry)} secureTextEntry={true} ref={(ref) => this._accountNumberEntry = ref} onChangeText={(accountNumber) =>{this.setState({accountNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={accountNumber} placeholder={'Account Number'}/>
+                              <TextInput
+                               onFocus={()=>this.onFocusInput(this._accountNumberEntry)} 
+                               onBlur={()=>this.onBlurInput(this._accountNumberEntry)} 
+                               secureTextEntry={true} ref={(ref) => this._accountNumberEntry = ref} 
+                               onChangeText={(accountNumber) =>{this.setState({accountNumber})}} 
+                               autoCorrect={false} 
+                               style={styles.textInputStyleSec(theme)} 
+                               value={accountNumber} 
+                               placeholder={'Account Number'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._crmAcNumberEntry.focus() }}
+                               />
                           </View>
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Confirm Account Number *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._crmAcNumberEntry)} onBlur={()=>this.onBlurInput(this._crmAcNumberEntry)} ref={(ref) => this._crmAcNumberEntry = ref} onChangeText={(crmAcNumber) =>{this.setState({crmAcNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={crmAcNumber} placeholder={'Confirm Account Number'}/>
+                              <TextInput
+                               onFocus={()=>this.onFocusInput(this._crmAcNumberEntry)} 
+                               onBlur={()=>this.onBlurInput(this._crmAcNumberEntry)} 
+                               ref={(ref) => this._crmAcNumberEntry = ref} 
+                               onChangeText={(crmAcNumber) =>{this.setState({crmAcNumber})}} 
+                               autoCorrect={false} 
+                               style={styles.textInputStyleSec(theme)} 
+                               value={crmAcNumber} 
+                               placeholder={'Confirm Account Number'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._acHolderNameEntry.focus() }}
+                               />
                           </View>
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Account Holder Name *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._acHolderNameEntry)} onBlur={()=>this.onBlurInput(this._acHolderNameEntry)} ref={(ref) => this._acHolderNameEntry = ref} onChangeText={(acHolderName) =>{this.setState({acHolderName})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={acHolderName} placeholder={'Account Holder Name'}/>
+                              <TextInput
+                               onFocus={()=>this.onFocusInput(this._acHolderNameEntry)} 
+                               onBlur={()=>this.onBlurInput(this._acHolderNameEntry)} 
+                               ref={(ref) => this._acHolderNameEntry = ref} 
+                               onChangeText={(acHolderName) =>{this.setState({acHolderName})}} 
+                               autoCorrect={false} 
+                               style={styles.textInputStyleSec(theme)} 
+                               value={acHolderName} 
+                               placeholder={'Account Holder Name'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._ifscCodeEntry.focus() }}
+                               />
                           </View>
-                          
-                          <View style={[styles.fieldWrapp(theme),styles.fieldWrappAccount(theme)]} ref={(ref) => this._typeOfAcEntry = ref} >
-                             
-                              <RNPickerSelect
-                                  placeholder={{
-                                    label: 'Type of Account',
-                                    value: null,
-                                    color: '#000000',
-                                  }}
-                                  style={pickerSelectStyles}
-                                  onValueChange={(typeOfAc) => this.setState({typeOfAc})}
-                                  items={[
-                                      { label: 'Current Account', value: '1' },
-                                      { label: 'Savings Account', value: '1' },
-                                      { label: 'Recurring Deposit Account', value: '3' },
-                                      { label: 'Fixed Deposit Account', value: '4' },
-                                  ]}
-                                  Icon={() => {
-                                    return (
-                                      <Image style={{width:14,height:15}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                    );
-                                  }}
-                                />
-                          </View>
-
                           <View style={styles.fieldWrapp(theme)}>
-                              <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)} ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode} placeholder={'IFSC Code/Sort Code'}/>
+                              <TextInput
+                               onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} 
+                               onBlur={()=>this.onBlurInput(this._ifscCodeEntry)} 
+                               ref={(ref) => this._ifscCodeEntry = ref} 
+                               onChangeText={(ifscCode) =>{this.setState({ifscCode})}} 
+                               autoCorrect={false} style={styles.textInputStyleSec(theme)} 
+                               value={ifscCode} placeholder={'IFSC Code/Swift Code'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._additionalDetailsEntry.focus() }}
+                               />
                           </View>
                           <View style={styles.fieldWrapp(theme)}>
                               <TextInput onFocus={()=>this.onFocusInput(this._additionalDetailsEntry)} onBlur={()=>this.onBlurInput(this._additionalDetailsEntry)} ref={(ref) => this._additionalDetailsEntry = ref} onChangeText={(additionalDetails) =>{this.setState({additionalDetails})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={additionalDetails} placeholder={'Additional Details'}/>

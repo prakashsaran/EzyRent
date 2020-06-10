@@ -7,6 +7,7 @@ import {Spinner} from '../../components';
 import styles from './style';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {getMyProfile} from '../../actions'
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH
@@ -27,9 +28,30 @@ class myDashBoard extends React.Component {
     StatusBar.setBarStyle("light-content");
     StatusBar.setHidden(false)
   }
+  UNSAFE_componentWillMount(){
+    const {customer,getMyProfile} = this.props
+    getMyProfile(customer);
+    
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps){
+    const {customer} = this.props;
+    if(nextProps.customer !==customer){
+      const updatedUser = nextProps.customer;
+      if(updatedUser.hasOwnProperty("user_type")){
+          if(updatedUser.user_type){
+            this.setState({dashboardType:updatedUser.user_type});
+          } else{
+            this.setState({dashboardType:'U'});
+          }
+        } else{
+          this.setState({dashboardType:"U"});
+        }
+    }
+  }
+
   componentDidMount(){
     const {customer,status}=this.props
-    console.log("customer =>",customer)
     if(status){
       if(customer.hasOwnProperty("user_type")){
         if(customer.user_type){
@@ -84,6 +106,7 @@ myDashBoard.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  getMyProfile: PropTypes.func.isRequired,
 };
 
 myDashBoard.defaultProps = {
@@ -94,4 +117,4 @@ myDashBoard.defaultProps = {
   customer:null,
 };
 
-export default connect(mapStateToProps, { })(myDashBoard);
+export default connect(mapStateToProps, { getMyProfile})(myDashBoard);

@@ -7,13 +7,14 @@ import Modal from 'react-native-modal';
 import { selectContactPhone } from 'react-native-select-contact';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
-import {RightIconTextbox,DropDownHolder,PickerSelect} from '../../../components'
+import {RightIconTextbox,DropDownHolder,PickerSelect,Spinner,normalize,DateMonthPicker} from '../../../components'
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH} from '../../../navigation/routes';
 import SampleData from '../../../config/sample-data';
-import { getProperties,addNewBuilding } from '../../../actions';
+import { getBuildings,addNewBuilding,addProperty } from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ImagePicker from 'react-native-image-picker';
 
 class AddPropertyTenant extends React.Component {
   static contextType = ThemeContext;
@@ -25,6 +26,7 @@ class AddPropertyTenant extends React.Component {
   constructor(props){
     super();
     this.state={
+      tenant_ccd:'0091',
       mobileNumber:undefined,
       tenantName:undefined,
       houseNumber:undefined,
@@ -41,6 +43,8 @@ class AddPropertyTenant extends React.Component {
       rentduesLabel:'Choose day/date',
       add_building_name:undefined,
       add_building_location:undefined,
+      availableBankAccounts:[],
+      propertyImage:null,
     }
     StatusBar.setBarStyle('light-content');
     this._mobileNumberEntry = undefined;
@@ -54,7 +58,7 @@ class AddPropertyTenant extends React.Component {
     this._collectingAmountEntry = undefined;
     this._PopupBuildingEntry = undefined;
     this._PopupLocationEntry = undefined;
-    this.keyboardBehavior = null;
+    this.keyboardBehavior = 'padding';
   }
 
 /* =========================================================  */
@@ -64,31 +68,37 @@ class AddPropertyTenant extends React.Component {
   /* comman using function current page */
  
   componentWillMount(){
-    const {getProperties} = this.props
-    getProperties();
+    const {getBuildings} = this.props
+    getBuildings();
   }
-  
   onChangeMobile(mobileNumber){
     this.setState({mobileNumber})
   }
   submitForm(){
-    const {mobileNumber,tenantName,houseNumber,buildingName,rentPeriod,rentDue,collectingAmount,bankAccount} = this.state
-    const formIsValid =
-            this.validateAndSetAttribute(mobileNumber, this._mobileNumberEntry) &
-            this.validateAndSetAttribute(mobileNumber, this._countrylabelEntry) &
-            this.validateAndSetAttribute(rentPeriod, this._rentPeriodEntry) &
-            this.validateAndSetAttribute(rentDue, this._rentDueEntry) &
-            this.validateAndSetAttribute(buildingName, this._buildingNameEntry) &
-            this.validateAndSetAttribute(collectingAmount, this._collectingAmountEntry) &
-            this.validateAndSetAttribute(bankAccount, this._bankAccountEntry) &
-            this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
-            this.validateAndSetAttribute(houseNumber, this._houseNumberEntry);
-    if(formIsValid){
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
-    }else{
-      DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
+      const { addProperty,customer } = this.props
+      let newuser = null;
+      if(customer.user_type=="U"){
+        newuser = customer;
+      }
+      const {tenant_ccd,mobileNumber,tenantName,houseNumber,buildingName,rentPeriod,rentDue,collectingAmount,bankAccount,propertyImage} = this.state
+      const formIsValid =
+              this.validateAndSetAttribute(mobileNumber, this._mobileNumberEntry) &
+              this.validateAndSetAttribute(mobileNumber, this._countrylabelEntry) &
+              this.validateAndSetAttribute(rentPeriod, this._rentPeriodEntry) &
+              this.validateAndSetAttribute(rentDue, this._rentDueEntry) &
+              this.validateAndSetAttribute(buildingName, this._buildingNameEntry) &
+              this.validateAndSetAttribute(collectingAmount, this._collectingAmountEntry) &
+              this.validateAndSetAttribute(bankAccount, this._bankAccountEntry) &
+              this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
+              this.validateAndSetAttribute(houseNumber, this._houseNumberEntry);
+      if(formIsValid){
+       const formData = {tenant_ccd:tenant_ccd,tenant_mobile:mobileNumber,tenant_name:tenantName,house_number:houseNumber,building_id:buildingName,bank_id:bankAccount,rent_amount:collectingAmount,rent_period_id:rentPeriod,rent_day_date:rentDue}
+       addProperty(formData,propertyImage,newuser);
+       // NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+      }else{
+        DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
+      }
     }
-  }
 
   validateInput(input) {
     if (input === undefined)
@@ -109,16 +119,18 @@ validateAndSetAttribute(value, attribute) {
     return valid
 }
 getWeekNames(){
-  return {1:'Sunday',2:'Monday',3:'Tuesday',4:'Wednesday',5:'Thursday',6:'Friday',7:'Saturday'};
+  return {0:'Sunday',1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday',6:'Saturday'};
 }
 getMonthNames(){
   return {1:'January',2:'February',3:'March',4:'April',5:'May',6:'June',7:'July',8:'August',9:'September',10:'October',11:'November',12:'December'};
 }
 getMonthDates(){
-  return {1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,10:10,11:11,12:12,13:13,14:14,15:15,16:16,17:17,18:18,19:19,20:20,21:21,22:22,23:23,24:24,25:25,26:26,27:27,28:28,29:29,30:30,31:31};
+  return {1:'1st of Month',2:'2nd of Month',3:'3rd of Month',4:'4th of Month',5:'5th of Month',6:'6th of Month',7:'7th of Month',8:'8th of Month',9:'9th of Month',10:'10th of Month',11:'11th of Month',12:'12th of Month',13:'13th of Month',14:'14th of Month',15:'15th of Month',16:'16th of Month',17:'17th of Month',18:'18th of Month',19:'19th of Month',20:'20th of Month',21:'21st of Month',22:'22nd of Month',23:'23rd of Month',24:'24th of Month',25:'25th of Month',26:'26th of Month',27:'27th of Month',28:'28th of Month',29:'29th of Month',30:'30th of Month',31:'31st of Month'};
 }
 componentDidMount(){
-  const {buildingData} = this.props
+  const {buildingData,bankData} = this.props
+  console.log("buildingData ,bankData ",buildingData,bankData);
+  
   if (Platform.OS == 'android') {
       this.keyboardBehavior = 'height'
   }
@@ -126,14 +138,22 @@ componentDidMount(){
   const allBuildings = buildingData || [];
   const availableBuildings = allBuildings.map((building,idx)=>{
     return {label:building.building_name,value:building.id}
-  })
+  });
+
+  const availableBankAccounts = bankData.map((bank,idx)=>{
+    return {label:bank.name,value:bank.id}
+  });
+
   availableBuildings.push({label:"+ Add New Building",value:"add_new"})
-  this.setState({availableBuildings})
+
+  availableBankAccounts.push({label:"+ Add New Bank Account",value:"add_new"})
+
+  this.setState({availableBuildings,availableBankAccounts})
 }
 UNSAFE_componentWillReceiveProps(nextProps){
   const {buildingData} = this.props
   if(nextProps.buildingData!==buildingData){
-    const allBuildings = buildingData || [];
+    const allBuildings = nextProps.buildingData || [];
     const availableBuildings = allBuildings.map((building,idx)=>{
       return {label:building.building_name,value:building.id}
     })
@@ -155,7 +175,7 @@ componentDidUpdate(prevProps,prevState){
 onChangeRentPeriod(rentPeriod){
   const rentduesData = [];
 
-  if(rentPeriod==1){
+  if(rentPeriod==4){
     const monthNames = this.getMonthNames();
     Object.keys(monthNames).forEach((key) => {
       const monthItem = { label: monthNames[key], value: key };
@@ -164,7 +184,7 @@ onChangeRentPeriod(rentPeriod){
     this.setState({rentduesLabel:"Choose month"})
   }
 
-  if(rentPeriod==2){
+  if(rentPeriod==3){
     const monthDates = this.getMonthDates();
     Object.keys(monthDates).forEach((key) => {
       const dateItem = { label: monthDates[key].toString(), value: key };
@@ -173,12 +193,12 @@ onChangeRentPeriod(rentPeriod){
     this.setState({rentduesLabel:"Choose day/date"})
   }
 
-  if(rentPeriod==3){
+  if(rentPeriod==2){
     rentduesData.push({label:'15th of the Month',value:1},{label:'End of the Month',value:2});
     this.setState({rentduesLabel:"Choose day/date"})
   }
 
-  if(rentPeriod==4){
+  if(rentPeriod==1){
     const weekNames = this.getWeekNames()
     Object.keys(weekNames).forEach((key) => {
       const weekItem = { label: weekNames[key], value: key };
@@ -210,9 +230,24 @@ getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
 };
 getBankCharge(amount,percentage){
   const amountClt = amount*(percentage/100);
-  return  Math.round(amountClt);
+  return  Math.round(amountClt+(amountClt*18/100));
 }
-getTotalAmount(amount,percentage){
+getTotalAmount(amount,type){
+  const serviceCharge = 28;
+  const Netbankingcharge = 10;
+  switch(type){
+    case 1: 
+    return  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(Netbankingcharge));
+    break;
+    case 2: 
+    const b2getBankCharge = this.getBankCharge(amount,1.25);
+    return  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(b2getBankCharge));
+    break;
+    case 3: 
+    const b3getBankCharge = this.getBankCharge(amount,1.95);
+    return  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(b3getBankCharge));
+    break;
+  }
   const bankcharge = amount*(percentage/100);
   const totalAmount = Number(amount)+Number(bankcharge)+28;
   return this.getMoneyFormat(totalAmount,0)
@@ -256,10 +291,10 @@ getTotalAmount(amount,percentage){
 
   onDonePressBank(){
     const {bankAccount} = this.state
-    if(bankAccount==4){
-      //console.log("bankAccount",bankAccount)
-      NavigationService.navigate(NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH)
-      this.setState({bankAccount:null});
+      if(bankAccount=="add_new"){
+        console.log("bankAccount",bankAccount)
+        NavigationService.navigate(NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH)
+        this.setState({bankAccount:null});
     }else {
       this.setState({bankAccount})
     }
@@ -267,7 +302,7 @@ getTotalAmount(amount,percentage){
 
   onChooseBankAc(selectItem){
     const bankAccount = selectItem.value;
-    if(bankAccount==4){
+    if(bankAccount=="add_new"){
       //console.log("bankAccount",bankAccount)
       NavigationService.navigate(NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH)
       this.setState({bankAccount:null});
@@ -317,6 +352,28 @@ getTotalAmount(amount,percentage){
     }
   }
   /* comman using function current page */
+  browseImage(){
+    const options = {
+      title: 'Select Picture',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        DropDownHolder.alert('error', '', response.error);
+      } else {
+        console.log(response)
+        this.setState({propertyImage:response});
+        //updateUserProfle(customer,response);
+      }
+    });
+  }
 
 /* =========================================================  */
 /* ================== END UI ACTIONS =======================  */
@@ -329,18 +386,27 @@ getTotalAmount(amount,percentage){
 /* =========================================================  */
 
 renderHeader(){
+  const { propertyImage } = this.state
     return(
       <View style={styles.headerContainer(theme)}>
         <View style={styles.headerContext}>
           <TouchableOpacity onPress={()=>NavigationService.goBack()} style={theme.typography.backbtmcontainer}>
             <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
-            <Text style={styles.pageTitle(theme)}>Add New Property/Tenant</Text>
+            <Text style={styles.pageTitle(theme)}>Add Property/Tenant</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.headerBanner(theme)}>
-          <Image style={styles.headerBannerImage(theme)} source={require('../../../assets/images/add_properties.png')}/>
-          <Image style={styles.edit_icon} source={require('../../../assets/images/edit-transparent.png')}/>
-          <Image style={[styles.edit_icon,styles.delete_icon]} source={require('../../../assets/images/delete-transparent.png')}/>
+          {propertyImage?
+            <Image style={styles.headerBannerImage(theme)} source={{uri:propertyImage.uri}}/>
+            :
+            <Image style={styles.headerBannerImage(theme)} source={require('../../../assets/images/add_properties.png')}/>
+          }
+            <TouchableOpacity style={styles.edit_icon} onPress={()=>this.browseImage()}>
+              <Image style={{width:25,height:25}} source={require('../../../assets/images/edit-transparent.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.edit_icon,styles.delete_icon]}  onPress={()=>this.setState({propertyImage:null})}>
+             <Image style={{width:25,height:25}} source={require('../../../assets/images/delete-transparent.png')}/>
+            </TouchableOpacity>
         </View>
       </View>
     )
@@ -348,7 +414,8 @@ renderHeader(){
   /* common using function current page */
   render(){
     const theme = this.context;
-    const {mobileNumber,tenantName,houseNumber,buildingName,collectingAmount,rentduesData,rentDue,isvisiblepayinfo,availableBuildings,rentPeriod,bankAccount,rentDueDisable,rentduesLabel} = this.state
+    const {loading} = this.props
+    const {mobileNumber,tenantName,houseNumber,buildingName,collectingAmount,rentduesData,rentDue,isvisiblepayinfo,availableBuildings,availableBankAccounts,rentPeriod,bankAccount,rentDueDisable,rentduesLabel} = this.state
       return (
         <SafeAreaView style={styles.container(theme)}>
         <KeyboardAvoidingView behavior={this.keyboardBehavior} >
@@ -369,7 +436,7 @@ renderHeader(){
                                <RightIconTextbox
                                 ref={(ref) => this._mobileNumberEntry = ref}
                                 onFocus={()=>this.onFocusInput(this._mobileNumberEntry)}
-                                onPressIcon={()=>this.chooseContactNumber()} 
+                                onPressIcon={()=>this.requestContactPermission()} 
                                 keyboardType={'number-pad'} 
                                 style={mobileNumber?styles.contactbook(theme):styles.contactbookSec(theme)} 
                                 placeholder={"Mobile Number"} textValue={mobileNumber} 
@@ -380,14 +447,14 @@ renderHeader(){
                           </View>
 
                           <View style={styles.fieldWrapp}>
-                             <Text style={theme.typography.tooltip}>Name of Tenant *</Text>
+                             <Text style={theme.typography.tooltip}>Name of Tenant</Text>
                               <TextInput ref={(ref) => this._tenantNameEntry = ref} onChangeText={(tenantName) =>{this.setState({tenantName})}} autoCorrect={false} style={tenantName?styles.textInputStyle(theme):styles.textInputStyleSec(theme)} value={tenantName} placeholder={'Name of Tenant'}/>
                           </View>
                         </View>
 
 
                        <View style={styles.formcolumn}>
-                          <Text style={styles.columntitle(theme)}>TENANT INFORMATION</Text>
+                          <Text style={styles.columntitle(theme)}>PROPERTY INFORMATION</Text>
 
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Tenant House Number (Ex: Flat 101, TC 6/1564) *</Text>
@@ -395,28 +462,16 @@ renderHeader(){
                           </View>
 
                           <View style={styles.fieldWrapp}>
-                             <Text style={theme.typography.tooltip}>Tenant Building Name (Ex: RHS Greenvile, Cordon Address) *</Text>
-                             <View style={styles.fieldWrappAccount(theme)} ref={(ref) => this._buildingNameEntry = ref} >
-                              <RNPickerSelect
-                                  //ref={ref => { this._buildingNameEntry = ref;}}
-                                  placeholder={{
-                                      label: 'Name of Building',
-                                      value: null,
-                                      color: '#000000',
-                                    }}
-                                    value={buildingName}
-                                    style={pickerSelectStyles}
-                                    onDonePress={()=>this.onDonePressBuilding()}
-                                    //onValueChange={(buildingName) => this.setState({buildingName})}
-                                    onValueChange={(buildingName) => this.onChooseBuilding(buildingName)}
+                             <Text style={theme.typography.tooltip}>Tenant Building Name (Ex: RHS Greenvile) *</Text>
+                              <PickerSelect
+                                    placeholder='Name of Building'
+                                    //onDonePress={()=>this.onDonePressBuilding()}
+                                    defaultValue={buildingName}
+                                    ref={ref => { this._buildingNameEntry = ref;}}
+                                    pickerStyle={buildingName?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
+                                    onChooseItem={({label,value}) => this.onChooseBuilding(value)}
                                     items={availableBuildings}
-                                    Icon={() => {
-                                      return (
-                                        <Image style={{width:13,height:13}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                      );
-                                    }}
                                   />
-                            </View>
                           </View>
 
 
@@ -424,123 +479,78 @@ renderHeader(){
 
                             <View style={styles.pikerwrap}>
                               <Text style={theme.typography.tooltip}>Rent Period *</Text>
-                              <View style={styles.fieldWrappAccount(theme)} ref={(ref) => this._rentPeriodEntry = ref} >
-                                <RNPickerSelect
-                                    placeholder={{
-                                      label: 'Choose duration',
-                                      value: null,
-                                      color: '#000000',
-                                    }}
-                                    style={pickerSelectStyles}
-                                    onValueChange={(rentPeriod) => this.onChangeRentPeriod(rentPeriod)}
+                                <PickerSelect
+                                    placeholder='Choose duration'
+                                    ref={ref => { this._rentPeriodEntry = ref;}}
+                                    //onValueChange={(rentPeriod) => this.onChangeRentPeriod(rentPeriod)}
+                                    defaultValue={rentPeriod}
+                                    onChooseItem={({value}) => this.onChangeRentPeriod(value)}
+                                    pickerStyle={rentPeriod?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     items={[
-                                        { label: 'Annually', value: '1' },
-                                        { label: 'Monthly', value: '2' },
-                                        { label: 'Bi Weekly', value: '3' },
-                                        { label: 'Weekly', value: '4' },
+                                        { label: 'Monthly', value: '3' },
+                                        { label: 'Bi Weekly', value: '2' },
+                                        { label: 'Weekly', value: '1' },                                       
+                                        { label: 'Annually', value: '4' },
                                     ]}
-                                    Icon={() => {
-                                      return (
-                                        <Image style={{width:14,height:15}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                      );
-                                    }}
                                   />
-                              </View>
                             </View>
 
 
                             <View style={styles.pikerwrap}>
                               <Text style={theme.typography.tooltip}>Rent Due *</Text>
-                              <View style={styles.fieldWrappAccount(theme)} ref={(ref) => this._rentDueEntry = ref} >
-                                <RNPickerSelect
-                                    placeholder={{
-                                      label: 'Choose day/date',
-                                      value: null,
-                                      color: '#000000',
-                                    }}
-                                    value={rentDue}
-                                    style={pickerSelectStyles}
-                                    onValueChange={(rentDue) => this.setState({rentDue})}
-                                    items={rentduesData}
-                                    Icon={() => {
-                                      return (
-                                        <Image style={{width:14,height:15}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                      );
-                                    }}
-                                  />
-                              </View>
+                              {this.renderRentDuePicker()}
                             </View>
-
                           </View>
-
-
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Total amount to be collected from tenant  *</Text>
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
                              <View style={styles.currencyLabel}>
                               <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:40}]} placeholder={'Ex: 10,000'}/>
+                              <TextInput  ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(43)}]} placeholder={'Ex: 10,000'}/>
                               </View>
                           </View>
-
-
-                          <View style={styles.fieldWrapp} >
-                             <Text style={theme.typography.tooltip}>Recipient Bank Account *</Text>
-                             <View style={styles.fieldWrappAccount(theme)} ref={(ref) => this._bankAccountEntry = ref} >
-                                <RNPickerSelect
-                                      placeholder={{
-                                        label: 'Choose Bank Account',
-                                        value: null,
-                                        color: '#000000',
-                                      }}
-                                      style={pickerSelectStyles}
-                                      onDonePress={()=>this.onDonePressBank()}
-                                      onValueChange={(bankAccount) => this.setState({bankAccount})}
-                                      items={[
-                                          { label: 'ICICI (Simon Dean - XXXXX67586)', value: '1' },
-                                          { label: 'Axis Bank (John Xyz - XXXXX67444)', value: '1' },
-                                          { label: 'HDFC (Simon Dean - XXXXX675566)', value: '3' },
-                                          { label: '+ Add New Bank Account', value: '4' },
-                                      ]}
-                                      Icon={() => {
-                                        return (
-                                          <Image style={{width:13,height:13}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                        );
-                                      }}
-                                    />
-                            </View>
+                          <View style={styles.fieldWrapp}>
+                             <Text style={theme.typography.tooltip}>Your (Recipient) Bank Account *</Text>
+                             <PickerSelect
+                                    ref={ref => { this._bankAccountEntry = ref;}}
+                                    defaultValue={bankAccount}
+                                    onChooseItem={(item)=>this.onChooseBankAc(item)}
+                                    pickerStyle={bankAccount?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
+                                    items={availableBankAccounts}
+                                   placeholder="Choose Bank Account"/>
                           </View>
-
                        </View>
-
-
                        {isvisiblepayinfo && <View style={styles.formcolumn}>
                           <Text style={styles.columntitle(theme)}>PAYMENT INFORMATION</Text>
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>A. Total Amount to be Collected from Tenant</Text>
                              <Text style={styles.responseValue(theme)}>INR {this.getMoneyFormat(collectingAmount,0)}</Text>
                           </View>
-
                           <View style={styles.fieldWrapp}>
-                             <Text style={theme.typography.tooltip}>B. Bank Charges - 1.5% Of A</Text>
-                             <Text style={styles.responseValue(theme)}>INR {this.getBankCharge(collectingAmount,1.5)}</Text>
+                             <Text style={theme.typography.tooltip}>B. Bank Charges</Text>
+                             <View style={styles.SubresponseValue}>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.1) INR 10</Text> on using Net Banking/UPI</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.2) INR {this.getBankCharge(collectingAmount,1.25)}</Text> on using Debit Card (1.25% of A includes 18% GST)</Text>
+                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.3) INR {this.getBankCharge(collectingAmount,1.95)}</Text> on using Credit Card (1.95% of A, includes 18% GST)</Text>
+                              </View>
                           </View>
-
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>C. Service Charges</Text>
                              <Text style={styles.responseValue(theme)}>INR 28</Text>
                           </View>
-
                           <View style={styles.fieldWrapp}>
-                             <Text style={theme.typography.tooltip}>Total Amount Payable by Tenant Monthly - (A+B+C)</Text>
-                             <Text style={styles.responseValue(theme)}>INR {this.getTotalAmount(collectingAmount,1.5)}</Text>
+                             <Text style={theme.typography.tooltip}>Total Amount Payable by Tenant Monthly</Text>
+                             <View style={styles.SubresponseValue}>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,1)}</Text> on using Net Banking/UPI (A + B.1 + C)</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,2)}</Text> on using Debit Card (A + B.2 + C)</Text>
+                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,3)}</Text> on using Credit Card (A + B.3 + C)</Text>
+                              </View>
                           </View>
-
                         </View>}
-
                        <View style={styles.spacing}></View>
                     </View>
                   </ScrollView>
+                  {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
                   {this.renderModalView()}
                 </View>
               </View>
@@ -550,6 +560,32 @@ renderHeader(){
       );
   }
 
+  renderRentDuePicker(){
+    const { rentDueDisable,rentduesData,rentDue,rentduesLabel,rentPeriod } = this.state
+    if(rentPeriod==4){
+      return(
+        <DateMonthPicker
+          placeholder={rentduesLabel}
+          defaultValue={rentDue}
+          ref={ref => { this._rentDueEntry = ref;}}
+          pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
+          onSeleteItem={(rentDue) =>this.setState({rentDue})}
+          />
+      )
+    }
+    return(
+      <PickerSelect
+        // placeholder='Choose day/date'
+        placeholder={rentduesLabel}
+        items={rentduesData}
+        defaultValue={rentDue}
+        isdisabled={rentDueDisable}
+        ref={ref => { this._rentDueEntry = ref;}}
+        pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
+        onChooseItem={({label,value}) => this.setState({rentDue:value})}
+      />
+    )
+  }
   reanderButton(){
     return (
       <TouchableOpacity onPress={()=>this.submitForm()} style={styles.addBtncontainer(theme)}>
@@ -557,7 +593,7 @@ renderHeader(){
       </TouchableOpacity>
     );
   }
-  
+   
 renderModalView(){
   const {add_building_name,add_building_location} = this.state;
   return(
@@ -633,10 +669,12 @@ const pickerSelectStyles = StyleSheet.create({
 
 
 
-const mapStateToProps = ({ building }) => {
-  const { error, success,loading, refreshing,buildingData } = building;
-
-  return { error, success, loading, refreshing,buildingData  };
+const mapStateToProps = ({ building,bankAccount,account,propertiesLandlord }) => {
+  const { error, success, refreshing,buildingData } = building;
+  const { bankData } = bankAccount;
+  const { customer } = account;
+  const { loading } = propertiesLandlord;
+  return { error, success, loading, refreshing,buildingData,bankData,customer  };
 };
 
 AddPropertyTenant.propTypes = {
@@ -645,8 +683,11 @@ AddPropertyTenant.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   refreshing:PropTypes.bool,
   buildingData:PropTypes.oneOfType(PropTypes.object,null),
-  getProperties: PropTypes.func,
+  bankData:PropTypes.oneOfType(PropTypes.object,null),
+  getBuildings: PropTypes.func,
   addNewBuilding: PropTypes.func,
+  addProperty: PropTypes.func,
+  customer:PropTypes.object,
 };
 
 AddPropertyTenant.defaultProps = {
@@ -655,6 +696,8 @@ AddPropertyTenant.defaultProps = {
   loading: false,
   refreshing:false,
   buildingData:[],
+  bankData:[],
+  customer:{},
 };
 
-export default connect(mapStateToProps, {getProperties,addNewBuilding})(AddPropertyTenant);
+export default connect(mapStateToProps, {getBuildings,addNewBuilding,addProperty})(AddPropertyTenant);

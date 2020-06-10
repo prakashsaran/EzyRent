@@ -76,7 +76,7 @@ const theme = useContext(ThemeContext);
               <Text style={theme.typography.caption}>VALIDATE</Text>
             </TouchableOpacity>
 
-            <View style={styles.signIn(theme)}>
+            <View style={styles.signIn(theme)}> 
               <Text style={styles.cnfrmSignText(theme)}>Haven`t received OTP?</Text>
               {!resendEnable && <Text style={styles.signLink(theme)}>Resend in </Text>}
               {resendEnable ?
@@ -87,7 +87,7 @@ const theme = useContext(ThemeContext);
                 <CountDown
                   size={12}
                   until={resendtimeout}
-                  digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:22,marginLeft:-3}}
+                  digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:25,marginLeft:-3}}
                   digitTxtStyle={styles.signLink(theme)}
                   onFinish={() => {setResendTimeOut(120),setResendEnable(true)}}
                   timeToShow={['M', 'S']}

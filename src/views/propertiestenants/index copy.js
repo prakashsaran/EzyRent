@@ -37,7 +37,6 @@ class PropertiesTenants extends React.Component {
     const properties = SampleData.getPropeties() || [];
     this.setState({payingRent:properties,collectingRent:properties})
 
-    console.log("customer =>",customer)
     if(status){
       if(customer.hasOwnProperty("type")){
         if(customer.type){
@@ -55,7 +54,6 @@ class PropertiesTenants extends React.Component {
   }
   componentDidMount(){
     const {AccountType} = this.state
-    //console.log("AccountType =>",AccountType)
     if(AccountType=="tenant"){
       this.setState({activeTab:1})
     } else if(AccountType=="landlord"){
@@ -117,7 +115,6 @@ class PropertiesTenants extends React.Component {
   }
   renderTitile(){
     const {AccountType} = this.state
-    console.log("AccountType =>",AccountType)
     if(AccountType=="tenant"){
       return "Properties I am Paying Rent";
     } else if(AccountType=="landlord"){
@@ -306,7 +303,6 @@ class PropertiesTenants extends React.Component {
     })
   }
   fasterImageRender(item){
-    //console.log("loop itm in side fasterImageRender",item.image)
     if(!item.image || item.image==null || item.image==''){
       return require('../../assets/images/sample/sample_image_1.png');
     }

@@ -84,7 +84,7 @@ function SignUpMobile(props) {
             <CountDown
               size={12}
               until={resendtimeout}
-              digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:22,marginLeft:-3}}
+              digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:25,marginLeft:-3}}
               digitTxtStyle={styles.signLink(theme)}
               onFinish={() => {setResendTimeOut(120),setResendEnable(true)}}
               timeToShow={['M', 'S']}

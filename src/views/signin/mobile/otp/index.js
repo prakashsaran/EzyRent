@@ -6,7 +6,7 @@ import OTPInputView from '@twotalltotems/react-native-otp-input'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
-import { resendMobileOtp,signIn } from '../../../../actions';
+import { resendMobileOtp,signIn,getCountryCodeFormat } from '../../../../actions';
 import {NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH,NAVIGATION_SIGN_UP_MAIL_ID_PATH} from '../../../../navigation/routes';
 import NavigationService from '../../../../navigation/NavigationService';
 import { DropDownHolder } from '../../../../components';
@@ -54,7 +54,7 @@ function SignUpMobile(props) {
         <Text style={theme.typography.stepTitle}>Sign In to Your Account</Text>
         <View style={styles.preprops(theme)}>
           <Text style={styles.propvalue(theme)}>We have sent an OTP SMS to </Text>
-          <Text style={styles.propvalue(theme)}>{mobile.dialcode} - {mobile.number}</Text>
+          <Text style={styles.propvalue(theme)}>{getCountryCodeFormat(mobile.dialcode)} - {mobile.number}</Text>
         </View>
         <Text style={theme.typography.stepmessage}>Validate your mobile number by entering the OTP below.</Text>
 
@@ -82,7 +82,7 @@ function SignUpMobile(props) {
             <CountDown
               size={12}
               until={resendtimeout}
-              digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:22,marginLeft:-3}}
+              digitStyle={{backgroundColor: 'transprint',padding:0,height:20,width:25,marginLeft:-3}}
               digitTxtStyle={styles.signLink(theme)}
               onFinish={() => {setResendTimeOut(120),setResendEnable(true)}}
               timeToShow={['M', 'S']}

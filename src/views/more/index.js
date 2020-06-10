@@ -29,11 +29,10 @@ class MoreInit extends React.Component {
 
   componentDidMount(){
     const {customer,status}=this.props
-    console.log("current loged in customer",customer)
     if(status){
       if(customer.hasOwnProperty("user_type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
         } else{
           this.setState({AccountType:'U'});
         }
@@ -95,9 +94,6 @@ class MoreInit extends React.Component {
                         <View style={styles.ImageWrapRight}>
                           <Text style={styles.textHeading(theme)}>{customer.full_name}</Text>
                           <Text style={styles.textSub(theme)}>
-                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/gps_dark.png')}></Image> Dubai, UAE
-                          </Text>
-                          <Text style={styles.textSub(theme)}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}
                           </Text>
                           <Text style={styles.textSub(theme)}>
@@ -136,7 +132,7 @@ class MoreInit extends React.Component {
                               <Image style={styles.More_icon} source={require('../../assets/images/my-profile.png')}></Image>
                               <TouchableOpacity onPress={()=>this.goToMyProfile()} style={styles.MoreLinks}>
                                 <Text style={styles.MoreLinksItem(theme)}>My Profile</Text>
-                                <Text style={styles.MoreLinksItemSub(theme)}>Manage your Profile Details</Text>
+                                <Text style={styles.MoreLinksItemSub(theme)}>Manage your profile details</Text>
                               </TouchableOpacity>
                             </View>
                             <View style={styles.MoreLinkswrap}>

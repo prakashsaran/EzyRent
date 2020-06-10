@@ -3,7 +3,7 @@ import { AppRegistry, StyleSheet, Text, View,ActivityIndicator } from 'react-nat
 import WalkThroughLandloard from './landloard';
 import WalkThroughTenants from './tenant';
 import Swiper from 'react-native-swiper';
-//import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {isAuth} from '../../actions';
@@ -45,20 +45,18 @@ class walkthrough extends Component {
     }
     UNSAFE_componentWillMount(){
       const {isAuth,customer,access_token,navigation} = this.props;
-      console.log("access_token , UNSAFE_componentWillMount",access_token)
       isAuth(customer,access_token,navigation);
     }
     componentDidMount() {
       const {isAuth,customer,access_token,navigation} = this.props;
-      console.log("access_token , componentDidMount",access_token)
     }
     changeViewIndx(){
        this.setState({currentIdx:1});
        this.swipable.scrollBy(1)
     }
-    /* componentDidMount() {
+     componentDidMount() {
         SplashScreen.hide();
-    } */
+    }
   render() {
       const {currentIdx} = this.state
     return (

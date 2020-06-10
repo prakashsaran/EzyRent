@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
+import { normalize } from "../../../components";
 
 export default StyleSheet.create({
     container: {
@@ -8,7 +9,7 @@ export default StyleSheet.create({
     rectviewcustom:{
       paddingTop:0,
       marginTop:80,
-      paddingBottom:40,
+      paddingBottom:90,
     },
     titleWrapper:{
       width:'90%',
@@ -45,7 +46,7 @@ export default StyleSheet.create({
       justifyContent:'center',
     },
     detailHeading:theme=>({
-      fontSize:20,
+      fontSize:normalize(20),
       color:'#315add',
       textAlign:'center',
       marginTop:10,
@@ -55,7 +56,7 @@ export default StyleSheet.create({
       marginBottom:5,
     }),
     detail_inner:{
-      fontSize:16,
+      fontSize:normalize(16),
       paddingHorizontal:10,
       flexDirection:'row',
       justifyContent:'flex-start',
@@ -108,13 +109,13 @@ export default StyleSheet.create({
     },
     quick_stats_heading:{
       color:theme.colors.propertyHeading,
-      fontSize:18,
+      fontSize:normalize(18),
       fontFamily:theme.typography.fontFamilyMontserratSemi,
       fontWeight:theme.typography.fontWeightSemiBold,
     },
     content:theme=>({
       color:theme.colors.descriptionColor,
-      fontSize:14,
+      fontSize:normalize(14),
       paddingBottom:10,
       paddingTop:10,
       fontFamily:theme.typography.secondaryFont,
@@ -145,7 +146,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#315add',
-      fontSize:24,
+      fontSize:normalize(24),
       fontFamily:theme.typography.fontFamilyOxygenLight,
       fontWeight:theme.typography.fontWeightRegular,
     },
@@ -153,7 +154,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#333',
-      fontSize:14,
+      fontSize:normalize(14),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     },
@@ -171,10 +172,23 @@ export default StyleSheet.create({
     greenText:{
       textAlign:'center',
       color:'#44b21b',
-      fontSize:14,
+      fontSize:normalize(14),
     },
     greenText100:{
-      fontSize:20,
+      fontSize:normalize(20),
     },
-
+    profilebg:{
+      alignContent:'center',
+      alignItems:'center',
+      position:'relative',
+      marginLeft: 0,
+      height: 134,
+      width: 134,
+      borderRadius: 67,
+      borderWidth: 2,
+      borderBottomColor:'#9eda90',
+      borderLeftColor:'#9eda90',
+      borderRightColor:'#9eda90',
+      borderTopColor:'#8cc3fc',
+    },
   });

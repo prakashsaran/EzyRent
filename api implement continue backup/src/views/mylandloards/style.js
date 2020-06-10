@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: {
@@ -11,7 +12,7 @@ export default StyleSheet.create({
     titleWrapper:{
       width:'90%',
       alignSelf:'center',
-      marginVertical:10,
+      marginVertical:normalize(10),
       flexDirection:'row',
       justifyContent:'space-between',
       paddingTop:10,
@@ -28,14 +29,14 @@ export default StyleSheet.create({
     },
     textHeading: theme =>({
       color:theme.colors.secondry,
-      fontSize:18,
+      fontSize:normalize(18),
       textTransform:'uppercase',
       fontWeight:'bold',
       paddingBottom:6,
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
-      fontSize:14,
+      fontSize:normalize(14),
       color:theme.colors.descriptionColor,
     }),
     gps_dark_icon:{
@@ -52,7 +53,7 @@ export default StyleSheet.create({
       overflow:'hidden',
     },
     morelinksmall:{
-      fontSize:14,
+      fontSize:normalize(14),
     },
     shadow:{
       backgroundColor: "#fff",
@@ -93,21 +94,22 @@ export default StyleSheet.create({
     },
     MoreLinksItem: theme =>({
       color:'#000',
-      fontSize:14,
+      fontSize:normalize(14),
       fontFamily:theme.typography.fontFamilyMontserratBold,
       fontWeight:theme.typography.fontWeightSemiBold,
+      width:'100%',
     }),
     MoreLinksItemSub: theme =>({
       color:theme.colors.descriptionColor,
-      fontSize:14,
-      paddingLeft:7,
+      fontSize:normalize(14),
+      paddingLeft:0,
       paddingTop:0,
       fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightLight,
     }),
     MoreLinksItemLocation: theme =>({
       color:theme.colors.descriptionColor,
-      fontSize:13,
+      fontSize:normalize(13),
       paddingLeft:5,
       paddingTop:2,
       fontFamily:theme.typography.secondaryFont,

@@ -8,10 +8,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements'
 import { signUp,isValidName } from '../../../actions';
-import OTPInputView from '@twotalltotems/react-native-otp-input'
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import DeviceInfo from 'react-native-device-info';
 const secureTextHidden = '../../../assets/images/securetext_hidden.png';
 const secureTextShow = '../../../assets/images/securetext_show.png';
 function SignUpProfile(props) {
+  const device_token = DeviceInfo.getUniqueId();
+  const device_type = DeviceInfo.getDeviceId();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [profilename, setProfileName] = useState('');
   const [appin, setAppPin] = useState('');
@@ -22,13 +25,19 @@ function SignUpProfile(props) {
   const theme = useContext(ThemeContext);
   const onChangeName = (name) =>{
     setProfileName(name);
-    if(appin.length===4 && isValidName(name)){
+    if(appin.length===4 && isValidName(name) && isSelectTerms){
       setEnableButton(true);
     }
   }
   const onCodeFilled = (code) =>{
     setAppPin(code);
-    if(isValidName(profilename)){
+    if(isValidName(profilename) && isSelectTerms){
+      setEnableButton(true);
+    }
+  }
+  const onChangeCheckBox = () =>{
+    setSelectTerms(!isSelectTerms);
+    if(isValidName(profilename) && appin){
       setEnableButton(true);
     }
   }
@@ -49,8 +58,9 @@ function SignUpProfile(props) {
 
   const submit = () =>{
     const {mobile,mail} = props
-    const userdata = {mobile:mobile.number,email:mail.email,name:profilename,password:appin};
-    props.signUp(userdata);
+    const userdata = {full_name:profilename,mpin:appin,device_token,device_type};
+    console.log("userdata submit",userdata)
+    props.signUp(mobile,userdata);
   }
   onFocusInput = (elementSlected)=>{
     elementSlected.setNativeProps({
@@ -79,7 +89,7 @@ function SignUpProfile(props) {
 
             <Text style={theme.typography.stepmessage}>Enter your full name and set a 4 digit app pin of your choice</Text>
 
-            <Text style={theme.typography.mobelTitle}>YOUR FULL NAME</Text>
+            <Text style={theme.typography.mobelTitle2}>YOUR FULL NAME</Text>
 
             <View style={styles.mobileWrapper(theme)}>
               <TextInput
@@ -122,7 +132,7 @@ function SignUpProfile(props) {
                 checkedIcon={<Image style={{width:20,height:20,marginTop:-10}} source={require('../../../assets/images/checkbox_active.png')} />}
                 uncheckedIcon={<Image style={{width:20,height:20,marginTop:-10}} source={require('../../../assets/images/checkbox_inactive.png')} />}
                 checked={isSelectTerms} 
-                onPress={()=>setSelectTerms(!isSelectTerms)} />
+                onPress={()=>onChangeCheckBox()} />
                 <TouchableOpacity onPress={()=>Linking.openURL("https://www.google.com/")}>
                   <Text style={styles.termTitle(theme)}>I have read & agree to Terms of Use</Text>
                 </TouchableOpacity>

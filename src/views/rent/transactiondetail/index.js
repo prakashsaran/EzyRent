@@ -51,7 +51,6 @@ class TransactionDetails extends React.Component {
   }
   /* comman using function current page */
   fasterImageRender(item){
-    //console.log("loop itm in side fasterImageRender",item.image)
     if(!item.image || item.image==null || item.image==''){
       return require('../../../assets/images/sample/sample_image_1.png');
     }

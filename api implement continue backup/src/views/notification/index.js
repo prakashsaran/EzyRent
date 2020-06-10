@@ -11,9 +11,13 @@ import {
   NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
 } from '../../navigation/routes';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { EzyRent } from '../../ezyrent';
+import {  getNotifications } from '../../actions';
 
-
-class RentList extends React.Component {
+ 
+class NotificationList extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
     super();
@@ -22,10 +26,29 @@ class RentList extends React.Component {
     }
     StatusBar.setBarStyle('dark-content');
   }
-  componentDidMount(){
-    const notifications = SampleData.getNotifications() || [];
-    this.setState({notifications})
+  UNSAFE_componentWillMount(){
+    const {customer,status,getNotifications}=this.props
+    const properties = SampleData.getPropeties() || [];
+    this.setState({payingRent:properties,collectingRent:properties})
+    console.log("current customer =>",customer.user_type)
+    if(status){
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
+        } else{
+          this.setState({AccountType:'U'});
+        }
+      } else{
+        this.setState({AccountType:"U"});
+      }
+    } else{
+      this.setState({AccountType:"U"});
+    }
+    getNotifications();
+
   }
+
+
   goToTargetScreen(item){
     console.log("now it",item)
     if(item.status=="paid"){
@@ -99,6 +122,8 @@ class RentList extends React.Component {
   }
   render(){
     const theme = this.context;
+    const {items}=this.props; 
+    console.log("items goes here",JSON.stringify(items))
       return (
           <SafeAreaView style={styles.container(theme)}>
             {this.renderHeader()}
@@ -120,18 +145,20 @@ class RentList extends React.Component {
       </View>
     )
   }
-
+ 
   renderPayingItems(){
-    const {notifications} = this.state
-
-    return notifications.map((item,inx)=>{
+    const {items} = this.props  
+    if(!items.length){
+      return(<Text style={{textAlign:'center'}}>Notifications Not Available</Text>)
+    }
+      return items.map((item,inx)=>{
       if(item.type=="paid"){
         return (
           <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitemAct}>
             <ImageBackground imageStyle={styles.loopitembg} style={[styles.loopitembg,styles.loopitembg2]} resizeMode={'cover'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
                 <Image style={styles.tickIcon} resizeMode={'contain'} source={require("../../assets/images/double_tick.png")}></Image>
-                 <Text style={styles.itemNameAct(theme)}>{item.name}</Text>
+                 <Text style={styles.itemNameAct(theme)}>{item.module_data.house_number}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.status=="due" &&
@@ -140,13 +167,13 @@ class RentList extends React.Component {
 
                     <View style={styles.propInforowright}>
 
-                      <View style={styles.propInfoAttrb}>
-                      {item.status=="due"?
-                       <Text style={styles.propItemattrvalueError(theme)}>Rent of <Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> for this property is now due</Text>
-                      :
-                        <Text style={styles.propItemattrvalue(theme)}>You had paid rent of <Text style={{fontWeight:'bold', color:theme.colors.primaryTitleColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> for this property</Text>
-                      }
-                      </View>
+                      <View style={styles.propInfoAttrb}> 
+                        {item.status=="due"?  
+                         <Text style={styles.propItemattrvalueError(theme)}>Rent of <Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR 15,000</Text> for this property is now due</Text>  
+                        : 
+                          <Text style={styles.propItemattrvalue(theme)}>You had paid rent of <Text style={{fontWeight:'bold', color:theme.colors.primaryTitleColor}}>INR 15,000</Text> for this property</Text> 
+                        } 
+                        </View>
 
                     </View>
                  </View>
@@ -160,33 +187,23 @@ class RentList extends React.Component {
       }
         return (
           <TouchableOpacity onPress={()=>this.goToTargetScreen(item)} key={inx} style={styles.loopitem}>
-            <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
-              <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)}>{item.name}</Text>
+                 <Text style={styles.itemName(theme)}>{item.module_data[0].house_number} {'\n'}{item.module_data[0].building_name}</Text>
                  <View style={styles.propertygnInfo}>
 
-                    <View style={styles.propInforowleft}>
-                      {item.status=="due" &&
-                      <Image style={styles.due_label} source={require("../../assets/images/dues_label.png")}></Image>}
-                    </View>
 
-
-                    <View style={styles.propInforowright}>
-
-                      <View style={styles.propInfoAttrb}>
-                      {item.status=="due"?
-                       <Text style={styles.propItemattrvalueError(theme)}>Rent of <Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.amount,0)}</Text> for this property is now due</Text>
-                      :
-                        <Text style={styles.propItemattrvalue(theme)}>You have received rent of <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.amount,0)}</Text> for this property</Text>
-                      }
-                      </View>
-
-                    </View>
-                 </View>
-                 <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.paying_date)}</Text>
-              </ImageBackground>
-
-            </ImageBackground>
+                    <View style={styles.propInforowright}>  
+    
+                        <View style={styles.propInfoAttrb}> 
+                        {item.status=="due"?  
+                         <Text style={styles.propItemattrvalueError(theme)}>Rent of <Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR 15,000</Text> for this property is now due</Text>  
+                        : 
+                          <Text style={styles.propItemattrvalue(theme)}>You have received rent of <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR 15,000</Text> for this property</Text>  
+                        } 
+                        </View> 
+    
+                      </View> 
+                   </View>  
+                   <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
           </TouchableOpacity>
         )
     })
@@ -195,15 +212,40 @@ class RentList extends React.Component {
   fasterImageRender(item){
     //console.log("loop itm in side fasterImageRender",item.image)
     if(!item.image || item.image==null || item.image==''){
+      return {uri:'${EzyRent.getMediaUrl()}${item.module_data[0].property_image}'}; 
+      } 
       return require('../../assets/images/sample/sample_image_1.png');
-    }
-    return {uri:item.image};
   }
 
 }
-RentList.navigationOptions = ({ navigation }) => ({
+NotificationList.navigationOptions = ({ navigation }) => ({
   headerStyle: {height:0},
   title: 'Rent',
 })
 
-export default RentList;
+
+
+const mapStateToProps = ({ account,notification}) => {
+  const { customer } = account;
+  const {items,loading} = notification;
+  return { items,loading,customer };
+};
+
+NotificationList.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType(PropTypes.string, null),
+  success: PropTypes.oneOfType(PropTypes.string, null),
+  customer:PropTypes.oneOfType(PropTypes.object,null),
+  getNotifications: PropTypes.func.isRequired,
+  landlord_items: PropTypes.object,
+};
+
+NotificationList.defaultProps = {
+  error: null,
+  success: null,
+  loading: false,
+  customer:null,
+  items:[],
+};
+
+export default connect(mapStateToProps, {getNotifications})(NotificationList);

@@ -15,20 +15,7 @@ class PickerSelect extends PureComponent {
     onclickLabel(){
         this.setState({isModalVisible:true})
     }
-    UNSAFE_componentWillReceiveProps(nextProps){
-        const {items} = this.props;
-        if(nextProps.defaultValue!==this.props.defaultValue){
-            this.setState({selectedItem:nextProps.defaultValue})
-            if(nextProps.defaultValue){
-                const currentSelection =  items.filter(item => item.value ==nextProps.defaultValue);
-                const selected = currentSelection[0];
-                if(selected){
-                    this.setState({selectedItem:selected.label})
-                }
-            }
-        }
 
-    }
     setNativeProps = (nativeProps) => {
     this._root.setNativeProps(nativeProps);
     }
@@ -39,15 +26,26 @@ class PickerSelect extends PureComponent {
         this.setState({isModalVisible:false})
         this.setState({selectedItem:item.label})
     }
-       
+    getLabelFormat(defaultValue){
+        const {items} = this.props;
+        const currentSelection =  items.find(function(item){
+            if(item.value ==defaultValue){
+                return item;
+            }
+            return null;
+            });
+        if(currentSelection){
+            return currentSelection.label;
+        }
+        return defaultValue
+    }
     render(){
-        const {style,pickerStyle,selectedLabelStyle,placeholder,placeholderStyle,isdisabled} = this.props;
-        const {selectedItem} = this.state
+        const {style,pickerStyle,selectedLabelStyle,placeholder,placeholderStyle,isdisabled,defaultValue} = this.props;
         return(
         <View style={[styles.container,]}>
             {this.renderModalView()}
             <TouchableOpacity disabled={isdisabled} ref={component => this._root = component} {...this.props} onPress={()=>this.onclickLabel()} style={[styles.pickercontainer,pickerStyle]}>
-            <View style={{width:'95%'}}>{selectedItem?<Text style={[styles.selectedLabel,selectedLabelStyle]} numberOfLines={1}>{selectedItem}</Text>:<Text style={[styles.placeholder,placeholderStyle]} numberOfLines={1}>{placeholder}</Text>}</View>
+            <View style={{width:'95%'}}>{defaultValue?<Text style={[styles.selectedLabel,selectedLabelStyle]} numberOfLines={1}>{this.getLabelFormat(defaultValue)}</Text>:<Text style={[styles.placeholder,placeholderStyle]} numberOfLines={1}>{placeholder}</Text>}</View>
             <View style={{position:'absolute',right:0}}><Image style={{width:13,height:13}} source={require('../assets/images/arrowdown_picker.png')}/></View>
             </TouchableOpacity>
         </View>

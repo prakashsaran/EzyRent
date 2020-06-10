@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback,FlatList,ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -11,6 +11,10 @@ import {
 } from '../../../navigation/routes';
 import { FloatingAction } from "react-native-floating-action";
 
+import { getBanks,deleteBank } from '../../../actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 class MyBankaccount extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -19,6 +23,12 @@ class MyBankaccount extends React.Component {
       activeAction:null,
     }
     StatusBar.setBarStyle("dark-content");
+  }
+
+  UNSAFE_componentWillMount(){
+    const { getBanks } = this.props
+    getBanks("",0,10);
+    console.log("componentWillMount hello test")
   }
   goToMyBankaccount(){
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
@@ -33,19 +43,63 @@ class MyBankaccount extends React.Component {
   }
   editBankAccount(account){
     this.setState({activeAction:null})
-    NavigationService.navigate(NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH,{account});
   }
   deleteBankAccount(account){
-    console.log(account)
+    console.log("account is",account)
+    const {deleteBank} = this.props;
+    deleteBank(account)
     this.setState({activeAction:null})
   }
   addNewBankAccount(){
     NavigationService.navigate(NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH);
   }
+
+  renderItems(){
+    const {activeAction} = this.state
+    const {bankData} = this.props
+    return bankData.map((item,inx)=>{
+      return(
+            <View style={[styles.shadow,{zIndex:100-inx}]}>
+                <View style={styles.MoreLinkswrap}>
+                  <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
+                    <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>
+                    <TouchableOpacity style={styles.UserWrap}>
+                      <View style={styles.heading_wrap}>
+                        <Text style={styles.MoreLinksItem(theme)}>{item.name}</Text>
+                      </View>
+                      <Text style={styles.AccountNo(theme)}>{item.account_no}</Text>
+                      <View style={styles.contentWrap}>
+                      <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
+                      <Text style={styles.MoreLinksItemSub(theme)}>{item.additional_details}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                    <TouchableOpacity style={{width:30,height:30,justifyContent:'flex-end',alignItems:'flex-end'}} onPress={()=>this.showAction(item.id)}>
+                       <Image style={activeAction==item.id?styles.active_three_dots_light:styles.three_dots_light} source={require('../../../assets/images/three-dot-light.png')}></Image>
+                    </TouchableOpacity>
+                    {activeAction==item.id && <View style={styles.hideShow}>
+                      <TouchableOpacity onPress={()=>this.editBankAccount(item)} style={{paddingVertical:5,paddingHorizontal:10,height:40}}>
+                        <Text style={styles.edit}>Edit</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={()=>this.deleteBankAccount(item.id)} style={{paddingVertical:5,paddingHorizontal:10,height:40}}>
+                        <Text style={styles.edit}>Delete</Text>
+                      </TouchableOpacity>
+                    </View>}
+                </View>
+              </View>
+        )
+    })
+    
+  }
   render(){
     const theme = this.context;
-    const {activeAction} = this.state
-      return (
+    const {bankData,loading} = this.props;
+    if(loading){
+      return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={'#315ADD'} size={'large'} /></View>)
+    }
+    if(!Object.keys(bankData).length){
+      return(
         <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
           <SafeAreaView style={styles.container}>
           <View style={styles.titleWrapper}>
@@ -53,71 +107,30 @@ class MyBankaccount extends React.Component {
               <Image style={styles.back_button} source={require('../../../assets/images/back-blue.png')}></Image>
               <Text style={theme.typography.pageTitleSecondary}>My Bank Accounts</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>this.addNewBankAccount()}><Image style={styles.plus} source={require('../../../assets/images/plus.png')}></Image></TouchableOpacity>
+            {/*<TouchableOpacity onPress={()=>this.addNewBankAccount()}><Image style={styles.plus} source={require('../../../assets/images/plus.png')}></Image></TouchableOpacity>*/}
+          </View>
+           <Text style={{textAlign:'center'}}>Bank Accounts Not Available</Text>
+           <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
+           </SafeAreaView>
+        </ImageBackground>
+      )
+    }
+      return ( 
+        <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
+          <SafeAreaView style={styles.container}>
+          <View style={styles.titleWrapper}>
+            <TouchableOpacity onPress={()=>NavigationService.goBack()} style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',}}>
+              <Image style={styles.back_button} source={require('../../../assets/images/back-blue.png')}></Image>
+              <Text style={theme.typography.pageTitleSecondary}>My Bank Accounts</Text>
+            </TouchableOpacity>
+            {/*<TouchableOpacity onPress={()=>this.addNewBankAccount()}><Image style={styles.plus} source={require('../../../assets/images/plus.png')}></Image></TouchableOpacity>*/}
           </View>
               <ScrollView
               showsVerticalScrollIndicator={false}
               >
-              <TouchableWithoutFeedback onPress={() => this.showAction(null)}>
+                <TouchableWithoutFeedback onPress={() => this.showAction(null)}>
                 <View style={[theme.typography.rectView2,styles.rectviewcustom]}>
-                  <View style={[styles.shadow,{zIndex:2}]}>
-                    <View style={styles.MoreLinkswrap}>
-                      <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
-                        <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>
-                        <TouchableOpacity style={styles.UserWrap}>
-                          <View style={styles.heading_wrap}>
-                            <Text style={styles.MoreLinksItem(theme)}>Dubai Finance Bank</Text>
-                          </View>
-                          <Text style={styles.AccountNo(theme)}>XXXX1546 XXX 1234</Text>
-                          <View style={styles.contentWrap}>
-                          <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
-                          <Text style={styles.MoreLinksItemSub(theme)}>Sharjah, Dubai, UAE</Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                        <TouchableOpacity onPress={()=>this.showAction(1)}>
-                           <Image style={activeAction==1?styles.active_three_dots_light:styles.three_dots_light} source={require('../../../assets/images/three-dot-light.png')}></Image>
-                        </TouchableOpacity>
-                        {activeAction==1 && <View style={styles.hideShow}>
-                          <TouchableOpacity onPress={()=>this.editBankAccount(1)} style={{paddingVertical:5,paddingHorizontal:10}}>
-                            <Text style={styles.edit}>Edit</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={()=>this.deleteBankAccount(1)} style={{paddingVertical:5,paddingHorizontal:10}}>
-                            <Text style={styles.edit}>Delete</Text>
-                          </TouchableOpacity>
-                        </View>}
-                    </View>
-                  </View>
-
-                  <View style={[styles.shadow,{zIndex:1}]}>
-                    <View style={styles.MoreLinkswrap}>
-                      <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
-                        <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>
-                        <TouchableOpacity style={styles.UserWrap}>
-                          <View style={styles.heading_wrap}>
-                            <Text style={styles.MoreLinksItem(theme)}>Dubai Finance Bank</Text>
-                          </View>
-                          <Text style={styles.AccountNo(theme)}>XXXX1546 XXX 1234</Text>
-                          <View style={styles.contentWrap}>
-                          <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
-                          <Text style={styles.MoreLinksItemSub(theme)}>Sharjah, Dubai, UAE</Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                        <TouchableOpacity style={{height:40,width:20,alignItems:'flex-end'}} onPress={()=>this.showAction(2)}>
-                           <Image style={activeAction==2?styles.active_three_dots_light:styles.three_dots_light} source={require('../../../assets/images/three-dot-light.png')}></Image>
-                        </TouchableOpacity>
-                        {activeAction==2 && <View style={styles.hideShow}>
-                          <TouchableOpacity onPress={()=>this.editBankAccount(2)} style={{paddingVertical:5,paddingHorizontal:10}}>
-                            <Text style={styles.edit}>Edit</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={()=>this.deleteBankAccount(2)} style={{paddingVertical:5,paddingHorizontal:10}}>
-                            <Text style={styles.edit}>Delete</Text>
-                          </TouchableOpacity>
-                        </View>}
-                    </View>
-                  </View>
-
+                  {this.renderItems()}
                 </View>
                 </TouchableWithoutFeedback>
               </ScrollView>
@@ -127,4 +140,29 @@ class MyBankaccount extends React.Component {
       );
   }
 }
-export default MyBankaccount;
+
+const mapStateToProps = ({ bankAccount }) => {
+  const { error, success,loading, refreshing,bankData } = bankAccount;
+
+  return { error, success, loading, refreshing,bankData  };
+};
+
+MyBankaccount.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType(PropTypes.string, null),
+  success: PropTypes.oneOfType(PropTypes.string, null),
+  refreshing:PropTypes.bool,
+  bankData:PropTypes.oneOfType(PropTypes.object,null),
+  getBanks: PropTypes.func,
+  deleteBank: PropTypes.func,
+};
+
+MyBankaccount.defaultProps = {
+  error: null,
+  success: null,
+  loading: false,
+  refreshing:false,
+  bankData:[],
+};
+
+export default connect(mapStateToProps, {getBanks,deleteBank})(MyBankaccount);

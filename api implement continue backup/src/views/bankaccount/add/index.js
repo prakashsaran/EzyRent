@@ -6,6 +6,9 @@ import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
 import { PickerSelect,DropDownHolder } from '../../../components';
+import {addBank} from '../../../actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
@@ -65,16 +68,18 @@ validateAndSetAttribute(value, attribute) {
 }
 
 submitForm(){
-  const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode} = this.state
+  const {addBank} = this.props;
+  const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode,additionalDetails} = this.state
   const formIsValid =
           this.validateAndSetAttribute(nameofBank, this._nameofBankEntry) &
           this.validateAndSetAttribute(accountNumber, this._accountNumberEntry) &
           this.validateAndSetAttribute(crmAcNumber, this._crmAcNumberEntry) &
           this.validateAndSetAttribute(acHolderName, this._acHolderNameEntry) &
-          this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
+          //this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
           this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
   if(formIsValid){
-    NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
+    const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails}
+    addBank(formdata);
   }else{
     DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
   }
@@ -119,33 +124,8 @@ submitForm(){
                              <Text style={theme.typography.tooltip}>Account Holder Name *</Text>
                               <TextInput onFocus={()=>this.onFocusInput(this._acHolderNameEntry)} onBlur={()=>this.onBlurInput(this._acHolderNameEntry)} ref={(ref) => this._acHolderNameEntry = ref} onChangeText={(acHolderName) =>{this.setState({acHolderName})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={acHolderName} placeholder={'Account Holder Name'}/>
                           </View>
-                          
-                          <View style={[styles.fieldWrapp(theme),styles.fieldWrappAccount(theme)]} ref={(ref) => this._typeOfAcEntry = ref} >
-                             
-                              <RNPickerSelect
-                                  placeholder={{
-                                    label: 'Type of Account',
-                                    value: null,
-                                    color: '#000000',
-                                  }}
-                                  style={pickerSelectStyles}
-                                  onValueChange={(typeOfAc) => this.setState({typeOfAc})}
-                                  items={[
-                                      { label: 'Current Account', value: '1' },
-                                      { label: 'Savings Account', value: '1' },
-                                      { label: 'Recurring Deposit Account', value: '3' },
-                                      { label: 'Fixed Deposit Account', value: '4' },
-                                  ]}
-                                  Icon={() => {
-                                    return (
-                                      <Image style={{width:14,height:15}} source={require('../../../assets/images/arrowdown_picker.png')}/>
-                                    );
-                                  }}
-                                />
-                          </View>
-
                           <View style={styles.fieldWrapp(theme)}>
-                              <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)} ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode} placeholder={'IFSC Code/Sort Code'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)} ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode} placeholder={'IFSC Code/Swift Code'}/>
                           </View>
                           <View style={styles.fieldWrapp(theme)}>
                               <TextInput onFocus={()=>this.onFocusInput(this._additionalDetailsEntry)} onBlur={()=>this.onBlurInput(this._additionalDetailsEntry)} ref={(ref) => this._additionalDetailsEntry = ref} onChangeText={(additionalDetails) =>{this.setState({additionalDetails})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={additionalDetails} placeholder={'Additional Details'}/>
@@ -168,7 +148,6 @@ submitForm(){
   }
 
 }
-export default AddBankAccount;
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 18,
@@ -193,3 +172,25 @@ const pickerSelectStyles = StyleSheet.create({
     right: 0,
   },
 });
+
+
+const mapStateToProps = ({ bankAccount }) => {
+  const { error, success,loading } = bankAccount;
+
+  return { error, success,loading  };
+};
+
+AddBankAccount.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType(PropTypes.string, null),
+  success: PropTypes.oneOfType(PropTypes.string, null),
+  addBank: PropTypes.func,
+};
+
+AddBankAccount.defaultProps = {
+  error: null,
+  success: null,
+  loading: false,
+};
+
+export default connect(mapStateToProps, {addBank})(AddBankAccount);

@@ -24,21 +24,71 @@ class MyProfile extends React.Component {
     }
     StatusBar.setBarStyle("light-content");
   }
+  //======================================================//
+//============ start common function ====================//
+//======================================================//
+
+getCollectionRent(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.rent_collect;
+  }
+  return "0";
+}
+
+getCollectionTotalRent(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.total_rent_collect;
+  }
+  return "0";
+}
+getConsistencyRentCollect(DataObj){
+  if(DataObj.hasOwnProperty("landlord")){
+    return DataObj.landlord.consistency_rent_collect;
+  }
+  return "0";
+}
+
+getTotalRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.total_rent_pay;
+  }
+  return "0";
+}
+
+
+getRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+getConsistencyRentPay(DataObj){
+  if(DataObj.hasOwnProperty("tenant")){
+    return DataObj.tenant.rent_pay;
+  }
+  return "0";
+}
+
+
+//======================================================//
+//============ end common function ====================//
+//======================================================//
+
   componentDidMount(){
     const {customer,status}=this.props
-    console.log("customer =>",customer)
     if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
         } else{
-          this.setState({AccountType:'new'});
+          this.setState({AccountType:'U'});
         }
       } else{
-        this.setState({AccountType:"new"});
+        this.setState({AccountType:"U"});
       }
     } else{
-      this.setState({AccountType:"new"});
+      this.setState({AccountType:"U"});
     }
   }
  
@@ -53,7 +103,8 @@ class MyProfile extends React.Component {
   }
   renderQuickState(){
     const {AccountType} = this.state
-    if(AccountType=="landlord"){
+    const {customer} = this.props
+    if(AccountType=="U"){
       return(
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
@@ -63,15 +114,15 @@ class MyProfile extends React.Component {
             <Text style={styles.content(theme)}>A quick summary of your account on EzyRent</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
+                <Text style={styles.box_heading}>0</Text>
                 <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>80K</Text>
+                <Text style={styles.box_heading}>0K</Text>
                 <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>100%</Text>
+                <Text style={styles.box_heading}>0%</Text>
                 <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
               </View>
             </View>
@@ -79,25 +130,51 @@ class MyProfile extends React.Component {
         </View>
       )
     }
-    if(AccountType!="lessee"){
+    if(AccountType=="L"){
       return(
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
             <View style={styles.quick_stats_inner}>
               <Text style={styles.quick_stats_heading}>Quick Stats</Text>
             </View>
-            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent</Text>
+            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
+                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
+                <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
+              </View>
+              <View style={styles.box}>
+                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
+                <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
+              </View>
+              <View style={styles.box}>
+                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
+                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      )
+    }
+    if(AccountType!="B"){
+      return(
+        <View style={styles.shadow}>
+          <View style={styles.quick_stats}>
+            <View style={styles.quick_stats_inner}>
+              <Text style={styles.quick_stats_heading}>Quick Stats</Text>
+            </View>
+            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent.</Text>
+            <View style={styles.two_box}>
+              <View style={styles.box}>
+                <Text style={styles.box_heading}>{this.getRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Properties I am Paying Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>80K</Text>
+                <Text style={styles.box_heading}>{this.getTotalRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Total Rent I have to Pay</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>100%</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}%</Text>
                 <Text style={styles.box_desc}>Consistency in Paying Rent</Text>
               </View>
             </View>
@@ -108,7 +185,7 @@ class MyProfile extends React.Component {
     return(
       <Swiper
         style={styles.slider1}
-        height={250}
+        height={220}
         dot={<View style={theme.typography.Dots}/>}
         activeDot={<View style={theme.typography.activeDots} />}
         //paginationStyle={theme.typography.pagination}
@@ -121,18 +198,18 @@ class MyProfile extends React.Component {
               <Text style={styles.quick_stats_heading}>Quick Stats</Text>
               <Image style={styles.paginat} source={require('../../assets/images/paginat.png')}></Image>
             </View>
-            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as landlord</Text>
+            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as landlord.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
+                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
                 <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>80K</Text>
+                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
                 <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>100%</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
                 <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
               </View>
             </View>
@@ -144,19 +221,19 @@ class MyProfile extends React.Component {
               <Text style={styles.quick_stats_heading}>Quick Stats</Text>
               <Image style={styles.paginat} source={require('../../assets/images/paginat-active.png')}></Image>
             </View>
-            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as tenant</Text>
+            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as tenant.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
-                <Text style={styles.box_desc}>Properties I am Paying Rent</Text>
+                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
+                <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>80K</Text>
-                <Text style={styles.box_desc}>Total Rent I have to Pay</Text>
+                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
+                <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>100%</Text>
-                <Text style={styles.box_desc}>Consistency in Paying Rent</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
+                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
               </View>
             </View>
           </View>
@@ -166,64 +243,100 @@ class MyProfile extends React.Component {
   }
   renderConsistency(){
     const {AccountType} = this.state
-    if(AccountType!="lessee"){
+    const {customer} = this.props
+    if(AccountType=="L"){
       return (
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
             <View style={styles.quick_stats_inner}>
               <Text style={styles.quick_stats_heading}>Consistency Score</Text>
             </View>
-            <Text style={styles.content(theme)}>Lorem ipsum dolor sit amet, consectetur adipiscing elit enim</Text>
+            <Text style={styles.content(theme)}>Your consistency score on EzyRent as landlord.</Text>
             <View style={styles.green_box}>
-              <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
+      <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentCollect(customer)}</Text>
               <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
               <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
             </View>
           </View>
         </View>
       )
+    } else if(AccountType=="T"){
+      return (
+        <View style={styles.shadow}>
+          <View style={styles.quick_stats}>
+            <View style={styles.quick_stats_inner}>
+              <Text style={styles.quick_stats_heading}>Consistency Score</Text>
+            </View>
+            <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
+            <View style={styles.green_box}>
+            <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentPay(customer)}</Text>
+              <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
+              <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
+            </View>
+          </View>
+        </View>
+      )
+
     }
-    return(
-      <Swiper
-        style={styles.slider}
-        height={220}
-        onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
-        dot={<View style={theme.typography.Dots}/>}
-        activeDot={<View style={theme.typography.activeDots} />}
-        //paginationStyle={theme.typography.pagination}
-        loop
-        showsPagination={false}
-      >
+    else if(AccountType=="B"){
+        return(
+          <Swiper
+            style={styles.slider}
+            height={220}
+            onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
+            dot={<View style={theme.typography.Dots}/>}
+            activeDot={<View style={theme.typography.activeDots} />}
+            //paginationStyle={theme.typography.pagination}
+            loop
+            showsPagination={false}
+          >
+            <View style={styles.shadow}>
+              <View style={styles.quick_stats}>
+                <View style={styles.quick_stats_inner}>
+                  <Text style={styles.quick_stats_heading}>Consistency Score</Text>
+                  <Image style={styles.paginat} source={require('../../assets/images/paginat.png')}></Image>
+                </View>
+                <Text style={styles.content(theme)}>Your consistency score on EzyRent as landlord.</Text>
+                <View style={styles.green_box}>
+                  <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentCollect(customer)}</Text>
+                  <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
+                  <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.shadow}>
+              <View style={styles.quick_stats}>
+                <View style={styles.quick_stats_inner}>
+                  <Text style={styles.quick_stats_heading}>Consistency Score</Text>
+                  <Image style={styles.paginat} source={require('../../assets/images/paginat-active.png')}></Image>
+                </View>
+                <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
+                <View style={styles.green_box}>
+                  <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentPay(customer)}</Text>
+                  <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
+                  <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
+                </View>
+              </View>
+            </View>
+          </Swiper>
+        )
+    } else{
+      return(
         <View style={styles.shadow}>
-          <View style={styles.quick_stats}>
-            <View style={styles.quick_stats_inner}>
-              <Text style={styles.quick_stats_heading}>Consistency Score</Text>
-              <Image style={styles.paginat} source={require('../../assets/images/paginat.png')}></Image>
-            </View>
-            <Text style={styles.content(theme)}>Lorem ipsum dolor sit amet, consectetur adipiscing elit enim</Text>
-            <View style={styles.green_box}>
-              <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
-              <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
-              <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-            </View>
+        <View style={styles.quick_stats}>
+          <View style={styles.quick_stats_inner}>
+            <Text style={styles.quick_stats_heading}>Consistency Score</Text>
+          </View>
+          <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
+          <View style={styles.green_box}>
+          <Text style={[styles.greenText,styles.greenText100]}>0%</Text>
+            <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
+            <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
           </View>
         </View>
-        <View style={styles.shadow}>
-          <View style={styles.quick_stats}>
-            <View style={styles.quick_stats_inner}>
-              <Text style={styles.quick_stats_heading}>Consistency Score</Text>
-              <Image style={styles.paginat} source={require('../../assets/images/paginat-active.png')}></Image>
-            </View>
-            <Text style={styles.content(theme)}>Lorem ipsum dolor sit amet, consectetur adipiscing elit enim</Text>
-            <View style={styles.green_box}>
-              <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
-              <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
-              <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-            </View>
-          </View>
-        </View>
-      </Swiper>
-    )
+      </View>
+      );
+    }
   }
   render(){
     const {customer} = this.props;
@@ -252,7 +365,6 @@ class MyProfile extends React.Component {
                   </View>
                   <Text style={styles.detailHeading(theme)}>{customer.full_name}</Text>
                   <View style={styles.detail}>
-                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../assets/images/gps_dark.png')}></Image> Dubai, UAE</Text>
                     <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}</Text>
                   </View>
                   <View>

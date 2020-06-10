@@ -1,8 +1,15 @@
-import { Platform } from 'react-native';
+import { Platform,Dimensions } from 'react-native';
 import colors from './colors';
 import spacing from './spacing';
 import dimens from './dimens';
-
+import {normalize} from '../components/normalize';
+function isLessMarshmallow(){
+  const dvcHeight = Dimensions.get('window').height;
+  if(dvcHeight < 750){
+    return true;
+  }
+  return false;
+}
 const fontFamilyMontserrat = 'Montserrat-Regular';
 const fontFamilyMontserratSemi = 'Montserrat-SemiBold';
 const fontFamilyMontserratLight = 'Montserrat-Light';
@@ -17,22 +24,22 @@ const fontWeightSemiBold = '600';
 const fontWeightMedium = '500';
 const fontWeightBold = '800';
 
-const font_10 = 10;
-const font_11 = 11;
-const font_12 = 12;
-const font_13 = 13;
-const font_14 = 14;
-const font_15 = 15;
-const font_16 = 16;
-const font_17 = 17;
-const font_18 = 18;
-const font_19 = 19;
-const font_20 = 20;
-const font_21 = 21;
-const font_22 = 22;
-const font_23 = 23;
-const font_24 = 24;
-const font_25 = 25;
+const font_10 = normalize(10);
+const font_11 = normalize(11);
+const font_12 = normalize(12);
+const font_13 = normalize(13);
+const font_14 = normalize(14);
+const font_15 = normalize(15);
+const font_16 = normalize(16);
+const font_17 = normalize(17);
+const font_18 = normalize(18);
+const font_19 = normalize(19);
+const font_20 = normalize(20);
+const font_21 = normalize(21);
+const font_22 = normalize(21);
+const font_23 = normalize(23);
+const font_24 = normalize(24);
+const font_25 = normalize(25);
 
 const titleTextColor = colors.primaryDark;
 
@@ -58,7 +65,7 @@ export default {
      borderWidth: 0,
      fontSize: font_14,
      fontFamily: fontFamilyMontserratLight,
-     lineHeight: 15,
+     lineHeight: normalize(15),
      letterSpacing: 0,
      marginVertical:spacing.small,
      textAlign: "center",
@@ -79,6 +86,14 @@ export default {
      color:colors.secondry,
      fontSize:font_12,
      marginTop:spacing.extraLarge*2,
+     fontFamily:fontFamilyMontserrat,
+   },
+   mobelTitle2: {
+     width: '80%',
+     alignSelf: "center",
+     color:colors.secondry,
+     fontSize:font_12,
+     marginTop:isLessMarshmallow()?15:spacing.extraLarge*2,
      fontFamily:fontFamilyMontserrat,
    },
    in_active_mobelTitle: {
@@ -108,7 +123,7 @@ export default {
       shadowColor: "#000",
       shadowOpacity: 0.35,
       shadowRadius: 5,
-      marginTop:spacing.extraLarge*2,
+      marginTop:isLessMarshmallow()?22:spacing.extraLarge*2,
       //lineHeight:20,
       height:45,
     },
@@ -130,7 +145,7 @@ export default {
       shadowColor: "#000",
       shadowOpacity: 0.35,
       shadowRadius: 5,
-      marginTop:spacing.extraLarge*2,
+      marginTop:isLessMarshmallow()?22:spacing.extraLarge*2,
       height:45,
     },
     caption: {
@@ -149,14 +164,14 @@ export default {
    },
    myDashBoard: {
      color: colors.primaryScreenTitle,
-     fontSize: font_20,
+     fontSize: font_19,
      textAlign: "left",
      fontFamily:fontFamilyMontserratMedium,
      paddingLeft:10,
    },
    pageTitleSecondary: {
      color: colors.secondry,
-     fontSize: font_20,
+     fontSize: font_19,
      textAlign: "left",
      fontFamily:fontFamilyMontserratMedium,
      paddingLeft:10,
@@ -197,7 +212,7 @@ export default {
    tooltip:{
      color:colors.secondry,
      fontFamily:fontFamilyOxygen,
-     fontSize:13,
+     fontSize:font_13,
      width:'100%',
      textAlign:'left',
    },
@@ -224,14 +239,22 @@ export default {
      color: colors.secondry,
      fontFamily:fontFamilyMontserratMedium,
      fontWeight:fontWeightSemiBold,
-     fontSize: 18,
+     fontSize: font_18,
    },
   titleText: {
     fontFamily:fontFamilyMontserrat,
     color: titleTextColor,
-    fontSize: 18,
+    fontSize: font_18,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
+  },
+  spinnerStyle:{
+    backgroundColor:'rgba(0,0,0,0.3)',
+    position:'absolute',
+    alignSelf:'center',
+    top:"60%",
+    padding:20,
+    borderRadius:5,
   },
   primaryFont:fontFamilyMontserrat,
   secondaryFont:fontFamilyOxygen,

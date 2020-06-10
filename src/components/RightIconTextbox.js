@@ -23,7 +23,7 @@ class RightIconTextbox extends PureComponent {
         const {onChangeText,placeholder,textValue,source,keyboardType,style,InputStyle} = this.props;
         return (
         <View style={[styles.container, style]}  ref={component => this._root = component}>
-          <TextInput onFocus={()=>this.onfocusMobile()} onBlur={()=>this.onBlurMobile()} keyboardType={keyboardType} onChangeText={(textValue)=>{onChangeText(textValue)}} placeholder={placeholder} value={textValue} style={[styles.inputStyle,InputStyle]}></TextInput>
+          <TextInput {...this.props} onFocus={()=>this.onfocusMobile()} onBlur={()=>this.onBlurMobile()} keyboardType={keyboardType} onChangeText={(textValue)=>{onChangeText(textValue)}} placeholder={placeholder} value={textValue} style={[styles.inputStyle,InputStyle]}></TextInput>
           {source && <TouchableOpacity onPress={()=>this.onClickIcon()}>
             <Image source={source} style={styles.iconStyle}/>
           </TouchableOpacity>}

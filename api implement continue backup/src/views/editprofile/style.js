@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../theme";
+import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: {
@@ -18,17 +19,30 @@ export default StyleSheet.create({
     },
     rectWrapp:{
       backgroundColor:theme.colors.lightBackgrountColor,
-      marginTop:80,
+      marginTop:normalize(80),
       minHeight:theme.dimens.defaultScreenMinHeight,
     },
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.fontFamilyOxygenBold,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightBold,
       width:'100%',
       textAlign:'left',
       marginBottom:20,
+    }),
+    columntitlePop:theme=>({
+      color:theme.colors.descriptionColor,
+      fontFamily:theme.typography.fontFamilyOxygenBold,
+      fontSize:normalize(16),
+      fontWeight:theme.typography.fontWeightBold,
+      width:'100%',
+      textAlign:'left',
+      marginBottom:0,
+      marginTop:40,
+    }),
+    columntitlePop1:theme=>({
+      marginTop:0,
     }),
     profilebg:{
       alignContent:'center',
@@ -81,7 +95,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
     }),
@@ -91,7 +105,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
       padding:0,
@@ -105,7 +119,7 @@ export default StyleSheet.create({
     pintitle: theme =>({
       fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:16,
+      fontSize:normalize(16),
       color:theme.colors.descriptionColor,
     }),
     pincontainer: theme => ({
@@ -117,6 +131,11 @@ export default StyleSheet.create({
     }),
     pininputBox: theme =>({
       height:40,
+      width:'100%',
+      alignSelf:'center',
+    }),
+    pininputBoxPop: theme =>({
+      height:20,
       width:'100%',
       alignSelf:'center',
     }),
@@ -132,7 +151,7 @@ export default StyleSheet.create({
       borderBottomWidth: 1,
       color:theme.colors.descriptionColor,
       borderColor:theme.colors.descriptionColor,
-      fontSize:22,
+      fontSize:normalize(22),
         fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -156,7 +175,7 @@ export default StyleSheet.create({
     fieltext:theme=>({
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:2,
       paddingBottom:2,
@@ -198,7 +217,7 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.primBtnTextColor,
       fontFamily:theme.typography.primaryFont,
-      fontSize:22,
+      fontSize:normalize(22),
       fontWeight:theme.typography.fontWeightSemiBold,
       textTransform:'uppercase',
     }),
@@ -206,11 +225,42 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.secondaryFont,
-      fontSize:12,
+      fontSize:normalize(12),
       fontWeight:theme.typography.fontWeightRegular,
-      lineHeight:20,
+      lineHeight:normalize(20),
     }),
     fieldWrappLast:{
       marginBottom:20,
     },
+    // popup design 
+    popupContainer: theme=>({
+      width:'100%',
+      backgroundColor: "rgba(230, 230, 230,1)",
+      borderRadius: 5,
+      borderColor: "#e6e6e6",
+      borderWidth: 1,
+      shadowOffset: {
+        height: 5,
+        width: 5
+      },
+      shadowColor: "rgba(0,0,0,1)",
+      shadowOpacity: 0.35,
+      paddingVertical:20,
+      paddingHorizontal:10,
+    }),
+    pop_wrap:{
+      //backgroundColor:'#fff',
+    },
+    popupBtms:{
+      width:'100%',
+      flexDirection:'row',
+      flexWrap:'wrap',
+      justifyContent:'space-between',
+      paddingVertical:10,
+      paddingTop:20,
+    },
+    cancel:{
+      color:'#6c6c6c',
+    },
+
   });

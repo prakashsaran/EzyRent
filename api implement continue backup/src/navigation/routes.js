@@ -1,4 +1,4 @@
-// 	WALKTHROUGH SCREENS 
+// 	WALKTHROUGH SCREENS
 export const NAVIGATION_WALKTHROUGH_LANDLORD_PATH ='walkthrough-landloard';
 export const NAVIGATION_WALKTHROUGH_TENANT_PATH ='walkthrough-tenant';
 
@@ -31,6 +31,7 @@ export const NAVIGATION_DASHBOARD_INIT_VIEW_PATH = 'dashboard-init-view';
 export const NAVIGATION_AUTHENTICATION_PATH = 'authentication-view';
 export const NAVIGATION_PROPERTIES_TENANTS_STACK_PATH = 'properties-tenants';
 export const NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH = 'add-properties-tenants';
+export const NAVIGATION_EDIT_PROPERTIES_VIEW_PATH = 'edit-properties';
 export const NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH = 'detail-properties-view';
 export const NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH = 'detail-properties-tenants';
 export const NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH = 'detail-properties-landlord';
@@ -51,13 +52,15 @@ export const NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH = 'add-bank-ac-more-
 export const NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH = 'edit-bank-ac-more-view';
 export const NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH = 'edit-my-profile-more-view';
 
+export const NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH ='verification-bank-ac-more-view';
+
 // Switch Navigator AFTER ACCOUNT SIGNIN/SIGNUP SUCCESSFULL
 export const SWITCH_NAVIGATION_AUTHORIZED_ACCOUNT_PATH = 'Authorized';
 
 // Switch Navigator IF ACCOUNT NOT LOGED IN
 export const SWITCH_NAVIGATION_UN_AUTHORIZED_ACCOUNT_PATH = 'Unauthorized';
 
-// 
+//
 export const NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH = 'properties-tenants-view';
 
 // TANANT PROFILE VIEW PATH

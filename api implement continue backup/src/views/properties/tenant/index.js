@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -12,6 +12,8 @@ import {
 } from '../../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {getTenantProfileById,getCountryCodeFormat} from '../../../actions';
+import { EzyRent } from '../../../ezyrent';
 
 class TenantProfile extends React.Component {
   static contextType = ThemeContext;
@@ -19,12 +21,20 @@ class TenantProfile extends React.Component {
     super();
     this.state ={
       AccountType:null,
+      tenant_name:undefined,
+      mobile_country_code:"0091",
+      profile_pic:"default.jpg",
+      tenant_mobile:undefined
     }
     StatusBar.setBarStyle("light-content");
   }
+  UNSAFE_componentWillMount(){
+    const {navigation,getTenantProfileById,customer} = this.props
+    const tenant_id = navigation.getParam("tenant_id");
+    getTenantProfileById(customer,tenant_id);
+  }
   componentDidMount(){
     const {customer,status}=this.props
-    console.log("customer =>",customer)
     if(status){
       if(customer.hasOwnProperty("type")){
         if(customer.type){
@@ -37,6 +47,19 @@ class TenantProfile extends React.Component {
       }
     } else{
       this.setState({AccountType:"new"});
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {current_tenant} = this.props
+    if(nextProps.current_tenant != current_tenant){
+      const {current_tenant} = nextProps
+      this.setState({
+        tenant_name:current_tenant.full_name,
+        tenant_mobile:current_tenant.mobile,
+        mobile_country_code:current_tenant.mobile_country_code,
+        profile_pic:current_tenant.profile_pic,
+      })
     }
   }
  
@@ -87,8 +110,17 @@ class TenantProfile extends React.Component {
       )
   }
   render(){
+    const {tenant_name,mobile_country_code,profile_pic,tenant_mobile} = this.state
+    const {current_tenant} = this.props
     const theme = this.context;
-      return (
+    if(!Object.keys(current_tenant).length > 0){
+      return(
+        <View style={{width:"100%",height:"100%",alignItems:'center',justifyContent:'center'}}>
+          <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
+        </View>
+      );
+     }
+       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
           <View style={styles.titleWrapper}>
@@ -98,18 +130,17 @@ class TenantProfile extends React.Component {
             </TouchableOpacity>
           </View>
           <View>
-              <ScrollView
+              <ScrollView 
               showsVerticalScrollIndicator={false}
               >
                 <View style={[theme.typography.rectView2,styles.rectviewcustom]}>
 
                   <View style={styles.profile_wrap}>
-                    <Image style={styles.profile} source={require('../../../assets/images/tever-thomas.png')}></Image>
+                    <Image style={styles.profilebg} source={{uri:`${EzyRent.getMediaUrl()}${this.state.profile_pic}`}}></Image>
                   </View>
-                  <Text style={styles.detailHeading(theme)}>TEVER THOMAS</Text>
+                  <Text style={styles.detailHeading(theme)}>{tenant_name}</Text>
                   <View style={styles.detail}>
-                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image> Dubai, UAE</Text>
-                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/call.png')}></Image> +97 9876543210</Text>
+                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/call.png')}></Image> {getCountryCodeFormat(mobile_country_code)} {tenant_mobile}</Text>
                   </View>
                   <View>
                   {this.renderQuickState()}
@@ -125,26 +156,24 @@ class TenantProfile extends React.Component {
       );
   }
 }
-const mapStateToProps = ({ account }) => {
-  const { error, success, loading,status,customer } = account;
+const mapStateToProps = ({ account,tenants }) => {
+  const { customer } = account;
+  const { current_tenant,loading } = tenants;
 
-  return { error, success, loading, status, customer };
+  return { current_tenant,loading, customer };
 };
 
 TenantProfile.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType(PropTypes.string, null),
-  success: PropTypes.oneOfType(PropTypes.string, null),
-  status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  current_tenant:PropTypes.oneOfType(PropTypes.object,null),
+  getTenantProfileById: PropTypes.func.isRequired,
 };
 
 TenantProfile.defaultProps = {
-  error: null,
-  success: null,
   loading: false,
-  status:false,
   customer:null,
+  current_tenant:{}
 };
 
-export default connect(mapStateToProps, {})(TenantProfile);
+export default connect(mapStateToProps, {getTenantProfileById})(TenantProfile);

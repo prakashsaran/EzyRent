@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView } from "react-native";
+import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView,ActivityIndicator } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import NavigationService from '../../../navigation/NavigationService';
 import Timeline from 'react-native-timeline-flatlist'
@@ -9,14 +9,23 @@ import {
     NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
     NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH,
   } from '../../../navigation/routes';
-  
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {getPropertyById } from '../../../actions';
+    
 class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
     constructor(props){
       super();
     }
-    goToPropertyOwnerDetail(){
-        NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH)
+    UNSAFE_componentWillMount(){
+        const {navigation,getPropertyById} = this.props
+        const currentProperty = navigation.getParam("property");
+        console.log("currentProperty UNSAFE_componentWillMount",currentProperty)
+        getPropertyById(currentProperty.id);
+    }
+    goToPropertyOwnerDetail(landlord_id){
+        NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
     }
 
     renderHeader(theme){
@@ -40,29 +49,29 @@ class ViewPropertyTenant extends React.Component {
       }
     render(){
         const theme = this.context;
+        const {property_loading,property_currentItem} = this.props;
+        if(property_loading || !Object.keys(property_currentItem).length){
+            return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={'#315ADD'} size={'large'} /></View>)
+          }
         return (
             <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'repeat'} imageStyle={{width:'100%',}} source={require('../../../assets/images/property_view_bg.png')}>
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
                     <View style={styles.detailContainer}>
-                        <View style={styles.gpsWrapp}>
-                            <TouchableOpacity style={styles.gpscontainer(theme)}><Image style={styles.gpsIcon} resizeMode={'contain'} source={require('../../../assets/images/gps.png')}></Image></TouchableOpacity>
-                            <Text style={styles.gpsTitle(theme)}>View Map</Text>
-                        </View>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styles.infoContainer}>
                                 <View style={styles.propertyInfo(theme)}>
-                                    <Text style={styles.pageTitle(theme)}>#ABC 12</Text>
-                                    <Text style={styles.pageTitle(theme)}>1BHK Apartment at Golf Links</Text>
+                                    <Text style={styles.pageTitle(theme)}>{property_currentItem.house_number}</Text>
+                                    <Text style={styles.pageTitle(theme)}>{property_currentItem.building_name}</Text>
                                     <View style={styles.ownerInfo}>
-                                        <Text style={styles.textLabel(theme)}>Owned/Managed by</Text>
-                                         <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail()}><Text style={styles.textValue(theme)}>Red Rows Property</Text></TouchableOpacity>
+                                        <Text style={styles.textLabel(theme)}>{property_currentItem.tenant_text}</Text>
+                                         <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.tenant_id)}><Text style={styles.textValue(theme)}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
                                     </View>
                                     <View style={styles.locationWrapp}>
                                         <Image resizeMode={'contain'} style={{width:20,height:20,marginRight:5,marginLeft:-5}} source={require('../../../assets/images/gps_dark.png')}></Image>
                                         <Text style={styles.textLabel(theme)}>
-                                            Kuravankonam, Trivandrum, Kerala
+                                            {property_currentItem.location}
                                         </Text>
                                     </View>
                                 </View>
@@ -71,9 +80,9 @@ class ViewPropertyTenant extends React.Component {
                                     <View>
                                         <View style={styles.payamountPeriod}>
                                             <Text style={styles.pageTitle(theme)}>INR 25,0000</Text>
-                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme)]}> Per month</Text>
+                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
-                                        <Text style={styles.payTimebld(theme)}>Next Rent due on 01 March 2020</Text>
+                                        <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>
                                     </View>
                                     <TouchableOpacity onPress={()=>this.PayRent()} style={styles.primaryBtn(theme)}>
                                         <Text style={styles.primaryBtnText(theme)}>PAY NOW</Text>
@@ -83,8 +92,8 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
-                                        <Text style={styles.textLabelXl(theme)}>ICICI Bank (XXXX-12342345)</Text>
-                                        <Text style={styles.textLabelXl(theme)}>Althara Branch, Trivandrum</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} {property_currentItem.bank_account_number}</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>
@@ -121,4 +130,23 @@ class ViewPropertyTenant extends React.Component {
     }
 }
 
-export default ViewPropertyTenant;
+
+const mapStateToProps = ({ properties }) => {
+    const {property_currentItem,property_loading} = properties
+    return { property_currentItem,property_loading };
+  };
+  
+  ViewPropertyTenant.propTypes = {
+    getPropertyById: PropTypes.func.isRequired,
+    property_currentItem: PropTypes.object,
+    property_loading: PropTypes.bool,
+  };
+  
+  ViewPropertyTenant.defaultProps = {
+    property_currentItem: {},
+    property_loading: false,
+  
+  };
+  
+  export default connect(mapStateToProps, {getPropertyById})(ViewPropertyTenant);
+  

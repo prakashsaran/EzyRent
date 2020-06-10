@@ -1,6 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimensions } from "react-native";
 import { theme } from "../../theme";
-
+import { normalize } from "../../components";
+const dvcHeight = Dimensions.get('window').height;
 export default StyleSheet.create({
     container: theme => ({
       flex: 1,
@@ -75,13 +76,13 @@ export default StyleSheet.create({
     tabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:22,
+      fontSize:normalize(22),
       paddingHorizontal:10,
     }),
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:18,
+      fontSize:normalize(18),
       paddingHorizontal:10,
       color:theme.colors.seconderyHeadingColor,
       textAlign:'center'
@@ -89,7 +90,7 @@ export default StyleSheet.create({
     Activetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:18,
+      fontSize:normalize(18),
       paddingHorizontal:10,
       color:theme.colors.secondry,
       textAlign:'center'
@@ -110,16 +111,29 @@ export default StyleSheet.create({
       borderColor:theme.colors.secondry,
       width:'50%',
     }),
+    itemNameAct:theme =>({
+      fontFamily:theme.typography.fontFamilyMontserratMedium,
+      fontWeight:theme.typography.fontWeightRegular,
+      fontSize:normalize(16),
+      width:'50%',
+      alignSelf:'center',
+      color:theme.colors.propertyHeading,
+      marginTop:theme.spacing.large,
+      paddingLeft:20,
+      //alignSelf:'flex-end',
+      //paddingRight:30,
+    }),
     properties:theme =>({
       backgroundColor:theme.colors.thirdBackgrounColor,
       width:'100%',
+      minHeight:dvcHeight-150,
       padding:10,
     }),
     loopitem:{
       width:'100%',
-      marginVertical:4,
+      marginVertical:5,
       borderRadius:9,
-      elevation: 6,
+      elevation: 3,
       shadowOffset: {
         height: 0,
         width: 0
@@ -141,7 +155,7 @@ export default StyleSheet.create({
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:16,
+      fontSize:normalize(16),
       width:'50%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
@@ -179,21 +193,21 @@ export default StyleSheet.create({
       paddingLeft:2,
       flexWrap:'wrap',
       width:'92%',
-      fontSize:13,
+      fontSize:normalize(13),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextValue: theme=>({
       color:theme.colors.primary,
       paddingHorizontal:1,
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
     statusTextWarnValue: theme=>({
       color:theme.colors.errorColor,
       paddingHorizontal:1,
-      fontSize:16,
+      fontSize:normalize(16),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -202,7 +216,7 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'88%',
-      fontSize:13,
+      fontSize:normalize(13),
       lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
@@ -212,7 +226,7 @@ export default StyleSheet.create({
       paddingHorizontal:5,
       flexWrap:'wrap',
       width:'100%',
-      fontSize:13,
+      fontSize:normalize(13),
       lineHeight:19,
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
@@ -222,7 +236,7 @@ export default StyleSheet.create({
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyOxygenBold,
       fontWeight:theme.typography.fontWeightSemiBold,
-      fontSize:14,
+      fontSize:normalize(14),
       float:'right',
     }),
     nextscreen:theme=>({

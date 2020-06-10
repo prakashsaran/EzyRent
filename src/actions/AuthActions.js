@@ -17,7 +17,17 @@ import {
   EZYRENT_AUTHENTICATION_ACCESS_TOKEN,
   EZYRENT_AUTHENTICATION_REFRESH_TOKEN,
   EZYRENT_AUTHENTICATION_TOKEN_TYPE,
+  EZYRENT_BUILDING_SET_LIST_VIEW,
+  EZYRENT_GET_PROPERTIES_AS_LANDLORD,
+  EZYRENT_GET_PROPERTIES_AS_TENANT,
+  EZYRENT_GET_SINGLE_PROPERTY,
+  EZYRENT_GET_BANK_ACCOUNTS,
+  EZYRENT_GET_RENTS_AS_LANDLORD,
+  EZYRENT_GET_RENTS_AS_TENANT,
+  EZYRENT_GET_NOTIFICATION,
+  EZYRENT_SET_CURRENT_TENANT_PROFILE,
 } from './types';
+
 import NavigationService from '../navigation/NavigationService';
 import {
   NAVIGATION_SIGN_UP_MOBILE_OTP_PATH,
@@ -34,18 +44,15 @@ export const signIn = customer => async (dispatch) => {
 	dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
 	try {
     //signin proccess
-    console.log("customer signIn",customer)
 
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(customer);
 
     // send request to server
     const response = await EzyRent.guest.userSignInVerify(formData);
-    console.log("response, signUp",response);
 
     if(response && response.data){
       const currentAc = response.data.user;
-      console.log("currentAc ==> is",currentAc)
       dispatch({ type: EZYRENT_SIGN_IN_SUCCESS, payload: currentAc });
       dispatch({ type: EZYRENT_SIGN_UP_SETUP_COMPLETE_ACCOUNT, payload: response.data });
       EzyRent.setCurrentAccount(currentAc);
@@ -78,14 +85,11 @@ export const signUp = (mobiledata,data) => async (dispatch) => {
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
 
-    console.log("post is signUp",userId,formData);
 
     // send request to server
     const response = await EzyRent.guest.setupAccountComplete(userId,formData);
-    console.log("response, signUp",response)
     if(response && response.data){
       const currentAc = response.data.user;
-      console.log("currentAc ==> is",currentAc)
       dispatch({ type: EZYRENT_SIGN_UP_SUCCESS, payload: currentAc });
       dispatch({ type: EZYRENT_SIGN_UP_SETUP_COMPLETE_ACCOUNT, payload: response.data });
       EzyRent.setCurrentAccount(currentAc);
@@ -119,7 +123,6 @@ export const signupMobile = (mobilenumber,dialcode='0091') => async (dispatch) =
     const formData = formUrlencodedData(data);
     // response otp from sms server
     const response = await EzyRent.guest.setupMobile(formData);
-    console.log("signupMobile response",response)
     if(response && response.data){
       const dataToProps = {id:response.data.id,status:response.data.status,number:mobilenumber,dialcode:dialcode,otp:null}
        dispatch({ type: EZYRENT_SIGN_UP_MOBILE_NUMBER, payload: dataToProps });
@@ -148,14 +151,12 @@ export const signupMobile = (mobilenumber,dialcode='0091') => async (dispatch) =
 export const resendMobileOtp = (user,type) => async (dispatch) => {
   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
   try {
-    console.log("user ===",user);
     // send otp proccess
       // form data
       const data = {
         "id": user.id,
         "type": type,
       }
-      console.log(" resendMobileOtp data",data)
       // form data convert to application/x-www-form-urlencoded
       const formData = formUrlencodedData(data);
 
@@ -188,7 +189,6 @@ export const signupMobileOtp = (mobiledata,mobile_otp) => async (dispatch) => {
 
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
-    console.log("pre entry data",mobiledata)
     const response = await EzyRent.guest.setupMobileOtp(userId,formData);
     if(response){
       mobiledata.status =response.data.status;
@@ -225,7 +225,6 @@ export const signupMail = (mobiledata,email) => async (dispatch) => {
 
     // response otp from sms server
     const response = await EzyRent.guest.setupEmail(formData);
-    console.log("response signupMail",response)
     if(response){
       dispatch({ type: EZYRENT_SIGN_UP_EMAIL_ID, payload: {email:email} });
      NavigationService.navigate(NAVIGATION_SIGN_UP_MAIL_OTP_PATH);
@@ -252,7 +251,6 @@ export const signupMailOtp = (mobiledata,maildata,email_otp) => async (dispatch)
     // user id
     const userId = mobiledata.id;
 
-    console.log("mobiledata signupMailOtp =>",mobiledata);
     // form data
     const data = {email_otp}
 
@@ -268,7 +266,6 @@ export const signupMailOtp = (mobiledata,maildata,email_otp) => async (dispatch)
       dispatch({ type: EZYRENT_SIGN_UP_EMAIL_ID, payload: maildata });
       NavigationService.navigate(NAVIGATION_SIGN_UP_PROFILE_PATH);
     }
-    console.log("response signupMailOtp=>",response);
     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   } catch (e) {
     console.error(e)
@@ -300,7 +297,6 @@ export const signinMail = (email) => async (dispatch) => {
     const response = await EzyRent.guest.userSignIn(formData);
     if(response && response.data && response.data.type=="V"){
       const propData = {email,id:response.data.id,type:response.data.type,otp:null};
-      console.log("propData is",propData)
       dispatch({ type: EZYRENT_SIGN_IN_EMAIL_ID, payload: propData });
       NavigationService.navigate(NAVIGATION_SIGN_IN_MAIL_OTP_PATH);
     }
@@ -327,7 +323,6 @@ export const signinMobile = (mobile,mobile_country_code="0091") => async (dispat
     const response = await EzyRent.guest.userSignIn(formData);
     if(response && response.data && response.data.type=="V"){
       const propData = {number:mobile,dialcode:mobile_country_code,id:response.data.id,type:response.data.type,otp:null};
-      console.log("propData is",propData)
       dispatch({ type: EZYRENT_SIGN_IN_MOBILE_NUMBER, payload: propData });
       NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_OTP_PATH);
     }
@@ -345,7 +340,6 @@ export const signinMobile = (mobile,mobile_country_code="0091") => async (dispat
 export const resendMailOtp = (userdata,email) => async (dispatch) => {
   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
   try {
-    console.log("userdata is",userdata)
     //form data
     const data = {"id":userdata.id}
 
@@ -353,7 +347,6 @@ export const resendMailOtp = (userdata,email) => async (dispatch) => {
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
 
-    console.log("data resendMailOtp",formData)
 
     // response otp from sms server
     const response = await EzyRent.guest.setupResendMailOtp(formData);
@@ -419,7 +412,6 @@ export const setCurrentCustomer = (userData) => async (dispatch, getState) => {
 
 
 export const isAuth  = (customer,access_token,navigation) => async (dispatch) =>{
-  console.log("access_token ",access_token)
   if(customer){
     const ctmrObj = Object.keys(customer).length;
     if(access_token && ctmrObj ){
@@ -430,6 +422,15 @@ export const isAuth  = (customer,access_token,navigation) => async (dispatch) =>
 
 export const logout = () => async (dispatch) => {
   try {
+    dispatch({ type: EZYRENT_BUILDING_SET_LIST_VIEW, payload: [] });
+    dispatch({ type: EZYRENT_GET_PROPERTIES_AS_LANDLORD, payload: [] });
+    dispatch({ type: EZYRENT_GET_PROPERTIES_AS_TENANT, payload: [] });
+    dispatch({ type: EZYRENT_GET_SINGLE_PROPERTY, payload: {} });
+    dispatch({ type: EZYRENT_GET_BANK_ACCOUNTS, payload: [] });
+    dispatch({ type: EZYRENT_GET_RENTS_AS_LANDLORD, payload: [] });
+    dispatch({ type: EZYRENT_GET_RENTS_AS_TENANT, payload: [] });
+    dispatch({ type: EZYRENT_GET_NOTIFICATION, payload: [] });
+    dispatch({ type: EZYRENT_SET_CURRENT_TENANT_PROFILE, payload: {} });
     const keys = await AsyncStorage.getAllKeys();
     await AsyncStorage.multiRemove(keys);
     NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);

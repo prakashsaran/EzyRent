@@ -9,18 +9,22 @@ import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
 import { PickerSelect,DropDownHolder } from '../../../components';
+import {editBank} from '../../../actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class EditBankAccount extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
     super();
     this.state ={
-      nameofBank:"Dubai Finance Bank",
-      accountNumber:"25768XXXX3457XX",
-      crmAcNumber:"25768XXXX3457XX",
-      acHolderName:"John Peter",
+      bankId:undefined,
+      nameofBank:undefined,
+      accountNumber:undefined,
+      crmAcNumber:undefined,
+      acHolderName:undefined,
       typeOfAc:null,
-      ifscCode:"UBIN0555380",
+      ifscCode:undefined,
       additionalDetails:undefined,
     }
     StatusBar.setBarStyle("light-content");
@@ -32,6 +36,21 @@ class EditBankAccount extends React.Component {
     this._ifscCodeEntry = undefined;
     this._additionalDetailsEntry = undefined;
   }
+  UNSAFE_componentWillMount(){
+    const { navigation } = this.props
+    const currentAccount = navigation.getParam('account');
+    this.setState({
+      bankId:currentAccount.id,
+      nameofBank:currentAccount.name,
+      accountNumber:currentAccount.account_no,
+      crmAcNumber:currentAccount.account_no,
+      acHolderName:currentAccount.account_holder_name,
+      typeOfAc:currentAccount.account_type,
+      ifscCode:currentAccount.ifsc_code,
+      additionalDetails:currentAccount.additional_details,
+    })
+  }
+
   validateInput(input) {
     if (input === undefined)
         return false
@@ -50,20 +69,20 @@ class EditBankAccount extends React.Component {
     });
     return valid
   }
-  componentDidMount(){
-    this.setState({typeOfAc:'2'})
-  }
   submitForm(){
-    const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode} = this.state
+    const {editBank} = this.props;
+      const {bankId,nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode,additionalDetails} = this.state
     const formIsValid =
             this.validateAndSetAttribute(nameofBank, this._nameofBankEntry) &
             this.validateAndSetAttribute(accountNumber, this._accountNumberEntry) &
             this.validateAndSetAttribute(crmAcNumber, this._crmAcNumberEntry) &
             this.validateAndSetAttribute(acHolderName, this._acHolderNameEntry) &
-            this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
+            //this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
             this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
     if(formIsValid){
-      NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
+      const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails,status:"A"}
+      editBank(bankId,formdata);
+      //NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
     }else{
       DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
     }
@@ -109,24 +128,44 @@ class EditBankAccount extends React.Component {
 
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Name of Bank *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._nameofBankEntry)} onBlur={()=>this.onBlurInput(this._nameofBankEntry)} ref={(ref) => this._nameofBankEntry = ref} onChangeText={(nameofBank) =>{this.setState({nameofBank})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={nameofBank} placeholder={'Name of Bank'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._nameofBankEntry)} onBlur={()=>this.onBlurInput(this._nameofBankEntry)} ref={(ref) => this._nameofBankEntry = ref} onChangeText={(nameofBank) =>{this.setState({nameofBank})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={nameofBank}
+                               placeholder={'Name of Bank'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._accountNumberEntry.focus() }}
+                              />
                           </View>
 
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Account Number *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._accountNumberEntry)} onBlur={()=>this.onBlurInput(this._accountNumberEntry)} secureTextEntry={true} ref={(ref) => this._accountNumberEntry = ref} onChangeText={(accountNumber) =>{this.setState({accountNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={accountNumber} placeholder={'Account Number'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._accountNumberEntry)} onBlur={()=>this.onBlurInput(this._accountNumberEntry)} secureTextEntry={true} ref={(ref) => this._accountNumberEntry = ref} onChangeText={(accountNumber) =>{this.setState({accountNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={accountNumber}
+                               placeholder={'Account Number'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._crmAcNumberEntry.focus() }}
+                               />
                           </View>
 
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Confirm Account Number *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._crmAcNumberEntry)} onBlur={()=>this.onBlurInput(this._crmAcNumberEntry)} ref={(ref) => this._crmAcNumberEntry = ref} onChangeText={(crmAcNumber) =>{this.setState({crmAcNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={crmAcNumber} placeholder={'Confirm Account Number'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._crmAcNumberEntry)} onBlur={()=>this.onBlurInput(this._crmAcNumberEntry)} ref={(ref) => this._crmAcNumberEntry = ref} onChangeText={(crmAcNumber) =>{this.setState({crmAcNumber})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={crmAcNumber}
+                               placeholder={'Confirm Account Number'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._acHolderNameEntry.focus() }}
+                               />
                           </View>
 
                           <View style={styles.fieldWrapp(theme)}>
                              <Text style={theme.typography.tooltip}>Account Holder Name *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._acHolderNameEntry)} onBlur={()=>this.onBlurInput(this._acHolderNameEntry)} ref={(ref) => this._acHolderNameEntry = ref} onChangeText={(acHolderName) =>{this.setState({acHolderName})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={acHolderName} placeholder={'Account Holder Name'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._acHolderNameEntry)} onBlur={()=>this.onBlurInput(this._acHolderNameEntry)} ref={(ref) => this._acHolderNameEntry = ref} onChangeText={(acHolderName) =>{this.setState({acHolderName})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={acHolderName} placeholder={'Account Holder Name'}
+                                returnKeyLabel={"next"}
+                                returnKeyType={"next"}
+                                onSubmitEditing={() => { this._ifscCodeEntry.focus() }}
+                              />
                           </View>
 
+                          {/*
                           <View style={[styles.fieldWrapp(theme),styles.fieldWrappAccount(theme)]} ref={(ref) => this._typeOfAcEntry = ref} >
                               <RNPickerSelect
                                   placeholder={{
@@ -150,10 +189,16 @@ class EditBankAccount extends React.Component {
                                   }}
                                 />
                           </View>
+                        */}
 
 
                           <View style={styles.fieldWrapp(theme)}>
-                              <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)}  ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode} placeholder={'IFSC Code/Sort Code'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)}  ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode}
+                               placeholder={'IFSC Code/Sort Code'}
+                               returnKeyLabel={"next"}
+                               returnKeyType={"next"}
+                               onSubmitEditing={() => { this._additionalDetailsEntry.focus() }}
+                               />
                           </View>
 
 
@@ -180,7 +225,6 @@ class EditBankAccount extends React.Component {
   }
 
 }
-export default EditBankAccount;
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 18,
@@ -205,3 +249,24 @@ const pickerSelectStyles = StyleSheet.create({
     right: 0,
   },
 });
+
+const mapStateToProps = ({ bankAccount }) => {
+  const { error, success,loading } = bankAccount;
+
+  return { error, success,loading  };
+};
+
+EditBankAccount.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.oneOfType(PropTypes.string, null),
+  success: PropTypes.oneOfType(PropTypes.string, null),
+  addBank: PropTypes.func,
+};
+
+EditBankAccount.defaultProps = {
+  error: null,
+  success: null,
+  loading: false,
+};
+
+export default connect(mapStateToProps, {editBank})(EditBankAccount);

@@ -14,6 +14,8 @@ import {
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {logout,getCountryCodeFormat} from '../../actions';
+import {EzyRent} from '../../ezyrent';
 
 class MoreInit extends React.Component {
   static contextType = ThemeContext;
@@ -24,27 +26,22 @@ class MoreInit extends React.Component {
     }
     StatusBar.setBarStyle("light-content");
   }
-  isLessMarshmallow(){
-    const dvcHeight = Dimensions.get('window').height;
-    if(dvcHeight < 600){
-      return 40;
-    }
-    return 0;
-  }
+
   componentDidMount(){
     const {customer,status}=this.props
+    console.log("current loged in customer",customer)
     if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
+      if(customer.hasOwnProperty("user_type")){
+        if(customer.user_type){
+          this.setState({AccountType:customer.user_type});
         } else{
-          this.setState({AccountType:'new'});
+          this.setState({AccountType:'U'});
         }
       } else{
-        this.setState({AccountType:"new"});
+        this.setState({AccountType:"U"});
       }
     } else{
-      this.setState({AccountType:"new"});
+      this.setState({AccountType:"U"});
     }
   }
  
@@ -65,9 +62,19 @@ class MoreInit extends React.Component {
     NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
   }
   goToLogout(){
-    NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);
+    const {logout} = this.props;
+    logout();
   }
+  isLessMarshmallow(){
+    const dvcHeight = Dimensions.get('window').height;
+    if(dvcHeight < 600){
+      return 40;
+    }
+    return 0;
+  }
+
   render(){
+    const {customer} = this.props
     const theme = this.context;
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../assets/images/dashboard_bg.png')}>
@@ -79,18 +86,19 @@ class MoreInit extends React.Component {
                    <View style={[theme.typography.rectView2,styles.rectView2]}>
                       <View style={styles.ImageWrap}>
                         <View style={styles.ImageLeftWrap}>
-                          <Image style={styles.imageLeft} source={require('../../assets/images/tever-thomas.png')}></Image>
+                          {/* <Image style={styles.imageLeft} source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}></Image> */}
+                          <ImageBackground style={styles.profilebg} imageStyle={styles.profilePik} resizeMode={'cover'} 
+                          //source={require('../../assets/images/sample/james.png')}
+                          source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                          ></ImageBackground>
                         </View>
                         <View style={styles.ImageWrapRight}>
-                          <Text style={styles.textHeading(theme)}>Tever Thomas</Text>
+                          <Text style={styles.textHeading(theme)}>{customer.full_name}</Text>
                           <Text style={styles.textSub(theme)}>
-                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/gps_dark.png')}></Image> Dubai, UAE
+                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}
                           </Text>
                           <Text style={styles.textSub(theme)}>
-                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> +97 79234762234
-                          </Text>
-                          <Text style={styles.textSub(theme)}>
-                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/email.png')}></Image> trevor.thomas@yahoo.com
+                            <Image style={styles.gps_dark_icon} source={require('../../assets/images/email.png')}></Image> {customer.email}
                           </Text>
                         </View>
                       </View>
@@ -125,7 +133,7 @@ class MoreInit extends React.Component {
                               <Image style={styles.More_icon} source={require('../../assets/images/my-profile.png')}></Image>
                               <TouchableOpacity onPress={()=>this.goToMyProfile()} style={styles.MoreLinks}>
                                 <Text style={styles.MoreLinksItem(theme)}>My Profile</Text>
-                                <Text style={styles.MoreLinksItemSub(theme)}>Manage your Profile Details</Text>
+                                <Text style={styles.MoreLinksItemSub(theme)}>Manage your profile details</Text>
                               </TouchableOpacity>
                             </View>
                             <View style={styles.MoreLinkswrap}>
@@ -147,7 +155,7 @@ class MoreInit extends React.Component {
 
   renderMyTenant(){
     const {AccountType} = this.state
-    if(AccountType=="lessee" || AccountType=="landlord"){
+    if(AccountType=="B" || AccountType=="L"){
       return(
         <View style={styles.MoreLinkswrap}>
           <Image style={styles.More_icon} source={require('../../assets/images/my-tenants.png')}></Image>
@@ -163,7 +171,7 @@ class MoreInit extends React.Component {
 
   renderMyLandlord(){
     const {AccountType} = this.state
-    if(AccountType=="lessee" || AccountType=="tenant"){
+    if(AccountType=="B" || AccountType=="T"){
       return(
         <View style={styles.MoreLinkswrap}>
           <Image style={styles.More_icon} source={require('../../assets/images/my-leaderboard.png')}></Image>
@@ -180,6 +188,7 @@ class MoreInit extends React.Component {
 
 }
 
+
 const mapStateToProps = ({ account }) => {
   const { error, success, loading,status,customer } = account;
 
@@ -187,6 +196,7 @@ const mapStateToProps = ({ account }) => {
 };
 
 MoreInit.propTypes = {
+  logout:PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
@@ -202,4 +212,4 @@ MoreInit.defaultProps = {
   customer:null,
 };
 
-export default connect(mapStateToProps, {})(MoreInit);
+export default connect(mapStateToProps, {logout})(MoreInit);

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { normalize } from "../../components";
 
 export default StyleSheet.create({
     container: {
@@ -27,14 +28,14 @@ export default StyleSheet.create({
     },
     textHeading: theme =>({
       color:theme.colors.secondry,
-      fontSize:18,
+      fontSize:normalize(18),
       textTransform:'uppercase',
       fontWeight:'bold',
       paddingBottom:6,
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
-      fontSize:14,
+      fontSize:normalize(14),
       color:theme.colors.descriptionColor,
     }),
     gps_dark_icon:{
@@ -51,7 +52,7 @@ export default StyleSheet.create({
       overflow:'hidden',
     },
     morelinksmall:{
-      fontSize:14,
+      fontSize:normalize(14),
     },
     shadow:{
       backgroundColor: "#fff",
@@ -92,13 +93,13 @@ export default StyleSheet.create({
     },
     MoreLinksItem: theme =>({
       color:'#000',
-      fontSize:14,
+      fontSize:normalize(14),
       fontFamily:theme.typography.fontFamilyMontserratBold,
       fontWeight:theme.typography.fontWeightSemiBold,
     }),
     MoreLinksItemSub: theme =>({
       color:theme.colors.descriptionColor,
-      fontSize:14,
+      fontSize:normalize(14),
       paddingLeft:7,
       paddingTop:0,
       fontFamily:theme.typography.fontFamilyMontserratMedium,

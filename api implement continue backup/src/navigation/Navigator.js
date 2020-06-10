@@ -31,6 +31,7 @@ import DashboardInit from '../views/dashboard';
 // PROPERTIES AND TENANTS SCREEN
 import PropertiesTenants from '../views/propertiestenants';
 import AddPropertyTenant from '../views/properties/add';
+import EditProperty from '../views/properties/edit';
 import ViewPropertyTenant from '../views/properties/viewtenant';
 import ViewPropertyLandlord from '../views/properties/viewlandlord'
 import ViewPropertyDetail from '../views/properties/viewdetail';
@@ -52,6 +53,7 @@ import MyBankaccount from '../views/bankaccount/init';
 import MyProfile from '../views/myprofile';
 import AddBankAccount from '../views/bankaccount/add';
 import EditBankAccount from '../views/bankaccount/edit';
+import BankVerification from '../views/bankaccount/verification';
 import EditMyProfile from '../views/editprofile';
 // MORE -> Transaction SCREENS
 import TransactionSuccessful from '../views/transaction/success';
@@ -96,6 +98,7 @@ import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
   NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_EDIT_PROPERTIES_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH,
   NAVIGATION_RENT_INIT_VIEW_PATH,
@@ -104,6 +107,7 @@ import {
   NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
   NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH,
+  NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH,
   NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH,
   NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
@@ -159,6 +163,7 @@ const DashboardStack = createStackNavigator({
 const PropertiesTenantsStack = createStackNavigator({
   [NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH]: PropertiesTenants,
   [NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH]: AddPropertyTenant,
+  [NAVIGATION_EDIT_PROPERTIES_VIEW_PATH]: EditProperty,
   [NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH]: ViewPropertyDetail,
   [NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH]: ViewPropertyTenant,
   [NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH]: ViewPropertyLandlord,
@@ -194,6 +199,7 @@ const MoreStack = createStackNavigator({
   [NAVIGATION_MORE_MY_PROFILE_VIEW_PATH]: MyProfile,
   [NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH]: AddBankAccount,
   [NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH]: EditBankAccount,
+  [NAVIGATION_MORE_VERIFICATION_BANK_ACCOUNT_VIEW_PATH]: BankVerification,
   [NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH]: EditMyProfile,
 }, {
   initialRouteName: NAVIGATION_MORE_INIT_VIEW_PATH,
@@ -214,7 +220,7 @@ const MainAppNavigator = createBottomTabNavigator(
     [NAVIGATION_PROPERTIES_TENANTS_STACK_PATH]: {
       screen: PropertiesTenantsStack,
       navigationOptions: () => ({
-        tabBarLabel: 'Properties/Tenants',
+        tabBarLabel: 'Properties',
         headerTitle:'Properties/Tenants',
         tabBarIcon: ({ focused }) => <Image resizeMode={'contain'} style={imageStyle} source={focused ? imagePropertyActive : imagePropertyInActive} />,
       }),

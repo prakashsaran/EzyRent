@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
+import { normalize } from "../../../components";
+
 
 export default StyleSheet.create({
     container: {
@@ -8,13 +10,13 @@ export default StyleSheet.create({
     titleWrapper:{
       width:'90%',
       alignSelf:'center',
-      marginVertical:20,
+      marginVertical:normalize(20),
       flexDirection:'row',
       alignItems:'center',
     },
     rectWrapp:{
       backgroundColor:theme.colors.lightBackgrountColor,
-      marginTop:80,
+      marginTop:normalize(80),
       minHeight:theme.dimens.defaultScreenMinHeight,
     },
     backscreen:{
@@ -25,14 +27,14 @@ export default StyleSheet.create({
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.fontFamilyOxygenBold,
-      fontSize:14,
+      fontSize:normalize(14),
       //fontWeight:theme.typography.fontWeightBold,
       width:'100%',
       textAlign:'left',
     }),
     fieldWrapp:theme=>({
       width:'100%',
-      marginTop:15,
+      marginTop:normalize(15),
       borderWidth:1,
       borderColor:'transparent',
     }),
@@ -46,7 +48,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:0,
       padding:5,
@@ -57,7 +59,7 @@ export default StyleSheet.create({
       borderBottomWidth:1,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:theme.spacing.small,
       paddingVertical:5,
@@ -79,7 +81,7 @@ export default StyleSheet.create({
       //borderBottomWidth:1,
       color:theme.colors.primBtnTextColor,
       fontFamily:theme.typography.primaryFont,
-      fontSize:22,
+      fontSize:normalize(22),
       fontWeight:theme.typography.fontWeightSemiBold,
       textDecoration:'none',
     }),

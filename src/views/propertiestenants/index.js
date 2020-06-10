@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FloatingAction } from "react-native-floating-action";
 import NavigationService from '../../navigation/NavigationService';
@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { EzyRent } from '../../ezyrent';
-import {  getPropertiesForLandlord, getPropertiesForTenant } from '../../actions';
+import {  getPropertiesForLandlord, getPropertiesForTenant,getPropertyById,getCountryCodeFormat,tenantSubmissionOnProperty } from '../../actions';
 class PropertiesTenants extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -40,9 +40,27 @@ class PropertiesTenants extends React.Component {
   /* ===================== START COMMON FUNCTION======================*/
   /* ================================================================*/
 
+  UNSAFE_componentWillReceiveProps(nextProps){
+    const {customer,getPropertiesForLandlord} = this.props;
+    const {searchQuery} = this.state
+    if(nextProps.customer!==customer){
+      const updatedUser = nextProps.customer;
+        if(updatedUser.hasOwnProperty("user_type")){
+          if(updatedUser.user_type){
+            this.setState({AccountType:updatedUser.user_type});
+          } else{
+            this.setState({AccountType:'U'});
+          }
+          this.reRenderActiveTab(updatedUser.user_type);
+        } else{
+          this.setState({AccountType:"U"});
+        }
+        getPropertiesForLandlord(searchQuery,0,10);
+    }
+  }
+
   UNSAFE_componentWillMount(){
     const {customer,status}=this.props
-    console.log("UNSAFE_componentWillMount customer.user_type",customer.user_type)
     this.loadUserDataAccordingAccountType(customer)
     const properties = SampleData.getPropeties() || [];
     this.setState({payingRent:properties,collectingRent:properties})
@@ -61,11 +79,11 @@ class PropertiesTenants extends React.Component {
     }
 
   }
-
+  
   /**
    * @name loadUserDataAccordingAccountType
    * @description this function load data according user type
-   * @param {JSON} customer 
+   * @param {JSON} customer
    */
   loadUserDataAccordingAccountType(customer){
     const {getPropertiesForLandlord,getPropertiesForTenant}=this.props
@@ -90,7 +108,17 @@ class PropertiesTenants extends React.Component {
 
   componentDidMount(){
     const {AccountType} = this.state
-    //console.log("AccountType =>",AccountType)
+    if(AccountType=="U"){
+      this.setState({activeTab:1})
+    } else if(AccountType=="L"){
+      this.setState({activeTab:2})
+    } else if(AccountType=="B"){
+      this.setState({activeTab:1})
+    } else{
+      this.setState({activeTab:1})
+    }
+  }
+  reRenderActiveTab(AccountType){
     if(AccountType=="U"){
       this.setState({activeTab:1})
     } else if(AccountType=="L"){
@@ -121,11 +149,11 @@ class PropertiesTenants extends React.Component {
       console.log(e)
     }
   };
-  ProPertyDetailTenant(){
-    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH);
+  ProPertyDetailTenant(property){
+    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,{property});
   }
-  ProPertyDetailLandlord(){
-    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH);
+  ProPertyDetailLandlord(property){
+    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH,{property});
   }
   /* *
   * name getDateFormat
@@ -157,14 +185,15 @@ class PropertiesTenants extends React.Component {
   PayRent(){
     NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
   }
-  goToPropertyDetail(){
+  goToPropertyDetail(property){
     this.setState({visiblemodal:false});
-    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH)
+    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,{property})
   }
-  goToPropertyOwnerDetail(){
+goToPropertyOwnerDetail(landlord_id){
     this.setState({visiblemodal:false});
-    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH)
+    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
   }
+
   renderTitile(){
     const {AccountType} = this.state
     if(AccountType=="T"){
@@ -177,6 +206,53 @@ class PropertiesTenants extends React.Component {
       return "Properties I am Paying Rent";
     }
   }
+
+  reviewProperty(item){
+    const {getPropertyById} = this.props
+    getPropertyById(item.id);
+    this.setState({visiblemodal:true})
+  }
+
+  AcceptProperty(item){
+    const {tenantSubmissionOnProperty} = this.props
+    tenantSubmissionOnProperty(item.id,"A");
+    this.setState({visiblemodal:false})
+  }
+
+  RejectProperty(item){
+    const {tenantSubmissionOnProperty} = this.props
+    tenantSubmissionOnProperty(item.id,"R");
+    this.setState({visiblemodal:false})
+  }
+
+  getPopupDateFormat(datestring){
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const dateFull = new Date(datestring);
+    return dateFull.getDate()+" "+ monthNames[dateFull.getMonth()]+" "+dateFull.getFullYear();
+  }
+
+  getPopupTimeFormat(datestring){
+
+    const dateFull = new Date(datestring);
+    const mpam = (dateFull.getHours() >= 12) ? "PM" : "AM";
+    return dateFull.getUTCHours()+":"+dateFull.getMinutes()+ ""+mpam;
+  }
+
+  onSearchProperties(searchQuery){
+    const {getPropertiesForLandlord,getPropertiesForTenant}=this.props
+    const {activeTab} = this.state
+    if(activeTab==1){
+      getPropertiesForTenant(searchQuery,0,10);
+    } else {
+      getPropertiesForLandlord(searchQuery,0,10);
+    }
+    
+   // this.setState({searchQuery})
+  }
+
   /* ================================================================*/
   /* ===================== END COMMON FUNCTION======================*/
   /* ================================================================*/
@@ -207,7 +283,7 @@ class PropertiesTenants extends React.Component {
         </View>
         {visibleSearch && <View style={styles.searchWrap}>
             <View style={styles.inputStyleStack(theme)}>
-              <TextInput onChangeText={(searchQuery)=>this.setState({searchQuery})} placeholder="Search" value={searchQuery} style={styles.searchinputStyle}></TextInput>
+              <TextInput onChangeText={(searchQuery)=>this.onSearchProperties(searchQuery)} placeholder="Search" value={searchQuery} style={styles.searchinputStyle}></TextInput>
             </View>
         </View>}
       </View>
@@ -268,17 +344,22 @@ class PropertiesTenants extends React.Component {
   renderPayingPropertiest(){
     const {propertiesTenant} = this.props
     if(propertiesTenant.items.length >0 ){
-     return <FlatList 
-        data={propertiesTenant.items}
-        renderItem={({ item,index }) => this.renderPayingItems(item,index)}
-        keyExtractor={item => item.id}
-      />
-    }
-    /* return(
+     return (
       <View style={styles.properties(theme)}>
-        {this.renderPayingItems()}
+        <FlatList
+          style={{minHeight:Dimensions.get('window').height,paddingHorizontal:1}}
+          data={propertiesTenant.items}
+          renderItem={({ item,index }) => this.renderPayingItems(item,index)}
+          keyExtractor={item => item.id}
+        />
       </View>
-    ) */
+     )
+    }
+    return(
+      <View style={styles.properties(theme)}>
+        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
+      </View>
+    )
   }
 
   renderPayingItems(item,indx){
@@ -287,7 +368,7 @@ class PropertiesTenants extends React.Component {
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
             <Text style={styles.itemName(theme)}>{item.house_number} {'\n'} {item.building_name}</Text>
-               <TouchableOpacity onPress={()=>this.ProPertyDetailTenant()} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
+               <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
                     {item.process=="due"?
@@ -296,12 +377,12 @@ class PropertiesTenants extends React.Component {
                   </View>
                   <View style={styles.propInforowright}>
                     <View style={styles.propInfoAttrb}>
-                      <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/map_ellipse.png')}></Image>
-                      <Text style={styles.propItemattrLocation(theme)}>{item.location}</Text>
+                      <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/user_ellipse.png')}></Image>
+                      <Text style={styles.propItemattrLocation(theme)}>Not Available</Text>
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
-                      {item.process=="A"?
+                      {item.property_status=="A"?
                       <Text style={styles.propItemattrvalue(theme)}>Awaiting your Approval</Text>
                       :
                       <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
@@ -315,7 +396,7 @@ class PropertiesTenants extends React.Component {
                       </View>}
                       {item.property_status=="A"&&
                       <View style={styles.waitingWrap}>
-                        <TouchableOpacity onPress={()=>this.setState({visiblemodal:true})}>
+                        <TouchableOpacity onPress={()=>this.reviewProperty(item)}>
                           <Text style={styles.marktext(theme)}>REVIEW TOTAL AMOUNT <Image style={styles.right_arrow} source={require('../../assets/images/arrow_next.png')}></Image></Text>
                         </TouchableOpacity>
                       </View>
@@ -327,17 +408,13 @@ class PropertiesTenants extends React.Component {
         </View>
       )
   }
-  renderCollectingItems(){
-    const {payingRent} = this.state
-    const {propertiesLandlord} = this.props;
-    return propertiesLandlord.items.map((item,inx)=>{
-      console.log("propertiesLandlord looping",item)
+  renderCollectingItems(item,inx){
       return (
         <View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
               <Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text>
-               <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
+               <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
                     {item.process=="due"?
@@ -346,15 +423,15 @@ class PropertiesTenants extends React.Component {
                   </View>
                   <View style={styles.propInforowright}>
                     <View style={styles.propInfoAttrb}>
-                      <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/map_ellipse.png')}></Image>
-                      <Text style={styles.propItemattrLocation(theme)}>{item.location}</Text>
+                      <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/user_ellipse.png')}></Image>
+                      <Text style={styles.propItemattrLocation(theme)}>Not Available</Text>
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
-                      {item.awaiting_text&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
+                      {item.property_status =="A"&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
                       {item.process=="reject"&&<Text style={styles.propItemattrvalueError(theme)}>Contract Rejected by Tenant</Text>}
-                      {(!item.awaiting_text && item.process!="reject") &&
-                        <Text style={item.process=="due"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.amount,0)} due on {this.getDateFormat(item.paying_date)}</Text>
+                      {item.property_status =="O" &&
+                        <Text style={item.process=="due"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
                       }
                     </View>
                     {item.process=="due"?
@@ -376,19 +453,31 @@ class PropertiesTenants extends React.Component {
           </ImageBackground>
         </View>
       )
-    })
   }
   fasterImageRender(item){
-    console.log("loop itm in side fasterImageRender",item)
     if(!item.property_image || item.property_image==null || item.property_image==''){
       return require('../../assets/images/sample/sample_image_1.png');
     }
     return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`};
   }
   renderCollectingPropertiest(){
+    const {propertiesLandlord} = this.props
+    
+    if(propertiesLandlord.items.length >0 ){
+     return (
+      <View style={styles.properties(theme)}>
+        <FlatList
+          style={{minHeight:Dimensions.get('window').height,paddingHorizontal:1}}
+          data={propertiesLandlord.items}
+          renderItem={({ item,index }) => this.renderCollectingItems(item,index)}
+          keyExtractor={item => item.id}
+        />
+      </View>
+     )
+    }
     return(
       <View style={styles.properties(theme)}>
-        {this.renderCollectingItems()}
+        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
       </View>
     )
   }
@@ -402,7 +491,20 @@ class PropertiesTenants extends React.Component {
    )
   }
 
-  rejectConfirm(){
+  descriptionBankCharge(bankCharges){
+   return(
+    <View>
+      <Text style={styles.payTime(theme)}>{bankCharges.net_banking.amount}</Text>
+      <Text style={styles.timePeriodExtra(theme)}>INR {bankCharges.net_banking.rate} on using Net Banking/UPI</Text>
+      <Text style={styles.payTime(theme)}>{bankCharges.debit_card.amount}</Text>
+      <Text style={styles.timePeriodExtra(theme)}>{bankCharges.debit_card.rate}% on using Debit Card (1.25% of A includes 18% GST)</Text>
+      <Text style={styles.payTime(theme)}>{bankCharges.credit_card.amount}</Text>
+      <Text style={styles.timePeriodExtra(theme)}>{bankCharges.credit_card.rate}% on using Credit Card (1.95% of A, includes 18% GST)</Text>
+    </View>
+   )
+  }
+
+  rejectConfirm(property_currentItem){
     Alert.alert(
       "",
       "Are you sure to reject?",
@@ -412,7 +514,7 @@ class PropertiesTenants extends React.Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "OK", onPress: () => this.setState({visiblemodal:false}) }
+        { text: "OK", onPress: () => this.RejectProperty(property_currentItem) }
       ],
       { cancelable: false }
     );
@@ -420,64 +522,81 @@ class PropertiesTenants extends React.Component {
 
 renderModelView()
     {
+      const {property_currentItem,property_loading} = this.props
+      if(!property_loading && !Object.keys(property_currentItem).length){
+        return null;
+      }
+      
       return(
         <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
-            <View style={styles.PopupContainer}>
-            <Image style={styles.congrats_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/congrats.png')}/>
-              <Text style={styles.congrats_head}>Congrats!</Text>
-              <ScrollView style={{height:theme.dimens.popupHeight}}>
-                <View style={styles.congrats_content(theme)}>
-                  <Text style={styles.light_color}>You have been added as Tenant of </Text>
-                  <TouchableOpacity onPress={()=>this.goToPropertyDetail()}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>House No. 7A</Text></TouchableOpacity>
-                  <Text style={styles.light_color}> in Building SFS Merrie Pink, Kuravankonam by Landlord  </Text>
-                  <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail()}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>Red Rows Properties</Text></TouchableOpacity>
-                  <Text style={[styles.light_color,{fontWeight:'bold'}]}> (+91-976242342)</Text>
-                </View>
-                <View style={styles.congrats_content(theme)}>
-                  <Text style={styles.light_color}>Please confirm the Total Amount Payable monthly</Text>
-                </View>
-               <Image style={styles.dash_bar_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/dash-bar-line.png')}/>
-                <View style={styles.bankacInfo}>
-                    <Text style={styles.banktitle(theme)}>Added Date</Text>
-                </View>
-                <View style={styles.bankacInfo}>
-                    <Text style={styles.textLabelXl(theme)}>15 March 2020</Text><Text style={styles.textLabelXl(theme)}>|    05:30PM</Text>
-                </View>
-                <View style={{height:280,width:'100%',paddingHorizontal:20,marginVertical:10}}>
-                    <Timeline
-                        showTime={false}
-                        circleSize={20}
-                        circleColor={theme.colors.secondry}
-                        innerCircle={'icon'}
-                        lineColor={theme.colors.secondry}
-                        separatorStyle={{backgroundColor:'transparent',height:1,}}
-                        separator={true}
-                        style={{width:'100%',marginLeft:-10,}}
-                        titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
-                        descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
-                        data={[
-                            {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem('INR 30,000',"Per Month"), icon: require('../../assets/images/step-round.png')},
-                            {time: '07:17', title: 'Bank charges', description: this.descriptionLoopItem('INR 450',"1.5% of the Rent Amount and Maintenance Charge"), icon: require('../../assets/images/step-round.png')},
-                            {time: '07:17', title: 'Service Charges', description: 'INR 28', icon: require('../../assets/images/step-round.png')},
-                        ]}
-                    />
-                  </View>
-                <View style={styles.total_warp}>
-                  <Text style={styles.total_amount}>TOTAL AMOUNT PAYABLE</Text>
-                  <Text style={styles.total_amount_light}>Per Month</Text>
-                  <Text style={styles.total_amount_price}>INR 35,553</Text>
-                  <Text style={styles.total_amount_light}>(Rent Amount + Bank charge + Service Charge)</Text>
-                </View>
-              </ScrollView>
-              <View style={styles.PopupbtnWrapper}>
-                  <TouchableOpacity onPress={()=>this.rejectConfirm()}>
-                    <Text style={styles.reject}>REJECT</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.setState({visiblemodal:false})}>
-                    <Text style={styles.accept}>ACCEPT</Text>
-                  </TouchableOpacity>
+
+            {property_loading ?
+            <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>
+              <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
               </View>
-            </View>
+              :
+              <View style={styles.PopupContainer}>
+                <Image style={styles.congrats_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/congrats.png')}/>
+                  <Text style={styles.congrats_head}>Congrats!</Text>
+                  <ScrollView style={{height:theme.dimens.popupHeight}}>
+                    <View style={styles.congrats_content(theme)}>
+                      <Text style={styles.light_color}>You have been added as Tenant of </Text>
+                      <TouchableOpacity onPress={()=>this.goToPropertyDetail(property_currentItem)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}> {property_currentItem.house_number}</Text></TouchableOpacity>
+                      <Text style={styles.light_color}> in Building {property_currentItem.building_name} by Landlord  </Text>
+                      <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.landlord_id)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
+                      <Text style={[styles.light_color,{fontWeight:'bold'}]}> ({getCountryCodeFormat(property_currentItem.landlord_details[0].landlord_ccd)}-{property_currentItem.landlord_details[0].landlord_mobile})</Text>
+                    </View>
+                    <View style={styles.congrats_content(theme)}>
+                      <Text style={styles.light_color}>Please confirm the Total Amount Payable monthly</Text>
+                    </View>
+                  <Image style={styles.dash_bar_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/dash-bar-line.png')}/>
+                    <View style={styles.bankacInfo}>
+                        <Text style={styles.banktitle(theme)}>Added Date</Text>
+                    </View>
+                    <View style={styles.bankacInfo}>
+                        <Text style={styles.textLabelXl(theme)}>{this.getPopupDateFormat(property_currentItem.added_date)}</Text><Text style={styles.textLabelXl(theme)}>|    {this.getPopupTimeFormat(property_currentItem.added_date)}</Text>
+                    </View>
+                    <View style={styles.timeline}>
+                        <Timeline
+                            showTime={false}
+                            circleSize={20}
+                            circleColor={theme.colors.secondry}
+                            innerCircle={'icon'}
+                            lineColor={theme.colors.secondry}
+                            separatorStyle={{backgroundColor:'transparent',height:1,}}
+                            separator={true}
+                            style={{width:'100%',marginLeft:-10,}}
+                            titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
+                            descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
+                            data={[
+                                {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,"Per Month"), icon: require('../../assets/images/step-round.png')},
+                                {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../assets/images/step-round.png')},
+                                {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../assets/images/step-round.png')},
+                            ]}
+                        />
+                      </View>
+                    <View style={styles.total_warp}>
+                      <Text style={styles.total_amount}>TOTAL AMOUNT PAYABLE</Text>
+                      <Text style={styles.total_amount_light}>Per Month</Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.net_banking.amount}</Text>
+                      <Text style={styles.paymType}>on using Net Banking/UPI </Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.debit_card.amount}</Text>
+                      <Text style={styles.paymType}>on using Debit Card </Text>
+                      <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.credit_card.amount}</Text>
+                      <Text style={styles.paymType}>on using Credit Card </Text>
+                      <Text style={styles.total_amount_light}>(Rent Amount + Bank charge + Service Charge)</Text>
+                    </View>
+                  </ScrollView>
+                  <View style={styles.PopupbtnWrapper}>
+                      <TouchableOpacity onPress={()=>this.rejectConfirm(property_currentItem)}>
+                        <Text style={styles.reject}>REJECT</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={()=>this.AcceptProperty(property_currentItem)}>
+                        <Text style={styles.accept}>ACCEPT</Text>
+                      </TouchableOpacity>
+                  </View>
+                </View>
+              }
         </Modal>
       )
   }
@@ -491,14 +610,17 @@ PropertiesTenants.navigationOptions = ({ navigation }) => ({
   title: 'Properties/Tenants',
 })
 
-const mapStateToProps = ({ account,propertiesLandlord,propertiesTenant }) => {
+const mapStateToProps = ({ account,propertiesLandlord,propertiesTenant,properties }) => {
   const { error, success, loading,status,customer } = account;
-  return { error, success, loading, status, customer,propertiesLandlord,propertiesTenant };
+  const {property_currentItem,property_loading} = properties
+  return { error, success, loading, status, customer,propertiesLandlord,propertiesTenant,property_currentItem,property_loading };
 };
 
 PropertiesTenants.propTypes = {
   getPropertiesForLandlord: PropTypes.func.isRequired,
   getPropertiesForTenant: PropTypes.func.isRequired,
+  getPropertyById: PropTypes.func.isRequired,
+  tenantSubmissionOnProperty: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
@@ -506,6 +628,8 @@ PropertiesTenants.propTypes = {
   customer:PropTypes.oneOfType(PropTypes.object,null),
   propertiesLandlord: PropTypes.object,
   propertiesTenant: PropTypes.object,
+  property_currentItem: PropTypes.object,
+  property_loading: PropTypes.bool,
 };
 
 PropertiesTenants.defaultProps = {
@@ -515,7 +639,10 @@ PropertiesTenants.defaultProps = {
   status:false,
   customer:null,
   propertiesLandlord:{items: [],refreshing: false,error: "",success: "",loading: false,},
-  propertiesTenant:{items: [],refreshing: false,error: "",success: "",loading: false,}
+  propertiesTenant:{items: [],refreshing: false,error: "",success: "",loading: false,},
+  property_currentItem: {},
+  property_loading: false,
+
 };
 
-export default connect(mapStateToProps, {getPropertiesForLandlord,getPropertiesForTenant})(PropertiesTenants);
+export default connect(mapStateToProps, {getPropertiesForLandlord,getPropertiesForTenant,getPropertyById,tenantSubmissionOnProperty})(PropertiesTenants);

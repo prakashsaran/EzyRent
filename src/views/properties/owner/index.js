@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -12,7 +12,8 @@ import {
 } from '../../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import {getLandlordProfileById,getCountryCodeFormat} from '../../../actions';
+import { EzyRent } from '../../../ezyrent';
 class PropertyOwner extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -22,9 +23,15 @@ class PropertyOwner extends React.Component {
     }
     StatusBar.setBarStyle("light-content");
   }
+
+  UNSAFE_componentWillMount(){
+    const {navigation,getLandlordProfileById,customer} = this.props
+    const landlord_id = navigation.getParam("landlord_id");
+    getLandlordProfileById(customer,landlord_id);
+  }
+
   componentDidMount(){
     const {customer,status}=this.props
-    console.log("customer =>",customer)
     if(status){
       if(customer.hasOwnProperty("type")){
         if(customer.type){
@@ -92,6 +99,14 @@ class PropertyOwner extends React.Component {
   }
   render(){
     const theme = this.context;
+    const {current_landlord} = this.props
+    if(!Object.keys(current_landlord).length > 0){
+     return(
+       <View style={{width:"100%",height:"100%",alignItems:'center',justifyContent:'center'}}>
+         <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
+       </View>
+     );
+    }
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
@@ -108,12 +123,11 @@ class PropertyOwner extends React.Component {
                 <View style={[theme.typography.rectView2,styles.rectviewcustom]}>
 
                   <View style={styles.profile_wrap}>
-                    <Image style={styles.profile} source={require('../../../assets/images/tever-thomas.png')}></Image>
+                    <Image style={styles.profile} source={{uri:`${EzyRent.getMediaUrl()}${current_landlord.profile_pic}`}}></Image>
                   </View>
-                  <Text style={styles.detailHeading(theme)}>TEVER THOMAS</Text>
+                  <Text style={styles.detailHeading(theme)}>{current_landlord.full_name}</Text>
                   <View style={styles.detail}>
-                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image> Dubai, UAE</Text>
-                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/call.png')}></Image> +97 9876543210</Text>
+                    <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../../assets/images/call.png')}></Image> {getCountryCodeFormat(current_landlord.mobile_country_code)} {current_landlord.mobile}</Text>
                   </View>
                   <View>
                   {this.renderQuickState()}
@@ -129,10 +143,10 @@ class PropertyOwner extends React.Component {
       );
   }
 }
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account,landlord }) => {
   const { error, success, loading,status,customer } = account;
-
-  return { error, success, loading, status, customer };
+const {current_landlord} = landlord;
+  return { error, success, loading, status, customer,current_landlord };
 };
 
 PropertyOwner.propTypes = {
@@ -141,6 +155,8 @@ PropertyOwner.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   status:PropTypes.bool,
   customer:PropTypes.oneOfType(PropTypes.object,null),
+  getLandlordProfileById: PropTypes.func,
+  current_landlord: PropTypes.object,
 };
 
 PropertyOwner.defaultProps = {
@@ -149,6 +165,7 @@ PropertyOwner.defaultProps = {
   loading: false,
   status:false,
   customer:null,
+  current_landlord:{},
 };
 
-export default connect(mapStateToProps, {})(PropertyOwner);
+export default connect(mapStateToProps, {getLandlordProfileById})(PropertyOwner);

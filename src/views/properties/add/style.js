@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
-import {isIphoneX} from "../../../components"
+import {isIphoneX,normalize} from "../../../components";
+
 export default StyleSheet.create({
     container: theme => ({
       flex: 1,
@@ -38,7 +39,7 @@ export default StyleSheet.create({
     }),
    pageTitle: theme =>({
       color:theme.colors.primaryScreenTitle,
-      fontSize:18,
+      fontSize:normalize(18),
       fontFamily:theme.typography.primaryFont,
       fontWeight: theme.typography.fontWeightRegular,
       marginLeft:15,
@@ -95,7 +96,7 @@ export default StyleSheet.create({
     columntitle:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:14,
+      fontSize:normalize(14),
       fontWeight:theme.typography.fontWeightRegular,
       width:'100%',
       textAlign:'left',
@@ -103,7 +104,7 @@ export default StyleSheet.create({
     tooltipDsc:theme=>({
       color:theme.colors.descriptionColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:12,
+      fontSize:normalize(12),
       fontWeight:theme.typography.fontWeightRegular,
       width:'100%',
       textAlign:'left',
@@ -111,7 +112,7 @@ export default StyleSheet.create({
     fieltext:theme=>({
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       paddingTop:3,
       fontWeight:theme.typography.fontWeightRegular,
     }),
@@ -158,7 +159,7 @@ export default StyleSheet.create({
       borderBottomWidth:0.7,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
@@ -167,10 +168,9 @@ export default StyleSheet.create({
       position:'absolute',
       left:0,
       bottom:8,
-      fontSize:18,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
     }),
     textInputStyleSec:theme=>({
@@ -179,7 +179,7 @@ export default StyleSheet.create({
       borderBottomWidth:0.7,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
@@ -201,7 +201,7 @@ export default StyleSheet.create({
       paddingBottom:20,
     },
     dropPicker:theme=>({
-      fontSize:18,
+      fontSize:normalize(18),
       colors:theme.colors.primaryTitleColor,
     }),
     pikerwrap:{
@@ -214,8 +214,8 @@ export default StyleSheet.create({
       //borderColor:theme.colors.secondry,
       //borderBottomWidth:0.7,
       color:theme.colors.primaryTitleColor,
-      fontFamily:theme.typography.secondryFont,
-      fontSize:16,
+      fontFamily:theme.typography.secondaryFont,
+      fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
       //marginVertical:theme.spacing.medium,
       marginBottom:5,
@@ -235,7 +235,7 @@ export default StyleSheet.create({
     addBtncaption:theme =>({
       color:theme.colors.primBtnTextColor,
       fontFamily:theme.typography.primaryFont,
-      fontSize:20,
+      fontSize:normalize(20),
       fontWeight:theme.typography.fontWeightSemiBold,
     }),
     borderProvider: theme=>({
@@ -258,27 +258,28 @@ export default StyleSheet.create({
       width:20,
     },
     edit_icon:{
-      width:25,
-      height:25,
+      width:40,
+      height:40,
       position:'absolute',
       right:60,
       top:-20,
+      padding:10,
     },
     delete_icon:{
-      right:25,
+      right:20,
     },
     listproperties:{
 	      width:'100%',
 	    },
 	    addProperty: theme=>({
 	      color:theme.colors.primary,
-	      fontSize:18,
+	      fontSize:normalize(18),
 	      marginVertical:5,
 	    }),
 	    chooseProperty: theme=>({
 	      color:theme.colors.secondry,
 	      marginVertical:5,
-	      fontSize:18,
+	      fontSize:normalize(18),
 	    }),
 	    popupTitle:theme=>({
 
@@ -325,6 +326,7 @@ export default StyleSheet.create({
         backgroundColor:'transparent',
         borderColor:theme.colors.secondry,
         paddingVertical:5,
+        fontSize:normalize(16),
       }),
       pickerUnSelected: theme=>({
         width:'100%',
@@ -332,6 +334,25 @@ export default StyleSheet.create({
         backgroundColor:'transparent',
         borderColor:theme.colors.lightBorder,
         paddingVertical:5,
+        fontSize:normalize(16),
       }),
-  
+      SubresponseValue:{
+        //paddingLeft:10,
+      },
+      responseValueWrap:{
+        flexDirection:'row',
+        alignItems:'flex-start',
+      },
+      responseValue1:{
+        paddingVertical:5,
+        fontSize:normalize(16),
+        width:'auto',
+        paddingRight:7,
+        //fontFamily:'Oxygen-Bold',
+      },
+      responseValue2:{
+        paddingVertical:5,
+        fontSize:normalize(13),
+        //maxWidth:'60%',
+      },
 });

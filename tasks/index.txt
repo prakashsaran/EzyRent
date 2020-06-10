@@ -1,0 +1,53 @@
+(1) image permission => Done
+(2) tab image choose size increase => Done
+(3) annually on chose show calendar => Done
+(4) approperty => auto select new added building
+(5) show selected edit property => Done
+(6) after add property refresh list view => Done
+
+
+Type a message
+
+fangmestor@gmail.com	                 axis@123
+sofiaserman007@gmail.com	          axis@123
+askadamjones@gmail.com	        AxisWeb!23
+trickygladyshoward@gmail.com	AxisWeb!23
+creativerichardmars@gmail.com	AxisWeb!23
+gorgeoussarahere@gmail.com 	AxisWeb!23
+yeahjackyardy@gmail.com	        AxisWeb!23
+phillipstexa@gmail.com	                AxisWeb!23
+certifieddoherty@gmail.com	        AxisWeb!23
+whitiessam@gmail.com	                AxisWeb!23
+billhiltonhit@gmail.com	                AxisWeb!23
+sandycurren@gmail.com	        AxisWeb!23
+
+
+=========
+
+https://receive-smss.com/
+
+
+======= Today work ======
+(1) popup all screens => complte 11 -am  => done
+(2) Loader on profile edit => Done
+(3) App pin change show a confirmation messaage => 12 am => Done
+(4) Placeholder image for property change it in create property => 2pm => Done,
+(5) While adding property, while entering mobile existing user name should auto fill => pending
+(6) Next option to shift to next field  => Done
+(7) n Case of Monthly Payment - First option should be - End of the Month and automatically selected => Done
+(8))in case of Bi-Weekly - 15th & End of the Month => Done
+(9) When selecting phone numbers choose 10 digits from the right side => Done
+
+0) Show Tatent & Landloard Name in place of location in property list in rent and properties screen & Change icon => Pendding => 10 :40 => Done 
+1) Search => Done
+2) Image loader ( Add property ) => pending
+3) Placeholder images in case of no data => pending
+4) Thousand seperator => proccessing
+5) Notification Read mark
+6) Pay Now ( Screen - Procced to Payment )
+7) Bank account delete
+8) Form input font size issues ( Shyam )
+9) Profile longer email in next line
+10) Mobile number based name auto fill if existing user
+11) back redirect previese screen
+

@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../../theme";
 import { isIphoneX } from '../../../components';
+import { normalize } from "../../../components";
 export default StyleSheet.create({
   container: theme => ({
     flex: 1,
@@ -10,7 +11,46 @@ export default StyleSheet.create({
     width:'100%',
     paddingTop:20,
   }),
-
+  pininputBox: theme =>({
+      height:40,
+      width:'100%',
+      alignSelf:'center',
+    }),
+    underlineStyleHighLighted: theme => ({
+      borderColor: theme.colors.secondry,
+      padding:0,
+    }),
+    underlineStyleBase: theme => ({
+      width: theme.dimens.defaultPinCodeWidth,
+      height: 45,
+      padding:0,
+      borderWidth: 0,
+      borderBottomWidth: 1,
+      color:theme.colors.descriptionColor,
+      borderColor:theme.colors.descriptionColor,
+      fontSize:normalize(22),
+      fontFamily:theme.typography.primaryFont,
+      fontWeight:theme.typography.fontWeightRegular,
+    }),
+    pincontainer: theme => ({
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
+      width:'100%',
+      paddingHorizontal:20,
+      alignSelf:'center',
+      position:'relative',
+      marginVertical:10,
+    }),
+    visibilityIconWrapp:{
+      position:'absolute',
+      right:10,
+      top:10,
+    },
+    visibilityIcon:{
+      width:25,
+      height:20,
+    },
   headerContext:{
     flexDirection:'row',
     justifyContent:'space-between',
@@ -37,7 +77,16 @@ export default StyleSheet.create({
   },
   gpsTitle:theme=>({
     color:theme.colors.primary,
-    fontSize:16,
+    fontSize:normalize(16),
+    fontFamily:theme.typography.secondaryFont,
+    fontWeight:theme.typography.fontWeightRegular,
+
+  }),
+  confirmBoxTitle:theme=>({
+    color:theme.colors.descriptionColor,
+    fontSize:normalize(22),
+    textAlign:'center',
+    paddingTop:10,
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightRegular,
 
@@ -50,6 +99,7 @@ export default StyleSheet.create({
     height:theme.dimens.containerHeightWithBannerHeader,
     borderTopRightRadius:50,
     borderTopLeftRadius:50,
+    paddingTop:20,
   },
   gpscontainer: theme=>({
     backgroundColor:theme.colors.primary,
@@ -71,28 +121,29 @@ export default StyleSheet.create({
     alignSelf:'center',
     paddingHorizontal:20,
     flexDirection:'column',
+    marginTop:-20,
   },
   pageTitle: theme =>({
     color:theme.colors.secondry,
-    fontSize:19,
+    fontSize:normalize(19),
     fontFamily:theme.typography.fontFamilyMontserratSemi,
   }),
   payTime: theme =>({
     color:theme.colors.propertyHeading,
-    fontSize:12,
+    fontSize:normalize(12),
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightBold,
   }),
   payTimeBld: theme =>({
     color:theme.colors.propertyHeading,
-    fontSize:12,
+    fontSize:normalize(12),
     fontFamily:theme.typography.fontFamilyOxygenBold,
   }),
   ownerInfo:{
     flexDirection:'row',
     justifyContent:'flex-start',
     alignItems:'center',
-   // flexWrap:'wrap',
+    flexWrap:'wrap',
   },
   locationWrapp:{
     flexDirection:'row',
@@ -102,7 +153,7 @@ export default StyleSheet.create({
   },
   textLabel:theme=>({
     color:theme.colors.labelColor,
-    fontSize:13,
+    fontSize:normalize(13),
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightRegular,
   }),
@@ -112,6 +163,7 @@ export default StyleSheet.create({
     borderBottomWidth:0.7,
     borderColor:theme.colors.textValueColor,
     paddingBottom:theme.spacing.extraLarge,
+    flexWrap:'wrap',
   }),
   paymentInfo:theme =>({
     width:'100%',
@@ -130,7 +182,7 @@ export default StyleSheet.create({
   },
   textValue:theme=>({
     color:theme.colors.primaryTitleColor,
-    fontSize:16,
+    fontSize:normalize(16),
     fontFamily:theme.typography.fontFamilyOxygenBold,
     fontWeight: theme.typography.fontWeightSemiBold,
     marginHorizontal:5,
@@ -143,7 +195,7 @@ export default StyleSheet.create({
     paddingTop:3,
   }),
   eraseTitle:theme=>({
-    fontSize:13,
+    fontSize:normalize(13),
     color:theme.colors.errorColor,
     paddingTop:3,
   }),
@@ -153,14 +205,14 @@ export default StyleSheet.create({
   },
   primaryBtnText:theme=>({
     color:theme.colors.primBtnTextColor,
-    fontSize:18,
+    fontSize:normalize(18),
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightSemiBold,
     marginHorizontal:5,
   }),
   banktitle:theme=>({
     color:theme.colors.descriptionColor,
-    fontSize:13,
+    fontSize:normalize(13),
     fontFamily:theme.typography.secondaryFont,
     fontWeight: theme.typography.fontWeightRegular,
     marginHorizontal:5,
@@ -175,7 +227,7 @@ export default StyleSheet.create({
   },
   textLabelXl: theme =>({
     color:theme.colors.primaryTitleColor,
-    fontSize:15,
+    fontSize:normalize(15),
     fontFamily:theme.typography.fontFamilyOxygenBold,    
   }),
 

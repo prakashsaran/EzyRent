@@ -8,14 +8,24 @@ import { ThemeContext, theme } from '../../../theme';
 import {
     NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
   } from '../../../navigation/routes';
-
+import {EzyRent} from '../../../ezyrent';
   class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
     constructor(props){
       super();
+      this.state ={
+          property:{},
+      }
     }
-    goToPropertyOwnerDetail(){
-        NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH)
+
+    UNSAFE_componentWillMount(){
+        const {navigation} = this.props
+        const property = navigation.getParam("property");
+        this.setState({property})
+    }
+
+    goToPropertyOwnerDetail(landlord_id){
+        NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
     }
 
     renderHeader(theme){
@@ -38,29 +48,26 @@ import {
 
     render(){
         const theme = this.context;
+        const {property} = this.state
         return (
-            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'repeat'} imageStyle={{width:'100%',}} source={require('../../../assets/images/property_view_bg.png')}>
+            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',}} source={{uri:`${EzyRent.getMediaUrl()}${property.property_image}`}}>
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
                     <View style={styles.detailContainer}>
-                        <View style={styles.gpsWrapp}>
-                            <TouchableOpacity style={styles.gpscontainer(theme)}><Image style={styles.gpsIcon} resizeMode={'contain'} source={require('../../../assets/images/gps.png')}></Image></TouchableOpacity>
-                            <Text style={styles.gpsTitle(theme)}>View Map</Text>
-                        </View>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styles.infoContainer}>
                                 <View style={styles.propertyInfo(theme)}>
-                                    <Text style={styles.pageTitle(theme)}>#ABC 12</Text>
-                                    <Text style={styles.pageTitle(theme)}>1BHK Apartment at Golf Links</Text>
+                                    <Text style={styles.pageTitle(theme)}>{property.house_number}</Text>
+                                    <Text style={styles.pageTitle(theme)}>{property.building_name}</Text>
                                     <View style={styles.ownerInfo}>
-                                        <Text style={styles.textLabel(theme)}>Owned/Managed by</Text>
-                                        <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail()}><Text style={styles.textValue(theme)}>Red Rows Property</Text></TouchableOpacity>
+                                        <Text style={styles.textLabel(theme)}>{property.tenant_text}</Text>
+                                        <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property.landlord_id)}><Text style={styles.textValue(theme)}>{property.landlord_details[0].landlord_name}</Text></TouchableOpacity>
                                     </View>
                                     <View style={styles.locationWrapp}>
                                         <Image resizeMode={'contain'} style={{width:20,height:20,marginRight:5,marginLeft:-5}} source={require('../../../assets/images/gps_dark.png')}></Image>
                                         <Text style={styles.textLabel(theme)}>
-                                            Kuravankonam, Trivandrum, Kerala
+                                            {property.location}
                                         </Text>
                                     </View>
                                 </View>
@@ -68,18 +75,18 @@ import {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View>
                                         <View style={styles.payamountPeriod}>
-                                            <Text style={styles.pageTitle(theme)}>INR 25,0000</Text>
-                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme)]}> Per month</Text>
+                                            <Text style={styles.pageTitle(theme)}>{property.rent_split_up.rent_amount}</Text>
+                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>Next Rent due on 01 March 2020</Text>
+                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_next_day_date} {/*01 March 2020*/}</Text>
                                     </View>
                                 </View>
 
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
-                                        <Text style={styles.textLabelXl(theme)}>ICICI Bank (XXXX-12342345)</Text>
-                                        <Text style={styles.textLabelXl(theme)}>Althara Branch, Trivandrum</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property.bank_name} ({property.bank_account_number})</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>
