@@ -14,7 +14,7 @@ import { DropDownHolder } from '../../../../components';
 function SignUpMobileVerify(props) {
   const {mobile} = props;
   const [enablebtn, setEnableButton] = useState(false);
-  const [resendEnable, setResendEnable] = useState(false);
+  const [resendEnable, setResendEnable] = useState(true);
   const [resendtimeout, setResendTimeOut] = useState(0);
   const [inputOtp, setInputOtp] = useState(null);
   let keyboardBehavior = null;

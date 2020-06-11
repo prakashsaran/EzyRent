@@ -57,7 +57,7 @@ import BankVerification from '../views/bankaccount/verification';
 import EditMyProfile from '../views/editprofile';
 // MORE -> Transaction SCREENS
 import TransactionSuccessful from '../views/transaction/success';
-
+import PaymentConfirmation from '../views/transaction/payment';
 // Walkthrough Screen
 import WalkthroughScreen from '../views/walkthrough';
 // bottom navigation icons
@@ -113,6 +113,7 @@ import {
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
   NAVIGATION_TENANT_PROFILE_VIEW_PATH,
+  NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,
 } from './routes';
 
 import { theme } from '../theme';
@@ -195,6 +196,7 @@ const MoreStack = createStackNavigator({
   [NAVIGATION_MORE_MY_TENANTS_VIEW_PATH]: MyTenants,
   [NAVIGATION_MORE_MY_LANDLOADS_VIEW_PATH]: MyLandloads,
   [NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH]: MyBankaccount,
+  [NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH]: PaymentConfirmation,
   [NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH]: TransactionSuccessful,
   [NAVIGATION_MORE_MY_PROFILE_VIEW_PATH]: MyProfile,
   [NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH]: AddBankAccount,

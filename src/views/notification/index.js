@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
 import SampleData from '../../config/sample-data';
@@ -23,8 +23,17 @@ class NotificationList extends React.Component {
     super();
     this.state={
       notifications:[],
+      DeviceWidth:Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
     }
     StatusBar.setBarStyle('dark-content');
+    this.onLayout = this.onLayout.bind(this);
+  }
+  onLayout(e) {
+    this.setState({
+      DeviceWidth: Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
+    });
   }
   UNSAFE_componentWillMount(){
     const {customer,status,getNotifications}=this.props
@@ -122,34 +131,37 @@ class NotificationList extends React.Component {
     const theme = this.context;
     const {items}=this.props; 
       return (
-          <SafeAreaView style={styles.container(theme)}>
+          <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  >
+                
                 {this.renderNotifications()}
-              </ScrollView>
 
           </SafeAreaView>
       );
   }
 
-
+renderPlaceHolder(){
+  const {DeviceHeight} = this.state
+  return(
+    <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+  );
+}
   renderNotifications(){
+    const {items} = this.props  
+    if(!items.length){
+      return this.renderPlaceHolder();
+    }
+    return this.renderPlaceHolder();
     return(
+      <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.properties(theme)}>
-        {this.renderNotificationItems()}
+        {this.renderNotificationItems(items)}
       </View>
+      </ScrollView>
     )
   }
  
-  renderNotificationItems(){
-    const {items} = this.props  
-    if(!items.length){
-      return(<Text style={{textAlign:'center'}}>Notifications Not Available</Text>)
-    }
-    
-    return(<Text style={{textAlign:'center'}}>Notifications Not Available</Text>);
+  renderNotificationItems(items){
       return items.map((item,inx)=>{
       if(item.type=="paid"){
         return (

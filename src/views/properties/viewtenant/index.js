@@ -7,7 +7,8 @@ import styles from './style';
 import { ThemeContext, theme } from '../../../theme';
 import {
     NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
-    NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH,
+    NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,
+    NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH
   } from '../../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,11 +18,15 @@ class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
     constructor(props){
       super();
+      this.state ={
+        property:{}
+      }
     }
     UNSAFE_componentWillMount(){
         const {navigation,getPropertyById} = this.props
-        const currentProperty = navigation.getParam("property");
-        getPropertyById(currentProperty.id);
+        const property = navigation.getParam("property");
+        this.setState({property})
+        getPropertyById(property.id);
     }
     goToPropertyOwnerDetail(landlord_id){
         NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
@@ -43,12 +48,13 @@ class ViewPropertyTenant extends React.Component {
             <Text style={styles.payTime(theme)}>You paid rent of <Text style={{color:theme.colors.primaryTitleColor,fontWeight:'bold'}}>INR 25000</Text> for this property</Text>
         )
     }
-    PayRent(){
-        NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
+    PayRent(property){
+        NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,{property,goBack:NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH})
       }
     render(){
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
+        const {property} = this.state
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
@@ -83,7 +89,7 @@ class ViewPropertyTenant extends React.Component {
                                         </View>
                                         <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={()=>this.PayRent()} style={styles.primaryBtn(theme)}>
+                                    <TouchableOpacity onPress={()=>this.PayRent(property)} style={styles.primaryBtn(theme)}>
                                         <Text style={styles.primaryBtnText(theme)}>PAY NOW</Text>
                                     </TouchableOpacity>
                                 </View>

@@ -76,6 +76,8 @@ export default StyleSheet.create({
     shadowRadius: 5,
     marginTop:isLessMarshmallow()?-39:30,
     height:45,
+    position:'absolute',
+    bottom:40  
   }),
   walkIndicator: theme =>({
     flexDirection:'row',

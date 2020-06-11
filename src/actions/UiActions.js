@@ -4,7 +4,7 @@ import {EzyRent} from '../ezyrent';
 import NavigationService from '../navigation/NavigationService';
 const emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
-const mobileRegex = '^([0|+[0-9]{1,5})?([7-9][0-9]{9})$';
+const mobileRegex = /^\d{10}$/;
 const ContactContryCode = [{label:"+91",value:"0091"}];
 export const isValidEmail = (email) => {
     return emailRegex.test(email);

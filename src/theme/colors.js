@@ -24,4 +24,5 @@ export default {
   propertyHeading:'#333',
   under_more:'#6e6e6e',
   labelColor:'#333333',
+  placeHolderBackgroundColor:"#d2e2f9",
 };

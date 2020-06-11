@@ -46,6 +46,7 @@ export default StyleSheet.create({
     height:theme.dimens.containerHeightWithBannerHeader,
     borderTopRightRadius:50,
     borderTopLeftRadius:50,
+    paddingTop:20,
   },
   gpscontainer: theme=>({
     backgroundColor:theme.colors.primary,

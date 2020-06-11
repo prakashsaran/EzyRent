@@ -11,9 +11,10 @@ import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH,
-  NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH,
+  NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
+  NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -32,13 +33,22 @@ class PropertiesTenants extends React.Component {
       searchQuery:null,
       AccountType:null,
       visiblemodal:false,
+      DeviceWidth:Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
     }
     StatusBar.setBarStyle('dark-content');
+    this.onLayout = this.onLayout.bind(this);
   }
 
   /* ================================================================*/
   /* ===================== START COMMON FUNCTION======================*/
   /* ================================================================*/
+  onLayout(e) {
+    this.setState({
+      DeviceWidth: Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
+    });
+  }
 
   UNSAFE_componentWillReceiveProps(nextProps){
     const {customer,getPropertiesForLandlord} = this.props;
@@ -182,8 +192,8 @@ class PropertiesTenants extends React.Component {
         return null;
     }
   }
-  PayRent(){
-    NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
+  PayRent(property){
+    NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,{property,goBack:NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH})
   }
   goToPropertyDetail(property){
     this.setState({visiblemodal:false});
@@ -318,7 +328,7 @@ goToPropertyOwnerDetail(landlord_id){
     const theme = this.context;
     const {activeTab} = this.state
       return (
-          <SafeAreaView style={styles.container(theme)}>
+          <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
                 {this.renderTabBar()}
                 {this.renderProperties()}
@@ -341,6 +351,13 @@ goToPropertyOwnerDetail(landlord_id){
     }
   }
 
+  renderPlaceHolder(){
+    const {DeviceHeight} = this.state
+    return(
+      <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+    );
+  }
+
   renderPayingPropertiest(){
     const {propertiesTenant} = this.props
     if(propertiesTenant.items.length >0 ){
@@ -351,15 +368,12 @@ goToPropertyOwnerDetail(landlord_id){
           data={propertiesTenant.items}
           renderItem={({ item,index }) => this.renderPayingItems(item,index)}
           keyExtractor={item => item.id}
+          ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
       </View>
      )
     }
-    return(
-      <View style={styles.properties(theme)}>
-        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
-      </View>
-    )
+    return this.renderPlaceHolder();
   }
 
   renderPayingItems(item,indx){
@@ -390,7 +404,7 @@ goToPropertyOwnerDetail(landlord_id){
                     </View>
                     {item.property_status=="O"&&
                       <View style={styles.markwrap}>
-                        <TouchableOpacity onPress={()=>this.PayRent()}>
+                        <TouchableOpacity onPress={()=>this.PayRent(item)}>
                           <Text style={styles.marktext(theme)}>PAY NOW <Image style={styles.right_arrow} source={require('../../assets/images/arrow_next.png')}></Image></Text>
                         </TouchableOpacity>
                       </View>}
@@ -471,15 +485,12 @@ goToPropertyOwnerDetail(landlord_id){
           data={propertiesLandlord.items}
           renderItem={({ item,index }) => this.renderCollectingItems(item,index)}
           keyExtractor={item => item.id}
+          ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
       </View>
      )
     }
-    return(
-      <View style={styles.properties(theme)}>
-        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
-      </View>
-    )
+    return this.renderPlaceHolder();
   }
 
   descriptionLoopItem(amount,period){

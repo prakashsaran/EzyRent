@@ -47,6 +47,7 @@ export const NAVIGATION_MORE_MY_TENANTS_VIEW_PATH = 'my-tenants-more-view';
 export const NAVIGATION_MORE_MY_LANDLOADS_VIEW_PATH = 'my-landloards-more-view';
 export const NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH = 'my-bankaccount-more-view';
 export const NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH = 'transaction-success-more-view';
+export const NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH = 'transaction-payment-confirmation-more-view';
 export const NAVIGATION_MORE_MY_PROFILE_VIEW_PATH = 'my-profile-more-view';
 export const NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH = 'add-bank-ac-more-view';
 export const NAVIGATION_MORE_EDIT_BANK_ACCOUNT_VIEW_PATH = 'edit-bank-ac-more-view';

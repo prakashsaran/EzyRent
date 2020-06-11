@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 import { selectContactPhone } from 'react-native-select-contact';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
-import {RightIconTextbox,DropDownHolder,PickerSelect,Spinner,DateMonthPicker} from '../../../components'
+import {RightIconTextbox,DropDownHolder,PickerSelect,Spinner,DateMonthPicker,normalize} from '../../../components'
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH} from '../../../navigation/routes';
 import SampleData from '../../../config/sample-data';
@@ -162,7 +162,7 @@ class EditPropertyTenant extends React.Component {
             this.validateAndSetAttribute(buildingName, this._buildingNameEntry) &
             this.validateAndSetAttribute(collectingAmount, this._collectingAmountEntry) &
             this.validateAndSetAttribute(bankAccount, this._bankAccountEntry) &
-            this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
+           // this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
             this.validateAndSetAttribute(houseNumber, this._houseNumberEntry);
     if(formIsValid){
      const formData = {tenant_ccd:tenant_ccd,tenant_mobile:mobileNumber,tenant_name:tenantName,house_number:houseNumber,building_id:buildingName,bank_id:bankAccount,rent_amount:collectingAmount,rent_period_id:rentPeriod,rent_day_date:rentDue,status:property_status}
@@ -272,10 +272,7 @@ componentDidUpdate(prevProps,prevState){
 }
 
 onChangeRentPeriod(rentPeriod){
-  console.log("rentPeriod onChangeRentPeriod",rentPeriod);
-  
   const rentduesData = [];
-
   if(rentPeriod==4){
     const monthNames = this.getMonthNames();
     Object.keys(monthNames).forEach((key) => {
@@ -284,6 +281,7 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose month"})
     this.setState({rentDue:null})
+    this.setState({rentDueDisable:false});
   }
 
   if(rentPeriod==3){
@@ -294,12 +292,14 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:31})
+    this.setState({rentDueDisable:false});
   }
 
   if(rentPeriod==2){
     rentduesData.push({label:'15th & End of the Month',value:1});
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:1})
+    this.setState({rentDueDisable:true});
   }
 
   if(rentPeriod==1){
@@ -310,11 +310,11 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:null})
+    this.setState({rentDueDisable:false});
   }
 
   this.setState({rentduesData});
   this.setState({rentPeriod})
-  this.setState({rentDueDisable:false});
 }
 
 getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
@@ -685,7 +685,7 @@ renderHeader(){
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
                              <View style={styles.currencyLabel}>
                               <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:40}]} placeholder={'Ex: 10,000'}/>
+                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10,000'}/>
                               </View>
                           </View>
 
@@ -773,7 +773,7 @@ renderModalView(){
               autoCorrect={false}
               value={add_building_name}
               style={styles.textInputStyle(theme)}
-              placeholder={'Name of Building'}
+              //placeholder={'Name of Building'}
               returnKeyLabel={"next"}
               returnKeyType={"next"}
               onSubmitEditing={() => { this._PopupLocationEntry.focus() }}

@@ -86,6 +86,8 @@ export default StyleSheet.create({
     shadowRadius: 5,
     marginTop:isLessMarshmallow()?0:55,
     height:45,
+    position:'absolute',
+    bottom:40
   }),
   walkIndicator:{
     flexDirection:'row',

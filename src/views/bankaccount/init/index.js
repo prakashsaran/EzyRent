@@ -60,7 +60,7 @@ class MyBankaccount extends React.Component {
       return(
             <View style={[styles.shadow,{zIndex:100-inx}]}>
                 <View style={styles.MoreLinkswrap}>
-                  <View style={{flexDirection:'row',justifyContent:'flex-start'}}>
+                  <View style={{flexDirection:'row',justifyContent:'flex-start',width:'87%',overflow:'hidden'}}>
                     <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>
                     <TouchableOpacity style={styles.UserWrap}>
                       <View style={styles.heading_wrap}>
@@ -68,12 +68,12 @@ class MyBankaccount extends React.Component {
                       </View>
                       <Text style={styles.AccountNo(theme)}>{item.account_no}</Text>
                       <View style={styles.contentWrap}>
-                      <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
-                      <Text style={styles.MoreLinksItemSub(theme)}>{item.additional_details}</Text>
+                        <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
+                        <Text style={styles.MoreLinksItemSub(theme)}>{item.additional_details?item.additional_details:"N/A"}</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
-                    <TouchableOpacity style={{width:30,height:30,justifyContent:'flex-end',alignItems:'flex-end'}} onPress={()=>this.showAction(item.id)}>
+                    <TouchableOpacity style={{width:30,height:30,justifyContent:'flex-end',alignItems:'flex-end',}} onPress={()=>this.showAction(item.id)}>
                        <Image style={activeAction==item.id?styles.active_three_dots_light:styles.three_dots_light} source={require('../../../assets/images/three-dot-light.png')}></Image>
                     </TouchableOpacity>
                     {activeAction==item.id && <View style={styles.hideShow}>

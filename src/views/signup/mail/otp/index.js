@@ -14,7 +14,7 @@ import { DropDownHolder } from '../../../../components';
 function SignUpMailVerify(props) {
   const {mobile,mail} = props;
   const [enablebtn, setEnableButton] = useState(false);
-  const [resendEnable, setResendEnable] = useState(false);
+  const [resendEnable, setResendEnable] = useState(true);
   const [resendtimeout, setResendTimeOut] = useState(0);
   const [inputOtp, setInputOtp] = useState(null);
   

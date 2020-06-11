@@ -36,12 +36,11 @@ const theme = useContext(ThemeContext);
           <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
           <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
           </View>
+        </View>
+      </ScrollView>
           <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)}}>
             <Text style={theme.typography.caption}>LET`S START</Text>
           </TouchableOpacity>
-        </View>
-        <View style={{width:'100%',height:20}}></View>
-      </ScrollView>
     </SafeAreaView>
   );
 }

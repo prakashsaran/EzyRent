@@ -139,7 +139,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={{paddingTop:10,}}>
                                         <View style={styles.payamountPeriod}>
-                                            <Text style={styles.pageTitle(theme)}> {property_currentItem.rent_split_up.rent_amount}</Text>
+                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.rent_split_up.rent_amount}</Text>
                                             <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> Per month</Text>
                                         </View>
                                      <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>

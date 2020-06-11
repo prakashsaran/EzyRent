@@ -123,7 +123,7 @@ getConsistencyRentPay(DataObj){
               </View>
               <View style={styles.box}>
                 <Text style={styles.box_heading}>0%</Text>
-                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
           </View>
@@ -149,7 +149,7 @@ getConsistencyRentPay(DataObj){
               </View>
               <View style={styles.box}>
                 <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
-                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
           </View>
@@ -210,7 +210,7 @@ getConsistencyRentPay(DataObj){
               </View>
               <View style={styles.box}>
                 <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
-                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
           </View>
@@ -233,7 +233,7 @@ getConsistencyRentPay(DataObj){
               </View>
               <View style={styles.box}>
                 <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
-                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
           </View>

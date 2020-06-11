@@ -41,13 +41,13 @@ https://receive-smss.com/
 0) Show Tatent & Landloard Name in place of location in property list in rent and properties screen & Change icon => Pendding => 10 :40 => Done 
 1) Search => Done
 2) Image loader ( Add property ) => pending
-3) Placeholder images in case of no data => pending
-4) Thousand seperator => proccessing
+3) Placeholder images in case of no data => Done
+4) Thousand seperator => Done
 5) Notification Read mark
-6) Pay Now ( Screen - Procced to Payment )
+6) Pay Now ( Screen - Procced to Payment ) => DONE
 7) Bank account delete
 8) Form input font size issues ( Shyam )
-9) Profile longer email in next line
+9) Profile longer email in next line => pending
 10) Mobile number based name auto fill if existing user
 11) back redirect previese screen
 

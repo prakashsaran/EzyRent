@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
 import SampleData from '../../config/sample-data';
@@ -23,18 +23,24 @@ class RentList extends React.Component {
     super();
     this.state={
       visibleSearch:false,
-      payingRent:[],
-      collectingRent:[],
       activeTab:1,
       searchQuery:null,
       AccountType:null,
+      DeviceWidth:Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
     }
     StatusBar.setBarStyle('dark-content');
+    this.onLayout = this.onLayout.bind(this);
   }
+  onLayout(e) {
+    this.setState({
+      DeviceWidth: Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
+    });
+  }
+
   UNSAFE_componentWillMount(){
     const {customer,status}=this.props
-    const properties = SampleData.getPropeties() || [];
-    this.setState({payingRent:properties,collectingRent:properties})
     if(status){
       if(customer.hasOwnProperty("user_type")){
         if(customer.user_type){
@@ -223,15 +229,10 @@ class RentList extends React.Component {
     const theme = this.context;
     const {activeTab} = this.state
       return (
-          <SafeAreaView style={styles.container(theme)}>
+          <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
                 {this.renderTabBar()}
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  >
                 {this.renderProperties()}
-              </ScrollView>
-
           </SafeAreaView>
       );
   }
@@ -248,21 +249,28 @@ class RentList extends React.Component {
     }
   }
 
-  renderPayingPropertiest(){
+  renderPlaceHolder(){
+    const {DeviceHeight} = this.state
     return(
-      <View style={styles.properties(theme)}>
-        {this.renderPayingItems()}
-      </View>
+      <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+    );
+  }
+
+  renderPayingPropertiest(){
+    const {tenant_items} = this.props
+    if(!tenant_items.length){
+      return this.renderPlaceHolder();
+    }
+    return(
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.properties(theme)}>
+          {this.renderPayingItems(tenant_items)}
+        </View>
+      </ScrollView>
     )
   }
 
-  renderPayingItems(){
-    const {payingRent} = this.state
-    const {tenant_items} = this.props
-
-    if(!tenant_items.length){
-      return(<Text style={{textAlign:'center'}}>Properties Not Available</Text>)
-    }
+  renderPayingItems(tenant_items){
     return tenant_items.map((item,inx)=>{
       if(item.process=="due"){
         return (
@@ -335,14 +343,7 @@ class RentList extends React.Component {
     })
   }
 
-  renderCollectingItems(){
-    const {payingRent} = this.state
-    const {landlord_items} = this.props
-    if(!landlord_items.length){
-      return(
-        <Text style={{textAlign:'center'}}>Properties Not Available</Text>
-      )
-    }
+  renderCollectingItems(landlord_items){
     return landlord_items.map((item,inx)=>{
       if(item.process=="due"){
         return (
@@ -434,10 +435,16 @@ class RentList extends React.Component {
       return {uri:'${EzyRent.getMediaUrl()}${item.module_data[0].property_image}'}; 
   }
   renderCollectingPropertiest(){
+    const {landlord_items} = this.props
+    if(!landlord_items.length){
+      return this.renderPlaceHolder();
+    }
     return(
-      <View style={styles.properties(theme)}>
-        {this.renderCollectingItems()}
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.properties(theme)}>
+          {this.renderCollectingItems(landlord_items)}
+        </View>
+      </ScrollView>
     )
   }
 

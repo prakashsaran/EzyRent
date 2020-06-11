@@ -90,7 +90,7 @@ class AddPropertyTenant extends React.Component {
               this.validateAndSetAttribute(buildingName, this._buildingNameEntry) &
               this.validateAndSetAttribute(collectingAmount, this._collectingAmountEntry) &
               this.validateAndSetAttribute(bankAccount, this._bankAccountEntry) &
-              this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
+              //this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
               this.validateAndSetAttribute(houseNumber, this._houseNumberEntry);
       if(formIsValid){
        const formData = {tenant_ccd:tenant_ccd,tenant_mobile:mobileNumber,tenant_name:tenantName,house_number:houseNumber,building_id:buildingName,bank_id:bankAccount,rent_amount:collectingAmount,rent_period_id:rentPeriod,rent_day_date:rentDue}
@@ -208,6 +208,7 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose month"})
     this.setState({rentDue:null})
+    this.setState({rentDueDisable:false});
   }
 
   if(rentPeriod==3){
@@ -218,12 +219,14 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:31})
+    this.setState({rentDueDisable:false});
   }
 
   if(rentPeriod==2){
     rentduesData.push({label:'15th & End of the Month',value:1});
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:1})
+    this.setState({rentDueDisable:true});
   }
 
   if(rentPeriod==1){
@@ -234,11 +237,11 @@ onChangeRentPeriod(rentPeriod){
     });
     this.setState({rentduesLabel:"Choose day/date"})
     this.setState({rentDue:null})
+    this.setState({rentDueDisable:false});
   }
 
   this.setState({rentduesData});
   this.setState({rentPeriod})
-  this.setState({rentDueDisable:false});
 }
 
 getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
@@ -490,6 +493,7 @@ renderHeader(){
                                 placeholder={"Mobile Number"} textValue={mobileNumber} 
                                 onChangeText={(mobileNumber)=>this.onChangeMobile(mobileNumber)} 
                                 image-style={styles.address_icon} 
+                                //InputStyle={{color:'red'}}
                                 source={require('../../../assets/images/address.png')}/>
                              </View>
                           </View>
@@ -574,7 +578,7 @@ renderHeader(){
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
                              <View style={styles.currencyLabel}>
                               <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput  ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(43)}]} placeholder={'Ex: 10,000'}/>
+                              <TextInput  ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10,000'}/>
                               </View>
                           </View>
                           <View style={styles.fieldWrapp}>
@@ -678,7 +682,7 @@ renderModalView(){
               autoCorrect={false} 
               value={add_building_name}
               style={styles.textInputStyle(theme)} 
-              placeholder={'Name of Building'}
+              //placeholder={'Name of Building'}
               returnKeyLabel={"next"}
               returnKeyType={"next"}
               onSubmitEditing={() => { this._PopupLocationEntry.focus() }}

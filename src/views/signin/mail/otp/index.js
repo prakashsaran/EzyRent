@@ -18,7 +18,7 @@ function SignUpMobile(props) {
     
   const {email,otp} = props.mail;
   const [enablebtn, setEnableButton] = useState(false);
-  const [resendEnable, setResendEnable] = useState(false);
+  const [resendEnable, setResendEnable] = useState(true);
   const [resendtimeout, setResendTimeOut] = useState(0);
   const [inputOtp, setInputOtp] = useState(null);
   
@@ -31,7 +31,7 @@ function SignUpMobile(props) {
       const {mail} = props
       setEnableButton(false);
       setResendEnable(false);
-      setResendTimeOut(20);
+      setResendTimeOut(120);
       props.resendMailOtp(mail,email);
     }
   

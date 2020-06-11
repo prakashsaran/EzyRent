@@ -49,12 +49,11 @@ const {onClickBtn} = props
             <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
             <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
           </View>
-          <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>onClickBtn()}>
-            <Text style={theme.typography.caption}>NEXT</Text>
-          </TouchableOpacity>
-          <View style={{height:20,width:'100%'}}></View>
         </View>
       </ScrollView>
+         <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>onClickBtn()}>
+            <Text style={theme.typography.caption}>NEXT</Text>
+          </TouchableOpacity>
     </SafeAreaView>
   );
 }
