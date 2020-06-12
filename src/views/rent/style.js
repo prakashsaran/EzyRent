@@ -156,11 +156,12 @@ export default StyleSheet.create({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
       fontSize:normalize(16),
-      width:'50%',
+      width:'75%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
       marginTop:theme.spacing.large,
       paddingLeft:20,
+      alignSelf:'flex-end',
     }),
     propertygnInfo:{
       width:'100%',

@@ -99,7 +99,7 @@ class EditMyProfile extends React.Component {
   pickupImage(){
     const {updateUserProfle,customer} = this.props
     const options = {
-      title: 'Select Avatar',
+      title: 'Profile Photo',
       storageOptions: {
         skipBackup: true,
         path: 'images',

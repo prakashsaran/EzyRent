@@ -590,7 +590,7 @@ renderHeader(){
                                </View>
                                <RightIconTextbox
                                 ref={(ref) => this._mobileNumberEntry = ref}
-                                onFocus={()=>this.onFocusInput(this._mobileNumberEntry)}
+                                //onFocus={()=>this.onFocusInput(this._mobileNumberEntry)}
                                 onPressIcon={()=>this.requestContactPermission()}
                                 keyboardType={'number-pad'}
                                 returnKeyLabel={"next"}

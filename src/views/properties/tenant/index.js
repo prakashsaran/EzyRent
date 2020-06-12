@@ -24,7 +24,10 @@ class TenantProfile extends React.Component {
       tenant_name:undefined,
       mobile_country_code:"0091",
       profile_pic:"default.jpg",
-      tenant_mobile:undefined
+      tenant_mobile:undefined,
+      consistency_rent_pay:0,
+      rent_pay:0,
+      total_rent_pay:0,
     }
     StatusBar.setBarStyle("light-content");
   }
@@ -59,6 +62,9 @@ class TenantProfile extends React.Component {
         tenant_mobile:current_tenant.mobile,
         mobile_country_code:current_tenant.mobile_country_code,
         profile_pic:current_tenant.profile_pic,
+        consistency_rent_pay:current_tenant.quick_stat.consistency_rent_pay,
+        rent_pay:current_tenant.quick_stat.rent_pay,
+        total_rent_pay:current_tenant.quick_stat.total_rent_pay,
       })
     }
   }
@@ -70,21 +76,26 @@ class TenantProfile extends React.Component {
     NavigationService.navigate(NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH);
   }
   renderQuickState(){
+    const {consistency_rent_pay,total_rent_pay,rent_pay} = this.state
       return(
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
             <View style={styles.quick_stats_inner}>
               <Text style={styles.quick_stats_heading}>Quick Stats</Text>
             </View>
-            <Text style={styles.content(theme)}>A quick summary of owner account on EzyRent.</Text>
+            <Text style={styles.content(theme)}>A quick summary of Tenant account on EzyRent.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
+                <Text style={styles.box_heading}>{rent_pay}</Text>
                 <Text style={styles.box_desc}>Properties Paying</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>7K</Text>
+                <Text style={styles.box_heading}>{total_rent_pay}K</Text>
                 <Text style={styles.box_desc}>Total Paid</Text>
+              </View>
+              <View style={styles.box}>
+                <Text style={styles.box_heading}>{consistency_rent_pay}</Text>
+                <Text style={styles.box_desc}>Consistency in Paying Rent</Text>
               </View>
             </View>
           </View>
@@ -92,16 +103,16 @@ class TenantProfile extends React.Component {
       )
   }
   renderConsistency(){
-    const {AccountType} = this.state
+    const {AccountType,tenant_name,consistency_rent_pay} = this.state
       return (
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
             <View style={styles.quick_stats_inner}>
               <Text style={styles.quick_stats_heading}>Consistency Score</Text>
             </View>
-            <Text style={styles.content(theme)}>Lorem ipsum dolor sit amet, consectetur adipiscing elit enim</Text>
+            <Text style={styles.content(theme)}>{tenant_name} consistency score on EzyRent as tenant.</Text>
             <View style={styles.green_box}>
-              <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
+              <Text style={[styles.greenText,styles.greenText100]}>{consistency_rent_pay}</Text>
               <Image style={styles.grenBox} source={require('../../../assets/images/green-box.png')}></Image>
               <Text style={styles.greenText}>Excellent! Your consistency score is very good.</Text>
             </View>

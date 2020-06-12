@@ -30,22 +30,6 @@ class PropertyOwner extends React.Component {
     getLandlordProfileById(customer,landlord_id);
   }
 
-  componentDidMount(){
-    const {customer,status}=this.props
-    if(status){
-      if(customer.hasOwnProperty("type")){
-        if(customer.type){
-          this.setState({AccountType:customer.type});
-        } else{
-          this.setState({AccountType:'new'});
-        }
-      } else{
-        this.setState({AccountType:"new"});
-      }
-    } else{
-      this.setState({AccountType:"new"});
-    }
-  }
  
   goToMyTenants(){
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
@@ -54,6 +38,7 @@ class PropertyOwner extends React.Component {
     NavigationService.navigate(NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH);
   }
   renderQuickState(){
+    const {current_landlord} = this.props
       return(
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
@@ -63,16 +48,16 @@ class PropertyOwner extends React.Component {
             <Text style={styles.content(theme)}>A quick summary of owner account on EzyRent.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>12</Text>
+                <Text style={styles.box_heading}>{current_landlord.quick_stat.rent_collect}</Text>
                 <Text style={styles.box_desc}>Properties Rented</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>7K</Text>
-                <Text style={styles.box_desc}>Rent Payable</Text>
+                <Text style={styles.box_heading}>{current_landlord.quick_stat.total_rent_collect}</Text>
+                <Text style={styles.box_desc}>Total Rent Collected</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>100%</Text>
-                <Text style={styles.box_desc}>Consistency in Collectin Rent</Text>
+                <Text style={styles.box_heading}>{current_landlord.quick_stat.consistency_rent_collect}</Text>
+                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
           </View>
@@ -80,6 +65,7 @@ class PropertyOwner extends React.Component {
       )
   }
   renderConsistency(){
+    const {current_landlord} = this.props
     const {AccountType} = this.state
       return (
         <View style={styles.shadow}>
@@ -87,7 +73,7 @@ class PropertyOwner extends React.Component {
             <View style={styles.quick_stats_inner}>
               <Text style={styles.quick_stats_heading}>Consistency Score</Text>
             </View>
-            <Text style={styles.content(theme)}>Lorem ipsum dolor sit amet, consectetur adipiscing elit enim</Text>
+            <Text style={styles.content(theme)}>{current_landlord.full_name} consistency score on EzyRent as landlord.</Text>
             <View style={styles.green_box}>
               <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
               <Image style={styles.grenBox} source={require('../../../assets/images/green-box.png')}></Image>
@@ -100,6 +86,7 @@ class PropertyOwner extends React.Component {
   render(){
     const theme = this.context;
     const {current_landlord} = this.props
+
     if(!Object.keys(current_landlord).length > 0){
      return(
        <View style={{width:"100%",height:"100%",alignItems:'center',justifyContent:'center'}}>

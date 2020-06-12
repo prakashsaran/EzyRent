@@ -27,6 +27,7 @@ class ViewPropertyTenant extends React.Component {
           isconfirmModalVisible:false,
           mpin:undefined,
           secureTextEntry:true,
+          errorMessage:null,
       }
     }
 
@@ -48,8 +49,13 @@ class ViewPropertyTenant extends React.Component {
       const { mpin } = this.state;
       const {deleteProperty,customer,property_currentItem} = this.props
       const formdata = {mpin};
-      deleteProperty(property_currentItem.id,formdata);
-      this.setState({isconfirmModalVisible:false});
+      if(mpin && mpin.length===4){
+        this.setState({errorMessage:null});
+        deleteProperty(property_currentItem.id,formdata);
+        this.setState({isconfirmModalVisible:false,errorMessage:null,mpin:""});          
+      } else{
+        this.setState({errorMessage:"Sorry, Please specify four digit APP-PIN"});
+      }
     }
     renderHeader(theme){
         return(
@@ -71,10 +77,10 @@ class ViewPropertyTenant extends React.Component {
         )
     }
     renderConfirmModalModal(){
-      const {secureTextEntry,isconfirmModalVisible} = this.state
+      const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
       return (
-        <Modal isVisible={isconfirmModalVisible}>
-            <View style={{ width:'95%',height:150,backgroundColor:'#fff',borderRadius:5 }}>
+        <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
+            <View style={{ width:'95%',height:errorMessage?160:140,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
               <Text style={styles.confirmBoxTitle(theme)}>Confirm your App Pin</Text>
               <View style={styles.pincontainer(theme)}>
                 <OTPInputView
@@ -82,16 +88,17 @@ class ViewPropertyTenant extends React.Component {
                   autoFocusOnLoad={false}
                   style={styles.pininputBox(theme)}
                   secureTextEntry={secureTextEntry}
-                  codeInputHighlightStyle={styles.underlineStyleHighLighted(theme)}
-                  onCodeFilled = {(code => {this.setState({mpin:code})})}
-                  codeInputFieldStyle={styles.underlineStyleBase(theme)}
+                  onCodeChanged={(code)=>{this.setState({errorMessage:null,mpin:code})}}
+                  codeInputHighlightStyle={errorMessage?styles.errorunderlineStyleHighLighted(theme):styles.underlineStyleHighLighted(theme)}
+                  codeInputFieldStyle={errorMessage?styles.errorunderlineStyleBase(theme):styles.underlineStyleBase(theme)}
                 />
                 <TouchableOpacity style={styles.visibilityIconWrapp} onPress={()=>{this.setState({secureTextEntry:!secureTextEntry})}}>
                   <Image style={styles.visibilityIcon} source={secureTextEntry?require(secureTextHidden):require(secureTextShow)}/>
                 </TouchableOpacity>
               </View>
-                <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:20,paddingTop:10,}}>
-                  <TouchableOpacity onPress={()=>this.setState({isconfirmModalVisible:false})}>
+              {errorMessage && <Text style={styles.errorMessage(theme)}>{errorMessage}</Text>}
+                <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
+                  <TouchableOpacity onPress={()=>this.setState({isconfirmModalVisible:false,errorMessage:null,mpin:""})}>
                     <Text style={styles.eraseTitle(theme)}>Cancel</Text>
                   </TouchableOpacity>
 

@@ -143,11 +143,13 @@ export default StyleSheet.create({
       flexDirection:'row',
       width:'100%',
       alignItems:'center',
-      justifyContent:'center',
+      justifyContent:'space-between',
     },
     box:{
       textAlign:'center',
       paddingHorizontal:10,
+      width:'33%',
+      minHeight:70,
     },
     box_heading:{
       width:'100%',
@@ -161,7 +163,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#333',
-      fontSize:normalize(14),
+      fontSize:normalize(12),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     },

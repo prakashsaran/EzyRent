@@ -20,8 +20,12 @@ export default StyleSheet.create({
       borderColor: theme.colors.secondry,
       padding:0,
     }),
+    errorunderlineStyleHighLighted: theme => ({
+      borderColor: theme.colors.errorColor,
+      padding:0,
+    }),
     underlineStyleBase: theme => ({
-      width: theme.dimens.defaultPinCodeWidth,
+      width: theme.dimens.defaultPinCodeWidth-10,
       height: 45,
       padding:0,
       borderWidth: 0,
@@ -32,11 +36,23 @@ export default StyleSheet.create({
       fontFamily:theme.typography.primaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
+    errorunderlineStyleBase: theme => ({
+      width: theme.dimens.defaultPinCodeWidth-10,
+      height: 45,
+      padding:0,
+      borderWidth: 0,
+      borderBottomWidth: 1,
+      color:theme.colors.descriptionColor,
+      borderColor:theme.colors.errorColor,
+      fontSize:normalize(22),
+      fontFamily:theme.typography.primaryFont,
+      fontWeight:theme.typography.fontWeightRegular,
+    }),
     pincontainer: theme => ({
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
-      width:'100%',
+      width:'90%',
       paddingHorizontal:20,
       alignSelf:'center',
       position:'relative',
@@ -48,8 +64,8 @@ export default StyleSheet.create({
       top:10,
     },
     visibilityIcon:{
-      width:25,
-      height:20,
+      width:20,
+      height:18,
     },
   headerContext:{
     flexDirection:'row',
@@ -84,7 +100,7 @@ export default StyleSheet.create({
   }),
   confirmBoxTitle:theme=>({
     color:theme.colors.descriptionColor,
-    fontSize:normalize(22),
+    fontSize:normalize(18),
     textAlign:'center',
     paddingTop:10,
     fontFamily:theme.typography.secondaryFont,
@@ -197,7 +213,6 @@ export default StyleSheet.create({
   eraseTitle:theme=>({
     fontSize:normalize(13),
     color:theme.colors.errorColor,
-    paddingTop:3,
   }),
   eraseIcon:{
     width:28,
@@ -229,6 +244,12 @@ export default StyleSheet.create({
     color:theme.colors.primaryTitleColor,
     fontSize:normalize(15),
     fontFamily:theme.typography.fontFamilyOxygenBold,    
+  }),
+  errorMessage: theme =>({
+    color:theme.colors.errorColor,
+    fontSize:normalize(12),
+    fontFamily:theme.typography.fontFamilyMontserratLight, 
+    alignSelf:'center',   
   }),
 
   });

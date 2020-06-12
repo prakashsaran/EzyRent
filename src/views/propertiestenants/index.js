@@ -68,7 +68,20 @@ class PropertiesTenants extends React.Component {
         getPropertiesForLandlord(searchQuery,0,10);
     }
   }
-
+  componentDidUpdate(prevProps, prevState, snapshot){
+    const {getPropertiesForTenant,getPropertiesForLandlord} = this.props
+    const {searchQuery,activeTab,visibleSearch} = this.state
+    if(prevState.visibleSearch !=visibleSearch){
+      if(!visibleSearch && activeTab==1 && searchQuery){
+        getPropertiesForTenant("",0,10);
+        this.setState({searchQuery:null})
+      }
+      if(!visibleSearch && activeTab==2 && searchQuery){
+        getPropertiesForLandlord("",0,10);
+        this.setState({searchQuery:null})
+      }
+    }
+  }
   UNSAFE_componentWillMount(){
     const {customer,status}=this.props
     this.loadUserDataAccordingAccountType(customer)
@@ -259,8 +272,7 @@ goToPropertyOwnerDetail(landlord_id){
     } else {
       getPropertiesForLandlord(searchQuery,0,10);
     }
-    
-   // this.setState({searchQuery})
+    this.setState({searchQuery})
   }
 
   /* ================================================================*/
@@ -381,7 +393,7 @@ goToPropertyOwnerDetail(landlord_id){
         <View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-            <Text style={styles.itemName(theme)}>{item.house_number} {'\n'} {item.building_name}</Text>
+            <Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -475,8 +487,7 @@ goToPropertyOwnerDetail(landlord_id){
     return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`};
   }
   renderCollectingPropertiest(){
-    const {propertiesLandlord} = this.props
-    
+    const {propertiesLandlord} = this.props    
     if(propertiesLandlord.items.length >0 ){
      return (
       <View style={styles.properties(theme)}>

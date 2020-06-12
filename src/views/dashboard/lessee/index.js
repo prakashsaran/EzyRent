@@ -160,7 +160,7 @@ getConsistencyRentPay(DataObj){
                             <Text style={styles.itemInfo(theme)}>Properties I am Paying Rent</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>{this.getTotalRentPay(customer)}K</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getTotalRentPay(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Total Rent I have to Pay</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>

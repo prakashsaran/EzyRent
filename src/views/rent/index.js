@@ -38,6 +38,21 @@ class RentList extends React.Component {
       DeviceHeight: Dimensions.get('window').height,
     });
   }
+  
+  componentDidUpdate(prevProps, prevState, snapshot){
+    const {getRentsForTenant,getRentsForLandlord,customer} = this.props
+    const {searchQuery,activeTab,visibleSearch} = this.state
+    if(prevState.visibleSearch !=visibleSearch){
+      if(!visibleSearch && activeTab==1 && searchQuery){
+        getRentsForTenant(customer,"",0,10);
+        this.setState({searchQuery:null})
+      }
+      if(!visibleSearch && activeTab==2 && searchQuery){
+        getRentsForLandlord(customer,"",0,10);
+        this.setState({searchQuery:null})
+      }
+    }
+  }
 
   UNSAFE_componentWillMount(){
     const {customer,status}=this.props
@@ -93,7 +108,7 @@ class RentList extends React.Component {
       getRentsForLandlord(customer,searchQuery,0,10);
     }
     
-   // this.setState({searchQuery})
+    this.setState({searchQuery})
   }
 
   componentDidMount(){
@@ -277,7 +292,7 @@ class RentList extends React.Component {
           <View key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)}>{item.building_name}</Text>
+                 <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.process=="due"?
@@ -309,7 +324,7 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.building_name}</Text>
+               <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
                     {item.process=="due"?
@@ -344,13 +359,13 @@ class RentList extends React.Component {
   }
 
   renderCollectingItems(landlord_items){
-    return landlord_items.map((item,inx)=>{
+    return landlord_items.map((item,inx)=>{      
       if(item.process=="due"){
         return (
           <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                <Text style={styles.itemName(theme)}>{item.building_name}</Text>
+               <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
                 <View style={styles.propertygnInfo}>
 
                     <View style={styles.propInforowleft}>
@@ -390,7 +405,7 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-              <Text style={styles.itemName(theme)}>{item.building_name}</Text>
+              <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
               <View style={styles.propertygnInfo}>
 
                   <View style={styles.propInforowleft}>

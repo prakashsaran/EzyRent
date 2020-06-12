@@ -128,28 +128,29 @@ getMonthNames(){
 getMonthDates(){
   return {1:'1st of Month',2:'2nd of Month',3:'3rd of Month',4:'4th of Month',5:'5th of Month',6:'6th of Month',7:'7th of Month',8:'8th of Month',9:'9th of Month',10:'10th of Month',11:'11th of Month',12:'12th of Month',13:'13th of Month',14:'14th of Month',15:'15th of Month',16:'16th of Month',17:'17th of Month',18:'18th of Month',19:'19th of Month',20:'20th of Month',21:'21st of Month',22:'22nd of Month',23:'23rd of Month',24:'24th of Month',25:'25th of Month',26:'26th of Month',27:'27th of Month',28:'28th of Month',29:'29th of Month',30:'30th of Month',31:'31st of Month'};
 }
-componentDidMount(){
-  const {buildingData,bankData} = this.props
-  
-  if (Platform.OS == 'android') {
-      this.keyboardBehavior = 'height'
-  }
-
+setBuildingPickerData(buildingData){
   const allBuildings = buildingData || [];
   const availableBuildings = allBuildings.map((building,idx)=>{
     return {label:building.building_name,value:building.id}
   });
-
-  const availableBankAccounts = bankData.map((bank,idx)=>{
+  availableBuildings.push({label:"+ Add New Building",value:"add_new"});
+  this.setState({availableBuildings});
+}
+setBankPickerData(bankData){
+  const allBankAccounts = bankData || [];
+  const availableBankAccounts = allBankAccounts.map((bank,idx)=>{
     return {label:bank.name,value:bank.id}
   });
-
-  availableBuildings.push({label:"+ Add New Building",value:"add_new"})
-
   availableBankAccounts.push({label:"+ Add New Bank Account",value:"add_new"})
-
-  this.setState({availableBuildings,availableBankAccounts});
-
+  this.setState({availableBankAccounts});
+}
+componentDidMount(){  
+  const {buildingData,bankData} = this.props
+  this.setBuildingPickerData(buildingData);
+  this.setBankPickerData(bankData);
+  if (Platform.OS == 'android') {
+      this.keyboardBehavior = 'height'
+  }
   this.keyboardDidShow = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
   this.keyboardWillShow = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow)
   this.keyboardWillHide = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide)
@@ -176,14 +177,12 @@ componentDidMount(){
 /* =================================== */
 
 UNSAFE_componentWillReceiveProps(nextProps){
-  const {buildingData} = this.props
+  const {buildingData,bankData} = this.props
   if(nextProps.buildingData!==buildingData){
-    const allBuildings = nextProps.buildingData || [];
-    const availableBuildings = allBuildings.map((building,idx)=>{
-      return {label:building.building_name,value:building.id}
-    })
-    availableBuildings.push({label:"+ Add New Building",value:"add_new"})
-    this.setState({availableBuildings})
+    this.setBuildingPickerData(nextProps.buildingData);
+  }
+  if(nextProps.bankData!==bankData){
+    this.setBankPickerData(nextProps.bankData);
   }
 }
 componentDidUpdate(prevProps,prevState){
@@ -483,7 +482,7 @@ renderHeader(){
                                </View>
                                <RightIconTextbox
                                 ref={(ref) => this._mobileNumberEntry = ref}
-                                onFocus={()=>this.onFocusInput(this._mobileNumberEntry)}
+                                //onFocus={()=>this.onFocusInput(this._mobileNumberEntry)}
                                 onPressIcon={()=>this.requestContactPermission()} 
                                 keyboardType={'number-pad'} 
                                 returnKeyLabel={"next"}
