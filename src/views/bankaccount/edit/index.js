@@ -25,7 +25,7 @@ class EditBankAccount extends React.Component {
       acHolderName:undefined,
       typeOfAc:null,
       ifscCode:undefined,
-      additionalDetails:undefined,
+      additionalDetails:"",
     }
     StatusBar.setBarStyle("light-content");
     this._nameofBankEntry = undefined;

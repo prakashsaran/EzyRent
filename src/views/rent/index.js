@@ -359,7 +359,9 @@ class RentList extends React.Component {
   }
 
   renderCollectingItems(landlord_items){
-    return landlord_items.map((item,inx)=>{      
+    return landlord_items.map((item,inx)=>{    
+      console.log("landlord_items",JSON.stringify(landlord_items));
+        
       if(item.process=="due"){
         return (
           <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} key={inx} style={styles.loopitem}>

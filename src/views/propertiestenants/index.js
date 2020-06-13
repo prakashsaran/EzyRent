@@ -15,6 +15,7 @@ import {
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
   NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH,
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -157,6 +158,10 @@ class PropertiesTenants extends React.Component {
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
   }
 
+  modifyPropertyTenant(property){
+    NavigationService.navigate(NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH,{property});
+  }
+
   getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     try {
       decimalCount = Math.abs(decimalCount);
@@ -237,14 +242,14 @@ goToPropertyOwnerDetail(landlord_id){
   }
 
   AcceptProperty(item){
-    const {tenantSubmissionOnProperty} = this.props
-    tenantSubmissionOnProperty(item.id,"A");
+    const {tenantSubmissionOnProperty,customer} = this.props
+    tenantSubmissionOnProperty(item.id,"A",customer);
     this.setState({visiblemodal:false})
   }
 
   RejectProperty(item){
-    const {tenantSubmissionOnProperty} = this.props
-    tenantSubmissionOnProperty(item.id,"R");
+    const {tenantSubmissionOnProperty,customer} = this.props
+    tenantSubmissionOnProperty(item.id,"R",customer);
     this.setState({visiblemodal:false})
   }
 
@@ -393,7 +398,7 @@ goToPropertyOwnerDetail(landlord_id){
         <View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-            <Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -439,13 +444,11 @@ goToPropertyOwnerDetail(landlord_id){
         <View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-              <Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
-                    {item.process=="due"?
-                      <Image style={styles.due_label} source={require("../../assets/images/due_label.png")}></Image>
-                    :null}
+                    {item.rent_status=="D" && <Image style={styles.due_label} source={require("../../assets/images/due_label.png")}></Image>}
                   </View>
                   <View style={styles.propInforowright}>
                     <View style={styles.propInfoAttrb}>
@@ -454,22 +457,22 @@ goToPropertyOwnerDetail(landlord_id){
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
-                      {item.property_status =="A"&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
-                      {item.process=="reject"&&<Text style={styles.propItemattrvalueError(theme)}>Contract Rejected by Tenant</Text>}
+                      {item.property_tenant_status =="N"&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
+                      {item.property_tenant_status=="R"&&<Text style={styles.propItemattrvalueError(theme)}>{item.awaiting_text}</Text>}
                       {item.property_status =="O" &&
-                        <Text style={item.process=="due"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
+                        <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
                       }
                     </View>
-                    {item.process=="due"?
+                    {item.rent_status=="D" &&
                       <View style={styles.markwrap}>
                         <TouchableOpacity>
                           <Text style={styles.marktext(theme)}>MARK AS PAID</Text>
                         </TouchableOpacity>
                       </View>
-                    :null}
-                    {item.process=="reject"&&
+                    }
+                    {item.property_tenant_status=="R"&&
                       <View style={styles.markwrap}>
-                        <TouchableOpacity onPress={()=>this.addPropertyTenant()}>
+                        <TouchableOpacity onPress={()=>this.modifyPropertyTenant(item)}>
                           <Text style={styles.marktext(theme)}>MODIFY <Image style={styles.right_arrow} source={require('../../assets/images/arrow_next.png')}></Image></Text>
                         </TouchableOpacity>
                       </View>}
@@ -487,7 +490,7 @@ goToPropertyOwnerDetail(landlord_id){
     return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`};
   }
   renderCollectingPropertiest(){
-    const {propertiesLandlord} = this.props    
+    const {propertiesLandlord} = this.props        
     if(propertiesLandlord.items.length >0 ){
      return (
       <View style={styles.properties(theme)}>

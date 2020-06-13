@@ -55,6 +55,7 @@ class ViewPropertyTenant extends React.Component {
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         const {property} = this.state
+        
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
@@ -84,7 +85,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View>
                                         <View style={styles.payamountPeriod}>
-                                            <Text style={styles.pageTitle(theme)}>INR 25,0000</Text>
+                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.rent_split_up.rent_amount}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
                                         <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>
@@ -97,7 +98,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
-                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} {property_currentItem.bank_account_number}</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} ({property_currentItem.bank_account_number})</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>

@@ -265,10 +265,11 @@ export const mobileNumberChangeVerify = (user,updatingData,data) => async (dispa
     const UpdateId = updatingData.id;
     const formData = formUrlencodedData(data);
     //request to server
-    const response = await EzyRent.admin.mobileNumberChangeVerify(UpdateId,formData);
-    if(response){
+    const response = await EzyRent.admin.mobileNumberChangeVerify(UpdateId,formData);    
+    if(response  && response.success){
       user.mobile = updatingData.mobile
       dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: user });
+      DropDownHolder.alert('success', '', response.message)
     }
       dispatch({ type: EZYRENT_ACCOUNT_LOADING, payload: false });
     } catch (e) {
@@ -296,27 +297,34 @@ export const refreshMyProfile  = async (user,dispatch) =>{
 }
 
 export const addProperty = (data,media=null,user=null) => async (dispatch) => {
-  if(media){
-    const formData = formMultipartData("property_image",media,data);
-    const response = await EzyRent.admin.addPropertyWithImage(formData);
-    if(response && response.success){
-      refreshPropertiesForLandlord(dispatch);
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
-      // re render user profile
-      if(user){
-        refreshMyProfile(user,dispatch);
+  dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
+  try{
+    if(media){
+      const formData = formMultipartData("property_image",media,data);
+      const response = await EzyRent.admin.addPropertyWithImage(formData);
+      if(response && response.success){
+        refreshPropertiesForLandlord(dispatch);
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+        // re render user profile
+        if(user){
+          refreshMyProfile(user,dispatch);
+        }
+      }
+    } else {
+      const formData = formUrlencodedData(data);
+      const response = await EzyRent.admin.addPropertyNoneImage(formData);
+      if(response && response.success){
+        refreshPropertiesForLandlord(dispatch);
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+        if(user){
+          refreshMyProfile(user,dispatch);
+        }
       }
     }
-  } else {
-    const formData = formUrlencodedData(data);
-    const response = await EzyRent.admin.addPropertyNoneImage(formData);
-    if(response && response.success){
-      refreshPropertiesForLandlord(dispatch);
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
-      if(user){
-        refreshMyProfile(user,dispatch);
-      }
-    }
+    dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
+  } catch(e){
+      console.log(e);
+      dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
   }
 
 }
@@ -331,21 +339,28 @@ export const deleteProperty = (propId,data) => async (dispatch) => {
 }
 
 export const editProperty = (propId,data,media=null) => async (dispatch) => {
-  
-  if(media){
-    const formData = formMultipartData("property_image",media,data);
-    const response = await EzyRent.admin.editPropertyWithImage(propId,formData);
-    if(response && response.success){
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
-      refreshPropertiesForLandlord(dispatch);
+  dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
+  try{
+
+    if(media){
+      const formData = formMultipartData("property_image",media,data);
+      const response = await EzyRent.admin.editPropertyWithImage(propId,formData);
+      if(response && response.success){
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+        refreshPropertiesForLandlord(dispatch);
+      }
+    } else {
+      const formData = formUrlencodedData(data);
+      const response = await EzyRent.admin.editPropertyNoneImage(propId,formData);
+      if(response && response.success){
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+        refreshPropertiesForLandlord(dispatch);
+      }
     }
-  } else {
-    const formData = formUrlencodedData(data);
-    const response = await EzyRent.admin.editPropertyNoneImage(propId,formData);
-    if(response && response.success){
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
-      refreshPropertiesForLandlord(dispatch);
-    }
+    dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
+  } catch(e){
+      console.log(e);
+      dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
   }
 
 }

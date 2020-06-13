@@ -46,6 +46,8 @@ class EditMyProfile extends React.Component {
       errorValue:null,
       verifyMpin:undefined,
       profileloader:false,
+      mobile_otp:"",
+      email_otp:"",
     }
     StatusBar.setBarStyle("light-content");
     this._fullNameEntry = undefined;
@@ -104,6 +106,9 @@ class EditMyProfile extends React.Component {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth: 500,
+      maxHeight: 500,
+      quality: 0.5
     };
     
     ImagePicker.showImagePicker(options, (response) => {
@@ -226,15 +231,15 @@ class EditMyProfile extends React.Component {
   }
 
   mobileNumberVerify(){
-    const {mobile_otp,verifyMpin} = this.state
+    const {mobile_otp,email_otp,verifyMpin} = this.state
     const {mobileNumberChangeVerify,updating,customer} = this.props
-    if(!mobile_otp || !verifyMpin){
+    if(!mobile_otp || !verifyMpin || !email_otp){
       this.setState({errorValue:"Please Enter Valid OTP & MPIN"});
       return false;
     }
-    const formdata = {mobile_otp,mpin:verifyMpin}    
+    const formdata = {mobile_otp,email_otp,mpin:verifyMpin}    
     mobileNumberChangeVerify(customer,updating,formdata);
-    this.setState({mobilePopup:false,errorValue:null,mobile_otp:null,verifyMpin:null})
+    this.setState({mobilePopup:false,errorValue:null,mobile_otp:null,email_otp:null,verifyMpin:null})
   }
 
   renderPopupMpinChange(){
@@ -357,6 +362,17 @@ class EditMyProfile extends React.Component {
                 codeInputFieldStyle={styles.underlineStyleBase(theme)}
               />
           </View>
+          <Text style={styles.columntitlePop(theme)}>CONFIRM YOUR EMAIL OTP</Text>
+          <View style={styles.fieldWrapp}>
+              <OTPInputView
+                pinCount={4}
+                autoFocusOnLoad={false}
+                style={styles.pininputBoxPop(theme)}
+                codeInputHighlightStyle={styles.underlineStyleHighLighted(theme)}
+                onCodeFilled = {(code => {this.setState({email_otp:code})})}
+                codeInputFieldStyle={styles.underlineStyleBase(theme)}
+              />
+          </View>
           <View style={styles.popupBtms}>
             <TouchableOpacity onPress={()=>this.setState({mobilePopup:false})}>
                 <Text style={styles.cancel}>CANCEL</Text>
@@ -373,7 +389,7 @@ class EditMyProfile extends React.Component {
   render(){
     const {full_name,secureTextEntry,appPin,mobileNumber,acEmail,profileloader} = this.state
     const {customer,loading} = this.props
-    const theme = this.context;
+    const theme = this.context;    
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} 
         source={require('../../assets/images/dashboard_bg.png')}
@@ -393,11 +409,11 @@ class EditMyProfile extends React.Component {
                     source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
                     >
                         <ActivityIndicator animating={profileloader} size={"large"} color={theme.colors.secondry} style={{position:'absolute',top:"35%"}}/>
-                          <TouchableOpacity onPress={()=>this.pickupImage()} style={styles.profileEdit}>
+                          <TouchableOpacity disabled={profileloader} onPress={()=>this.pickupImage()} style={styles.profileEdit}>
                             <Image style={styles.editIcon}
                             source={require('../../assets/images/edit-transparent.png')}></Image>
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={()=>this.removeProfileImage()} style={styles.profileRemove}>
+                          <TouchableOpacity  disabled={profileloader} onPress={()=>this.removeProfileImage()} style={styles.profileRemove}>
                             <Image style={styles.removeIcon}
                             source={require('../../assets/images/delete-transparent.png')}></Image>
                           </TouchableOpacity>

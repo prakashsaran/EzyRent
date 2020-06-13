@@ -468,6 +468,9 @@ renderContactList(){
         skipBackup: true,
         path: 'images',
       },
+      maxWidth: 700,
+      maxHeight: 700,
+      quality: 0.5
     };
 
     ImagePicker.showImagePicker(options, (response) => {
@@ -685,7 +688,7 @@ renderHeader(){
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
                              <View style={styles.currencyLabel}>
                               <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10,000'}/>
+                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10000'}/>
                               </View>
                           </View>
 

@@ -134,6 +134,7 @@ class ViewPropertyTenant extends React.Component {
                                         <Text style={styles.textLabel(theme)}>{property_currentItem.landlord_text}</Text>
                                         {property_currentItem.tenant_id &&<TouchableOpacity onPress={()=>this.goToTenantProfile(property_currentItem.tenant_id)}><Text style={styles.textValue(theme)}>{property_currentItem.tenant_details[0].tenant_name}</Text></TouchableOpacity>}
                                         {property_currentItem.tenant_id &&<Text style={styles.textLabel(theme)}>({getCountryCodeFormat(property_currentItem.tenant_details[0].tenant_ccd)} - {property_currentItem.tenant_details[0].tenant_mobile})</Text>}
+                                        {!property_currentItem.tenant_id && <Text style={styles.textValue(theme)}>Not Available</Text>}
                                     </View>
                                     <View style={styles.locationWrapp}>
                                         <Image resizeMode={'contain'} style={{width:20,height:20,marginRight:5,marginLeft:-5}} source={require('../../../assets/images/gps_dark.png')}></Image>
@@ -160,7 +161,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
-                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} {property_currentItem.bank_account_number}</Text>
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} ({property_currentItem.bank_account_number})</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>

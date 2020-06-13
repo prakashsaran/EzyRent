@@ -6,7 +6,7 @@ import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
 import { PickerSelect,DropDownHolder } from '../../../components';
-import {addBank} from '../../../actions';
+import {addBank,isValidAccountNumber,isValidIfsc} from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -24,7 +24,7 @@ class AddBankAccount extends React.Component {
       acHolderName:undefined,
       typeOfAc:undefined,
       ifscCode:undefined,
-      additionalDetails:undefined,
+      additionalDetails:"",
     }
     StatusBar.setBarStyle("light-content");
     this._nameofBankEntry = undefined;
@@ -66,7 +66,23 @@ validateAndSetAttribute(value, attribute) {
   });
   return valid
 }
-
+checkValidBankDetails(){
+  const {accountNumber,crmAcNumber,ifscCode} = this.state
+  if(accountNumber !=crmAcNumber){
+    DropDownHolder.alert('error', '', 'Invalid Form. Account number mismatch!')
+    return false
+  }
+  if(isValidAccountNumber(accountNumber) && isValidIfsc(ifscCode)){
+    return true
+  }
+  if(!isValidAccountNumber(accountNumber)){
+    DropDownHolder.alert('error', '', 'Invalid Form. Please enter valid account number!')
+  }
+  if(!isValidIfsc(accountNumber)){
+    DropDownHolder.alert('error', '', 'Invalid Form. Please enter valid IFSC Code!')
+  }
+  return false
+}
 submitForm(){
   const {addBank} = this.props;
   const {nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode,additionalDetails} = this.state
@@ -78,8 +94,10 @@ submitForm(){
           //this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
           this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
   if(formIsValid){
-    const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails}
-    addBank(formdata);
+    if(this.checkValidBankDetails()){
+      const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails}
+      addBank(formdata);
+    }
   }else{
     DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
   }

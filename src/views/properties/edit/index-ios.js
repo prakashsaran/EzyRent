@@ -385,6 +385,9 @@ getTotalAmount(amount,type){
         skipBackup: true,
         path: 'images',
       },
+      maxWidth: 700,
+      maxHeight: 700,
+      quality: 0.5
     };
 
     ImagePicker.showImagePicker(options, (response) => {

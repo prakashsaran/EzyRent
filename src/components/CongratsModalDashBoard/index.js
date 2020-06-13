@@ -46,6 +46,22 @@ class CongratsModalDashBoard extends PureComponent {
         }
         
       }
+
+      getPopupDateFormat(datestring){
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+    
+        const dateFull = new Date(datestring);
+        return dateFull.getDate()+" "+ monthNames[dateFull.getMonth()]+" "+dateFull.getFullYear();
+      }
+    
+      getPopupTimeFormat(datestring){
+    
+        const dateFull = new Date(datestring);
+        const mpam = (dateFull.getHours() >= 12) ? "PM" : "AM";
+        return dateFull.getUTCHours()+":"+dateFull.getMinutes()+ ""+mpam;
+      }
     
       rejectConfirm(property_currentItem){
         Alert.alert(
@@ -140,7 +156,7 @@ class CongratsModalDashBoard extends PureComponent {
                             <Text style={styles.banktitle(theme)}>Added Date</Text>
                         </View>
                         <View style={styles.bankacInfo}>
-                            <Text style={styles.textLabelXl(theme)}>15 March 2020</Text><Text style={styles.textLabelXl(theme)}>|    05:30PM</Text>
+                            <Text style={styles.textLabelXl(theme)}>{this.getPopupDateFormat(property_currentItem.added_date)}</Text><Text style={styles.textLabelXl(theme)}>|    {this.getPopupTimeFormat(property_currentItem.added_date)}</Text>
                         </View>
                         <View style={styles.timeline}>
                             <Timeline

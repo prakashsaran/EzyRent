@@ -58,6 +58,8 @@ class MyBankaccount extends React.Component {
     const {activeAction} = this.state
     const {bankData} = this.props
     return bankData.map((item,inx)=>{
+      console.log("item.additional_details",item);
+      
       return(
             <View style={[styles.shadow,{zIndex:100-inx}]}>
                 <View style={styles.MoreLinkswrap}>
@@ -70,7 +72,7 @@ class MyBankaccount extends React.Component {
                       <Text style={styles.AccountNo(theme)}>{item.account_no}</Text>
                       <View style={styles.contentWrap}>
                         <Image style={styles.gps_dark_icon} source={require('../../../assets/images/gps_dark.png')}></Image>
-                        <Text style={styles.MoreLinksItemSub(theme)}>{item.additional_details?item.additional_details:"N/A"}</Text>
+                        <Text style={styles.MoreLinksItemSub(theme)}>{(item.additional_details && item.additional_details!="undefined")?item.additional_details:"N/A"}</Text>
                       </View>
                     </TouchableOpacity>
                   </View>

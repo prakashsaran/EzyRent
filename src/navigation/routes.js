@@ -31,6 +31,7 @@ export const NAVIGATION_DASHBOARD_INIT_VIEW_PATH = 'dashboard-init-view';
 export const NAVIGATION_AUTHENTICATION_PATH = 'authentication-view';
 export const NAVIGATION_PROPERTIES_TENANTS_STACK_PATH = 'properties-tenants';
 export const NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH = 'add-properties-tenants';
+export const NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH = 'modify-properties-tenants';
 export const NAVIGATION_EDIT_PROPERTIES_VIEW_PATH = 'edit-properties';
 export const NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH = 'detail-properties-view';
 export const NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH = 'detail-properties-tenants';

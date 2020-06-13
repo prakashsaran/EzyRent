@@ -5,6 +5,8 @@ import NavigationService from '../navigation/NavigationService';
 const emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
 const mobileRegex = /^\d{10}$/;
+const accountNumberRegex = /^\s*-?[0-9]{9,18}\s*$/;
+const ifscRegex = /^[^\s]{4}\d{7}$/;
 const ContactContryCode = [{label:"+91",value:"0091"}];
 export const isValidEmail = (email) => {
     return emailRegex.test(email);
@@ -20,6 +22,25 @@ export const isValidMobile = (mobilenumber) =>{
         return false;
     }    
 }
+
+export const isValidAccountNumber = (accountnumber) =>{   
+    const regacn = new RegExp(accountNumberRegex);
+    if(regacn.test(accountnumber)){
+        return true;
+    } else {
+        return false;
+    }    
+}
+
+export const isValidIfsc = (ifscCode) =>{   
+    const regifsc = new RegExp(ifscRegex);
+    if(regifsc.test(ifscCode)){
+        return true;
+    } else {
+        return false;
+    }    
+}
+
 export const getSecondTabTitile = () =>{  
     switch(EzyRent.getAccountType()){
         case TENANT_TYPE:

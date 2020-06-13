@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,Dimensions } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,Dimensions,Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../theme';
@@ -62,7 +62,19 @@ class MoreInit extends React.Component {
   }
   goToLogout(){
     const {logout} = this.props;
-    logout();
+    Alert.alert(
+      "",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => logout() }
+      ],
+      { cancelable: false }
+    );
   }
   isLessMarshmallow(){
     const dvcHeight = Dimensions.get('window').height;

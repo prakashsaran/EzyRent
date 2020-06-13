@@ -170,7 +170,8 @@ export default StyleSheet.create({
       flexDirection:'row',
     },
     propInforowright:{
-      
+      width:'60%',
+ 
     },
     propInfoAttrb:{
       flexDirection:'row',
