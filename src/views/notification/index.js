@@ -9,12 +9,16 @@ import {
   NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
+  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
+  NAVIGATION_TENANT_PROFILE_VIEW_PATH,
+  NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
+  NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EzyRent } from '../../ezyrent';
-import { getNotifications } from '../../actions';
- 
+import { getNotifications,updateNotification } from '../../actions';
+  
 class NotificationList extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -43,7 +47,33 @@ class NotificationList extends React.Component {
     getNotifications();
 
   }
-
+  goToTennatViewPath(item){
+    if(item.initiated_user_id){
+      console.log("id",item.initiated_user_id);
+      NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id})
+    }
+    this.readMarkNotification(item)
+  }
+  readMarkNotification(item){
+    const {updateNotification} = this.props
+    if(item.notification_status=="U"){
+      const formdata = {status:"R"}
+      console.log("to",formdata)
+      updateNotification(item.id,formdata)
+    }
+  }
+  goToLandlordViewPath(item){
+    if(item.initiated_user_id){
+      console.log("id",item.initiated_user_id);
+      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id:item.initiated_user_id})
+    }
+    this.readMarkNotification(item)
+  }
+  
+  goToMyProfileViewPath(item){
+    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
+    this.readMarkNotification(item)
+  }
   fasterImageRender(item){
     if(Object.keys(item.module_data).length && item.module_data[0].property_image){
       return {uri:`${EzyRent.getMediaUrl()}${item.module_data[0].property_image}`}; 
@@ -68,10 +98,18 @@ class NotificationList extends React.Component {
     const dyprd = date.getHours() >= 12 ? 'PM' : 'AM';
      return fdt+ ' '+fmt +' '+fly+', '+date.getHours()+':'+date.getMinutes()+ ' '+dyprd;
   }
-  goToTargetViewPath(item){
-    console.log("item",JSON.stringify(item));
-    
+  goToPropertyViewPath(item){
+    if(item.module_data[0].id){
+      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,{propery_id:item.module_data[0].id});
+    }
+    this.readMarkNotification(item)
   }
+
+  goToTransactionDetail(item){
+    //NavigationService.navigate(NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,{item});
+    this.readMarkNotification(item)
+  }
+
   /** ======================================================== */
   /** =============== END COMMON UI FUNCTION ================= */
   /** ======================================================== */
@@ -129,10 +167,16 @@ class NotificationList extends React.Component {
         return this.renderPropertiesNotification(item,indx)
         break;
       case "2":
-        return this.renderPropertiesNotification(item,indx)
+        return this.renderRentNotification(item,indx)
+        break;
+      case "3":
+        return this.renderTenantNotification(item,indx)
         break;
       case "4":
-        return this.renderProfileNotification(item,indx)
+        return this.renderLandlordProfileNotification(item,indx)
+        break;
+      case "5":
+        return this.renderMyProfileNotification(item,indx)
         break;
       default:
         return null;
@@ -153,15 +197,11 @@ class NotificationList extends React.Component {
     }
     
     return(
-      <TouchableOpacity key={indx} onPress={()=>this.goToTargetViewPath(item)} style={styles.loopitemAct}>
-            <ImageBackground imageStyle={styles.loopitembg} style={[styles.loopitembg,styles.loopitembg2]} resizeMode={'cover'} source={this.fasterImageRender(item)}>
-              <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
-              {item.notification_status=="R" && <Image style={styles.tickIcon} resizeMode={'contain'} source={require("../../assets/images/double_tick.png")}></Image>}
+      <TouchableOpacity key={indx} onPress={()=>this.goToPropertyViewPath(item)} style={styles.loopitemAct}>
+              <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} >
+              {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
                  <Text style={styles.itemNameAct(theme)}>{item.module_data[0].house_number} {item.module_data[0].building_name}</Text>
                  <View style={styles.propertygnInfo}>
-                    <View style={styles.propInforowleft}>
-                    </View>
-
                     <View style={styles.propInforowright}>
 
                       <View style={styles.propInfoAttrb}> 
@@ -173,21 +213,111 @@ class NotificationList extends React.Component {
                  <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
               </ImageBackground>
 
-            </ImageBackground>
         </TouchableOpacity>
       )
   }
 
+
   /** ======================================================== */
-  /** ====== RENDER PROPERTIES NOTIFICATION ================= */
+  /** ====== RENDER RENT NOTIFICATION ================= */
   /** ======================================================== */
-  renderProfileNotification(item,indx){
-    return null;
+
+    renderRentNotification(item,indx){  
+        return(
+          <TouchableOpacity key={indx} onPress={()=>this.goToTransactionDetail(item)} style={styles.loopitemAct}>
+            <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'}>
+            {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
+               <Text style={styles.itemNameAct(theme)}>{item.module_title}</Text>
+               <View style={styles.propertygnInfo}>
+                  <View style={styles.propInforowright}>
+                    <View style={styles.propInfoAttrb}> 
+                       <Text style={styles.propItemattrvalueError(theme)}>{item.notification_message}</Text>  
+                      </View>
+                  </View>
+               </View>
+               <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
+            </ImageBackground>
+
+      </TouchableOpacity>
+      )
+    }
+
+  /** ======================================================== */
+  /** ====== RENDER TENANT NOTIFICATION ================= */
+  /** ======================================================== */
+
+  renderTenantNotification(item,indx){
     return(
-      <View key={indx}>
-        <Text>{item.notification_message}</Text>
-      </View>
+      <TouchableOpacity key={indx} onPress={()=>this.goToTennatViewPath(item)} style={styles.loopitemAct}>
+        <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'}>
+        {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
+           <Text style={styles.itemNameAct(theme)}>{item.module_title}</Text>
+           <View style={styles.propertygnInfo}>
+              <View style={styles.propInforowright}>
+
+                <View style={styles.propInfoAttrb}> 
+                   <Text style={styles.propItemattrvalueError(theme)}>{item.notification_message}</Text>  
+                  </View>
+
+              </View>
+           </View>
+           <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
+        </ImageBackground>
+
+  </TouchableOpacity>
     )
+    }
+
+  /** ======================================================== */
+  /** ====== RENDER LANDLORD NOTIFICATION ================= */
+  /** ======================================================== */
+
+  renderLandlordProfileNotification(item,indx){
+        return(
+          <TouchableOpacity key={indx} onPress={()=>this.goToLandlordViewPath(item)} style={styles.loopitemAct}>
+                <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'}>
+                {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
+                  <Text style={styles.itemNameAct(theme)}>{item.module_title}</Text>
+                  <View style={styles.propertygnInfo}>        
+                      <View style={styles.propInforowright}>
+        
+                        <View style={styles.propInfoAttrb}> 
+                          <Text style={styles.propItemattrvalueError(theme)}>{item.notification_message}</Text>  
+                          </View>
+        
+                      </View>
+                  </View>
+                  <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
+                </ImageBackground>
+        
+          </TouchableOpacity>
+        )
+    }
+
+
+  /** ======================================================== */
+  /** ====== RENDER MY PROFILE NOTIFICATION ================= */
+  /** ======================================================== */
+  renderMyProfileNotification(item,indx){
+      return(
+      <TouchableOpacity key={indx} onPress={()=>this.goToMyProfileViewPath(item)} style={styles.loopitemAct}>
+        <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'}>
+        {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
+          <Text style={styles.itemNameAct(theme)}>{item.module_title}</Text>
+          <View style={styles.propertygnInfo}>
+              <View style={styles.propInforowright}>
+
+                <View style={styles.propInfoAttrb}> 
+                  <Text style={styles.propItemattrvalueError(theme)}>{item.notification_message}</Text>  
+                  </View>
+
+              </View>
+          </View>
+          <Text style={styles.dateFormat(theme)}> {this.getDateFormat(item.notification_date)}</Text>
+        </ImageBackground>
+
+  </TouchableOpacity>
+)
   }
 
 }
@@ -210,6 +340,7 @@ NotificationList.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   customer:PropTypes.oneOfType(PropTypes.object,null),
   getNotifications: PropTypes.func.isRequired,
+  updateNotification: PropTypes.func,
   landlord_items: PropTypes.object,
 };
 
@@ -221,4 +352,4 @@ NotificationList.defaultProps = {
   items:[],
 };
 
-export default connect(mapStateToProps, {getNotifications})(NotificationList);
+export default connect(mapStateToProps, {getNotifications,updateNotification})(NotificationList);

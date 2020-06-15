@@ -29,6 +29,19 @@ export default StyleSheet.create({
     fontFamily:theme.typography.secondaryFont,
     fontWeight:theme.typography.fontWeightRegular,
   }),
+  confirmBoxTitle:theme=>({
+    color:theme.colors.descriptionColor,
+    fontSize:normalize(18),
+    textAlign:'center',
+    paddingTop:10,
+    fontFamily:theme.typography.secondaryFont,
+    fontWeight: theme.typography.fontWeightRegular,
+
+  }),
+  eraseTitle:theme=>({
+    fontSize:normalize(13),
+    color:theme.colors.errorColor,
+  }),
 
   mobileWrapper: theme=> ({
     width: '80%',

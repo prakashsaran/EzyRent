@@ -27,6 +27,8 @@ function SignUpProfile(props) {
     setProfileName(name);
     if(appin.length===4 && isValidName(name) && isSelectTerms){
       setEnableButton(true);
+    } else{
+      setEnableButton(false);
     }
   }
   const onCodeFilled = (code) =>{
@@ -37,8 +39,10 @@ function SignUpProfile(props) {
   }
   const onChangeCheckBox = () =>{
     setSelectTerms(!isSelectTerms);
-    if(isValidName(profilename) && appin){
+    if(isValidName(profilename) && appin && !isSelectTerms){
       setEnableButton(true);
+    } else{
+      setEnableButton(false);
     }
   }
   const onCodeChanged = (code) =>{
@@ -137,8 +141,9 @@ function SignUpProfile(props) {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-              <Text style={theme.typography.caption}>FINISH ACCOUNT CREATION</Text>
+              <Text style={styles.caption(theme)}>FINISH ACCOUNT CREATION</Text>
             </TouchableOpacity>
+
 
             <Text style={theme.typography.copyright}>Copyright &copy; EzyRent 2020. All Rights Reserved.</Text>
 

@@ -37,5 +37,6 @@ export default ezyrent => ({
   emailAdressChangeVerify: (uderId,data) => ezyrent.requestPatch(`/v1/users/${uderId}/email/verify`,data,null, ADMIN_TYPE),
   mobileNumberChangeVerify: (uderId,data) => ezyrent.requestPatch(`/v1/users/${uderId}/mobile/verify`,data,null, ADMIN_TYPE),
   deleteProfileImage: (uderId) => ezyrent.requestDelete(`/v1/users/${uderId}/profile-image`,null,null, ADMIN_TYPE),
+  updateNotification: (notid,data) => ezyrent.requestPatch(`/v1/notifications/${notid}`,data,null, ADMIN_TYPE),
 
 });

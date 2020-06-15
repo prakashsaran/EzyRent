@@ -1,4 +1,4 @@
-import React, { Component,useContext ,useState} from "react";
+import React, { Component,useContext ,useState,useEffect} from "react";
 import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity,TextInput } from "react-native";
 import styles from './style';
 import { ThemeContext } from '../../../../theme';
@@ -6,11 +6,13 @@ import {NAVIGATION_SIGN_UP_MOBILE_OTP_PATH,NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH
 import NavigationService from '../../../../navigation/NavigationService';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { signinMail,isValidEmail } from '../../../../actions';
+import { signinMail,isValidEmail,resetSingWarn } from '../../../../actions';
+import Modal from 'react-native-modal';
 
 function SignInMail(props) {
   const [emailaddress, setEmailAddress] = useState('');
   const [enablebtn, setEnableButton] = useState(false);
+  const [isconfirmModalVisible, setConfirmModalVisible] = useState(false);
 
   const theme = useContext(ThemeContext);
   const onChangeEmailAdress = (email) =>{
@@ -20,6 +22,40 @@ function SignInMail(props) {
   const submit = () =>{
     props.signinMail(emailaddress);
   }
+  useEffect(() => {
+    if(Object.keys(props.warndata).length){
+      if(props.warndata.hasOwnProperty("type")){
+        setConfirmModalVisible(true);
+      }
+    }
+  }, [props.warndata]);
+
+  reStartSignUp = () =>{
+    setConfirmModalVisible(false);
+    props.resetSingWarn();
+    NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)
+  }
+
+  renderConfirmModal =() =>{
+    return (
+      <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
+            <View style={{ width:'95%',height:140,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
+              <Text style={styles.confirmBoxTitle(theme)}>Your account creation is pending. Please complete your account.</Text>
+                <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
+                  <TouchableOpacity onPress={()=>setConfirmModalVisible(false)}>
+                    <Text style={styles.eraseTitle(theme)}>Cancel</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={()=>reStartSignUp()}>
+                    <Text>Ok</Text>
+                  </TouchableOpacity>
+
+                </View>
+            </View>
+        </Modal>
+    )
+  }
+
   return (
     <SafeAreaView style={styles.container(theme)}>
       <ScrollView>
@@ -42,7 +78,9 @@ function SignInMail(props) {
             style={styles.mobileInput(theme)}
             value={emailaddress}
             autoCorrect={false}
+            underlineColorAndroid='white'
             keyboardType={'email-address'}
+            underlineColorAndroid={"transparent"}
             autoCapitalize={'none'}
             allowFontScaling={false}
             onChangeText={(email) =>onChangeEmailAdress(email)}
@@ -70,15 +108,15 @@ function SignInMail(props) {
           resizeMode={'cover'}
           style={styles.footerImage}
         ></Image>
-
+        {renderConfirmModal()}
     </SafeAreaView>
   );
 }
 
 const mapStateToProps = ({ signin }) => {
-  const { error, success, loading } = signin;
+  const {warndata, error, success, loading } = signin;
 
-  return { error, success, loading };
+  return {warndata, error, success, loading };
 };
 
 SignInMail.propTypes = {
@@ -87,12 +125,15 @@ SignInMail.propTypes = {
   success: PropTypes.oneOfType(PropTypes.string, null),
   signinMail: PropTypes.func.isRequired,
   isValidEmail: PropTypes.func.isRequired,
+  resetSingWarn: PropTypes.func,
+  warndata: PropTypes.object,
 };
 
 SignInMail.defaultProps = {
   error: null,
   success: null,
   loading: false,
+  warndata:{},
 };
 
-export default connect(mapStateToProps, { signinMail })(SignInMail);
+export default connect(mapStateToProps, { signinMail,resetSingWarn })(SignInMail);

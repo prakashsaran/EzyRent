@@ -26,6 +26,8 @@ import {
   EZYRENT_GET_RENTS_AS_TENANT,
   EZYRENT_GET_NOTIFICATION,
   EZYRENT_SET_CURRENT_TENANT_PROFILE,
+  EZYRENT_SIGN_IN_WERN_DATA,
+  EZYRENT_UPDATE_CUSTOMER_ACCOUNT,
 } from './types';
 
 import NavigationService from '../navigation/NavigationService';
@@ -294,11 +296,16 @@ export const signinMail = (email) => async (dispatch) => {
     const formData = formUrlencodedData(data);
 
     // response otp from sms server
-    const response = await EzyRent.guest.userSignIn(formData);
+    const response = await EzyRent.guest.userSignIn(formData);    
     if(response && response.data && response.data.type=="V"){
       const propData = {email,id:response.data.id,type:response.data.type,otp:null};
       dispatch({ type: EZYRENT_SIGN_IN_EMAIL_ID, payload: propData });
       NavigationService.navigate(NAVIGATION_SIGN_IN_MAIL_OTP_PATH);
+    }
+
+    if(response && response.data && response.data.type !="V"){
+      const propData = {email,id:response.data.id,type:response.data.type,otp:null};
+      dispatch({ type: EZYRENT_SIGN_IN_WERN_DATA, payload: propData });
     }
     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   } catch (e) {
@@ -321,13 +328,17 @@ export const signinMobile = (mobile,mobile_country_code="0091") => async (dispat
 
     // response otp from sms server
     const response = await EzyRent.guest.userSignIn(formData);
-    console.log("response signinMobile",JSON.stringify(response));
-    
+
     if(response && response.data && response.data.type=="V"){
       const propData = {number:mobile,dialcode:mobile_country_code,id:response.data.id,type:response.data.type,otp:null};
       dispatch({ type: EZYRENT_SIGN_IN_MOBILE_NUMBER, payload: propData });
       NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_OTP_PATH);
+    } 
+    if(response && response.data && response.data.type !="V"){
+      const propData = {number:mobile,dialcode:mobile_country_code,id:response.data.id,type:response.data.type,otp:null};
+      dispatch({ type: EZYRENT_SIGN_IN_WERN_DATA, payload: propData });
     }
+
     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   } catch (e) {
     console.error(e)
@@ -335,7 +346,13 @@ export const signinMobile = (mobile,mobile_country_code="0091") => async (dispat
   }
 };
 
-
+export const resetSingWarn = () => async (dispatch) => {
+  try{
+    dispatch({ type: EZYRENT_SIGN_IN_WERN_DATA, payload: {} });
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 
 
@@ -433,6 +450,7 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: EZYRENT_GET_RENTS_AS_TENANT, payload: [] });
     dispatch({ type: EZYRENT_GET_NOTIFICATION, payload: [] });
     dispatch({ type: EZYRENT_SET_CURRENT_TENANT_PROFILE, payload: {} });
+    dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: {} });
     const keys = await AsyncStorage.getAllKeys();
     await AsyncStorage.multiRemove(keys);
     NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);

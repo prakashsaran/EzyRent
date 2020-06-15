@@ -13,11 +13,24 @@ const accountBlacklistFilter = createBlacklistFilter(
   ['refreshing','error','success',"message","customer","data","access_token","refresh_token","token_type"],
 );
 
+const signInBlacklistFilter = createBlacklistFilter(
+  'signin',
+  ['loading','refreshing','error','success','warndata'],
+);
+
+
+const buildingBlacklistFilter = createBlacklistFilter(
+  'building',
+  ['selectedBuilding'],
+);
+
 
 const persistConfig = {
   key: 'root',
   transforms: [
     accountBlacklistFilter,
+    signInBlacklistFilter,
+    buildingBlacklistFilter,
   ],
   storage: AsyncStorage,
 };

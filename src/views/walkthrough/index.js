@@ -49,13 +49,13 @@ class walkthrough extends Component {
     }
     componentDidMount() {
       const {isAuth,customer,access_token,navigation} = this.props;
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 1000);
     }
     changeViewIndx(){
        this.setState({currentIdx:1});
        this.swipable.scrollBy(1)
-    }
-     componentDidMount() {
-        SplashScreen.hide();
     }
   render() {
       const {currentIdx} = this.state

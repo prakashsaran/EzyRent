@@ -123,10 +123,12 @@ export default StyleSheet.create({
       shadowOpacity: 0.5,
       //shadowRadius: 2,
       marginHorizontal:'1%',
+      backgroundColor:'#fff',
+      marginBottom:5,
     },
     loopitembg:{
       width:'100%',
-      minHeight:180,
+      minHeight:140,
       borderRadius:9,
     },
     loopitembg2:{
@@ -134,8 +136,9 @@ export default StyleSheet.create({
     },
     loopitembgcltg:{
       width:'100%',
-      minHeight:180,
-      borderRadius:0
+      minHeight:140,
+      borderRadius:0,
+      backgroundColor:'#fff',
     },
     itemName:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
@@ -151,8 +154,8 @@ export default StyleSheet.create({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
       fontSize:normalize(16),
-      width:'50%',
-      alignSelf:'center',
+      width:'100%',
+      //alignSelf:'center',
       color:theme.colors.propertyHeading,
       marginTop:theme.spacing.large,
       paddingLeft:20,
@@ -162,7 +165,8 @@ export default StyleSheet.create({
     propertygnInfo:{
       width:'100%',
       flexDirection:'row',
-      justifyContent:'space-between',
+      //justifyContent:'flex',
+      paddingHorizontal:15,
       paddingVertical:10,
     },
     propInforowleft:{
@@ -170,8 +174,7 @@ export default StyleSheet.create({
       flexDirection:'row',
     },
     propInforowright:{
-      width:'60%',
- 
+      width:'100%',
     },
     propInfoAttrb:{
       flexDirection:'row',
@@ -217,7 +220,7 @@ export default StyleSheet.create({
       color:theme.colors.propertyHeading,
       paddingHorizontal:5,
       flexWrap:'wrap',
-      width:'88%',
+      width:'100%',
       fontSize:normalize(13),
       lineHeight:normalize(19),
       fontFamily:theme.typography.secondaryFont,

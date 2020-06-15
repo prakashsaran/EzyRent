@@ -11,6 +11,7 @@ import Timeline from 'react-native-timeline-flatlist';
 import {
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
   NAVIGATION_RENT_INIT_VIEW_PATH,
+  NAVIGATION_DASHBOARD_INIT_VIEW_PATH,
 } from '../../../navigation/routes';
 import CongratsModalDashBoard from '../../../components/CongratsModalDashBoard';
 
@@ -22,7 +23,7 @@ class TenantDashboard extends React.Component {
     StatusBar.setHidden(false)
   }
   gotToProfile(){
-    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
   }
   payRent(){
     NavigationService.navigate(NAVIGATION_RENT_INIT_VIEW_PATH);

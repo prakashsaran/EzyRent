@@ -36,6 +36,7 @@ import ModifyProperty from '../views/properties/modify';
 import ViewPropertyTenant from '../views/properties/viewtenant';
 import ViewPropertyLandlord from '../views/properties/viewlandlord'
 import ViewPropertyDetail from '../views/properties/viewdetail';
+import ViewPropertyById from '../views/properties/viewbyid';
 import ViewPropertyOwner from '../views/properties/owner';
 import ViewTenantProfile from '../views/properties/tenant';
 
@@ -116,6 +117,7 @@ import {
   NAVIGATION_TENANT_PROFILE_VIEW_PATH,
   NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,
   NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH,
+  NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,
 } from './routes';
 
 import { theme } from '../theme';
@@ -169,6 +171,7 @@ const PropertiesTenantsStack = createStackNavigator({
   [NAVIGATION_EDIT_PROPERTIES_VIEW_PATH]: EditProperty,
   [NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH]: ModifyProperty,
   [NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH]: ViewPropertyDetail,
+  [NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH]: ViewPropertyById,
   [NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH]: ViewPropertyTenant,
   [NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH]: ViewPropertyLandlord,
   [NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH]: ViewPropertyOwner,

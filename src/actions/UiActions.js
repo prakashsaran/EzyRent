@@ -3,7 +3,7 @@ import {TENANT_TYPE,LANDLORD_TYPE,LANDLORD_TENANT_TYPE} from '../ezyrent/types';
 import {EzyRent} from '../ezyrent';
 import NavigationService from '../navigation/NavigationService';
 const emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-const nameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+const nameRegex = /^([a-zA-Z ]){4,30}$/;
 const mobileRegex = /^\d{10}$/;
 const accountNumberRegex = /^\s*-?[0-9]{9,18}\s*$/;
 const ifscRegex = /^[^\s]{4}\d{7}$/;

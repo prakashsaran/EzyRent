@@ -162,7 +162,7 @@ class ViewPropertyTenant extends React.Component {
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} ({property_currentItem.bank_account_number})</Text>
-                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
+                                        {(property_currentItem.bank_additional_details && property_currentItem.bank_additional_details !="undefined") && <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>}
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>
@@ -172,7 +172,7 @@ class ViewPropertyTenant extends React.Component {
                                 </View>
 
                                 <View style={{height:30,width:'100%'}}></View>
-                                <Timeline
+                                {/*<Timeline
                                     showTime={false}
                                     circleSize={20}
                                     circleColor={theme.colors.secondry}
@@ -187,7 +187,7 @@ class ViewPropertyTenant extends React.Component {
                                         {time: '05:34', title: '15 January 2020, 05:34 PM ', description: this.renderInfoTimeline('You paid rent of INR 25000 for this property'), icon: require('../../../assets/images/step-round.png')},
                                         {time: '07:17', title: '15 December 2019, 07:17 PM ', description: this.renderInfoTimeline('You paid rent of INR 25000 for this property'), icon: require('../../../assets/images/step-round.png')},
                                     ]}
-                                />
+                                  />*/}
                                 <View style={{height:140,width:'100%'}}></View>
                             </View>
                             {this.renderConfirmModalModal()}

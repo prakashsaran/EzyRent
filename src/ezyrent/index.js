@@ -8,6 +8,8 @@ import NavigationService from '../navigation/NavigationService';
 import {
   SWITCH_NAVIGATION_AUTHORIZED_ACCOUNT_PATH,
 } from '../navigation/routes';
+import RNFetchBlob from 'rn-fetch-blob';
+
 
 const defaultOptions = {
   url: null,
@@ -389,27 +391,17 @@ class EzyRentClass {
     if(ADMIN_TYPE==type && authentication==null){
       authorization = this.getAuthorization();
     }
-
     let uri = `${this.base_url}${url}`;
     const headers = {
       "Authorization": authorization,
       'Accept': 'application/json',
-      "Content-Type": "multipart/form-data",
+      "content-type": "multipart/form-data",
       "cache-control": "no-cache",
     }
-
     return new Promise((resolve, reject) => {
-      fetch(uri, { "method": requestMethod, headers, body: data})
+      RNFetchBlob.fetch(requestMethod, uri, headers,data)
       .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        // Possible 401 or other network error
-        return response.json().then(errorResponse => Promise.reject(errorResponse));
-      })
-      .then((responseData) => {
-        // debugger;
-        resolve(responseData);
+        resolve(response.json());
       })
       .catch((error) => {
        const customError = this.getErrorMessageForResponce(error);

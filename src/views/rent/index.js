@@ -165,7 +165,7 @@ class RentList extends React.Component {
      return fdt+ ' '+fmt +' '+fly;
   }
   goToTransactionDetail(item){
-    NavigationService.navigate(NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,{item});
+    //NavigationService.navigate(NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,{item});
   }
   PayRent(){
     NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
@@ -359,9 +359,7 @@ class RentList extends React.Component {
   }
 
   renderCollectingItems(landlord_items){
-    return landlord_items.map((item,inx)=>{    
-      console.log("landlord_items",JSON.stringify(landlord_items));
-        
+    return landlord_items.map((item,inx)=>{            
       if(item.process=="due"){
         return (
           <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} key={inx} style={styles.loopitem}>

@@ -139,6 +139,9 @@
 		FC39690C9CC94280829F3E2B /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 202630596B1E48B7B89C2590 /* address.png */; };
 		FC6AA41FA4F340B98DA71B73 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A5129BBE37154612A2B9CF76 /* download.png */; };
 		FF2ABB91B37F43E8B9A7C7B5 /* nav_notifications_active.png in Resources */ = {isa = PBXBuildFile; fileRef = F563B397FA964D17BB550EFD /* nav_notifications_active.png */; };
+		AD350D8BDDCD4A5F97D7FA5F /* building_placehoder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */; };
+		5FD51BB64E004FE09735E79A /* rzyrent_empty_placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */; };
+		0ABA869438BF40419915690B /* user_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = 171C272A74324DF9800BEEEC /* user_ellipse.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +349,9 @@
 		FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrowdown_picker.png; path = ../src/assets/images/arrowdown_picker.png; sourceTree = "<group>"; };
 		FE7086420B9A41838280B9CB /* property_view_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = property_view_bg.png; path = ../src/assets/images/property_view_bg.png; sourceTree = "<group>"; };
 		FF07DAD081BB41F6BFF67C20 /* MONTSERRAT-EXTRABOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRABOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRABOLDITALIC_0.TTF"; sourceTree = "<group>"; };
+		3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */ = {isa = PBXFileReference; name = "building_placehoder.jpg"; path = "../src/assets/images/building_placehoder.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */ = {isa = PBXFileReference; name = "rzyrent_empty_placeholder.jpg"; path = "../src/assets/images/rzyrent_empty_placeholder.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		171C272A74324DF9800BEEEC /* user_ellipse.png */ = {isa = PBXFileReference; name = "user_ellipse.png"; path = "../src/assets/images/user_ellipse.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +584,9 @@
 				8C8543714C984155B0133B17 /* Octicons.ttf */,
 				A6A65EA6B9D34FC188EC9913 /* SimpleLineIcons.ttf */,
 				F144F2D184C8425BBE26C55E /* Zocial.ttf */,
+				3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */,
+				2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */,
+				171C272A74324DF9800BEEEC /* user_ellipse.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -908,6 +917,9 @@
 				9D87EB7AEA2247D78FF01C19 /* checkbox_inactive.png in Resources */,
 				7E872E2CFE9E4D099F12B778 /* ezyrent-footer-icon.jpg in Resources */,
 				B813D0074F8B44B9A6900ABD /* my-profile.png in Resources */,
+				AD350D8BDDCD4A5F97D7FA5F /* building_placehoder.jpg in Resources */,
+				5FD51BB64E004FE09735E79A /* rzyrent_empty_placeholder.jpg in Resources */,
+				0ABA869438BF40419915690B /* user_ellipse.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

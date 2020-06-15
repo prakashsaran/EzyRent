@@ -108,7 +108,7 @@ class MoreInit extends React.Component {
                           <Text style={styles.textSub(theme)}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}
                           </Text>
-                          <Text style={styles.textSub(theme)}>
+                          <Text style={styles.textSub(theme)} numberOfLines={2}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/email.png')}></Image> {customer.email}
                           </Text>
                         </View>

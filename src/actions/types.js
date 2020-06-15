@@ -19,6 +19,7 @@ export const EZYRENT_SIGN_IN_MOBILE_NUMBER = 'ezyrent_signin_mobile_number';
 export const EZYRENT_SIGN_IN_EMAIL_ID = 'ezyrent_signin_email_id';
 //SIGN IN SUCCESS
 export const EZYRENT_SIGN_IN_SUCCESS = 'ezyrent_signin_success';
+export const EZYRENT_SIGN_IN_WERN_DATA = 'ezyrent_signin_warn_data';
 
 // AUTHENTICATION COMPLETE CONTROLLERS
 export const EZYRENT_AUTHENTICATION_ACCESS_TOKEN = "ezyrent-authentication-access-token";
@@ -30,6 +31,7 @@ export const EZYRENT_BUILDING_LOADING = 'ezyrent-building-loading';
 export const EZYRENT_BUILDING_ADD_NEW = 'ezyrent-building-add-new';
 export const EZYRENT_BUILDING_GET_LIST_VIEW = 'ezyrent-building-get-list-view';
 export const EZYRENT_BUILDING_SET_LIST_VIEW = 'ezyrent-building-set-list-view';
+export const EZYRENT_BUILDING_SET_SELECTED = 'ezyrent-building-set-selected';
 
 
 // PROPERTIES AS LANDLORD CONTROLLERS

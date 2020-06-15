@@ -34,6 +34,7 @@ export const NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH = 'add-properties-tenan
 export const NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH = 'modify-properties-tenants';
 export const NAVIGATION_EDIT_PROPERTIES_VIEW_PATH = 'edit-properties';
 export const NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH = 'detail-properties-view';
+export const NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH = 'detail-properties-by-id';
 export const NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH = 'detail-properties-tenants';
 export const NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH = 'detail-properties-landlord';
 export const NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH = 'detail-properties-owner';

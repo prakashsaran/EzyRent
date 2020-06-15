@@ -86,7 +86,7 @@ import {EzyRent} from '../../../ezyrent';
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property.bank_name} ({property.bank_account_number})</Text>
-                                        <Text style={styles.textLabelXl(theme)}>{property.bank_additional_details}</Text>
+                                        {(property.bank_additional_details && property.bank_additional_details !="undefined") && <Text style={styles.textLabelXl(theme)}>{property.bank_additional_details}</Text>}
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>
@@ -96,7 +96,7 @@ import {EzyRent} from '../../../ezyrent';
                                 </View>
 
                                 <View style={{height:30,width:'100%'}}></View>
-                                <Timeline
+                                {/*<Timeline
                                     showTime={false}
                                     circleSize={20}
                                     circleColor={theme.colors.secondry}
@@ -111,7 +111,7 @@ import {EzyRent} from '../../../ezyrent';
                                         {time: '05:34', title: '15 January 2020, 05:34 PM ', description: this.renderInfoTimeline('You paid rent of INR 25000 for this property'), icon: require('../../../assets/images/step-round.png')},
                                         {time: '07:17', title: '15 December 2019, 07:17 PM ', description:  this.renderInfoTimeline('You paid rent of INR 25000 for this property'), icon: require('../../../assets/images/step-round.png')},
                                     ]}
-                                />
+                                />*/}
                                 <View style={{height:70,width:'100%'}}></View>
                             </View>
                         </ScrollView>

@@ -59,7 +59,12 @@ export default StyleSheet.create({
     fontSize:theme.typography.font_13,
     color:theme.colors.lightBlack,
   }),
-  
+  caption:theme=>({
+    color: theme.colors.primBtnTextColor,
+    fontSize: isLessMarshmallow()?normalize(18):normalize(19),
+    fontFamily: theme.typography.fontFamilyOxygen,
+  }),
+
   active_pintitle: theme =>({
     fontFamily:theme.typography.primaryFont,
     fontWeight:theme.typography.fontWeightRegular,

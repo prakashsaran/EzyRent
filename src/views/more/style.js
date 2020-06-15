@@ -42,6 +42,7 @@ export default StyleSheet.create({
     ImageWrapRight:{
       paddingLeft:15,
       paddingTop:15,
+      paddingRight:10,
     },
     textHeading: theme =>({
       color:theme.colors.secondry,
@@ -49,7 +50,7 @@ export default StyleSheet.create({
       fontSize:normalize(18),
       textTransform:'uppercase',
       paddingBottom:6,
-      width:'99%',
+      width:'70%',
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
@@ -58,6 +59,10 @@ export default StyleSheet.create({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
       marginTop:2,
+      flexWrap:'wrap',
+      maxWidth:normalize(140),
+      flexGrow: 1,
+      flexDirection:'column',
     }),
     gps_dark_icon:{
       width:13,

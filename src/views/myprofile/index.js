@@ -99,7 +99,13 @@ getConsistencyRentPay(DataObj){
     NavigationService.navigate(NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH);
   }
   gotToMoreView(){
-    NavigationService.navigate(NAVIGATION_MORE_INIT_VIEW_PATH);
+    const { navigation } = this.props
+    const backscreen = navigation.getParam('goBack');
+    if(backscreen){
+      NavigationService.navigate(backscreen);
+    } else{
+       NavigationService.navigate(NAVIGATION_MORE_INIT_VIEW_PATH);
+    }
   }
   renderQuickState(){
     const {AccountType} = this.state
@@ -189,7 +195,7 @@ getConsistencyRentPay(DataObj){
         dot={<View style={theme.typography.Dots}/>}
         activeDot={<View style={theme.typography.activeDots} />}
         //paginationStyle={theme.typography.pagination}
-        loop
+        loop={false}
         showsPagination={false}
       >
         <View style={styles.shadow}>
@@ -201,15 +207,15 @@ getConsistencyRentPay(DataObj){
             <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as landlord.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getTotalRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
@@ -252,11 +258,11 @@ getConsistencyRentPay(DataObj){
               <Text style={styles.quick_stats_heading}>Consistency Score</Text>
             </View>
             <Text style={styles.content(theme)}>Your consistency score on EzyRent as landlord.</Text>
-            <View style={styles.green_box}>
-      <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentCollect(customer)}</Text>
+            {(this.getConsistencyRentCollect(customer) !="0%" && this.getConsistencyRentCollect(customer)) && <View style={styles.green_box}>
+              <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentCollect(customer)}</Text>
               <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
               <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-            </View>
+            </View> }
           </View>
         </View>
       )
@@ -268,11 +274,11 @@ getConsistencyRentPay(DataObj){
               <Text style={styles.quick_stats_heading}>Consistency Score</Text>
             </View>
             <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
-            <View style={styles.green_box}>
+            {(this.getConsistencyRentPay(customer) !="0%" && this.getConsistencyRentPay(customer)) && <View style={styles.green_box}>
             <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentPay(customer)}</Text>
               <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
               <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-            </View>
+            </View>}
           </View>
         </View>
       )
@@ -287,7 +293,7 @@ getConsistencyRentPay(DataObj){
             dot={<View style={theme.typography.Dots}/>}
             activeDot={<View style={theme.typography.activeDots} />}
             //paginationStyle={theme.typography.pagination}
-            loop
+            loop={false}
             showsPagination={false}
           >
             <View style={styles.shadow}>
@@ -297,11 +303,11 @@ getConsistencyRentPay(DataObj){
                   <Image style={styles.paginat} source={require('../../assets/images/paginat.png')}></Image>
                 </View>
                 <Text style={styles.content(theme)}>Your consistency score on EzyRent as landlord.</Text>
-                <View style={styles.green_box}>
+                {(this.getConsistencyRentCollect(customer) !="0%" && this.getConsistencyRentCollect(customer)) && <View style={styles.green_box}>
                   <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentCollect(customer)}</Text>
                   <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
                   <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-                </View>
+                </View> }
               </View>
             </View>
             <View style={styles.shadow}>
@@ -311,11 +317,11 @@ getConsistencyRentPay(DataObj){
                   <Image style={styles.paginat} source={require('../../assets/images/paginat-active.png')}></Image>
                 </View>
                 <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
-                <View style={styles.green_box}>
+                {(this.getConsistencyRentPay(customer) !="0%" && this.getConsistencyRentPay(customer)) && <View style={styles.green_box}>
                   <Text style={[styles.greenText,styles.greenText100]}>{this.getConsistencyRentPay(customer)}</Text>
                   <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
                   <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-                </View>
+                </View>}
               </View>
             </View>
           </Swiper>
@@ -328,11 +334,6 @@ getConsistencyRentPay(DataObj){
             <Text style={styles.quick_stats_heading}>Consistency Score</Text>
           </View>
           <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
-          <View style={styles.green_box}>
-          <Text style={[styles.greenText,styles.greenText100]}>0%</Text>
-            <Image style={styles.grenBox} source={require('../../assets/images/green-box.png')}></Image>
-            <Text style={styles.greenText}><Text style={{fontWeight:'bold'}}>Excellent!</Text> Your consistency score is very good.</Text>
-          </View>
         </View>
       </View>
       );

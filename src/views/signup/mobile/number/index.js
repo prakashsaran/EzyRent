@@ -22,6 +22,12 @@ function SignUpMobile(props) {
   const submit = () =>{
     props.signupMobile(mobilenumber,dialcode);
   }
+  const paramsMobilenumber = props.navigation.getParam('mobilenumber');
+  if(paramsMobilenumber && paramsMobilenumber !=mobilenumber){
+    setMobileNumber(paramsMobilenumber);
+    setEnableButton(true);
+  }
+
   useEffect(() => {
     // ComponentDidMount
     StatusBar.setHidden(true)

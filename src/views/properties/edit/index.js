@@ -151,6 +151,14 @@ class EditPropertyTenant extends React.Component {
   onChangeMobile(mobileNumber){
     this.setState({mobileNumber})
   }
+  getRealValueOfRentDay(rentDue){
+    const {rentPeriod} = this.state;
+    if(rentPeriod==3){
+      return 31;
+    }
+    return rentDue;
+  }
+
   submitForm(){
     const { editProperty } = this.props
     const {propertyId,tenant_ccd,mobileNumber,tenantName,houseNumber,buildingName,rentPeriod,rentDue,collectingAmount,bankAccount,propertyImage,property_status} = this.state
@@ -165,7 +173,7 @@ class EditPropertyTenant extends React.Component {
            // this.validateAndSetAttribute(tenantName, this._tenantNameEntry) &
             this.validateAndSetAttribute(houseNumber, this._houseNumberEntry);
     if(formIsValid){
-     const formData = {tenant_ccd:tenant_ccd,tenant_mobile:mobileNumber,tenant_name:tenantName,house_number:houseNumber,building_id:buildingName,bank_id:bankAccount,rent_amount:collectingAmount,rent_period_id:rentPeriod,rent_day_date:rentDue,status:property_status}
+     const formData = {tenant_ccd:tenant_ccd,tenant_mobile:mobileNumber,tenant_name:tenantName,house_number:houseNumber,building_id:buildingName,bank_id:bankAccount,rent_amount:collectingAmount.replace(",",""),rent_period_id:rentPeriod,rent_day_date:this.getRealValueOfRentDay(rentDue),status:property_status}
      editProperty(propertyId,formData,propertyImage);
      // NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
     }else{
@@ -198,7 +206,7 @@ getMonthNames(){
   return {1:'January',2:'February',3:'March',4:'April',5:'May',6:'June',7:'July',8:'August',9:'September',10:'October',11:'November',12:'December'};
 }
 getMonthDates(){
-  return {1:'1st of Month',2:'2nd of Month',3:'3rd of Month',4:'4th of Month',5:'5th of Month',6:'6th of Month',7:'7th of Month',8:'8th of Month',9:'9th of Month',10:'10th of Month',11:'11th of Month',12:'12th of Month',13:'13th of Month',14:'14th of Month',15:'15th of Month',16:'16th of Month',17:'17th of Month',18:'18th of Month',19:'19th of Month',20:'20th of Month',21:'21st of Month',22:'22nd of Month',23:'23rd of Month',24:'24th of Month',25:'25th of Month',26:'26th of Month',27:'27th of Month',28:'28th of Month',29:'29th of Month',30:'30th of Month',31:'31st of Month'};
+  return {0:'End of Month',1:'1st of Month',2:'2nd of Month',3:'3rd of Month',4:'4th of Month',5:'5th of Month',6:'6th of Month',7:'7th of Month',8:'8th of Month',9:'9th of Month',10:'10th of Month',11:'11th of Month',12:'12th of Month',13:'13th of Month',14:'14th of Month',15:'15th of Month',16:'16th of Month',17:'17th of Month',18:'18th of Month',19:'19th of Month',20:'20th of Month',21:'21st of Month',22:'22nd of Month',23:'23rd of Month',24:'24th of Month',25:'25th of Month',26:'26th of Month',27:'27th of Month',28:'28th of Month',29:'29th of Month',30:'30th of Month',31:'31st of Month'};
 }
 componentDidMount(){
   const {buildingData,bankData} = this.props
@@ -250,7 +258,7 @@ componentDidMount(){
 
 
 UNSAFE_componentWillReceiveProps(nextProps){
-  const {buildingData} = this.props
+  const {buildingData,selectedBuilding} = this.props
   if(nextProps.buildingData!==buildingData){
     const allBuildings = nextProps.buildingData || [];
     const availableBuildings = allBuildings.map((building,idx)=>{
@@ -259,6 +267,11 @@ UNSAFE_componentWillReceiveProps(nextProps){
     availableBuildings.push({label:"+ Add New Building",value:"add_new"})
     this.setState({availableBuildings})
   }
+
+  if(nextProps.selectedBuilding != selectedBuilding && nextProps.selectedBuilding){
+    this,this.setState({buildingName:nextProps.selectedBuilding});
+  }
+
 }
 componentDidUpdate(prevProps,prevState){
   const {bankAccount,collectingAmount,rentPeriod,rentDue} = this.state
@@ -279,7 +292,7 @@ onChangeRentPeriod(rentPeriod){
       const monthItem = { label: monthNames[key], value: key };
       rentduesData.push(monthItem);
     });
-    this.setState({rentduesLabel:"Choose month"})
+    this.setState({rentduesLabel:"Choose rent date"})
     this.setState({rentDue:null})
     this.setState({rentDueDisable:false});
   }
@@ -290,14 +303,14 @@ onChangeRentPeriod(rentPeriod){
       const dateItem = { label: monthDates[key].toString(), value: key };
       rentduesData.push(dateItem);
     });
-    this.setState({rentduesLabel:"Choose day/date"})
-    this.setState({rentDue:31})
+    this.setState({rentduesLabel:"Rent due day"})
+    this.setState({rentDue:null})
     this.setState({rentDueDisable:false});
   }
 
   if(rentPeriod==2){
     rentduesData.push({label:'15th & End of the Month',value:1});
-    this.setState({rentduesLabel:"Choose day/date"})
+    this.setState({rentduesLabel:"Rent due day"})
     this.setState({rentDue:1})
     this.setState({rentDueDisable:true});
   }
@@ -308,7 +321,7 @@ onChangeRentPeriod(rentPeriod){
       const weekItem = { label: weekNames[key], value: key };
       rentduesData.push(weekItem);
     });
-    this.setState({rentduesLabel:"Choose day/date"})
+    this.setState({rentduesLabel:"Rent due day"})
     this.setState({rentDue:null})
     this.setState({rentDueDisable:false});
   }
@@ -576,7 +589,7 @@ renderHeader(){
     } = this.state
       return (
         <SafeAreaView style={styles.container(theme)}>
-        <KeyboardAvoidingView behavior={this.keyboardBehavior} >
+        <KeyboardAvoidingView style={{flex: 1,backgroundColor:inputFocused?'#fff':'transparent'}} behavior={this.keyboardBehavior} >
               <View>
                 {!inputFocused && this.renderHeader()}
                 <View style={styles.formcontainer}>
@@ -711,15 +724,15 @@ renderHeader(){
                           <Text style={styles.columntitle(theme)}>PAYMENT INFORMATION</Text>
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>A. Total Amount to be Collected from Tenant</Text>
-                             <Text style={styles.responseValue(theme)}>INR {this.getMoneyFormat(collectingAmount,0)}</Text>
+                             <Text style={styles.responseValue(theme)}>INR {this.getMoneyFormat(collectingAmount.replace(",",""),0)}</Text>
                           </View>
 
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>B. Bank Charges</Text>
                              <View style={styles.SubresponseValue}>
                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.1) INR 10</Text> on using Net Banking/UPI</Text>
-                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.2) INR {this.getBankCharge(collectingAmount,1.25)}</Text> on using Debit Card (1.25% of A includes 18% GST)</Text>
-                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.3) INR {this.getBankCharge(collectingAmount,1.95)}</Text> on using Credit Card (1.95% of A, includes 18% GST)</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.2) INR {this.getBankCharge(collectingAmount.replace(",",""),1.25)}</Text> on using Debit Card (1.25% of A includes 18% GST)</Text>
+                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.3) INR {this.getBankCharge(collectingAmount.replace(",",""),1.95)}</Text> on using Credit Card (1.95% of A, includes 18% GST)</Text>
                               </View>
                           </View>
 
@@ -731,9 +744,9 @@ renderHeader(){
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Total Amount Payable by Tenant Monthly</Text>
                              <View style={styles.SubresponseValue}>
-                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,1)}</Text> on using Net Banking/UPI (A + B.1 + C)</Text>
-                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,2)}</Text> on using Debit Card (A + B.2 + C)</Text>
-                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount,3)}</Text> on using Credit Card (A + B.3 + C)</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount.replace(",",""),1)}</Text> on using Net Banking/UPI (A + B.1 + C)</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount.replace(",",""),2)}</Text> on using Debit Card (A + B.2 + C)</Text>
+                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>INR {this.getTotalAmount(collectingAmount.replace(",",""),3)}</Text> on using Credit Card (A + B.3 + C)</Text>
                               </View>
                           </View>
 
@@ -841,11 +854,11 @@ const pickerSelectStyles = StyleSheet.create({
 
 
 const mapStateToProps = ({ building,bankAccount,propertiesLandlord }) => {
-  const { error, success, refreshing,buildingData } = building;
+  const { error, success, refreshing,buildingData,selectedBuilding } = building;
   const { bankData } = bankAccount;
   const { loading } = propertiesLandlord;
 
-  return { error, success, loading, refreshing,buildingData,bankData  };
+  return { error, success, loading, refreshing,buildingData,bankData,selectedBuilding  };
 };
 
 EditPropertyTenant.propTypes = {
@@ -858,6 +871,7 @@ EditPropertyTenant.propTypes = {
   getBuildings: PropTypes.func,
   addNewBuilding: PropTypes.func,
   editProperty: PropTypes.func,
+  selectedBuilding: PropTypes.string,
 };
 
 EditPropertyTenant.defaultProps = {
@@ -867,6 +881,7 @@ EditPropertyTenant.defaultProps = {
   refreshing:false,
   buildingData:[],
   bankData:[],
+  selectedBuilding:null,
 };
 
 export default connect(mapStateToProps, {getBuildings,addNewBuilding,editProperty})(EditPropertyTenant);

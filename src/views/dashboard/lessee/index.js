@@ -10,7 +10,8 @@ import Swiper from 'react-native-swiper';
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
-  NAVIGATION_RENT_INIT_VIEW_PATH
+  NAVIGATION_RENT_INIT_VIEW_PATH,
+  NAVIGATION_DASHBOARD_INIT_VIEW_PATH
 } from '../../../navigation/routes';
 import CongratsModalDashBoard from '../../../components/CongratsModalDashBoard';
 
@@ -22,13 +23,13 @@ class LesseeDashboard extends React.Component {
     StatusBar.setHidden(false)
   }
   addPropertyTenant(){
-    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
   }
   gotToProfile(){
-    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
   }
   payRent(){
-    NavigationService.navigate(NAVIGATION_RENT_INIT_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_RENT_INIT_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
   }
 //======================================================//
 //============ start common function ====================//
@@ -124,7 +125,7 @@ getConsistencyRentPay(DataObj){
                         dot={<View style={theme.typography.Dots}/>}
                         activeDot={<View style={theme.typography.activeDots} />}
                         //paginationStyle={theme.typography.pagination}
-                        loop
+                        loop={false}
                         showsPagination={false}
                       >
                       <View style={styles.accountstats(theme)}>

@@ -48,6 +48,10 @@ class DateMonthPicker extends PureComponent {
     }
 
   showDatePicker(){
+      const {defaultValue,onSeleteItem} = this.props
+      if(!defaultValue){
+        onSeleteItem("01-01");
+      }
     let daylist = [];
     for(var i=1;i<32;i++){
         daylist.push(i);
@@ -58,9 +62,9 @@ class DateMonthPicker extends PureComponent {
             monthList
         ],
         //selectedValue: [59],
-        pickerConfirmBtnText: 'confirm',
-        pickerCancelBtnText: 'cancel',
-        pickerTitleText: 'Choose Date Month',
+        pickerConfirmBtnText: 'Confirm',
+        pickerCancelBtnText: 'Cancel',
+        pickerTitleText: 'Choose rent date',
         onPickerConfirm: data => {
             this.onConfirmItem(data);
         },

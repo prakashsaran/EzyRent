@@ -193,6 +193,7 @@ class EditBankAccount extends React.Component {
 
 
                           <View style={styles.fieldWrapp(theme)}>
+                          <Text style={theme.typography.tooltip}>IFSC Code/Swift Code *</Text>
                               <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)}  ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode}
                                placeholder={'IFSC Code/Sort Code'}
                                returnKeyLabel={"next"}
@@ -203,6 +204,7 @@ class EditBankAccount extends React.Component {
 
 
                           <View style={styles.fieldWrapp(theme)}>
+                          <Text style={theme.typography.tooltip}>Additional Details</Text>
                               <TextInput onFocus={()=>this.onFocusInput(this._additionalDetailsEntry)} onBlur={()=>this.onBlurInput(this._additionalDetailsEntry)} ref={(ref) => this._additionalDetailsEntry = ref} onChangeText={(additionalDetails) =>{this.setState({additionalDetails})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={additionalDetails} placeholder={'Additional Details'}/>
                           </View>
                           <View style={styles.spacing}></View>

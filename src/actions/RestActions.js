@@ -36,6 +36,7 @@ import {
   EZYRENT_GET_LANDLORD_PROFILE,
   EZYRENT_LANDLORD_PROFILE_VIEW_LOADING,
   EZYRENT_SET_CURRENT_LANDLORD_PROFILE,
+  EZYRENT_BUILDING_SET_SELECTED,
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -77,6 +78,7 @@ export const addNewBuilding = (data) => async (dispatch) => {
     const formData = formUrlencodedData(data);
     const response = await EzyRent.admin.addNewBuilding(formData);
     if(response && response.data){
+      dispatch({ type: EZYRENT_BUILDING_SET_SELECTED, payload: response.data.id });
       refreshBuildings(dispatch);
     }
   dispatch({ type: EZYRENT_BUILDING_LOADING, payload: false });
@@ -97,6 +99,10 @@ export const updateUserProfle = (customer,data) => async (dispatch) =>{
         userData.user.profile_pic = response.data.profile_pic;
         dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: customer });
         updateUserData(userData);
+        DropDownHolder.alert('success', '', response.message)
+      }
+      if(response.error && response.message){
+        DropDownHolder.alert('error', '', response.message)
       }
       dispatch({ type: EZYRENT_ACCOUNT_LOADING, payload: false });
     } catch (e) {
@@ -309,6 +315,10 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
         if(user){
           refreshMyProfile(user,dispatch);
         }
+        DropDownHolder.alert('success', '', response.message)
+      }
+      if(response.error && response.error_message){
+        DropDownHolder.alert('error', '', response.error_message)
       }
     } else {
       const formData = formUrlencodedData(data);
@@ -319,6 +329,7 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
         if(user){
           refreshMyProfile(user,dispatch);
         }
+        DropDownHolder.alert('success', '', response.message)
       }
     }
     dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
@@ -335,6 +346,7 @@ export const deleteProperty = (propId,data) => async (dispatch) => {
     if(response && response.success){
       refreshPropertiesForLandlord(dispatch)
       NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+      DropDownHolder.alert('success', '', response.message)
     }
 }
 
@@ -345,9 +357,14 @@ export const editProperty = (propId,data,media=null) => async (dispatch) => {
     if(media){
       const formData = formMultipartData("property_image",media,data);
       const response = await EzyRent.admin.editPropertyWithImage(propId,formData);
+      console.log("response editProperty",response)
       if(response && response.success){
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         refreshPropertiesForLandlord(dispatch);
+        DropDownHolder.alert('success', '', response.message)
+      }
+      if(response.error && response.error_message){
+        DropDownHolder.alert('error', '', response.error_message)
       }
     } else {
       const formData = formUrlencodedData(data);
@@ -355,6 +372,7 @@ export const editProperty = (propId,data,media=null) => async (dispatch) => {
       if(response && response.success){
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         refreshPropertiesForLandlord(dispatch);
+        DropDownHolder.alert('success', '', response.message)
       }
     }
     dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});
@@ -462,6 +480,8 @@ export const refreshPropertiesForTenant  = async (dispatch) => {
     const response = await EzyRent.admin.getPropertiesForTenant(params);
     if(response && response.data){
       dispatch({type:EZYRENT_GET_PROPERTIES_AS_TENANT,payload : response.data});
+    } else {
+      dispatch({type:EZYRENT_GET_PROPERTIES_AS_TENANT,payload : []});
     }
     dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : false});
   } catch(e){
@@ -715,6 +735,38 @@ export const getNotifications = () => async (dispatch) => {
     dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : false});
   }
 }
+export const refreshNotifications = async (dispatch) => {
+  dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : true});
+  try{
+    // request to server
+    const response = await EzyRent.admin.getNotifications();
+    if(response && response.data){
+      dispatch({type:EZYRENT_GET_NOTIFICATION,payload : response.data});
+    }
+    dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : false});
+  } catch(e){
+    console.error(e)
+    dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : false});
+  }
+}
+
+export const updateNotification = (notid,data) => async (dispatch) => {
+  dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : true});
+  try{
+   const formdata = formUrlencodedData(data)
+    // request to server
+    const response = await EzyRent.admin.updateNotification(notid,formdata);
+    if(response){
+      refreshNotifications(dispatch);
+    }
+    dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : false});
+  } catch(e){
+    console.error(e)
+    dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : false});
+  }
+}
+
+
 // NOTIFICATION CONTROLLER LIST END
 
 
@@ -803,20 +855,14 @@ export const getMyTenant = (user) => async (dispatch) => {
 
 // FORM DATA SET EXICUTIVE FROMAT
 const formMultipartData = (keyValue,photo, extraData=null) => {
-  const data = new FormData();
-  const imgname = photo.uri.split("/").slice(-1)[0];
-
-  data.append(keyValue, {
-    name: imgname,
-    type: photo.type,
-    uri: photo.uri.replace("file://", "")
-  });
-  if(extraData){
+  let data = [];
+   if(extraData){
     for (var item in extraData) {
-     data.append(item,extraData[item]);
+     data.push({ name : item, data : String(extraData[item])});
     }
-  }
+  } 
 
+  data.push({ name : keyValue, filename : photo.fileName, type:photo.type, data: photo.data});
   return data;
 };
 
