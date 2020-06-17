@@ -16,6 +16,9 @@ import styles from './style';
 import { ThemeContext } from '../../../theme';
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_WALKTHROUGH_TENANT_PATH,NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH} from '../../../navigation/routes';
+import {appInitStart} from '../../../actions';
+import { connect } from 'react-redux';
+
 function WalkThroughLandloard(props) {
   useEffect(() => {
     // ComponentDidMount
@@ -25,10 +28,14 @@ function WalkThroughLandloard(props) {
 
 const theme = useContext(ThemeContext);
 const {onClickBtn} = props
+const appStart = () =>{
+  props.appInitStart();
+  NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)
+}
   return (
   	<SafeAreaView style={styles.container(theme)}>
       <ScrollView style={styles.ScrollView}>
-  	    <TouchableOpacity style={styles.skipwalkthrough} onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)}}>
+  	    <TouchableOpacity style={styles.skipwalkthrough} onPress={()=>{appStart()}}>
           <Text style={styles.skipText(theme)}>Skip</Text>
         </TouchableOpacity>
         <View style={styles.itemcontainer}>
@@ -59,7 +66,19 @@ const {onClickBtn} = props
 }
 WalkThroughLandloard.propTypes = {
   onClickBtn: PropTypes.func.isRequired,
+  appInitStart: PropTypes.func.isRequired,
   extra: PropTypes.string
 };
 
-export default WalkThroughLandloard;
+
+const mapStateToProps = () => {
+  return {};
+};
+
+
+WalkThroughLandloard.defaultProps = {
+  extra:null,
+};
+
+export default connect(mapStateToProps, { appInitStart })(WalkThroughLandloard);
+

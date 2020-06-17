@@ -27,7 +27,12 @@ function SignUpMail(props) {
     if (Platform.OS == 'android') {
         keyboardBehavior = 'height'
     }
-
+    const paramsEmailaddress = props.navigation.getParam('emailaddress');
+    if(paramsEmailaddress && paramsEmailaddress !=emailaddress){
+      setEmailAddress(paramsEmailaddress);
+      setEnableButton(true);
+    }
+  
   }, []);
 
   return (

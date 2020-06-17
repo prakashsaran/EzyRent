@@ -7,8 +7,10 @@ import {TENANT_TYPE,LANDLORD_TYPE,LANDLORD_TENANT_TYPE} from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
   SWITCH_NAVIGATION_AUTHORIZED_ACCOUNT_PATH,
+  NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH,
 } from '../navigation/routes';
 import RNFetchBlob from 'rn-fetch-blob';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const defaultOptions = {
@@ -28,10 +30,18 @@ class EzyRentClass {
       this.guest = guest(this);
       this.admin = admin(this);
 	}
+  async getAsyncStarted(){
+    const app_setup = await AsyncStorage.getItem('app_setup');
+    if(app_setup && app_setup=="ok"){
+      NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);
+    }
+  }
 
 	init() {
     if(this.currentAccount && this.accessToken){
       NavigationService.navigate(SWITCH_NAVIGATION_AUTHORIZED_ACCOUNT_PATH);
+    } else{
+      this.getAsyncStarted();
     }
   }
   getMediaUrl(){
@@ -173,7 +183,6 @@ class EzyRentClass {
       "content-type": "application/x-www-form-urlencoded",
       "cache-control": "no-cache",
     }
-
     return new Promise((resolve, reject) => {
       fetch(uri, { "method": "POST", headers, body: data})
       .then((response) => {

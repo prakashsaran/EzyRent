@@ -3,7 +3,12 @@ import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity } from "react
 import styles from './style';
 import { ThemeContext } from '../../../../theme';
 import PhoneInput from 'react-native-phone-input'
-import {NAVIGATION_SIGN_UP_MOBILE_OTP_PATH,NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH,NAVIGATION_SIGN_IN_MAIL_ID_PATH} from '../../../../navigation/routes';
+import {NAVIGATION_SIGN_UP_MOBILE_OTP_PATH,
+  NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH,
+  NAVIGATION_SIGN_IN_MAIL_ID_PATH,
+  NAVIGATION_SIGN_UP_MAIL_ID_PATH,
+  NAVIGATION_SIGN_UP_PROFILE_PATH,
+} from '../../../../navigation/routes';
 import NavigationService from '../../../../navigation/NavigationService';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -30,7 +35,7 @@ const onChangePhoneNumber = (number) =>{
   }
   useEffect(() => {
     if(Object.keys(props.warndata).length){
-      if(props.warndata.hasOwnProperty("type")){
+      if(props.warndata.hasOwnProperty("type") && props.warndata.popuptype=="mobile"){
         setConfirmModalVisible(true);
       }
     }
@@ -38,14 +43,20 @@ const onChangePhoneNumber = (number) =>{
 
   reStartSignUp = () =>{
     setConfirmModalVisible(false);
+    if(props.warndata.type=="N"){
+      NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH,{mobilenumber})
+    } else if(props.warndata.type=="M"){
+      NavigationService.navigate(NAVIGATION_SIGN_UP_MAIL_ID_PATH); 
+    } else if(props.warndata.type=='E'){
+      NavigationService.navigate(NAVIGATION_SIGN_UP_PROFILE_PATH);  
+    }
     props.resetSingWarn();
-    NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH,{mobilenumber})
   }
   renderConfirmModal =() =>{
     return (
       <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
-            <View style={{ width:'95%',height:140,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
-              <Text style={styles.confirmBoxTitle(theme)}>Your account creation is pending. Please complete your account.</Text>
+            <View style={{ width:'95%',height:100,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
+              <Text style={styles.confirmBoxTitle(theme)}>Your Account Setup is pending. Do you wish to complete?</Text>
                 <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
                   <TouchableOpacity onPress={()=>setConfirmModalVisible(false)}>
                     <Text style={styles.eraseTitle(theme)}>Cancel</Text>

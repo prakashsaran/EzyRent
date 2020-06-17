@@ -6,7 +6,7 @@ import OTPInputView from '@twotalltotems/react-native-otp-input'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CountDown from 'react-native-countdown-component';
-import { bankVerify,resendMobileOtp } from '../../../actions';
+import { bankVerify,resendMobileOtpAdminType } from '../../../actions';
 import {NAVIGATION_SIGN_UP_MAIL_ID_PATH,NAVIGATION_SIGN_UP_PROFILE_PATH} from '../../../navigation/routes';
 import NavigationService from '../../../navigation/NavigationService';
 import { DropDownHolder } from '../../../components';
@@ -18,7 +18,7 @@ function BankVerification(props) {
   const [inputOtp, setInputOtp] = useState(null);
   const [appPin, setAppPin] = useState(null);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [resendEnable, setResendEnable] = useState(false);
+  const [resendEnable, setResendEnable] = useState(true);
   const [resendtimeout, setResendTimeOut] = useState(0);
   const {currentAccount} = props
 
@@ -38,8 +38,8 @@ function BankVerification(props) {
     const resendSubmit = (code) =>{
         setEnableButton(false);
         setResendEnable(false);
-        setResendTimeOut(10);
-        props.resendMobileOtp(props.customer,currentAccount.type);
+        setResendTimeOut(120);
+        props.resendMobileOtpAdminType(currentAccount,currentAccount.type);
       }
     
     
@@ -144,7 +144,7 @@ BankVerification.propTypes = {
   customer: PropTypes.object,
   currentAccount: PropTypes.object,
   bankVerify: PropTypes.func.isRequired,
-  resendMobileOtp: PropTypes.func.isRequired,
+  resendMobileOtpAdminType: PropTypes.func.isRequired,
 };
 
 BankVerification.defaultProps = {
@@ -155,4 +155,4 @@ BankVerification.defaultProps = {
   currentAccount:{}
 };
 
-export default connect(mapStateToProps, { bankVerify,resendMobileOtp })(BankVerification);
+export default connect(mapStateToProps, { bankVerify,resendMobileOtpAdminType })(BankVerification);

@@ -32,7 +32,6 @@ class CongratsModalDashBoard extends PureComponent {
     UNSAFE_componentWillReceiveProps(nextProps){
         const {items,getPropertyById} = this.props
         if(nextProps.items != items){
-          console.log("slectedProperty",JSON.stringify(nextProps.items))
           const slectedProperty = nextProps.items.find(function(item){
             if(item.property_status=="A"){
                 return item;

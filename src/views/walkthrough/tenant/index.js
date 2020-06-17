@@ -14,9 +14,16 @@ import styles from './style';
 import { ThemeContext } from '../../../theme';
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH} from '../../../navigation/routes';
+import {appInitStart} from '../../../actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 function WalkThroughTenants(props) {
 const theme = useContext(ThemeContext);
+const startApp = () =>{
+  props.appInitStart();
+  NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH);
+}
   return (
     <SafeAreaView style={styles.container(theme)}>
       <ScrollView>
@@ -38,11 +45,25 @@ const theme = useContext(ThemeContext);
           </View>
         </View>
       </ScrollView>
-          <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)}}>
+          <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>startApp()}>
             <Text style={theme.typography.caption}>LET`S START</Text>
           </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
-export default WalkThroughTenants;
+const mapStateToProps = ({ account }) => {
+  const { customer,access_token } = account;
+
+  return { customer,access_token };
+};
+
+WalkThroughTenants.propTypes = {
+  appInitStart: PropTypes.func.isRequired,
+};
+
+WalkThroughTenants.defaultProps = {
+};
+
+
+export default connect(mapStateToProps, { appInitStart })(WalkThroughTenants);

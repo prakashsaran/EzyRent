@@ -1,17 +1,13 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View,Text,TouchableOpacity,Image,FlatList } from "react-native";
 import PropTypes from 'prop-types';
-import { Picker, DatePicker } from 'react-native-wheel-pick';
-import Modal from 'react-native-modal';
-
+import Picker from 'react-native-picker';
 const monthList = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 class DateMonthPicker extends PureComponent {
     constructor(props) {
         super(props);
-        this.state={
-            modelVisible:false
-        };
+        this.state={}
         this.onSeleteItem = this.onSeleteItem.bind(this);
         this.onCancelItem = this.onCancelItem.bind(this);
         this.onConfirmItem = this.onConfirmItem.bind(this);
@@ -35,15 +31,11 @@ class DateMonthPicker extends PureComponent {
         }
     }
     onSeleteItem(data){
-        const chooseMonth = new Date(data).getMonth();
-        const chooseDay = new Date(data).getDate();
-        const currentMonth = parseInt(chooseMonth)+1;
         const { onSeleteItem } = this.props;
         if(onSeleteItem){
-            const SelectedDay = (chooseDay<10)?"0"+chooseDay:chooseDay;
-            const SelectedMonth = (currentMonth<10)?"0"+currentMonth:currentMonth;
-            const returnValue = SelectedMonth+"-"+SelectedDay;
-            console.log("returnValue",returnValue)
+            const SelectedDay = (data[0]<10)?"0"+data[0]:data[0];
+            const SelectedMonth = this.getIndexOfMonth(monthList,data[1]);
+            const returnValue = SelectedDay+"-"+SelectedMonth;
             onSeleteItem(returnValue);
         }
         
@@ -56,7 +48,34 @@ class DateMonthPicker extends PureComponent {
     }
 
   showDatePicker(){
-    this.setState({modelVisible:true})
+      const {defaultValue,onSeleteItem} = this.props
+      if(!defaultValue){
+        onSeleteItem("01-01");
+      }
+    let daylist = [];
+    for(var i=1;i<32;i++){
+        daylist.push(i);
+    }
+    Picker.init({
+        pickerData: [
+            daylist,
+            monthList
+        ],
+        //selectedValue: [59],
+        pickerConfirmBtnText: 'Confirm',
+        pickerCancelBtnText: 'Cancel',
+        pickerTitleText: 'Choose rent date',
+        onPickerConfirm: data => {
+            this.onConfirmItem(data);
+        },
+        onPickerCancel: data => {
+            this.onCancelItem(data);
+        },
+        onPickerSelect: data => {
+            this.onSeleteItem(data);
+        }
+    });
+    Picker.show();
   }
 
     setNativeProps = (nativeProps) => {
@@ -66,42 +85,20 @@ class DateMonthPicker extends PureComponent {
     getLabelFormat(selectLable){
         const arrayFormat  = selectLable.split("-");
         if(Object.keys(arrayFormat).length > 1){
-            const indxOfMonth = parseInt(arrayFormat[0])-1;
-            return arrayFormat[1]+" "+monthList[indxOfMonth];
+            const indxOfMonth = parseInt(arrayFormat[1])-1;
+            return arrayFormat[0]+" "+monthList[indxOfMonth];
         }
         return selectLable;
     }
-    renderModeView(){
-        return(
-            <Modal onBackdropPress={()=>this.setState({modelVisible:false})} isVisible={this.state.modelVisible}>
-                <View style={{flex:1,justifyContent:'center'}}>
-                <DatePicker
-                    style={{ backgroundColor: 'white', height: 215,borderBottomWidth:1,borderColor:'red'}} 
-                    // android not support width
-                    onDateChange={date => {this.onSeleteItem(date)}}
-                    itemSpace={30}
-                    textSize={16}
-                    />
-                    <View style={{backgroundColor:'white',alignItems:'center',paddingVertical:10}}>
-                        <TouchableOpacity onPress={()=>this.setState({modelVisible:false})}>
-                            <Text style={{fontSize:18}}>Done</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-           
-            </Modal>
-        )
-        
-    }
+       
     render(){
         const {style,selectedLabelStyle,placeholder,placeholderStyle,isdisabled,pickerStyle,defaultValue} = this.props;
         return(
-            <View style={[styles.container,style]}>
-                {this.renderModeView()}
-                <TouchableOpacity disabled={isdisabled} ref={component => this._root = component} {...this.props} onPress={()=>this.showDatePicker()} style={[styles.pickercontainer,pickerStyle]}>
-                    {defaultValue?<Text style={[styles.selectedLabel,selectedLabelStyle]} numberOfLines={1}>{this.getLabelFormat(defaultValue)}</Text>:<Text style={[styles.placeholder,placeholderStyle]} numberOfLines={1}>{placeholder}</Text>}
-                    <View style={{position:'absolute',right:0}}><Image style={{width:13,height:13}} source={require('../assets/images/arrowdown_picker.png')}/></View>
-                </TouchableOpacity>
+        <View style={[styles.container,style]}>
+            <TouchableOpacity disabled={isdisabled} ref={component => this._root = component} {...this.props} onPress={()=>this.showDatePicker()} style={[styles.pickercontainer,pickerStyle]}>
+                {defaultValue?<Text style={[styles.selectedLabel,selectedLabelStyle]} numberOfLines={1}>{this.getLabelFormat(defaultValue)}</Text>:<Text style={[styles.placeholder,placeholderStyle]} numberOfLines={1}>{placeholder}</Text>}
+                <View style={{position:'absolute',right:0}}><Image style={{width:13,height:13}} source={require('../assets/images/arrowdown_picker.png')}/></View>
+            </TouchableOpacity>
         </View>
         )
     }

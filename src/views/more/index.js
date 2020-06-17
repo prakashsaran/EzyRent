@@ -10,12 +10,14 @@ import {
   NAVIGATION_MORE_MY_LANDLOADS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
-  NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH
+  NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH,
+  NAVIGATION_MORE_INIT_VIEW_PATH
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout,getCountryCodeFormat} from '../../actions';
 import {EzyRent} from '../../ezyrent';
+import Modal from 'react-native-modal';
 
 class MoreInit extends React.Component {
   static contextType = ThemeContext;
@@ -23,6 +25,7 @@ class MoreInit extends React.Component {
     super();
     this.state ={
       AccountType:null,
+      isVisibleConfirmDialog:false,
     }
     StatusBar.setBarStyle("light-content");
   }
@@ -46,7 +49,7 @@ class MoreInit extends React.Component {
  
 
   goToAddNewProperty(){
-    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,{goBack:NAVIGATION_MORE_INIT_VIEW_PATH});
   }
   goToMyTenants(){
     NavigationService.navigate(NAVIGATION_MORE_MY_TENANTS_VIEW_PATH);
@@ -59,22 +62,6 @@ class MoreInit extends React.Component {
   }
   goToMyProfile(){
     NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
-  }
-  goToLogout(){
-    const {logout} = this.props;
-    Alert.alert(
-      "",
-      "Are you sure?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => logout() }
-      ],
-      { cancelable: false }
-    );
   }
   isLessMarshmallow(){
     const dvcHeight = Dimensions.get('window').height;
@@ -149,7 +136,7 @@ class MoreInit extends React.Component {
                             </View>
                             <View style={styles.MoreLinkswrap}>
                               <Image style={styles.More_icon} source={require('../../assets/images/log-out.png')}></Image>
-                              <TouchableOpacity style={styles.MoreLinks}  onPress={()=>this.goToLogout()}>
+                              <TouchableOpacity style={styles.MoreLinks}  onPress={()=>this.setState({isVisibleConfirmDialog:true})}>
                                 <Text style={styles.MoreLinksItem(theme)}>Logout</Text>
                               </TouchableOpacity>
                             </View>
@@ -159,6 +146,7 @@ class MoreInit extends React.Component {
                       {/* commming==== */}
                     </View>
                 </View>
+                {this.renderLogoutConfirm()}
           </SafeAreaView>
         </ImageBackground>
       );
@@ -178,6 +166,24 @@ class MoreInit extends React.Component {
       )
     }
     return null;
+  }
+  renderLogoutConfirm(){
+    const {logout} = this.props;
+    return(
+      <Modal isVisible={this.state.isVisibleConfirmDialog} style={styles.pop_wrap}>
+        <View style={styles.popupContainer(theme)}>
+          <Text style={styles.columntitlePop1(theme)}>ARE YOU SURE ?</Text>
+          <View style={styles.popupBtms}>
+            <TouchableOpacity onPress={()=>this.setState({isVisibleConfirmDialog:false})}>
+                <Text style={styles.cancel}>CANCEL</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{this.setState({isVisibleConfirmDialog:false}),logout()}}>
+                <Text style={{color:'#315add'}}>Ok</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    )
   }
 
   renderMyLandlord(){

@@ -90,7 +90,7 @@ class TenantProfile extends React.Component {
                 <Text style={styles.box_desc}>Properties Paying</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{total_rent_pay}K</Text>
+                <Text style={styles.box_heading}>{total_rent_pay}</Text>
                 <Text style={styles.box_desc}>Total Paid</Text>
               </View>
               <View style={styles.box}>
@@ -104,6 +104,10 @@ class TenantProfile extends React.Component {
   }
   renderConsistency(){
     const {AccountType,tenant_name,consistency_rent_pay} = this.state
+    if(!consistency_rent_pay || consistency_rent_pay =="0%"){
+      return null;
+    }
+    console.log("consistency_rent_pay",consistency_rent_pay)
       return (
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
@@ -120,14 +124,24 @@ class TenantProfile extends React.Component {
         </View>
       )
   }
+  goToPrevious(){
+      const { navigation } = this.props
+      const backscreen = navigation.getParam('goBack');
+      if(backscreen){
+        NavigationService.navigate(backscreen);
+      } else{
+          NavigationService.goBack()
+      }
+  }
+
   render(){
-    const {tenant_name,mobile_country_code,profile_pic,tenant_mobile} = this.state
-    const {current_tenant} = this.props
+    const {tenant_name,mobile_country_code,profile_pic,tenant_mobile,consistency_rent_pay} = this.state
+    const {current_tenant,loading} = this.props
     const theme = this.context;
-    if(!Object.keys(current_tenant).length > 0){
+    if(!Object.keys(current_tenant).length > 0 || loading){
       return(
         <View style={{width:"100%",height:"100%",alignItems:'center',justifyContent:'center'}}>
-          <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
+          <ActivityIndicator style={{marginTop:40}} size={'large'} color={theme.colors.secondry}/>
         </View>
       );
      }
@@ -135,7 +149,7 @@ class TenantProfile extends React.Component {
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
           <View style={styles.titleWrapper}>
-          <TouchableOpacity onPress={()=>NavigationService.goBack()}  style={{alignItems:'center',flexDirection:'row'}}>
+          <TouchableOpacity onPress={()=>this.goToPrevious()}  style={{alignItems:'center',flexDirection:'row'}}>
             <Image style={styles.back_button} source={require('../../../assets/images/back-white.png')}></Image>
             <Text style={theme.typography.myDashBoard}>Tenant Profile</Text>
             </TouchableOpacity>
@@ -157,8 +171,6 @@ class TenantProfile extends React.Component {
                   {this.renderQuickState()}
                   </View>
                   {this.renderConsistency()}
-                  
-                  
                 </View>
               </ScrollView>
             </View>

@@ -65,7 +65,7 @@ getRentPay(DataObj){
 
 getConsistencyRentPay(DataObj){
   if(DataObj.hasOwnProperty("tenant")){
-    return DataObj.tenant.rent_pay;
+    return DataObj.tenant.consistency_rent_pay;
   }
   return "0";
 }
@@ -112,27 +112,9 @@ getConsistencyRentPay(DataObj){
     const {customer} = this.props
     if(AccountType=="U"){
       return(
-        <View style={styles.shadow}>
-          <View style={styles.quick_stats}>
-            <View style={styles.quick_stats_inner}>
-              <Text style={styles.quick_stats_heading}>Quick Stats</Text>
-            </View>
-            <Text style={styles.content(theme)}>A quick summary of your account on EzyRent</Text>
-            <View style={styles.two_box}>
-              <View style={styles.box}>
-                <Text style={styles.box_heading}>0</Text>
-                <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.box_heading}>0K</Text>
-                <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.box_heading}>0%</Text>
-                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
-              </View>
-            </View>
-          </View>
+        <View style={styles.dashboard_img_wrap}>
+          <Image style={styles.dashboard_img} resizeMode={'stretch'} source={require('../../assets/images/new-user-dashboard.png')}/>
+          <Text style={styles.new_user_text}>For all profile features to work Add a Tenant/Property or be Added by a Landlord</Text>
         </View>
       )
     }
@@ -180,7 +162,7 @@ getConsistencyRentPay(DataObj){
                 <Text style={styles.box_desc}>Total Rent I have to Pay</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}%</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}</Text>
                 <Text style={styles.box_desc}>Consistency in Paying Rent</Text>
               </View>
             </View>
@@ -207,15 +189,15 @@ getConsistencyRentPay(DataObj){
             <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as landlord.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getRentPay(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
                 <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getTotalRentPay(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
                 <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
                 <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
               </View>
             </View>
@@ -230,16 +212,16 @@ getConsistencyRentPay(DataObj){
             <Text style={styles.content(theme)}>A quick summary of your account on EzyRent as tenant.</Text>
             <View style={styles.two_box}>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getCollectionRent(customer)}</Text>
-                <Text style={styles.box_desc}>Properties I am Collecting Rent</Text>
+                <Text style={styles.box_heading}>{this.getRentPay(customer)}</Text>
+                <Text style={styles.box_desc}>Properties I am Paying Rent</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getCollectionTotalRent(customer)}</Text>
-                <Text style={styles.box_desc}>Total Rent I have to Receive</Text>
+                <Text style={styles.box_heading}>{this.getTotalRentPay(customer)}</Text>
+                <Text style={styles.box_desc}>Total Rent I have to Pay</Text>
               </View>
               <View style={styles.box}>
-                <Text style={styles.box_heading}>{this.getConsistencyRentCollect(customer)}</Text>
-                <Text style={styles.box_desc}>Consistency in Collecting Rent</Text>
+                <Text style={styles.box_heading}>{this.getConsistencyRentPay(customer)}</Text>
+                <Text style={styles.box_desc}>Consistency in Paying Rent</Text>
               </View>
             </View>
           </View>
@@ -327,16 +309,7 @@ getConsistencyRentPay(DataObj){
           </Swiper>
         )
     } else{
-      return(
-        <View style={styles.shadow}>
-        <View style={styles.quick_stats}>
-          <View style={styles.quick_stats_inner}>
-            <Text style={styles.quick_stats_heading}>Consistency Score</Text>
-          </View>
-          <Text style={styles.content(theme)}>Your consistency score on EzyRent as tenant.</Text>
-        </View>
-      </View>
-      );
+      return null;
     }
   }
   render(){

@@ -1,6 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimensions } from "react-native";
 import { theme } from "../../theme";
 import { normalize } from "../../components";
+function isLessMarshmallow(){
+  const dvcHeight = Dimensions.get('window').height;
+  if(dvcHeight < 750){
+    return true;
+  }
+  return false;
+}
 
 export default StyleSheet.create({
     container: {
@@ -193,6 +200,23 @@ export default StyleSheet.create({
     },
     greenText100:{
       fontSize:normalize(20),
+    },
+    dashboard_img_wrap:{
+      marginTop:40,
+    },
+    dashboard_img:{
+      width:isLessMarshmallow()?180:240,
+      alignSelf:'center',
+      height:isLessMarshmallow()?200:270,
+    },
+    new_user_text:{
+      fontSize:normalize(16),
+      textAlign:'center',
+      color:'#333',
+      fontFamily:'Oxygen',
+      marginBottom:80,
+      lineHeight:normalize(25),
+      marginTop:30,
     },
 
   });

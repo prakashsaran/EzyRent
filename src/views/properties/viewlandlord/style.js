@@ -144,6 +144,13 @@ export default StyleSheet.create({
     fontSize:normalize(19),
     fontFamily:theme.typography.fontFamilyMontserratSemi,
   }),
+  pagePropertyTitle: theme =>({
+    color:theme.colors.secondry,
+    fontSize:normalize(19),
+    fontFamily:theme.typography.fontFamilyMontserratSemi,
+    flexWrap:'wrap',
+    width:'100%',
+  }),
   payTime: theme =>({
     color:theme.colors.propertyHeading,
     fontSize:normalize(12),

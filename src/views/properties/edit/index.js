@@ -347,7 +347,11 @@ getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
 };
 getBankCharge(amount,percentage){
   const amountClt = amount*(percentage/100);
-  return  Math.round(amountClt);
+  return  Math.round(amountClt+(amountClt*18/100));
+}
+getBankChargeMoneyFormat(amount,percentage){
+  const totalBnkCharge = this.getBankCharge(amount,percentage);
+  return this.getMoneyFormat(totalBnkCharge,0);
 }
 getTotalAmount(amount,type){
   const serviceCharge = 28;
@@ -731,8 +735,8 @@ renderHeader(){
                              <Text style={theme.typography.tooltip}>B. Bank Charges</Text>
                              <View style={styles.SubresponseValue}>
                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.1) INR 10</Text> on using Net Banking/UPI</Text>
-                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.2) INR {this.getBankCharge(collectingAmount.replace(",",""),1.25)}</Text> on using Debit Card (1.25% of A includes 18% GST)</Text>
-                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.3) INR {this.getBankCharge(collectingAmount.replace(",",""),1.95)}</Text> on using Credit Card (1.95% of A, includes 18% GST)</Text>
+                               <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.2) INR {this.getBankChargeMoneyFormat(collectingAmount.replace(",",""),1.25)}</Text> on using Debit Card (1.25% of A includes 18% GST)</Text>
+                                <Text style={[styles.responseValue(theme),styles.responseValue2]}><Text style={[styles.responseValue(theme),styles.responseValue1]}>B.3) INR {this.getBankChargeMoneyFormat(collectingAmount.replace(",",""),1.95)}</Text> on using Credit Card (1.95% of A, includes 18% GST)</Text>
                               </View>
                           </View>
 

@@ -72,7 +72,7 @@ getRentPay(DataObj){
 
 getConsistencyRentPay(DataObj){
   if(DataObj.hasOwnProperty("tenant")){
-    return DataObj.tenant.rent_pay;
+    return DataObj.tenant.consistency_rent_pay;
   }
   return "0";
 }
@@ -165,7 +165,7 @@ getConsistencyRentPay(DataObj){
                             <Text style={styles.itemInfo(theme)}>Total Rent I have to Pay</Text>
                           </View>
                           <View style={styles.dataItem(theme)}>
-                            <Text style={styles.itemValue(theme)}>{this.getConsistencyRentPay(customer)}%</Text>
+                            <Text style={styles.itemValue(theme)}>{this.getConsistencyRentPay(customer)}</Text>
                             <Text style={styles.itemInfo(theme)}>Consistency in Paying Rent</Text>
                           </View>
                         </View>

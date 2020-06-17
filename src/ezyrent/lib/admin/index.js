@@ -38,5 +38,7 @@ export default ezyrent => ({
   mobileNumberChangeVerify: (uderId,data) => ezyrent.requestPatch(`/v1/users/${uderId}/mobile/verify`,data,null, ADMIN_TYPE),
   deleteProfileImage: (uderId) => ezyrent.requestDelete(`/v1/users/${uderId}/profile-image`,null,null, ADMIN_TYPE),
   updateNotification: (notid,data) => ezyrent.requestPatch(`/v1/notifications/${notid}`,data,null, ADMIN_TYPE),
+  ResendMobileOtp: (data) => ezyrent.requestPost('/v1/mobile/otp-resend',data,null, ADMIN_TYPE),
+
 
 });

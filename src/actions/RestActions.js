@@ -37,6 +37,7 @@ import {
   EZYRENT_LANDLORD_PROFILE_VIEW_LOADING,
   EZYRENT_SET_CURRENT_LANDLORD_PROFILE,
   EZYRENT_BUILDING_SET_SELECTED,
+  EZYRENT_AUTHENTICATION_LOADING,
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -116,8 +117,9 @@ export const getMyProfile = (user) => async (dispatch) =>{
     const userId = user.id;
     const userData = await getUserData();
     const response = await EzyRent.admin.getMyProfile(userId);
+    console.log("response getMyProfile",JSON.stringify(response))
       if(response && response.data){
-        userUpdatedata = {...user, ...response.data};
+       const userUpdatedata = {...user, ...response.data};
         userData.user = userUpdatedata;
         dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: userUpdatedata });
         updateUserData(userData);
@@ -290,7 +292,7 @@ export const refreshMyProfile  = async (user,dispatch) =>{
     const userData = await getUserData();
     const response = await EzyRent.admin.getMyProfile(userId);
       if(response && response.data){
-        userUpdatedata = {...user, ...response.data};
+        const userUpdatedata = {...user, ...response.data};
         userData.user = userUpdatedata;
         dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: userUpdatedata });
         updateUserData(userData);
@@ -340,11 +342,12 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
 
 }
 
-export const deleteProperty = (propId,data) => async (dispatch) => {
+export const deleteProperty = (propId,data,user=null) => async (dispatch) => {
     const formData = formUrlencodedData(data);
     const response = await EzyRent.admin.deleteProperty(propId,formData);
     if(response && response.success){
       refreshPropertiesForLandlord(dispatch)
+      refreshMyProfile(user,dispatch);
       NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
       DropDownHolder.alert('success', '', response.message)
     }
@@ -641,6 +644,7 @@ export const bankVerify = (bankdata,data) => async (dispatch) =>{
     if(response && response.message){
       refreshBanks(dispatch);
       NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
+      DropDownHolder.alert('success', '', response.message)
     }
 
 }
@@ -852,6 +856,36 @@ export const getMyTenant = (user) => async (dispatch) => {
     dispatch({type:EZYRENT_MY_TENANT_LOADING,payload : false});
   }
 }
+
+
+/**
+ * @description resendMobileOtp method : resend Otp at create account
+ * @param user object
+ * @param type string
+ * @returns avoid
+ * @callback NavigationService.navigate();
+ **/
+export const resendMobileOtpAdminType = (content,type) => async (dispatch) => {
+  dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
+  try {
+    // send otp proccess
+      // form data
+      const data = {
+        "id": content.id,
+        "type": type,
+      }
+      // form data convert to application/x-www-form-urlencoded
+      const formData = formUrlencodedData(data);
+
+    // response otp from sms server
+    const response = await EzyRent.admin.ResendMobileOtp(formData);
+    
+    dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
+  } catch (e) {
+    console.error(e)
+    authFail(dispatch, e.message);
+  }
+};
 
 // FORM DATA SET EXICUTIVE FROMAT
 const formMultipartData = (keyValue,photo, extraData=null) => {

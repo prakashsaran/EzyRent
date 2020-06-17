@@ -30,6 +30,16 @@ class ViewPropertyTenant extends React.Component {
           errorMessage:null,
       }
     }
+    goToPrevious(){
+      const { navigation } = this.props
+      const backscreen = navigation.getParam('goBack');
+      if(backscreen){
+        NavigationService.navigate(backscreen);
+      } else{
+          NavigationService.goBack()
+      }
+    }
+
 
     UNSAFE_componentWillMount(){
         const {navigation,getPropertyById} = this.props
@@ -51,7 +61,7 @@ class ViewPropertyTenant extends React.Component {
       const formdata = {mpin};
       if(mpin && mpin.length===4){
         this.setState({errorMessage:null});
-        deleteProperty(property_currentItem.id,formdata);
+        deleteProperty(property_currentItem.id,formdata,customer);
         this.setState({isconfirmModalVisible:false,errorMessage:null,mpin:""});          
       } else{
         this.setState({errorMessage:"Sorry, Please specify four digit APP-PIN"});
@@ -61,7 +71,7 @@ class ViewPropertyTenant extends React.Component {
         return(
           <View style={styles.headerContainer(theme)}>
             <View style={styles.headerContext}>
-              <TouchableOpacity onPress={()=>NavigationService.goBack()} style={styles.backscreen}>
+              <TouchableOpacity onPress={()=>this.goToPrevious()} style={styles.backscreen}>
                 <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
               </TouchableOpacity>
               <TouchableOpacity onPress={()=>this.goToEditProperty()}>
@@ -119,7 +129,7 @@ class ViewPropertyTenant extends React.Component {
           }
           
         return (
-            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%'}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
+            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',height:300}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
@@ -128,8 +138,8 @@ class ViewPropertyTenant extends React.Component {
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styles.infoContainer}>
                                 <View style={styles.propertyInfo(theme)}>
-                                    <Text style={styles.pageTitle(theme)}>{property_currentItem.house_number}</Text>
-                                    <Text style={styles.pageTitle(theme)}>{property_currentItem.building_name}</Text>
+                                    <Text style={styles.pagePropertyTitle(theme)}>{property_currentItem.house_number}</Text>
+                                    <Text style={styles.pagePropertyTitle(theme)}>{property_currentItem.building_name}</Text>
                                     <View style={styles.ownerInfo}>
                                         <Text style={styles.textLabel(theme)}>{property_currentItem.landlord_text}</Text>
                                         {property_currentItem.tenant_id &&<TouchableOpacity onPress={()=>this.goToTenantProfile(property_currentItem.tenant_id)}><Text style={styles.textValue(theme)}>{property_currentItem.tenant_details[0].tenant_name}</Text></TouchableOpacity>}
@@ -201,20 +211,23 @@ class ViewPropertyTenant extends React.Component {
 }
 
 
-const mapStateToProps = ({ properties }) => {
+const mapStateToProps = ({ account,properties }) => {
+  const { customer } = account;
     const {property_currentItem,property_loading} = properties
-    return { property_currentItem,property_loading };
+    return { property_currentItem,property_loading,customer };
   };
 
   ViewPropertyTenant.propTypes = {
     getPropertyById: PropTypes.func.isRequired,
     deleteProperty: PropTypes.func.isRequired,
+    customer: PropTypes.object,
     property_currentItem: PropTypes.object,
     property_loading: PropTypes.bool,
   };
 
 
   ViewPropertyTenant.defaultProps = {
+    customer: {},
     property_currentItem: {},
     property_loading: false,
 

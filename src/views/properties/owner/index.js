@@ -37,6 +37,16 @@ class PropertyOwner extends React.Component {
   goToEditProfile(){
     NavigationService.navigate(NAVIGATION_MORE_EDIT_MY_PROFILE_VIEW_PATH);
   }
+  goToPrevious(){
+      const { navigation } = this.props
+      const backscreen = navigation.getParam('goBack');
+      if(backscreen){
+        NavigationService.navigate(backscreen);
+      } else{
+          NavigationService.goBack()
+      }
+  }
+
   renderQuickState(){
     const {current_landlord} = this.props
       return(
@@ -75,7 +85,7 @@ class PropertyOwner extends React.Component {
             </View>
             <Text style={styles.content(theme)}>{current_landlord.full_name} consistency score on EzyRent as landlord.</Text>
             <View style={styles.green_box}>
-              <Text style={[styles.greenText,styles.greenText100]}>100%</Text>
+              <Text style={[styles.greenText,styles.greenText100]}>{current_landlord.consistency_rent_collect}</Text>
               <Image style={styles.grenBox} source={require('../../../assets/images/green-box.png')}></Image>
               <Text style={styles.greenText}>Excellent! Your consistency score is very good.</Text>
             </View>
@@ -85,12 +95,12 @@ class PropertyOwner extends React.Component {
   }
   render(){
     const theme = this.context;
-    const {current_landlord} = this.props
-
-    if(!Object.keys(current_landlord).length > 0){
+    const {current_landlord,loading} = this.props
+    console.log("current_landlord",current_landlord)
+    if(!Object.keys(current_landlord).length > 0 || loading){
      return(
        <View style={{width:"100%",height:"100%",alignItems:'center',justifyContent:'center'}}>
-         <ActivityIndicator style={{marginTop:40}} size={'large'} color={'red'}/>
+         <ActivityIndicator style={{marginTop:40}} size={'large'} color={theme.colors.secondry}/>
        </View>
      );
     }
@@ -98,7 +108,7 @@ class PropertyOwner extends React.Component {
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
           <View style={styles.titleWrapper}>
-          <TouchableOpacity onPress={()=>NavigationService.goBack()}  style={{alignItems:'center',flexDirection:'row'}}>
+          <TouchableOpacity onPress={()=>this.goToPrevious()}  style={{alignItems:'center',flexDirection:'row'}}>
             <Image style={styles.back_button} source={require('../../../assets/images/back-white.png')}></Image>
             <Text style={theme.typography.myDashBoard}>Property Owner</Text>
             </TouchableOpacity>
@@ -119,9 +129,7 @@ class PropertyOwner extends React.Component {
                   <View>
                   {this.renderQuickState()}
                   </View>
-                  {this.renderConsistency()}
-                  
-                  
+                  {(current_landlord.consistency_rent_collect) && this.renderConsistency()}
                 </View>
               </ScrollView>
             </View>
@@ -131,8 +139,8 @@ class PropertyOwner extends React.Component {
   }
 }
 const mapStateToProps = ({ account,landlord }) => {
-  const { error, success, loading,status,customer } = account;
-const {current_landlord} = landlord;
+  const { error, success,status,customer } = account;
+const {current_landlord,loading} = landlord;
   return { error, success, loading, status, customer,current_landlord };
 };
 

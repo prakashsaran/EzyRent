@@ -111,7 +111,7 @@ export const getMyProfile = (user) => async (dispatch) =>{
     const userData = await getUserData();
     const response = await EzyRent.admin.getMyProfile(userId);
       if(response && response.data){
-        userUpdatedata = {...user, ...response.data};
+       const userUpdatedata = {...user, ...response.data};
         userData.user = userUpdatedata;
         dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: userUpdatedata });
         updateUserData(userData);
@@ -284,7 +284,7 @@ export const refreshMyProfile  = async (user,dispatch) =>{
     const userData = await getUserData();
     const response = await EzyRent.admin.getMyProfile(userId);
       if(response && response.data){
-        userUpdatedata = {...user, ...response.data};
+       const userUpdatedata = {...user, ...response.data};
         userData.user = userUpdatedata;
         dispatch({ type: EZYRENT_UPDATE_CUSTOMER_ACCOUNT, payload: userUpdatedata });
         updateUserData(userData);

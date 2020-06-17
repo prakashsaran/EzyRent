@@ -28,11 +28,21 @@ import {EzyRent} from '../../../ezyrent';
         NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
     }
 
+    goToPrevious(){
+        const { navigation } = this.props
+        const backscreen = navigation.getParam('goBack');
+        if(backscreen){
+          NavigationService.navigate(backscreen);
+        } else{
+            NavigationService.goBack()
+        }
+    }
+
     renderHeader(theme){
         return(
           <View style={styles.headerContainer(theme)}>
             <View style={styles.headerContext}>
-              <TouchableOpacity onPress={()=>NavigationService.goBack()} style={styles.backscreen}>
+              <TouchableOpacity onPress={()=>this.goToPrevious()} style={styles.backscreen}>
                 <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
               </TouchableOpacity>
             </View>
@@ -58,8 +68,8 @@ import {EzyRent} from '../../../ezyrent';
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styles.infoContainer}>
                                 <View style={styles.propertyInfo(theme)}>
-                                    <Text style={styles.pageTitle(theme)}>{property.house_number}</Text>
-                                    <Text style={styles.pageTitle(theme)}>{property.building_name}</Text>
+                                    <Text style={styles.pagePropertyTitle(theme)}>{property.house_number}</Text>
+                                    <Text style={styles.pagePropertyTitle(theme)}>{property.building_name}</Text>
                                     <View style={styles.ownerInfo}>
                                         <Text style={styles.textLabel(theme)}>{property.tenant_text}</Text>
                                         <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property.landlord_id)}><Text style={styles.textValue(theme)}>{property.landlord_details[0].landlord_name}</Text></TouchableOpacity>

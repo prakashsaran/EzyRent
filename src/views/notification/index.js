@@ -13,12 +13,13 @@ import {
   NAVIGATION_TENANT_PROFILE_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,
+  NAVIGATION_NOTIFICATION_INIT_VIEW_PATH,
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EzyRent } from '../../ezyrent';
 import { getNotifications,updateNotification } from '../../actions';
-  
+import {Spinner} from '../../components';
 class NotificationList extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -49,8 +50,7 @@ class NotificationList extends React.Component {
   }
   goToTennatViewPath(item){
     if(item.initiated_user_id){
-      console.log("id",item.initiated_user_id);
-      NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id})
+      NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
     }
     this.readMarkNotification(item)
   }
@@ -58,20 +58,18 @@ class NotificationList extends React.Component {
     const {updateNotification} = this.props
     if(item.notification_status=="U"){
       const formdata = {status:"R"}
-      console.log("to",formdata)
       updateNotification(item.id,formdata)
     }
   }
   goToLandlordViewPath(item){
     if(item.initiated_user_id){
-      console.log("id",item.initiated_user_id);
-      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id:item.initiated_user_id})
+      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
     }
     this.readMarkNotification(item)
   }
   
   goToMyProfileViewPath(item){
-    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
+    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
     this.readMarkNotification(item)
   }
   fasterImageRender(item){
@@ -100,7 +98,7 @@ class NotificationList extends React.Component {
   }
   goToPropertyViewPath(item){
     if(item.module_data[0].id){
-      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,{propery_id:item.module_data[0].id});
+      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,{propery_id:item.module_data[0].id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
     }
     this.readMarkNotification(item)
   }
@@ -133,11 +131,12 @@ class NotificationList extends React.Component {
   }
   render(){
     const theme = this.context;
-    const {items}=this.props; 
+    const {items,loading}=this.props; 
       return (
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
             {this.renderNotifications()}
+            {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
           </SafeAreaView>
       );
   }
@@ -200,7 +199,7 @@ class NotificationList extends React.Component {
       <TouchableOpacity key={indx} onPress={()=>this.goToPropertyViewPath(item)} style={styles.loopitemAct}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} >
               {item.notification_status=="R" && <Image style={styles.tickIcon}  source={require("../../assets/images/double_tick.png")} resizeMode={'contain'}></Image>}
-                 <Text style={styles.itemNameAct(theme)}>{item.module_data[0].house_number} {item.module_data[0].building_name}</Text>
+                 <Text style={styles.itemNameAct(theme)}>{item.module_title} {item.module_data[0].building_name}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowright}>
 

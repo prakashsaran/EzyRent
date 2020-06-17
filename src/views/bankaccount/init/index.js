@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback,FlatList,ActivityIndicator } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TouchableWithoutFeedback,FlatList,ActivityIndicator,Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -22,8 +22,17 @@ class MyBankaccount extends React.Component {
     super();
     this.state={
       activeAction:null,
+      DeviceWidth:Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
     }
+    this.onLayout = this.onLayout.bind(this);
     StatusBar.setBarStyle("dark-content");
+  }
+  onLayout(e) {
+    this.setState({
+      DeviceWidth: Dimensions.get('window').width,
+      DeviceHeight: Dimensions.get('window').height,
+    });
   }
 
   UNSAFE_componentWillMount(){
@@ -58,7 +67,6 @@ class MyBankaccount extends React.Component {
     const {activeAction} = this.state
     const {bankData} = this.props
     return bankData.map((item,inx)=>{
-      console.log("item.additional_details",item);
       
       return(
             <View style={[styles.shadow,{zIndex:100-inx}]}>
@@ -93,6 +101,13 @@ class MyBankaccount extends React.Component {
     })
     
   }
+  renderPlaceHolder(){
+    const {DeviceHeight} = this.state
+    return(
+      <ImageBackground source={require("../../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+    );
+  }
+
   render(){
     const theme = this.context;
     const {bankData,loading} = this.props;
@@ -102,7 +117,7 @@ class MyBankaccount extends React.Component {
     if(!Object.keys(bankData).length){
       return(
         <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
-          <SafeAreaView style={styles.container}>
+          <SafeAreaView  onLayout={this.onLayout} style={styles.container}>
           <View style={styles.titleWrapper}>
             <TouchableOpacity onPress={()=>NavigationService.navigate(NAVIGATION_MORE_INIT_VIEW_PATH)} style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',}}>
               <Image style={styles.back_button} source={require('../../../assets/images/back-blue.png')}></Image>
@@ -110,7 +125,7 @@ class MyBankaccount extends React.Component {
             </TouchableOpacity>
             {/*<TouchableOpacity onPress={()=>this.addNewBankAccount()}><Image style={styles.plus} source={require('../../../assets/images/plus.png')}></Image></TouchableOpacity>*/}
           </View>
-           <Text style={{textAlign:'center'}}>Bank Accounts Not Available</Text>
+           {this.renderPlaceHolder()}
            <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
            </SafeAreaView>
         </ImageBackground>

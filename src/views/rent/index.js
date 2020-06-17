@@ -168,10 +168,10 @@ class RentList extends React.Component {
     //NavigationService.navigate(NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,{item});
   }
   PayRent(){
-    NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
+    //NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_SUCCESS_VIEW_PATH)
   }
-  ProPertyDetailLandlord(){
-    NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH);
+  ProPertyDetailLandlord(property){
+    //NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH);
   }
 
   renderTitile(){
@@ -286,16 +286,17 @@ class RentList extends React.Component {
   }
 
   renderPayingItems(tenant_items){
+    console.log("tenant_items",JSON.stringify(tenant_items))
     return tenant_items.map((item,inx)=>{
-      if(item.process=="due"){
+      if(item.status_text=="DUE"){
         return (
           <View key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
+                 <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
-                      {item.process=="due"?
+                      {item.status_text=="DUE"?
                       <Image style={styles.due_label} source={require("../../assets/images/dues_label.png")}></Image>
                       :
                       <Image style={styles.due_label} source={require("../../assets/images/paid_label.png")}></Image>
@@ -307,7 +308,7 @@ class RentList extends React.Component {
                         <Text style={styles.propItemattrLocation(theme)}>{item.location}</Text>
                       </View>
                       <View style={styles.propInfoAttrb}>
-                      {item.process=="due"?
+                      {item.status_text=="DUE"?
                        <TouchableOpacity onPress={()=>this.PayRent()} style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:11,height:11,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                       :
                         <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.Total_amount,0)}</Text> on {item.date}</Text>
@@ -324,10 +325,10 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
+               <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
-                    {item.process=="due"?
+                    {item.status_text=="DUE"?
                     <Image style={styles.due_label} source={require("../../assets/images/due_label.png")}></Image>
                     :
                     <Image style={styles.due_label} source={require("../../assets/images/paid_label.png")}></Image>
@@ -340,7 +341,7 @@ class RentList extends React.Component {
                     </View>
 
                     <View style={styles.propInfoAttrb}>
-                    {item.process=="due"?
+                    {item.status_text=="DUE"?
                      <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                     :
                       <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
@@ -360,16 +361,16 @@ class RentList extends React.Component {
 
   renderCollectingItems(landlord_items){
     return landlord_items.map((item,inx)=>{            
-      if(item.process=="due"){
+      if(item.status_text=="DUE"){
         return (
-          <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord()} key={inx} style={styles.loopitem}>
+          <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
+               <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
                 <View style={styles.propertygnInfo}>
 
                     <View style={styles.propInforowleft}>
-                      {item.process=="due"?
+                      {item.status_text=="DUE"?
                       <Image style={styles.due_label} source={require("../../assets/images/dues_label.png")}></Image>
                       :
                       <Image style={styles.due_label} source={require("../../assets/images/paid_label.png")}></Image>
@@ -385,7 +386,7 @@ class RentList extends React.Component {
                       </View>
 
                       <View style={styles.propInfoAttrb}>
-                      {item.process=="due"?
+                      {item.status_text=="DUE"?
                       <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
                       :
                         <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
@@ -405,11 +406,11 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-              <Text style={styles.itemName(theme)}>{item.house_number} {item.building_name}</Text>
+              <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
               <View style={styles.propertygnInfo}>
 
                   <View style={styles.propInforowleft}>
-                    {item.process=="due"?
+                    {item.status_text=="DUE"?
                     <Image style={styles.due_label} source={require("../../assets/images/dues_label.png")}></Image>
                     :
                     <Image style={styles.due_label} source={require("../../assets/images/paid_label.png")}></Image>
@@ -425,7 +426,7 @@ class RentList extends React.Component {
                     </View>
 
                     <View style={styles.propInfoAttrb}>
-                    {item.process=="due"?
+                    {item.status_text=="DUE"?
                     <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
                     :
                       <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
@@ -444,10 +445,10 @@ class RentList extends React.Component {
     })
   }
   fasterImageRender(item){
-    if(!item.image || item.image==null || item.image==''){
-      return require('../../assets/images/sample/sample_image_1.png');
+    if(!item.property_image || item.property_image==null || item.property_image==''){
+      return require('../../assets/images/building_placehoder.jpg');
       } 
-      return {uri:'${EzyRent.getMediaUrl()}${item.module_data[0].property_image}'}; 
+      return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`}; 
   }
   renderCollectingPropertiest(){
     const {landlord_items} = this.props

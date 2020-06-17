@@ -256,8 +256,7 @@ export default StyleSheet.create({
       flexDirection:'row',
       flexWrap:'wrap',
       justifyContent:'space-between',
-      paddingVertical:10,
-      paddingTop:20,
+      paddingTop:40,
     },
     cancel:{
       color:'#6c6c6c',

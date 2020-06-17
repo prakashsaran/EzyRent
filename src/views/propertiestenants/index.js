@@ -398,7 +398,7 @@ goToPropertyOwnerDetail(landlord_id){
         <View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-            <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -416,7 +416,7 @@ goToPropertyOwnerDetail(landlord_id){
                       {item.property_status=="A"?
                       <Text style={styles.propItemattrvalue(theme)}>Awaiting your Approval</Text>
                       :
-                      <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
+                      <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {item.rent_date_time}</Text>
                       }
                     </View>
                     {item.property_status=="O"&&
@@ -444,7 +444,7 @@ goToPropertyOwnerDetail(landlord_id){
         <View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-            <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><Text style={styles.itemName(theme)}>{item.house_number} {'\n'}{item.building_name}</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -460,7 +460,7 @@ goToPropertyOwnerDetail(landlord_id){
                       {item.property_tenant_status =="N"&&<Text style={styles.awaitingforapproval(theme)}>{item.awaiting_text}</Text>}
                       {item.property_tenant_status=="R"&&<Text style={styles.propItemattrvalueError(theme)}>{item.awaiting_text}</Text>}
                       {item.property_status =="O" &&
-                        <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {this.getDateFormat(item)}</Text>
+                        <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {item.rent_date_time}</Text>
                       }
                     </View>
                     {item.rent_status=="D" &&
