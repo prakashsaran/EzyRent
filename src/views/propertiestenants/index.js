@@ -22,6 +22,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { EzyRent } from '../../ezyrent';
 import {  getPropertiesForLandlord, getPropertiesForTenant,getPropertyById,getCountryCodeFormat,tenantSubmissionOnProperty } from '../../actions';
+import { Spinner} from '../../components';
 class PropertiesTenants extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -376,7 +377,7 @@ goToPropertyOwnerDetail(landlord_id){
   }
 
   renderPayingPropertiest(){
-    const {propertiesTenant} = this.props
+    const {propertiesTenant} = this.props    
     if(propertiesTenant.items.length >0 ){
      return (
       <View style={styles.properties(theme)}>
@@ -387,6 +388,7 @@ goToPropertyOwnerDetail(landlord_id){
           keyExtractor={item => item.id}
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
+        {propertiesTenant.loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
       </View>
      )
     }
@@ -485,7 +487,7 @@ goToPropertyOwnerDetail(landlord_id){
   }
   fasterImageRender(item){
     if(!item.property_image || item.property_image==null || item.property_image==''){
-      return require('../../assets/images/sample/sample_image_1.png');
+      return require('../../assets/images/building_placehoder.jpg');
     }
     return {uri:`${EzyRent.getMediaUrl()}${item.property_image}`};
   }
@@ -501,6 +503,7 @@ goToPropertyOwnerDetail(landlord_id){
           keyExtractor={item => item.id}
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
+        {propertiesLandlord.loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
       </View>
      )
     }

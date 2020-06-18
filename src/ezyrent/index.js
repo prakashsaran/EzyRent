@@ -423,10 +423,13 @@ class EzyRentClass {
   }
 
   getErrorMessageForResponce(data) {
-    let { error_message,error } = data;
+    let { error_message,error,message } = data;
     if (typeof data !== 'undefined') {
       if(error_message){
         return error_message;
+      }
+      if(message){
+        return message;
       }
       if(error){
         return error;

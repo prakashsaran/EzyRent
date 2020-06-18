@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signinMail,isValidEmail,resetSingWarn } from '../../../../actions';
 import Modal from 'react-native-modal';
-
+import {Spinner} from '../../../../components';
 function SignInMail(props) {
   const [emailaddress, setEmailAddress] = useState('');
   const [enablebtn, setEnableButton] = useState(false);
@@ -97,7 +97,8 @@ function SignInMail(props) {
           />
         </View>
         <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-          <Text style={theme.typography.caption}>PROCEED</Text>
+          {!props.loading && <Text style={theme.typography.caption}>PROCEED</Text>}
+          {props.loading && <Spinner color={"white"}/>}
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.signIn(theme)}  onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)}} >

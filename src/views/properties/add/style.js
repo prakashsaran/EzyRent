@@ -355,4 +355,7 @@ export default StyleSheet.create({
         fontSize:normalize(13),
         //maxWidth:'60%',
       },
+      font_16:{
+        fontSize:normalize(16),
+      },
 });

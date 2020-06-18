@@ -80,7 +80,7 @@ class EditPropertyTenant extends React.Component {
           this.setState({
             propertyId:currentProperty.id,
             houseNumber:currentProperty.house_number,
-            collectingAmount:listItem.rent_amount,
+            collectingAmount:listItem.rent_amount?listItem.rent_amount:"",
             houseNumber:listItem.house_number,
             buildingName:listItem.building_id,
             rentPeriod:listItem.rent_period_id,
@@ -95,6 +95,12 @@ class EditPropertyTenant extends React.Component {
               mobileNumber:currentProperty.tenant_details[0].tenant_mobile,
             });
           }
+          if(currentProperty.rent_split_up){
+            this.setState({
+              collectingAmount:currentProperty.rent_split_up.rent_amount,
+            });
+          }
+      
           const slectedbank = bankData.find(function(item){
               if(item.account_no==currentProperty.bank_account_number){
                   return item;
@@ -561,6 +567,7 @@ renderHeader(){
       <PickerSelect
         // placeholder='Choose day/date'
         placeholder={rentduesLabel}
+        placeholderStyle={styles.font_16}
         items={rentduesData}
         defaultValue={rentDue}
         isdisabled={rentDueDisable}
@@ -620,6 +627,7 @@ renderHeader(){
                                 placeholder={"Mobile Number"} textValue={mobileNumber}
                                 onChangeText={(mobileNumber)=>this.onChangeMobile(mobileNumber)}
                                 image-style={styles.address_icon}
+                                InputStyle={styles.font_16}
                                 source={require('../../../assets/images/address.png')}/>
                              </View>
                           </View>
@@ -666,6 +674,7 @@ renderHeader(){
                                     ref={ref => { this._buildingNameEntry = ref;}}
                                     pickerStyle={buildingName?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     onChooseItem={({label,value}) => this.onChooseBuilding(value)}
+                                    placeholderStyle={styles.font_16}
                                     items={availableBuildings}
                                   />
                           </View>
@@ -679,6 +688,7 @@ renderHeader(){
                                     placeholder='Choose duration'
                                     ref={ref => { this._rentPeriodEntry = ref;}}
                                     //onValueChange={(rentPeriod) => this.onChangeRentPeriod(rentPeriod)}
+                                    placeholderStyle={styles.font_16}
                                     onChooseItem={({value}) => this.onChangeRentPeriod(value)}
                                     defaultValue={rentPeriod}
                                     pickerStyle={rentPeriod?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
@@ -718,6 +728,7 @@ renderHeader(){
                                     onChooseItem={(item)=>this.onChooseBankAc(item)}
                                     pickerStyle={bankAccount?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     items={availableBankAccounts}
+                                    placeholderStyle={styles.font_16}
                                    placeholder="Choose Bank Account"/>
                           </View>
 

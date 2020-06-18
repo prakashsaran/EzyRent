@@ -39,16 +39,32 @@ class RentList extends React.Component {
     });
   }
   
+  UNSAFE_componentWillReceiveProps(nextProps){
+    const {customer} = this.props;
+      if(nextProps.customer !==customer){
+        const updatedUser = nextProps.customer;
+        if(updatedUser.hasOwnProperty("user_type")){
+            if(updatedUser.user_type){
+              this.setState({AccountType:updatedUser.user_type});
+            } else{
+              this.setState({AccountType:'U'});
+            }
+          } else{
+            this.setState({AccountType:"U"});
+          }
+      }
+    }
+
   componentDidUpdate(prevProps, prevState, snapshot){
     const {getRentsForTenant,getRentsForLandlord,customer} = this.props
     const {searchQuery,activeTab,visibleSearch} = this.state
     if(prevState.visibleSearch !=visibleSearch){
       if(!visibleSearch && activeTab==1 && searchQuery){
-        getRentsForTenant(customer,"",0,10);
+        getRentsForTenant(customer,"",0,20);
         this.setState({searchQuery:null})
       }
       if(!visibleSearch && activeTab==2 && searchQuery){
-        getRentsForLandlord(customer,"",0,10);
+        getRentsForLandlord(customer,"",0,20);
         this.setState({searchQuery:null})
       }
     }
@@ -83,14 +99,14 @@ class RentList extends React.Component {
     const {searchQuery} = this.state;
     switch(customer.user_type){
       case "B":
-        getRentsForLandlord(customer,searchQuery,0,10);
-        getRentsForTenant(customer,searchQuery,0,10);
+        getRentsForLandlord(customer,searchQuery,0,20);
+        getRentsForTenant(customer,searchQuery,0,20);
         break;
       case "L":
-        getRentsForLandlord(customer,searchQuery,0,10);
+        getRentsForLandlord(customer,searchQuery,0,20);
         break;
       case "T":
-        getRentsForTenant(customer,searchQuery,0,10);
+        getRentsForTenant(customer,searchQuery,0,20);
         break;
       default:
         console.log("current user is new user")
@@ -103,9 +119,9 @@ class RentList extends React.Component {
     const {getRentsForTenant,getRentsForLandlord,customer}=this.props
     const {activeTab} = this.state
     if(activeTab==1){
-      getRentsForTenant(customer,searchQuery,0,10);
+      getRentsForTenant(customer,searchQuery,0,20);
     } else {
-      getRentsForLandlord(customer,searchQuery,0,10);
+      getRentsForLandlord(customer,searchQuery,0,20);
     }
     
     this.setState({searchQuery})
@@ -286,7 +302,6 @@ class RentList extends React.Component {
   }
 
   renderPayingItems(tenant_items){
-    console.log("tenant_items",JSON.stringify(tenant_items))
     return tenant_items.map((item,inx)=>{
       if(item.status_text=="DUE"){
         return (

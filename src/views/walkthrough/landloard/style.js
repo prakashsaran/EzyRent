@@ -50,7 +50,6 @@ export default StyleSheet.create({
     fontFamily:theme.typography.fontFamilyMontserratBold,
   }),
   pageInfo: theme =>({
-    minHeight:normalize(130),
     color:theme.colors.descriptionColor,
     textAlign:'center',
     fontSize:theme.typography.font_16,
@@ -64,6 +63,7 @@ export default StyleSheet.create({
     marginLeft:'auto',
     marginRight:'auto',
     lineHeight:normalize(25),
+    minHeight:normalize(130),
   }),
   btncontainer: theme =>({
     backgroundColor: theme.colors.secondry,

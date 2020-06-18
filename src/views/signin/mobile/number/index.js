@@ -13,7 +13,7 @@ import NavigationService from '../../../../navigation/NavigationService';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signinMobile,isValidMobile,resetSingWarn } from '../../../../actions';
-import { RightIconTextbox } from '../../../../components';
+import { RightIconTextbox,Spinner } from '../../../../components';
 import Modal from 'react-native-modal';
 function SignInMobile(props) {
   const [dialcode, setDialCode] = useState('0091');
@@ -31,6 +31,9 @@ const onChangePhoneNumber = (number) =>{
     setDialCode(phone.getDialCode());
   }
   const submit = () =>{
+    if(props.loading){
+      return true
+    }
     props.signinMobile(mobilenumber,dialcode);
   }
   useEffect(() => {
@@ -58,11 +61,11 @@ const onChangePhoneNumber = (number) =>{
             <View style={{ width:'95%',height:100,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
               <Text style={styles.confirmBoxTitle(theme)}>Your Account Setup is pending. Do you wish to complete?</Text>
                 <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
-                  <TouchableOpacity onPress={()=>setConfirmModalVisible(false)}>
+                  <TouchableOpacity onPress={()=>{setConfirmModalVisible(false)}}>
                     <Text style={styles.eraseTitle(theme)}>Cancel</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={()=>reStartSignUp()}>
+                  <TouchableOpacity onPress={()=>{reStartSignUp()}}>
                     <Text>Ok</Text>
                   </TouchableOpacity>
 
@@ -95,7 +98,8 @@ const onChangePhoneNumber = (number) =>{
         </View>
 
         <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-          <Text style={theme.typography.caption}>PROCEED</Text>
+          {!props.loading && <Text style={theme.typography.caption}>PROCEED</Text>}
+          {props.loading && <Spinner color={"white"}/>}
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.signIn(theme)}  onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH)}} >

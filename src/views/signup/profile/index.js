@@ -10,6 +10,7 @@ import { CheckBox } from 'react-native-elements'
 import { signUp,isValidName } from '../../../actions';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DeviceInfo from 'react-native-device-info';
+import {Spinner} from '../../../components';
 const secureTextHidden = '../../../assets/images/securetext_hidden.png';
 const secureTextShow = '../../../assets/images/securetext_show.png';
 function SignUpProfile(props) {
@@ -141,7 +142,8 @@ function SignUpProfile(props) {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-              <Text style={styles.caption(theme)}>FINISH ACCOUNT CREATION</Text>
+                {!props.loading && <Text style={styles.caption(theme)}>FINISH ACCOUNT CREATION</Text>}
+                {props.loading && <Spinner color={"white"}/>}
             </TouchableOpacity>
 
 

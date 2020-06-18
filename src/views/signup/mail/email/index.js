@@ -7,6 +7,7 @@ import NavigationService from '../../../../navigation/NavigationService';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signupMail,isValidEmail } from '../../../../actions';
+import {Spinner} from '../../../../components';
 
 function SignUpMail(props) {
   const [emailaddress, setEmailAddress] = useState('');
@@ -67,7 +68,8 @@ function SignUpMail(props) {
                 />
               </View>
               <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-                <Text style={theme.typography.caption}>PROCEED</Text>
+                {!props.loading && <Text style={theme.typography.caption}>PROCEED</Text>}
+                {props.loading && <Spinner color={"white"}/>}
               </TouchableOpacity>
 
               <Text style={theme.typography.copyright}>Copyright &copy; EzyRent 2020. All Rights Reserved.</Text>

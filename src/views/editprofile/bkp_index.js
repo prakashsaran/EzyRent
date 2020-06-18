@@ -301,7 +301,7 @@ class EditMyProfile extends React.Component {
                 </TouchableOpacity>
               </View>
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR MOBILE OTP</Text>
+          <Text style={styles.columntitlePop(theme)}>CONFIRM YOUR MOBILE OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -333,7 +333,7 @@ class EditMyProfile extends React.Component {
     return(
       <Modal isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
-          <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
+          <Text style={[styles.columntitlePop(theme),styles.columntitlePop1(theme)]}>CONFIRM YOUR MPIN</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
              <View style={styles.pincontainer(theme)}>
@@ -351,7 +351,7 @@ class EditMyProfile extends React.Component {
                 </TouchableOpacity>
               </View>
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR MOBILE OTP</Text>
+          <Text style={styles.columntitlePop(theme)}>CONFIRM YOUR MOBILE OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -362,7 +362,7 @@ class EditMyProfile extends React.Component {
                 codeInputFieldStyle={styles.underlineStyleBase(theme)}
               />
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR EMAIL OTP</Text>
+          <Text style={styles.columntitlePop(theme)}>CONFIRM YOUR EMAIL OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}

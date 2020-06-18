@@ -76,7 +76,7 @@ class NotificationList extends React.Component {
     if(Object.keys(item.module_data).length && item.module_data[0].property_image){
       return {uri:`${EzyRent.getMediaUrl()}${item.module_data[0].property_image}`}; 
       } 
-      return require('../../assets/images/sample/sample_image_1.png');
+      return require('../../assets/images/building_placehoder.jpg');
   }
     /* *
     * name getDateFormat

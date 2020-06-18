@@ -156,7 +156,7 @@ class CongratsModalDashBoard extends PureComponent {
                             <Text style={styles.banktitle(theme)}>Added Date</Text>
                         </View>
                         <View style={styles.bankacInfo}>
-                            <Text style={styles.textLabelXl(theme)}>{this.getPopupDateFormat(property_currentItem.added_date)}</Text><Text style={styles.textLabelXl(theme)}>|    {this.getPopupTimeFormat(property_currentItem.added_date)}</Text>
+                            <Text style={styles.textLabelXl(theme)}>{this.getPopupDateFormat(property_currentItem.added_date)}</Text><Text style={styles.textLabelXl(theme)}>|   {this.getPopupTimeFormat(property_currentItem.added_date)}</Text>
                         </View>
                         <View style={styles.timeline}>
                             <Timeline

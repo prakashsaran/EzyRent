@@ -8,7 +8,7 @@ import NavigationService from '../../../../navigation/NavigationService';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signupMobile,isValidMobile } from '../../../../actions';
-import { RightIconTextbox } from '../../../../components';
+import { RightIconTextbox,Spinner } from '../../../../components';
 function SignUpMobile(props) {
   const [dialcode, setDialCode] = useState('0091');
   const [mobilenumber, setMobileNumber] = useState('');
@@ -64,7 +64,8 @@ function SignUpMobile(props) {
                   <RightIconTextbox keyboardType={'number-pad'} style={styles.contactbook(theme)} placeholder={"Mobile Number"} textValue={mobilenumber} onChangeText={(mobilenumber)=>onChangePhoneNumber(mobilenumber)} />
                 </View>
                 <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled}  onPress={()=>{submit()}}>
-                  <Text style={theme.typography.caption}>PROCEED</Text>
+                  {!props.loading && <Text style={theme.typography.caption}>PROCEED</Text>}
+                  {props.loading && <Spinner color={"white"}/>}
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.signIn(theme)}  onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH)}} >

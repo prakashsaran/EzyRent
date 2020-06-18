@@ -52,7 +52,7 @@ class TransactionDetails extends React.Component {
   /* comman using function current page */
   fasterImageRender(item){
     if(!item.image || item.image==null || item.image==''){
-      return require('../../../assets/images/sample/sample_image_1.png');
+      return require('../../../assets/images/building_placehoder.jpg');
     }
     return {uri:item.image};
   }

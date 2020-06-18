@@ -157,6 +157,13 @@ export default StyleSheet.create({
     fontWeight: theme.typography.fontWeightSemiBold,
     marginHorizontal:5,
   }),
+  reviewText:theme=>({
+    color:theme.colors.primBtnTextColor,
+    fontSize:normalize(12),
+    fontFamily:theme.typography.fontFamilyOxygenBold,
+    fontWeight: theme.typography.fontWeightSemiBold,
+    marginHorizontal:5,
+  }),
   banktitle:theme=>({
     color:'#6e6e6e',
     fontSize:normalize(14),

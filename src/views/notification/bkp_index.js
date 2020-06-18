@@ -210,7 +210,7 @@ renderPlaceHolder(){
     if(!item.image || item.image==null || item.image==''){
       return {uri:`${EzyRent.getMediaUrl()}${item.module_data[0].property_image}`}; 
       } 
-      return require('../../assets/images/sample/sample_image_1.png');
+      return require('../../assets/images/building_placehoder.jpg');
   }
 
 }

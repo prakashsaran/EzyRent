@@ -379,14 +379,12 @@ export const resendMailOtp = (userdata,email) => async (dispatch) => {
     // form data convert to application/x-www-form-urlencoded
     const formData = formUrlencodedData(data);
 
-
     // response otp from sms server
     const response = await EzyRent.guest.setupResendMailOtp(formData);
 
-    /* let responseOtp = 1234;
-    dispatch({ type: EZYRENT_SIGN_UP_EMAIL_ID, payload: {email:email,otp:responseOtp} });
-    dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false }); */
+    dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   } catch (e) {
+    dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
     console.error(e)
     authFail(dispatch, e.message);
   }

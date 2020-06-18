@@ -318,6 +318,6 @@ export default StyleSheet.create({
       paddingBottom:5,
     },
     timeline:{
-      height:380,width:'100%',paddingHorizontal:20,marginVertical:10
+      minHeight:380,width:'100%',paddingHorizontal:20,marginVertical:10,
     },
   });

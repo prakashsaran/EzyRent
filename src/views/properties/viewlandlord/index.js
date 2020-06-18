@@ -90,8 +90,9 @@ class ViewPropertyTenant extends React.Component {
       const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
       return (
         <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
-            <View style={{ width:'95%',height:errorMessage?160:140,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
-              <Text style={styles.confirmBoxTitle(theme)}>Confirm your App Pin</Text>
+            <View style={styles.popupContainer(theme)}>
+              <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
+              <View style={styles.fieldWrapp}>
               <View style={styles.pincontainer(theme)}>
                 <OTPInputView
                   pinCount={4}
@@ -106,14 +107,15 @@ class ViewPropertyTenant extends React.Component {
                   <Image style={styles.visibilityIcon} source={secureTextEntry?require(secureTextHidden):require(secureTextShow)}/>
                 </TouchableOpacity>
               </View>
+              </View>
               {errorMessage && <Text style={styles.errorMessage(theme)}>{errorMessage}</Text>}
-                <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
+                <View style={styles.popupBtms}>
                   <TouchableOpacity onPress={()=>this.setState({isconfirmModalVisible:false,errorMessage:null,mpin:""})}>
-                    <Text style={styles.eraseTitle(theme)}>Cancel</Text>
+                    <Text style={styles.cancel}>CANCEL</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={()=>this.deleteSubmitProperty()}>
-                    <Text>Ok</Text>
+                    <Text style={{color:'#315add'}}>OK</Text>
                   </TouchableOpacity>
 
                 </View>
@@ -157,7 +159,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View style={{paddingTop:10,}}>
                                         <View style={styles.payamountPeriod}>
-                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.rent_split_up.rent_amount}</Text>
+                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> Per month</Text>
                                         </View>
                                      <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>

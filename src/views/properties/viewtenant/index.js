@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView,ActivityIndicator } from "react-native";
+import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView,ActivityIndicator,Alert } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import NavigationService from '../../../navigation/NavigationService';
 import Timeline from 'react-native-timeline-flatlist'
@@ -12,7 +12,7 @@ import {
   } from '../../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {getPropertyById } from '../../../actions';
+import {getPropertyById,tenantSubmissionOnProperty } from '../../../actions';
 import { EzyRent } from '../../../ezyrent';   
 class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
@@ -61,11 +61,38 @@ class ViewPropertyTenant extends React.Component {
     PayRent(property){
         NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,{property,goBack:NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH})
       }
+
+      AcceptProperty(item){
+        const {tenantSubmissionOnProperty,customer} = this.props
+        tenantSubmissionOnProperty(item.id,"A",customer);
+        NavigationService.goBack();
+      }
+    
+      RejectProperty(item){
+        const {tenantSubmissionOnProperty,customer,} = this.props
+        tenantSubmissionOnProperty(item.id,"R",customer);
+        NavigationService.goBack();
+      }
+    
+    confirmProperty(property_currentItem){
+        Alert.alert(
+            "Are you sure to Accept?",
+          "",
+          [
+            {
+              text: "REJECT",
+              onPress: () => this.RejectProperty(property_currentItem),
+              style: "cancel"
+            },
+            { text: "ACCEPT", onPress: () => this.AcceptProperty(property_currentItem) }
+          ],
+          { cancelable: false }
+        );
+    }
     render(){
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         const {property} = this.state
-        
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
@@ -95,14 +122,20 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.paymentInfo(theme)}>
                                     <View>
                                         <View style={styles.payamountPeriod}>
-                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.rent_split_up.rent_amount}</Text>
+                                            <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
                                         <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_date_time}</Text>
                                     </View>
+                                    {property_currentItem.property_status =="A"?
+                                    <TouchableOpacity onPress={()=>{this.confirmProperty(property_currentItem)}} style={styles.primaryBtn(theme)}>
+                                        <Text style={styles.primaryBtnText(theme)}>ACCEPT</Text>
+                                    </TouchableOpacity>
+                                     :
                                     <TouchableOpacity onPress={()=>this.PayRent(property)} style={styles.primaryBtn(theme)}>
                                         <Text style={styles.primaryBtnText(theme)}>PAY NOW</Text>
                                     </TouchableOpacity>
+                                    }
                                 </View>
 
                                 <View style={styles.paymentInfo(theme)}>
@@ -147,22 +180,26 @@ class ViewPropertyTenant extends React.Component {
 }
 
 
-const mapStateToProps = ({ properties }) => {
+const mapStateToProps = ({ account,properties }) => {
     const {property_currentItem,property_loading} = properties
-    return { property_currentItem,property_loading };
+    const { customer } = account;
+    return { property_currentItem,property_loading,customer };
   };
   
   ViewPropertyTenant.propTypes = {
     getPropertyById: PropTypes.func.isRequired,
     property_currentItem: PropTypes.object,
+    customer: PropTypes.object,
     property_loading: PropTypes.bool,
-  };
+    tenantSubmissionOnProperty: PropTypes.func,
+};
   
   ViewPropertyTenant.defaultProps = {
+    customer: {},
     property_currentItem: {},
     property_loading: false,
   
   };
   
-  export default connect(mapStateToProps, {getPropertyById})(ViewPropertyTenant);
+  export default connect(mapStateToProps, {getPropertyById,tenantSubmissionOnProperty})(ViewPropertyTenant);
   

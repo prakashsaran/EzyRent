@@ -11,7 +11,7 @@ import {RightIconTextbox,DropDownHolder,PickerSelect,Spinner,DateMonthPicker,nor
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,NAVIGATION_MORE_ADD_NEW_BANK_ACCOUNT_VIEW_PATH} from '../../../navigation/routes';
 import SampleData from '../../../config/sample-data';
-import { getBuildings,addNewBuilding,editProperty } from '../../../actions';
+import { getBuildings,addNewBuilding,editProperty,getPropertyById } from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImagePicker from 'react-native-image-picker';
@@ -72,71 +72,26 @@ class ModifyProperty extends React.Component {
 
   /* comman using function current page */
 
-  renderEditData(){
-          const {navigation,bankData} = this.props
-          const listItem = navigation.getParam("property");
-          this.setState({
-            propertyId:listItem.id,
-            collectingAmount:listItem.rent_amount,
-            houseNumber:listItem.house_number,
-            buildingName:listItem.building_id,
-            rentPeriod:listItem.rent_period_id,
-            rentDue:listItem.rent_day_date,
-            property_status:listItem.property_status,
-            serverPropertiesImg:listItem.property_image,
-            isvisiblepayinfo:true,
-          });
-          /* const slectedbank = bankData.find(function(item){
-              if(item.account_no==currentProperty.bank_account_number){
-                  return item;
-              }
-              return null;
-          });
-          if(slectedbank){
-            this.setState({bankAccount:slectedbank.id})
-          } */
-          this.renderRentDayDate(listItem.rent_period_id);
+  UNSAFE_componentWillMount(){
+    const {getBuildings,getPropertyById,navigation} = this.props
+    const listItem = navigation.getParam("property");
+    if(listItem){
+      this.setState({
+        propertyId:listItem.id,
+        collectingAmount:listItem.rent_amount?listItem.rent_amount:"",
+        houseNumber:listItem.house_number,
+        buildingName:listItem.building_id,
+        rentPeriod:listItem.rent_period_id,
+        rentDue:listItem.rent_day_date,
+        property_status:listItem.property_status,
+        serverPropertiesImg:listItem.property_image,
+        isvisiblepayinfo:true,
+      });
+      this.renderRentDayDate(listItem.rent_period_id);
     }
-    renderRentDayDate(rentPeriod){
-      const rentduesData = [];
-      if(rentPeriod==4){
-        const monthNames = this.getMonthNames();
-        Object.keys(monthNames).forEach((key) => {
-          const monthItem = { label: monthNames[key], value: key };
-          rentduesData.push(monthItem);
-        });
-        this.setState({rentduesLabel:"Choose month"})
-      }
-    
-      if(rentPeriod==3){
-        const monthDates = this.getMonthDates();
-        Object.keys(monthDates).forEach((key) => {
-          const dateItem = { label: monthDates[key].toString(), value: key };
-          rentduesData.push(dateItem);
-        });
-        this.setState({rentduesLabel:"Choose day/date"})
-      }
-    
-      if(rentPeriod==2){
-        rentduesData.push({label:'15th & End of the Month',value:1});
-        this.setState({rentduesLabel:"Choose day/date"})
-      }
-    
-      if(rentPeriod==1){
-        const weekNames = this.getWeekNames()
-        Object.keys(weekNames).forEach((key) => {
-          const weekItem = { label: weekNames[key], value: key };
-          rentduesData.push(weekItem);
-        });
-        this.setState({rentduesLabel:"Choose day/date"})
-      }
-      this.setState({rentduesData});
-      this.setState({rentDueDisable:false});
-      //this.setState({rentDue:4});
-    
+    if(listItem.id){
+      getPropertyById(listItem.id)
     }
-    UNSAFE_componentWillMount(){
-    const {getBuildings} = this.props
     getBuildings();
   }
   onChangeMobile(mobileNumber){
@@ -211,7 +166,6 @@ componentDidMount(){
   availableBankAccounts.push({label:"+ Add New Bank Account",value:"add_new"})
   
   this.setState({availableBuildings,availableBankAccounts})
-  this.renderEditData();
 
   this.keyboardDidShow = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
   this.keyboardWillShow = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow)
@@ -239,9 +193,39 @@ componentDidMount(){
 /* ======== KEYBOARD FUNCTION ======== */
 /* =================================== */
 
+renderEditData(editData){
+  //console.log("editData",JSON.stringify(editData))
+  const {bankData} = this.props
+  if(editData){
+    this.setState({
+      houseNumber:editData.house_number,
+    })
+    if(editData.tenant_details && Object.keys(editData.tenant_details).length){
+      this.setState({
+        tenantName: editData.tenant_details[0].tenant_name,
+        mobileNumber: editData.tenant_details[0].tenant_mobile,
+      })
+    }
+    if(editData.rent_split_up){
+      this.setState({
+        collectingAmount:editData.rent_split_up.rent_amount,
+      });
+    }
+    // select bank
+     const slectedbank = bankData.find(function(item){
+        if(item.account_no==editData.bank_account_number){
+            return item;
+        }
+        return null;
+    });
+    if(slectedbank){
+      this.setState({bankAccount:slectedbank.id})
+    }
 
+  }
+}
 UNSAFE_componentWillReceiveProps(nextProps){
-  const {buildingData} = this.props
+  const {buildingData,property_currentItem} = this.props
   if(nextProps.buildingData!==buildingData){
     const allBuildings = nextProps.buildingData || [];
     const availableBuildings = allBuildings.map((building,idx)=>{
@@ -249,6 +233,9 @@ UNSAFE_componentWillReceiveProps(nextProps){
     })
     availableBuildings.push({label:"+ Add New Building",value:"add_new"})
     this.setState({availableBuildings})
+  }
+  if(nextProps.property_currentItem!==property_currentItem){
+    this.renderEditData(nextProps.property_currentItem);
   }
 }
 componentDidUpdate(prevProps,prevState){
@@ -260,6 +247,45 @@ componentDidUpdate(prevProps,prevState){
       this.setState({isvisiblepayinfo:false})
     }
   }
+}
+
+renderRentDayDate(rentPeriod){
+  const rentduesData = [];
+  if(rentPeriod==4){
+    const monthNames = this.getMonthNames();
+    Object.keys(monthNames).forEach((key) => {
+      const monthItem = { label: monthNames[key], value: key };
+      rentduesData.push(monthItem);
+    });
+    this.setState({rentduesLabel:"Choose month"})
+  }
+
+  if(rentPeriod==3){
+    const monthDates = this.getMonthDates();
+    Object.keys(monthDates).forEach((key) => {
+      const dateItem = { label: monthDates[key].toString(), value: key };
+      rentduesData.push(dateItem);
+    });
+    this.setState({rentduesLabel:"Choose day/date"})
+  }
+
+  if(rentPeriod==2){
+    rentduesData.push({label:'15th & End of the Month',value:1});
+    this.setState({rentduesLabel:"Choose day/date"})
+  }
+
+  if(rentPeriod==1){
+    const weekNames = this.getWeekNames()
+    Object.keys(weekNames).forEach((key) => {
+      const weekItem = { label: weekNames[key], value: key };
+      rentduesData.push(weekItem);
+    });
+    this.setState({rentduesLabel:"Choose day/date"})
+  }
+  this.setState({rentduesData});
+  this.setState({rentDueDisable:false});
+  //this.setState({rentDue:4});
+
 }
 
 onChangeRentPeriod(rentPeriod){
@@ -831,12 +857,13 @@ const pickerSelectStyles = StyleSheet.create({
 
 
 
-const mapStateToProps = ({ building,bankAccount,propertiesLandlord }) => {
+const mapStateToProps = ({ building,bankAccount,propertiesLandlord,properties }) => {
+  const {property_currentItem,property_loading} = properties
   const { error, success, refreshing,buildingData } = building;
   const { bankData } = bankAccount;
   const { loading } = propertiesLandlord;
 
-  return { error, success, loading, refreshing,buildingData,bankData  };
+  return { error, success, loading, refreshing,buildingData,bankData,property_currentItem,property_loading  };
 };
 
 ModifyProperty.propTypes = {
@@ -849,6 +876,9 @@ ModifyProperty.propTypes = {
   getBuildings: PropTypes.func,
   addNewBuilding: PropTypes.func,
   editProperty: PropTypes.func,
+  getPropertyById: PropTypes.func,
+  property_currentItem: PropTypes.object,
+  property_loading: PropTypes.bool,
 };
 
 ModifyProperty.defaultProps = {
@@ -858,6 +888,8 @@ ModifyProperty.defaultProps = {
   refreshing:false,
   buildingData:[],
   bankData:[],
+  property_currentItem: {},
+  property_loading: false,
 };
 
-export default connect(mapStateToProps, {getBuildings,addNewBuilding,editProperty})(ModifyProperty);
+export default connect(mapStateToProps, {getBuildings,addNewBuilding,editProperty,getPropertyById})(ModifyProperty);

@@ -9,7 +9,7 @@ import CountDown from 'react-native-countdown-component';
 import { resendMailOtp,signupMailOtp } from '../../../../actions';
 import {NAVIGATION_SIGN_UP_MAIL_ID_PATH,NAVIGATION_SIGN_UP_PROFILE_PATH} from '../../../../navigation/routes';
 import NavigationService from '../../../../navigation/NavigationService';
-import { DropDownHolder } from '../../../../components';
+import { DropDownHolder,Spinner } from '../../../../components';
 
 function SignUpMailVerify(props) {
   const {mobile,mail} = props;
@@ -62,7 +62,8 @@ function SignUpMailVerify(props) {
         />
 
         <TouchableOpacity disabled={!enablebtn} style={enablebtn?theme.typography.btnProceed:theme.typography.btnProceedDisabled} onPress={()=>submitOtp()}>
-          <Text style={theme.typography.caption}>VALIDATE</Text>
+           {!props.loading && <Text style={theme.typography.caption}>VALIDATE</Text>}
+            {props.loading && <Spinner color={"white"}/>}
         </TouchableOpacity>
 
         <View style={styles.signIn(theme)}>
