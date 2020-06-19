@@ -1,6 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Dimensions } from "react-native";
 import { theme } from "../../../theme";
 import {isIphoneX, normalize} from "../../../components";
+function isLessMarshmallow(){
+  const dvcHeight = Dimensions.get('window').height;
+  if(dvcHeight < 750){
+    return true;
+  }
+  return false;
+}
 export default StyleSheet.create({
     container: theme => ({
       flex: 1,
@@ -29,12 +36,13 @@ export default StyleSheet.create({
       position:'relative',
     }),
     headerBannerImage : theme =>({
-      height:theme.dimens.headerWithBannerHeight-70,
+      height:theme.dimens.headerWithBannerHeight-normalize(70),
       borderRadius:9,
       width:'100%',
       position:'absolute',
       alignSelf:'center',
       top:isIphoneX() ? -(theme.dimens.headerWithBannerHeight/3)+25:-(theme.dimens.headerWithBannerHeight/3)+35,
+      paddingBottom:10,
     }),
    pageTitle: theme =>({
       color:theme.colors.primaryScreenTitle,
@@ -166,7 +174,7 @@ export default StyleSheet.create({
     currencySymbl:theme=>({
       position:'absolute',
       left:0,
-      bottom:8,
+      bottom:isLessMarshmallow?normalize(6):normalize(9),
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
       fontSize:normalize(16),

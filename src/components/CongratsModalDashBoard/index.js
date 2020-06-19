@@ -130,7 +130,7 @@ class CongratsModalDashBoard extends PureComponent {
         return null;
       }
       return(
-            <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
+            <Modal  onBackdropPress={()=>{this.setState({visiblemodal:false})}} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
     
                 {property_loading ?
                 <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>

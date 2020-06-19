@@ -91,7 +91,7 @@ class MoreInit extends React.Component {
                           ></ImageBackground>
                         </View>
                         <View style={styles.ImageWrapRight}>
-                          <Text style={styles.textHeading(theme)}>{customer.full_name}</Text>
+                          <Text style={styles.textHeading(theme)}>{customer.full_name}</Text> 
                           <Text style={styles.textSub(theme)}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}
                           </Text>
@@ -178,7 +178,7 @@ class MoreInit extends React.Component {
                 <Text style={styles.cancel}>CANCEL</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{this.setState({isVisibleConfirmDialog:false}),logout()}}>
-                <Text style={{color:'#315add'}}>Ok</Text>
+                <Text style={{color:'#315add'}}>OK</Text>
             </TouchableOpacity>
           </View>
         </View>

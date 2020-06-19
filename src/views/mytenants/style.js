@@ -127,7 +127,7 @@ export default StyleSheet.create({
       borderRadius:30,
     },
     heading_wrap:{
-      flexDirection:'row',
+      flexDirection:'column',
       flexWrap:'wrap',
     },
     UserWrap:{

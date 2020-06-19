@@ -88,7 +88,7 @@ import {EzyRent} from '../../../ezyrent';
                                             <Text style={styles.pageTitle(theme)}>{property.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_next_day_date} {/*01 March 2020*/}</Text>
+                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time} {/*01 March 2020*/}</Text>
                                     </View>
                                 </View>
 

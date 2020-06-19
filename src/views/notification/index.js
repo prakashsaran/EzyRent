@@ -148,7 +148,7 @@ class NotificationList extends React.Component {
     );
   }
   renderNotifications(){
-    const {items} = this.props      
+    const {items} = this.props    
     if(!items.length){
       return this.renderPlaceHolder();
     }

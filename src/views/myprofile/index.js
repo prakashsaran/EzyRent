@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../theme';
 import {EzyRent} from '../../ezyrent';
+import {normalize} from '../../components';
 // swiper
 import Swiper from 'react-native-swiper';
 import styles from './style';
@@ -270,7 +271,7 @@ getConsistencyRentPay(DataObj){
         return(
           <Swiper
             style={styles.slider}
-            height={220}
+            height={normalize(190)}
             onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
             dot={<View style={theme.typography.Dots}/>}
             activeDot={<View style={theme.typography.activeDots} />}
@@ -347,7 +348,7 @@ getConsistencyRentPay(DataObj){
                   <View>
                     {this.renderConsistency()}
                   </View>
-                  <View style={{width:'100%',height:100}}></View>
+                  <View style={{width:'100%',height:120}}></View>
                 </View>
               </ScrollView>
               </View>

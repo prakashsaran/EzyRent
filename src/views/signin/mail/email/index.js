@@ -49,15 +49,15 @@ function SignInMail(props) {
   renderConfirmModal =() =>{
     return (
       <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
-            <View style={{ width:'95%',height:100,backgroundColor:'#fff',borderRadius:5,alignSelf:'center' }}>
-              <Text style={styles.confirmBoxTitle(theme)}>Your Account Setup is pending. Do you wish to complete?</Text>
-                <View style={{flexDirection:'row',justifyContent:'space-between',width:"90%",paddingTop:10,alignSelf:'center',paddingHorizontal:20}}>
+            <View style={styles.popupContainer(theme)}>
+              <Text style={styles.columntitlePop1(theme)}>YOUR ACCOUNT SETUP IS PENDING. DO YOU WISH TO COMPLETE?</Text>
+                <View style={styles.popupBtms}>
                   <TouchableOpacity onPress={()=>setConfirmModalVisible(false)}>
-                    <Text style={styles.eraseTitle(theme)}>Cancel</Text>
+                    <Text style={styles.cancel}>CANCEL</Text>
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={()=>reStartSignUp()}>
-                    <Text>Ok</Text>
+                    <Text style={{color:'#315add'}}>OK</Text>
                   </TouchableOpacity>
 
                 </View>

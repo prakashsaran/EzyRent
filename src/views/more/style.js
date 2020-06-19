@@ -50,7 +50,8 @@ export default StyleSheet.create({
       fontSize:normalize(18),
       textTransform:'uppercase',
       paddingBottom:6,
-      width:'70%',
+      width:normalize(160),
+      flexWrap:'wrap',
     }),
     textSub: theme =>({
       color:theme.colors.secondry,
@@ -158,7 +159,7 @@ export default StyleSheet.create({
       flexDirection:'row',
       flexWrap:'wrap',
       justifyContent:'space-between',
-      paddingTop:10,
+      paddingTop:30,
     },
     pop_wrap:{
       //backgroundColor:'#fff',

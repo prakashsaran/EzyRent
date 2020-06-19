@@ -57,7 +57,7 @@ export default StyleSheet.create({
     marginLeft:'auto',
     marginRight:'auto',
     lineHeight:normalize(25),
-    minHeight:normalize(100),
+    minHeight:isLessMarshmallow()?normalize(100):normalize(118),
   }),
   btncontainer: theme =>({
     backgroundColor: theme.colors.secondry,

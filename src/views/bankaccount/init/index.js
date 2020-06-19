@@ -69,7 +69,7 @@ class MyBankaccount extends React.Component {
     return bankData.map((item,inx)=>{
       
       return(
-            <View style={[styles.shadow,{zIndex:100-inx}]}>
+            <View key={inx} style={[styles.shadow,{zIndex:100-inx}]}>
                 <View style={styles.MoreLinkswrap}>
                   <View style={{flexDirection:'row',justifyContent:'flex-start',width:'87%',overflow:'hidden'}}>
                     <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>

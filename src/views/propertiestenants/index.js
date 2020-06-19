@@ -156,6 +156,10 @@ class PropertiesTenants extends React.Component {
   }
 
   addPropertyTenant(){
+    const {activeTab} = this.state
+    if(activeTab==1){
+      return true;
+    }
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
   }
 
@@ -465,7 +469,7 @@ goToPropertyOwnerDetail(landlord_id){
                         <Text style={item.rent_status=="D"?styles.propItemattrvalueError(theme):styles.propItemattrvalue(theme)}>INR {this.getMoneyFormat(item.rent_amount,0)} {item.due_text} {item.rent_date_time}</Text>
                       }
                     </View>
-                    {item.rent_status=="D" &&
+                    {(item.rent_status=="D" && item.property_status =="O") &&
                       <View style={styles.markwrap}>
                         <TouchableOpacity>
                           <Text style={styles.marktext(theme)}>MARK AS PAID</Text>
@@ -556,7 +560,7 @@ renderModelView()
       }
       
       return(
-        <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
+        <Modal onBackdropPress={()=>{this.setState({visiblemodal:false})}} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
 
             {property_loading ?
             <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>

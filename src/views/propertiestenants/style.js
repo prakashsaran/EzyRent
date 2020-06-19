@@ -97,7 +97,7 @@ export default StyleSheet.create({
       fontWeight:theme.typography.fontWeightRegular,
       fontSize:normalize(22),
       paddingHorizontal:0,
-    }),
+    }), 
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,

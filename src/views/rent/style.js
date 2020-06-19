@@ -24,7 +24,7 @@ export default StyleSheet.create({
       justifyContent:'space-between',
       alignContent:'center',
       alignItems:'center',
-    },
+    }, 
     rightIconsWrapper: {
       flexDirection: "row",
       alignItems: "center",
@@ -82,7 +82,7 @@ export default StyleSheet.create({
     inActivetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(18),
+      fontSize:normalize(15),
       paddingHorizontal:10,
       color:theme.colors.seconderyHeadingColor,
       textAlign:'center'
@@ -90,7 +90,7 @@ export default StyleSheet.create({
     Activetabtitle:theme =>({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
-      fontSize:normalize(18),
+      fontSize:normalize(15),
       paddingHorizontal:10,
       color:theme.colors.secondry,
       textAlign:'center'
@@ -145,7 +145,7 @@ export default StyleSheet.create({
     loopitembg:{
       width:'100%',
       minHeight:170,
-      borderRadius:10
+      borderRadius:2
     },
     loopitembgcltg:{
       width:'100%',

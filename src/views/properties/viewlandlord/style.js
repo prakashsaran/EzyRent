@@ -52,16 +52,22 @@ export default StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-between',
       alignItems:'center',
-      width:'100%',
+      width:'100%', 
       //paddingHorizontal:20,
       alignSelf:'center',
       position:'relative',
       //marginVertical:10,
     }),
+    fieldWrapp:{
+      width:'100%',
+      marginTop:20,
+      borderWidth:1,
+      borderColor:'transparent',
+    },
     visibilityIconWrapp:{
       position:'absolute',
-      right:10,
-      top:10,
+      right:0,
+      top:0,
     },
     visibilityIcon:{
       width:20,
@@ -220,6 +226,8 @@ export default StyleSheet.create({
   eraseTitle:theme=>({
     fontSize:normalize(13),
     color:theme.colors.errorColor,
+    flexDirection:'column',
+    padding:2,
   }),
   eraseIcon:{
     width:28,

@@ -129,7 +129,6 @@ class ViewPropertyTenant extends React.Component {
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
-          
         return (
             <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',height:300}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
                 <SafeAreaView style={styles.container(theme)}>
@@ -162,7 +161,7 @@ class ViewPropertyTenant extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> Per month</Text>
                                         </View>
-                                     <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_next_day_date}</Text>
+                                     <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_date_time}</Text>
                                     </View>
                                     <TouchableOpacity style={styles.eraseBtn(theme)} onPress={()=>this.setState({isconfirmModalVisible:true})}>
                                        <Image resizeMode={'contain'} style={styles.eraseIcon} source={require('../../../assets/images/erase.png')}></Image>

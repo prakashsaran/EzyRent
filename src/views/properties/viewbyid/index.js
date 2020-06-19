@@ -95,7 +95,6 @@ class ViewPropertyById extends React.Component {
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
-          
         return (
 
             <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
@@ -126,7 +125,7 @@ class ViewPropertyById extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_next_day_date} {/*01 March 2020*/}</Text>
+                                        <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time} {/*01 March 2020*/}</Text>
                                     </View>
                                 </View>
 

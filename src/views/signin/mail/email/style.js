@@ -84,5 +84,33 @@ signLink: theme =>({
     left:0,
     right:0,
     height: 75,
-  }
+  },
+  popupContainer: theme=>({
+      width:'100%',
+      backgroundColor: "rgba(230, 230, 230,1)",
+      borderRadius: 5,
+      borderColor: "#e6e6e6",
+      borderWidth: 1,
+      shadowOffset: {
+        height: 5,
+        width: 5
+      },
+      shadowColor: "rgba(0,0,0,1)",
+      shadowOpacity: 0.35,
+      paddingVertical:20,
+      paddingHorizontal:10,
+    }),
+  columntitlePop1:theme=>({
+      marginTop:0,
+    }),
+  popupBtms:{
+      width:'100%',
+      flexDirection:'row',
+      flexWrap:'wrap',
+      justifyContent:'space-between',
+      paddingTop:40,
+    },
+    cancel:{
+      color:'#6c6c6c',
+    },
 });

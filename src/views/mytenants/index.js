@@ -25,6 +25,13 @@ class MyTenants extends React.Component {
     const {getMyTenant,customer} = this.props
     getMyTenant(customer);
   }
+  renderFirstImage(item){
+    if(item.profile_pic && item.profile_pic !=""){
+      return {uri:`${EzyRent.getMediaUrl()}${item.profile_pic}`}      
+    }
+    return require("../../assets/images/default.jpg")
+
+  }
 
   render(){
     const theme = this.context;
@@ -76,7 +83,8 @@ class MyTenants extends React.Component {
               <View style={styles.shadow} key={inx}>
                   <View style={styles.MoreLinkswrap}>
                   <Image style={styles.User_image}
-                   source={{uri:`${EzyRent.getMediaUrl()}${item.profile_pic}`}}
+                   //source={{uri:`${EzyRent.getMediaUrl()}${item.profile_pic}`}}
+                   source={this.renderFirstImage(item)}
                    ></Image>
                   <TouchableOpacity style={styles.UserWrap}>
                     <View style={styles.heading_wrap}>
