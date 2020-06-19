@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,PermissionsAndroid,KeyboardAvoidingView,Platform,Button,Keyboard} from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,PermissionsAndroid,KeyboardAvoidingView,Platform,Button,Keyboard,Animated} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -447,7 +447,7 @@ getTotalAmount(amount,type){
 renderHeader(){
   const { propertyImage } = this.state
     return(
-      <View style={styles.headerContainer(theme)}>
+      <Animated.View style={styles.headerContainer(theme)}>
         <View style={styles.headerContext}>
           <TouchableOpacity onPress={()=>this.backRedirection()} style={theme.typography.backbtmcontainer}>
             <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
@@ -467,7 +467,7 @@ renderHeader(){
              <Image style={{width:25,height:25}} source={require('../../../assets/images/delete-transparent.png')}/>
             </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     )
   }
   /* common using function current page */
@@ -514,6 +514,7 @@ renderHeader(){
                                 keyboardType={'number-pad'} 
                                 returnKeyLabel={"next"}
                                 returnKeyType={"next"}
+                                blurOnSubmit={false}
                                 onSubmitEditing={() => { this._tenantNameEntry.focus() }}
                                 style={mobileNumber?styles.contactbook(theme):styles.contactbookSec(theme)} 
                                 placeholder={"Mobile Number"} textValue={mobileNumber} 
@@ -533,6 +534,7 @@ renderHeader(){
                               style={tenantName?styles.textInputStyle(theme):styles.textInputStyleSec(theme)} 
                               value={tenantName} 
                               placeholder={'Name of Tenant'}
+                              blurOnSubmit={false}
                               returnKeyLabel={"next"}
                               returnKeyType={"next"}
                               onSubmitEditing={() => { this._houseNumberEntry.focus() }}
@@ -555,6 +557,7 @@ renderHeader(){
                                 placeholder={'Ex: Flat 101, TC 6/1564'}
                                 returnKeyLabel={"next"}
                                  returnKeyType={"next"}
+                                 blurOnSubmit={false}
                                 onSubmitEditing={() => { this._collectingAmountEntry.focus() }}
                                />
                           </View>
@@ -606,7 +609,7 @@ renderHeader(){
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
                              <View style={styles.currencyLabel}>
                               <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput  ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10000'}/>
+                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10000'}/>
                               </View>
                           </View>
                           <View style={styles.fieldWrapp}>

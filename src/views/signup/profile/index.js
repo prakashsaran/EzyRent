@@ -1,5 +1,5 @@
 import React, { Component,useContext ,useState,useEffect} from "react";
-import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity,TextInput,KeyboardAvoidingView,Platform,StatusBar,Linking  } from "react-native";
+import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity,TextInput,KeyboardAvoidingView,Platform,StatusBar,Linking,BackHandler  } from "react-native";
 import styles from './style';
 import { ThemeContext } from '../../../theme';
 import {NAVIGATION_SIGN_UP_MOBILE_OTP_PATH} from '../../../navigation/routes';
@@ -58,7 +58,7 @@ function SignUpProfile(props) {
     if (Platform.OS == 'android') {
         keyboardBehavior = 'height'
     }
-
+    BackHandler.addEventListener('hardwareBackPress', function() {return true})
   }, []);
 
   const submit = () =>{

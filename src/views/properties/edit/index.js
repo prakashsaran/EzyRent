@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,PermissionsAndroid,KeyboardAvoidingView,Platform,Button,Keyboard} from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,PermissionsAndroid,KeyboardAvoidingView,Platform,Button,Keyboard,Animated} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -530,7 +530,7 @@ renderPropertyMainImage(){
 }
 renderHeader(){
     return(
-      <View style={styles.headerContainer(theme)}>
+      <Animated.View style={styles.headerContainer(theme)}>
         <View style={styles.headerContext}>
           <TouchableOpacity onPress={()=>NavigationService.goBack()} style={theme.typography.backbtmcontainer}>
             <Image style={styles.backscreen} resizeMode={'stretch'} source={require('../../../assets/images/back-white.png')}></Image>
@@ -546,7 +546,7 @@ renderHeader(){
              <Image style={{width:25,height:25}} source={require('../../../assets/images/delete-transparent.png')}/>
             </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
     )
   }
   /* common using function current page */
@@ -628,6 +628,7 @@ renderHeader(){
                                 onChangeText={(mobileNumber)=>this.onChangeMobile(mobileNumber)}
                                 image-style={styles.address_icon}
                                 InputStyle={styles.font_16}
+                                blurOnSubmit={false}
                                 source={require('../../../assets/images/address.png')}/>
                              </View>
                           </View>
@@ -642,6 +643,7 @@ renderHeader(){
                                placeholder={'Name of Tenant'}
                                returnKeyLabel={"next"}
                                returnKeyType={"next"}
+                               blurOnSubmit={false}
                                onSubmitEditing={() => { this._houseNumberEntry.focus() }}
                                 />
                           </View>
@@ -661,6 +663,7 @@ renderHeader(){
                               placeholder={'Ex: Flat 101, TC 6/1564'}
                               returnKeyLabel={"next"}
                                returnKeyType={"next"}
+                               blurOnSubmit={false}
                               onSubmitEditing={() => { this._collectingAmountEntry.focus() }}
                             />
                           </View>

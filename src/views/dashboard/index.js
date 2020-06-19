@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,BackHandler } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../theme';
@@ -32,6 +32,9 @@ class myDashBoard extends React.Component {
     const {customer,getMyProfile} = this.props
     getMyProfile(customer);
     
+  }
+  componentDidMount(){
+    BackHandler.removeEventListener('hardwareBackPress', function() {return true});
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
