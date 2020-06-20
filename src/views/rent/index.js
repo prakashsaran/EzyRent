@@ -127,6 +127,20 @@ class RentList extends React.Component {
     this.setState({searchQuery})
   }
 
+  onTabViewChange(activeTab){
+    const {getRentsForTenant,getRentsForLandlord,customer}=this.props
+    const {searchQuery} = this.state
+    this.setState({activeTab})
+    if(searchQuery){
+      this.setState({searchQuery:""})
+      if(activeTab==1){
+        getRentsForLandlord(customer,"",0,20);
+      } else {
+        getRentsForTenant(customer,"",0,20);
+      }
+    }
+  }
+
   componentDidMount(){
     const {AccountType} = this.state
     if(AccountType=="T"){
@@ -225,7 +239,7 @@ class RentList extends React.Component {
         </View>
         {visibleSearch && <View style={styles.searchWrap}>
             <View style={styles.inputStyleStack(theme)}>
-              <TextInput placeholder="Search" onChangeText={(searchQuery)=>this.onSearchProperties(searchQuery)} style={styles.searchinputStyle}></TextInput>
+              <TextInput placeholder="Search" value={this.state.searchQuery} onChangeText={(searchQuery)=>this.onSearchProperties(searchQuery)} style={styles.searchinputStyle}></TextInput>
             </View>
         </View>}
       </View>
@@ -238,15 +252,15 @@ class RentList extends React.Component {
     }
     return(
       <View style={styles.tabWrapp}>
-          <ScrollView horizontal>
+          <ScrollView onendRi horizontal>
             <View style={styles.tabsrows(theme)}>
               <View style={activeTab==1?styles.Activetabitem(theme):styles.inActivetabitem(theme)}>
-                <TouchableOpacity onPress={()=>this.setState({activeTab:1})} style={styles.tabaction}>
+                <TouchableOpacity onPress={()=>this.onTabViewChange(1)} style={styles.tabaction}>
                   <Text style={activeTab==1?styles.Activetabtitle(theme):styles.inActivetabtitle(theme)}>I am Paying</Text>
                 </TouchableOpacity>
               </View>
               <View style={activeTab==2?styles.Activetabitem(theme):styles.inActivetabitem(theme)}>
-                <TouchableOpacity onPress={()=>this.setState({activeTab:2})} style={styles.tabaction}>
+                <TouchableOpacity onPress={()=>this.onTabViewChange(2)} style={styles.tabaction}>
                   <Text style={activeTab==2?styles.Activetabtitle(theme):styles.inActivetabtitle(theme)}>I am Collecting</Text>
                 </TouchableOpacity>
               </View>

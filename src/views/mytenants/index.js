@@ -6,11 +6,14 @@ import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_TENANT_PROFILE_VIEW_PATH,
+  NAVIGATION_MORE_MY_TENANTS_VIEW_PATH,
 } from '../../navigation/routes';
 import {getMyTenant,getCountryCodeFormat} from '../../actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {EzyRent} from '../../ezyrent';
+import { cos } from "react-native-reanimated";
 
 class MyTenants extends React.Component {
   static contextType = ThemeContext;
@@ -80,13 +83,13 @@ class MyTenants extends React.Component {
     const {items} = this.props
     return items.map((item,inx)=>{
       return(
-              <View style={styles.shadow} key={inx}>
+              <TouchableOpacity onPress={()=>NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.tenant_id,goBack:NAVIGATION_MORE_MY_TENANTS_VIEW_PATH})} style={styles.shadow} key={inx}>
                   <View style={styles.MoreLinkswrap}>
                   <Image style={styles.User_image}
                    //source={{uri:`${EzyRent.getMediaUrl()}${item.profile_pic}`}}
                    source={this.renderFirstImage(item)}
                    ></Image>
-                  <TouchableOpacity style={styles.UserWrap}>
+                  <View style={styles.UserWrap}>
                     <View style={styles.heading_wrap}>
                       <Text style={styles.MoreLinksItem(theme)}>{item.full_name}</Text>
                       <Text style={styles.MoreLinksItemSub(theme)}>({getCountryCodeFormat(item.mobile_country_code)} {item.mobile})</Text>
@@ -95,9 +98,9 @@ class MyTenants extends React.Component {
                     <Image style={styles.gps_dark_icon} source={require('../../assets/images/gps_dark.png')}></Image>
                     <Text style={styles.MoreLinksItemLocation(theme)}>No.13, Metro Falt, Sheikh Mohammed Rd. Dubai, UAE</Text>
                     </View>*/}
-                  </TouchableOpacity>
+                  </View>
                 </View>
-            </View>
+            </TouchableOpacity>
       )
     });
   }

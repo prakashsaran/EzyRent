@@ -278,11 +278,25 @@ goToPropertyOwnerDetail(landlord_id){
     const {getPropertiesForLandlord,getPropertiesForTenant}=this.props
     const {activeTab} = this.state
     if(activeTab==1){
-      getPropertiesForTenant(searchQuery,0,10);
+      getPropertiesForTenant(searchQuery,0,20);
     } else {
-      getPropertiesForLandlord(searchQuery,0,10);
+      getPropertiesForLandlord(searchQuery,0,20);
     }
     this.setState({searchQuery})
+  }
+  
+  onTabViewChange(activeTab){
+    const {getPropertiesForLandlord,getPropertiesForTenant}=this.props
+    const {searchQuery} =  this.state
+    this.setState({activeTab})
+    if(searchQuery){
+      this.setState({searchQuery:""})
+      if(activeTab==1){
+        getPropertiesForLandlord("",0,20);
+      } else {
+        getPropertiesForTenant("",0,20);
+      }
+    }
   }
 
   /* ================================================================*/
@@ -332,12 +346,12 @@ goToPropertyOwnerDetail(landlord_id){
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={styles.tabsrows}>
               <View style={activeTab==1?styles.Activetabitem(theme):styles.inActivetabitem(theme)}>
-                <TouchableOpacity onPress={()=>this.setState({activeTab:1})} style={styles.tabaction}>
+                <TouchableOpacity onPress={()=>this.onTabViewChange(1)} style={styles.tabaction}>
                   <Text style={activeTab==1?styles.Activetabtitle(theme):styles.inActivetabtitle(theme)}>I am Paying Rent</Text>
                 </TouchableOpacity>
               </View>
               <View style={activeTab==2?styles.Activetabitem(theme):styles.inActivetabitem(theme)}>
-                <TouchableOpacity onPress={()=>this.setState({activeTab:2})} style={styles.tabaction}>
+                <TouchableOpacity onPress={()=>this.onTabViewChange(2)} style={styles.tabaction}>
                   <Text style={activeTab==2?styles.Activetabtitle(theme):styles.inActivetabtitle(theme)}>I am Collecting Rent</Text>
                 </TouchableOpacity>
               </View>
@@ -530,7 +544,7 @@ goToPropertyOwnerDetail(landlord_id){
         return "Per Week";
         break;
       case "2":
-        return "Per Bi Week";
+        return "Bi Weekly";
         break;
       case "3":
         return "Per Month";

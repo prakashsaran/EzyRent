@@ -115,7 +115,7 @@ class CongratsModalDashBoard extends PureComponent {
             return "Per Week";
             break;
           case "2":
-            return "Per Bi Week";
+            return "Bi Weekly";
             break;
           case "3":
             return "Per Month";

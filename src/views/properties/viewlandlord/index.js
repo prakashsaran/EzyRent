@@ -89,16 +89,16 @@ class ViewPropertyTenant extends React.Component {
     renderPayPeriod(period){
       switch(period){
         case "1":
-          return "Week";
+          return "Per Week";
           break;
         case "2":
-          return "Bi Week";
+          return "Bi Weekly";
           break;
         case "3":
-          return "Month";
+          return "Per Month";
           break;
         case "4":
-          return "Year";
+          return "Per Year";
           break;
       }
     }

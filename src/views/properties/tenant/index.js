@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,ActivityIndicator } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,ActivityIndicator,NavigationActions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
@@ -128,6 +128,7 @@ class TenantProfile extends React.Component {
       const { navigation } = this.props
       const backscreen = navigation.getParam('goBack');
       if(backscreen){
+        NavigationService.goBack()
         NavigationService.navigate(backscreen);
       } else{
           NavigationService.goBack()
