@@ -518,9 +518,29 @@ goToPropertyOwnerDetail(landlord_id){
    return(
     <View>
       <Text style={styles.payTime(theme)}>{amount}</Text>
-      <Text style={styles.timePeriodExtra(theme)}>{period}</Text>
+      <Text style={styles.timePeriodExtra(theme)}>{this.renderPayPeriod(period)}</Text>
+
     </View>
    )
+  }
+
+  renderPayPeriod(period){
+    switch(period){
+      case "1":
+        return "Per Week";
+        break;
+      case "2":
+        return "Per Bi Week";
+        break;
+      case "3":
+        return "Per Month";
+        break;
+      case "4":
+        return "Per Year";
+        break;
+      default:
+        return null;
+    }
   }
 
   descriptionBankCharge(bankCharges){
@@ -601,7 +621,7 @@ renderModelView()
                             titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
                             descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
                             data={[
-                                {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,"Per Month"), icon: require('../../assets/images/step-round.png')},
+                                {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,property_currentItem.rent_period_id), icon: require('../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../assets/images/step-round.png')},
                             ]}
@@ -609,7 +629,7 @@ renderModelView()
                       </View>
                     <View style={styles.total_warp}>
                       <Text style={styles.total_amount}>TOTAL AMOUNT PAYABLE</Text>
-                      <Text style={styles.total_amount_light}>Per Month</Text>
+                      <Text style={styles.total_amount_light}>{this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                       <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.net_banking.amount}</Text>
                       <Text style={styles.paymType}>on using Net Banking/UPI </Text>
                       <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.debit_card.amount}</Text>

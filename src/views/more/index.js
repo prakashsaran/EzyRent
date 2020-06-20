@@ -71,6 +71,13 @@ class MoreInit extends React.Component {
     return 0;
   }
 
+  renderFastImage(customer){
+    if(customer.profile_pic && customer.profile_pic !=""){
+      return {uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}
+    }
+    return require("../../assets/images/default.jpg");
+  }
+  
   render(){
     const {customer} = this.props
     const theme = this.context;
@@ -87,7 +94,8 @@ class MoreInit extends React.Component {
                           {/* <Image style={styles.imageLeft} source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}></Image> */}
                           <ImageBackground style={styles.profilebg} imageStyle={styles.profilePik} resizeMode={'cover'} 
                           //source={require('../../assets/images/sample/james.png')}
-                          source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                         // source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                         source={this.renderFastImage(customer)}
                           ></ImageBackground>
                         </View>
                         <View style={styles.ImageWrapRight}>

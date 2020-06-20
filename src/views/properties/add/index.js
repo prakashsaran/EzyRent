@@ -410,7 +410,7 @@ getTotalAmount(amount,type){
       },
       maxWidth: 700,
       maxHeight: 700,
-      quality: 0.5
+      quality: 0.7
     };
     
     ImagePicker.showImagePicker(options, (response) => {
@@ -722,7 +722,7 @@ renderModalView(){
           />
           </View>
           <View style={styles.fieldWrapp}>
-              <Text style={theme.typography.tooltip}>Location</Text>
+              <Text style={theme.typography.tooltip}>Location *</Text>
               <TextInput 
                 onFocus={()=>this.onFocusInput(this._PopupLocationEntry)} 
                 onBlur={()=>this.onBlurInput(this._PopupLocationEntry)} 

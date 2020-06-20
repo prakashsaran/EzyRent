@@ -47,6 +47,14 @@ class PropertyOwner extends React.Component {
       }
   }
 
+  renderFastImage(customer){
+    if(customer.profile_pic && customer.profile_pic !=""){
+      return {uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}
+    }
+    return require("../../../assets/images/default.jpg");
+  }
+  
+
   renderQuickState(){
     const {current_landlord} = this.props
       return(
@@ -120,7 +128,10 @@ class PropertyOwner extends React.Component {
                 <View style={[theme.typography.rectView2,styles.rectviewcustom]}>
 
                   <View style={styles.profile_wrap}>
-                    <Image style={styles.profile} source={{uri:`${EzyRent.getMediaUrl()}${current_landlord.profile_pic}`}}></Image>
+                    <Image style={styles.profile}
+                     //source={{uri:`${EzyRent.getMediaUrl()}${current_landlord.profile_pic}`}}
+                     source={this.renderFastImage(current_landlord)}
+                     ></Image>
                   </View>
                   <Text style={styles.detailHeading(theme)}>{current_landlord.full_name}</Text>
                   <View style={styles.detail}>

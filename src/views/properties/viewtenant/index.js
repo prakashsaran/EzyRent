@@ -53,6 +53,24 @@ class ViewPropertyTenant extends React.Component {
           </View>
         )
     }
+
+    renderPayPeriod(period){
+      switch(period){
+        case "1":
+          return "Week";
+          break;
+        case "2":
+          return "Bi Week";
+          break;
+        case "3":
+          return "Month";
+          break;
+        case "4":
+          return "Year";
+          break;
+      }
+    }
+
     renderInfoTimeline(value){
         return(
             <Text style={styles.payTime(theme)}>You paid rent of <Text style={{color:theme.colors.primaryTitleColor,fontWeight:'bold'}}>INR 25000</Text> for this property</Text>
@@ -96,6 +114,7 @@ class ViewPropertyTenant extends React.Component {
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
+          console.log("property_currentItem",JSON.stringify(property_currentItem))
         return (
             <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',height:300}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
                 <SafeAreaView style={styles.container(theme)}>
@@ -123,7 +142,7 @@ class ViewPropertyTenant extends React.Component {
                                     <View>
                                         <View style={styles.payamountPeriod}>
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
-                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
+                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
                                         <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_date_time}</Text>
                                     </View>

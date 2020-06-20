@@ -71,6 +71,12 @@ getConsistencyRentPay(DataObj){
   return "0";
 }
 
+renderFastImage(customer){
+  if(customer.profile_pic && customer.profile_pic !=""){
+    return {uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}
+  }
+  return require("../../assets/images/default.jpg");
+}
 
 //======================================================//
 //============ end common function ====================//
@@ -335,7 +341,8 @@ getConsistencyRentPay(DataObj){
                   <View style={styles.profile_wrap}>
                   <ImageBackground style={styles.profilebg} imageStyle={styles.profilePik} resizeMode={'cover'} 
                   //source={require('../../assets/images/sample/james.png')}
-                  source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                  //source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                  source={this.renderFastImage(customer)}
                   ></ImageBackground>
                   </View>
                   <Text style={styles.detailHeading(theme)}>{customer.full_name}</Text>

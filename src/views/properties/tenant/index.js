@@ -133,6 +133,12 @@ class TenantProfile extends React.Component {
           NavigationService.goBack()
       }
   }
+  renderFastImage(profileImage){
+    if(profileImage && profileImage !=""){
+      return {uri:`${EzyRent.getMediaUrl()}${profileImage}`}
+    }
+    return require("../../../assets/images/default.jpg");
+  }
 
   render(){
     const {tenant_name,mobile_country_code,profile_pic,tenant_mobile,consistency_rent_pay} = this.state
@@ -161,7 +167,10 @@ class TenantProfile extends React.Component {
                 <View style={[theme.typography.rectView2,styles.rectviewcustom]}>
 
                   <View style={styles.profile_wrap}>
-                    <Image style={styles.profilebg} source={{uri:`${EzyRent.getMediaUrl()}${this.state.profile_pic}`}}></Image>
+                    <Image style={styles.profilebg} 
+                    //source={{uri:`${EzyRent.getMediaUrl()}${this.state.profile_pic}`}}
+                    source={this.renderFastImage(this.state.profile_pic)}
+                    ></Image>
                   </View>
                   <Text style={styles.detailHeading(theme)}>{tenant_name}</Text>
                   <View style={styles.detail}>

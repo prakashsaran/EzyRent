@@ -108,7 +108,7 @@ class EditMyProfile extends React.Component {
       },
       maxWidth: 500,
       maxHeight: 500,
-      quality: 0.5
+      quality: 0.7
     };
     
     ImagePicker.showImagePicker(options, (response) => {
@@ -241,7 +241,12 @@ class EditMyProfile extends React.Component {
     mobileNumberChangeVerify(customer,updating,formdata);
     this.setState({mobilePopup:false,errorValue:null,mobile_otp:null,email_otp:null,verifyMpin:null})
   }
-
+  renderFastImage(customer){
+    if(customer.profile_pic && customer.profile_pic !=""){
+      return {uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}
+    }
+    return require("../../assets/images/default.jpg");
+  }
   renderPopupMpinChange(){
     const {mpinPopup,mobile_otp,errorValue} = this.state
     if(!mpinPopup){
@@ -406,7 +411,8 @@ class EditMyProfile extends React.Component {
                     //source={require('../../assets/images/sample/james.png')}
                     onLoadEnd={()=>this.setState({profileloader:false})}
                     onLoadStart={(e) => this.setState({profileloader:true})}
-                    source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                    //source={{uri:`${EzyRent.getMediaUrl()}${customer.profile_pic}`}}
+                    source={this.renderFastImage(customer)}
                     >
                         <ActivityIndicator animating={profileloader} size={"large"} color={theme.colors.secondry} style={{position:'absolute',top:"35%"}}/>
                           <TouchableOpacity disabled={profileloader} onPress={()=>this.pickupImage()} style={styles.profileEdit}>

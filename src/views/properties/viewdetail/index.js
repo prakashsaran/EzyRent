@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView } from "react-native";
+import { TouchableOpacity, View, Image, ImageBackground, Text,SafeAreaView, ScrollView,Alert } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import NavigationService from '../../../navigation/NavigationService';
 import Timeline from 'react-native-timeline-flatlist'
@@ -7,9 +7,14 @@ import styles from '../viewtenant/style';
 import { ThemeContext, theme } from '../../../theme';
 import {
     NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
+    NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,
   } from '../../../navigation/routes';
 import {EzyRent} from '../../../ezyrent';
-  class ViewPropertyTenant extends React.Component {
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {tenantSubmissionOnProperty } from '../../../actions';
+
+class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
     constructor(props){
       super();
@@ -55,7 +60,50 @@ import {EzyRent} from '../../../ezyrent';
         )
     }
 
+    AcceptProperty(item){
+        const {tenantSubmissionOnProperty,customer} = this.props
+        tenantSubmissionOnProperty(item.id,"A",customer);
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
+      }
+    
+      RejectProperty(item){
+        const {tenantSubmissionOnProperty,customer,} = this.props
+        tenantSubmissionOnProperty(item.id,"R",customer);
+        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
+      }
 
+    confirmProperty(property_currentItem){
+        Alert.alert(
+            "Are you sure to Accept?",
+          "",
+          [
+            {
+              text: "REJECT",
+              onPress: () => this.RejectProperty(property_currentItem),
+              style: "cancel"
+            },
+            { text: "ACCEPT", onPress: () => this.AcceptProperty(property_currentItem) }
+          ],
+          { cancelable: false }
+        );
+    }
+    renderPayPeriod(period){
+        switch(period){
+          case "1":
+            return "Week";
+            break;
+          case "2":
+            return "Bi Week";
+            break;
+          case "3":
+            return "Month";
+            break;
+          case "4":
+            return "Year";
+            break;
+        }
+      }
+  
     render(){
         const theme = this.context;
         const {property} = this.state
@@ -86,10 +134,14 @@ import {EzyRent} from '../../../ezyrent';
                                     <View>
                                         <View style={styles.payamountPeriod}>
                                             <Text style={styles.pageTitle(theme)}>{property.total_amount_display}</Text>
-                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> Per month</Text>
+                                            <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property.rent_period_id)}</Text>
                                         </View>
                                         <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time} {/*01 March 2020*/}</Text>
                                     </View>
+                                    {property.user_role ==2 &&
+                                    <TouchableOpacity onPress={()=>{this.confirmProperty(property)}} style={styles.primaryBtn(theme)}>
+                                        <Text style={styles.primaryBtnText(theme)}>ACCEPT</Text>
+                                    </TouchableOpacity>}
                                 </View>
 
                                 <View style={styles.paymentInfo(theme)}>
@@ -133,4 +185,21 @@ import {EzyRent} from '../../../ezyrent';
     }
 }
 
-export default ViewPropertyTenant;
+
+
+const mapStateToProps = ({ account }) => {
+    const { customer } = account;
+    return {customer };
+  };
+  
+  ViewPropertyTenant.propTypes = {
+    customer: PropTypes.object,
+    tenantSubmissionOnProperty: PropTypes.func,
+};
+  
+ViewPropertyTenant.defaultProps = {
+    customer: {},  
+  };
+  
+  export default connect(mapStateToProps, {tenantSubmissionOnProperty})(ViewPropertyTenant);
+  

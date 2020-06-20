@@ -86,6 +86,22 @@ class ViewPropertyTenant extends React.Component {
             <Text style={styles.payTime(theme)}>You received rent of <Text style={{color:theme.colors.primaryTitleColor,fontWeight:'bold'}}>INR 25000</Text> for this property</Text>
         )
     }
+    renderPayPeriod(period){
+      switch(period){
+        case "1":
+          return "Week";
+          break;
+        case "2":
+          return "Bi Week";
+          break;
+        case "3":
+          return "Month";
+          break;
+        case "4":
+          return "Year";
+          break;
+      }
+    }
     renderConfirmModalModal(){
       const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
       return (
@@ -129,6 +145,7 @@ class ViewPropertyTenant extends React.Component {
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
+          
         return (
             <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',height:300}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
                 <SafeAreaView style={styles.container(theme)}>
@@ -159,7 +176,7 @@ class ViewPropertyTenant extends React.Component {
                                     <View style={{paddingTop:10,}}>
                                         <View style={styles.payamountPeriod}>
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
-                                            <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> Per month</Text>
+                                             <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
                                      <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_date_time}</Text>
                                     </View>
@@ -173,7 +190,7 @@ class ViewPropertyTenant extends React.Component {
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} ({property_currentItem.bank_account_number})</Text>
-                                        {(property_currentItem.bank_additional_details && property_currentItem.bank_additional_details !="undefined") && <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>}
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>
