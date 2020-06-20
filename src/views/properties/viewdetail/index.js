@@ -71,7 +71,14 @@ class ViewPropertyTenant extends React.Component {
         tenantSubmissionOnProperty(item.id,"R",customer);
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
       }
-
+      renderFastImage(property_image){
+        if(property_image && property_image !=""){
+          return {uri:`${EzyRent.getMediaUrl()}${property_image}`}
+        }
+        return require("../../../assets/images/building_placehoder.jpg");
+      }
+  
+  
     confirmProperty(property_currentItem){
         Alert.alert(
             "Are you sure to Accept?",
@@ -108,7 +115,11 @@ class ViewPropertyTenant extends React.Component {
         const theme = this.context;
         const {property} = this.state
         return (
-            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',}} source={{uri:`${EzyRent.getMediaUrl()}${property.property_image}`}}>
+            <ImageBackground style={{width:'100%',height:'100%'}}
+             resizeMode={'cover'} imageStyle={{width:'100%',height:300}} 
+             //source={{uri:`${EzyRent.getMediaUrl()}${property.property_image}`}}
+             source={this.renderFastImage(property.property_image)}
+             >
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
@@ -136,7 +147,7 @@ class ViewPropertyTenant extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property.rent_period_id)}</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time} {/*01 March 2020*/}</Text>
+                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time}</Text>
                                     </View>
                                     {property.user_role ==2 &&
                                     <TouchableOpacity onPress={()=>{this.confirmProperty(property)}} style={styles.primaryBtn(theme)}>
@@ -148,7 +159,7 @@ class ViewPropertyTenant extends React.Component {
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property.bank_name} ({property.bank_account_number})</Text>
-                                        {(property.bank_additional_details && property.bank_additional_details !="undefined") && <Text style={styles.textLabelXl(theme)}>{property.bank_additional_details}</Text>}
+                                        <Text style={styles.textLabelXl(theme)}>{property.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>

@@ -87,6 +87,8 @@ class EditPropertyTenant extends React.Component {
             rentDue:listItem.rent_day_date,
             property_status:listItem.property_status,
             serverPropertiesImg:listItem.property_image,
+            tenantName:currentProperty.tenant_name,
+            mobileNumber:currentProperty.tenant_mobile,
             isvisiblepayinfo:true,
           });
           if (currentProperty.tenant_id && Object.keys(currentProperty).length > 0) {
@@ -352,8 +354,8 @@ getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
   }
 };
 getBankCharge(amount,percentage){
-  const amountClt = amount*(percentage/100);
-  return  Math.round(amountClt+(amountClt*18/100));
+  return amount*(percentage/100);
+  ///return  Math.round(amountClt+(amountClt*18/100));
 }
 getBankChargeMoneyFormat(amount,percentage){
   const totalBnkCharge = this.getBankCharge(amount,percentage);

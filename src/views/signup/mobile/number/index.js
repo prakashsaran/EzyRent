@@ -29,14 +29,12 @@ function SignUpMobile(props) {
     if (Platform.OS == 'android') {
         keyboardBehavior = 'height'
     }
-    const paramsMobilenumber = props.navigation.getParam('mobilenumber');
-    if(paramsMobilenumber && paramsMobilenumber !=mobilenumber){
-      setMobileNumber(paramsMobilenumber);
-      setEnableButton(true);
-    }
-  
-  }, []);
-
+    setMobileNumber(props.mobile.number)
+  }, [props.mobile]);
+  goToSignInPage = ()=> {
+    NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH);
+    setMobileNumber("");
+  }
   return (
       <SafeAreaView style={styles.container(theme)}>
           <KeyboardAvoidingView behavior={keyboardBehavior} >
@@ -68,7 +66,7 @@ function SignUpMobile(props) {
                   {props.loading && <Spinner color={"white"}/>}
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.signIn(theme)}  onPress={()=>{NavigationService.navigate(NAVIGATION_SIGN_IN_MOBILE_NUMBER_PATH)}} >
+                <TouchableOpacity style={styles.signIn(theme)}  onPress={()=>{goToSignInPage()}} >
                   <Text style={styles.cnfrmSignText(theme)}>Already have an account?</Text>
                   <Text style={styles.signLink(theme)}>Sign In</Text>
                 </TouchableOpacity>
@@ -88,12 +86,13 @@ function SignUpMobile(props) {
 }
 
 const mapStateToProps = ({ signup }) => {
-  const { error, success, loading } = signup;
+  const { error, success, loading,mobile } = signup;
 
-  return { error, success, loading };
+  return { error, success, loading,mobile };
 };
 
 SignUpMobile.propTypes = {
+  mobile: PropTypes.object,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
@@ -104,6 +103,7 @@ SignUpMobile.defaultProps = {
   error: null,
   success: null,
   loading: false,
+  mobile:{},
 };
 
 export default connect(mapStateToProps, { signupMobile })(SignUpMobile);

@@ -554,7 +554,7 @@ renderModelView()
                             titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
                             descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
                             data={[
-                                {time: '05:34', title: 'Rent Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,"Per Month"), icon: require('../../../assets/images/step-round.png')},
+                                {time: '05:34', title: 'Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,"Per Month"), icon: require('../../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../../assets/images/step-round.png')},
                             ]}

@@ -135,7 +135,7 @@ class MyBankaccount extends React.Component {
         <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
           <SafeAreaView style={styles.container}>
           <View style={styles.titleWrapper}>
-            <TouchableOpacity onPress={()=>NavigationService.goBack()} style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',}}>
+            <TouchableOpacity onPress={()=>NavigationService.navigate(NAVIGATION_MORE_INIT_VIEW_PATH)} style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'center',}}>
               <Image style={styles.back_button} source={require('../../../assets/images/back-blue.png')}></Image>
               <Text style={theme.typography.pageTitleSecondary}>My Bank Accounts</Text>
             </TouchableOpacity>

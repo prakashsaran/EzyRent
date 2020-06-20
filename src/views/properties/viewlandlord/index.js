@@ -102,6 +102,15 @@ class ViewPropertyTenant extends React.Component {
           break;
       }
     }
+
+    renderFastImage(property_image){
+      if(property_image && property_image !=""){
+        return {uri:`${EzyRent.getMediaUrl()}${property_image}`}
+      }
+      return require("../../../assets/images/building_placehoder.jpg");
+    }
+    
+  
     renderConfirmModalModal(){
       const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
       return (
@@ -139,15 +148,38 @@ class ViewPropertyTenant extends React.Component {
         </Modal>
       );
     }
+    renderTenantDetails(property_currentItem){
+      console.log("property_currentItem",JSON.stringify(property_currentItem))
+      if(property_currentItem.tenant_id){
+        return(
+          <View style={styles.ownerInfo}>
+              <Text style={styles.textLabel(theme)}>{property_currentItem.landlord_text}</Text>
+              <TouchableOpacity onPress={()=>this.goToTenantProfile(property_currentItem.tenant_id)}><Text style={styles.textValue(theme)}>{property_currentItem.tenant_details[0].tenant_name}</Text></TouchableOpacity>
+              <Text style={styles.textLabel(theme)}>({getCountryCodeFormat(property_currentItem.tenant_details[0].tenant_ccd)} - {property_currentItem.tenant_details[0].tenant_mobile})</Text>
+          </View>
+        )  
+      } else {
+        return(
+          <View style={styles.ownerInfo}>
+              <Text style={styles.textLabel(theme)}>{property_currentItem.landlord_text}</Text>
+              <TouchableOpacity disabled={true}><Text style={styles.textValue(theme)}>{property_currentItem.tenant_name}</Text></TouchableOpacity>
+              <Text style={styles.textLabel(theme)}>({getCountryCodeFormat(property_currentItem.tenant_ccd)} - {property_currentItem.tenant_mobile})</Text>
+          </View>
+        )  
+      }
+    }
     render(){
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
-          
         return (
-            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',height:300}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
+            <ImageBackground style={{width:'100%',height:'100%'}}
+             resizeMode={'cover'} imageStyle={{width:'100%',height:300}}
+              //source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}
+              source={this.renderFastImage(property_currentItem.property_image)}
+              >
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
@@ -158,12 +190,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={styles.propertyInfo(theme)}>
                                     <Text style={styles.pagePropertyTitle(theme)}>{property_currentItem.house_number}</Text>
                                     <Text style={styles.pagePropertyTitle(theme)}>{property_currentItem.building_name}</Text>
-                                    <View style={styles.ownerInfo}>
-                                        <Text style={styles.textLabel(theme)}>{property_currentItem.landlord_text}</Text>
-                                        {property_currentItem.tenant_id &&<TouchableOpacity onPress={()=>this.goToTenantProfile(property_currentItem.tenant_id)}><Text style={styles.textValue(theme)}>{property_currentItem.tenant_details[0].tenant_name}</Text></TouchableOpacity>}
-                                        {property_currentItem.tenant_id &&<Text style={styles.textLabel(theme)}>({getCountryCodeFormat(property_currentItem.tenant_details[0].tenant_ccd)} - {property_currentItem.tenant_details[0].tenant_mobile})</Text>}
-                                        {!property_currentItem.tenant_id && <Text style={styles.textValue(theme)}>Not Available</Text>}
-                                    </View>
+                                    {this.renderTenantDetails(property_currentItem)}
                                     <View style={styles.locationWrapp}>
                                         <Image resizeMode={'contain'} style={{width:20,height:20,marginRight:5,marginLeft:-5}} source={require('../../../assets/images/gps_dark.png')}></Image>
                                         <Text style={styles.textLabel(theme)}>
@@ -178,7 +205,7 @@ class ViewPropertyTenant extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                              <Text style={styles.textLabel(theme),{color:'#878787',paddingTop:5,}}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
-                                     <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {/*01 March 2020*/} {property_currentItem.rent_date_time}</Text>
+                                     <Text style={styles.payTimeBld(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>
                                     </View>
                                     <TouchableOpacity style={styles.eraseBtn(theme)} onPress={()=>this.setState({isconfirmModalVisible:true})}>
                                        <Image resizeMode={'contain'} style={styles.eraseIcon} source={require('../../../assets/images/erase.png')}></Image>

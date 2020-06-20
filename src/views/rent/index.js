@@ -324,9 +324,9 @@ class RentList extends React.Component {
                       </View>
                       <View style={styles.propInfoAttrb}>
                       {item.status_text=="DUE"?
-                       <TouchableOpacity onPress={()=>this.PayRent()} style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:11,height:11,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
+                       <TouchableOpacity onPress={()=>this.PayRent()} style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due from {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:11,height:11,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                       :
-                        <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.Total_amount,0)}</Text> on {item.date}</Text>
+                        <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>{item.total_amount}</Text> on {item.date}</Text>
                       }
                       </View>
                     </View>
@@ -357,9 +357,9 @@ class RentList extends React.Component {
 
                     <View style={styles.propInfoAttrb}>
                     {item.status_text=="DUE"?
-                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
+                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                     :
-                      <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
+                      <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>{item.total_amount}</Text> on {item.date}</Text>
                     }
                     </View>
 
@@ -402,9 +402,9 @@ class RentList extends React.Component {
 
                       <View style={styles.propInfoAttrb}>
                       {item.status_text=="DUE"?
-                      <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
+                      <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due from {item.date} </Text>
                       :
-                        <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
+                    <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>{item.total_amount}</Text> on {item.date}</Text>
                       }
                       </View>
 
@@ -442,9 +442,9 @@ class RentList extends React.Component {
 
                     <View style={styles.propInfoAttrb}>
                     {item.status_text=="DUE"?
-                    <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> due from {item.date} </Text>
+                    <Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due from {item.date} </Text>
                     :
-                      <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>INR {this.getMoneyFormat(item.total_amount,0)}</Text> on {item.date}</Text>
+                      <Text style={styles.propItemattrvalue(theme)}>Received <Text style={{fontWeight:'bold', color:theme.colors.primary}}>{item.total_amount}</Text> on {item.date}</Text>
                     }
                     </View>
 

@@ -354,6 +354,7 @@ export const deleteProperty = (propId,data,user=null) => async (dispatch) => {
 }
 
 export const editProperty = (propId,data,media=null) => async (dispatch) => {
+  console.log("editProperty data",propId,data,media)
   dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
   try{
 
@@ -372,6 +373,7 @@ export const editProperty = (propId,data,media=null) => async (dispatch) => {
     } else {
       const formData = formUrlencodedData(data);
       const response = await EzyRent.admin.editPropertyNoneImage(propId,formData);
+      console.log("response editProperty",response)
       if(response && response.success){
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         refreshPropertiesForLandlord(dispatch);

@@ -191,6 +191,12 @@ class ViewPropertyById extends React.Component {
             break;
         }
       }
+      renderFastImage(property_image){
+        if(property_image && property_image !=""){
+          return {uri:`${EzyRent.getMediaUrl()}${property_image}`}
+        }
+        return require("../../../assets/images/building_placehoder.jpg");
+      }
   
     renderConfirmModalModal(){
         const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
@@ -266,7 +272,11 @@ class ViewPropertyById extends React.Component {
           }
         return (
 
-            <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} imageStyle={{width:'100%',}} source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}>
+            <ImageBackground style={{width:'100%',height:'100%'}}
+             resizeMode={'cover'} imageStyle={{width:'100%',height:300}} 
+             //source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}
+             source={this.renderFastImage(property_currentItem.property_image)}
+             >
                 <SafeAreaView style={styles.container(theme)}>
                     <View>
                     {this.renderHeader(theme)}
@@ -291,7 +301,7 @@ class ViewPropertyById extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time} {/*01 March 2020*/}</Text>
+                                        <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>
                                     </View>
                                     {this.renderbuttonsRole(property_currentItem)}
                                 </View>
@@ -300,7 +310,7 @@ class ViewPropertyById extends React.Component {
                                     <View style={styles.bankacInfoXl}>
                                         <Text style={styles.banktitle(theme)}>Bank Details</Text>
                                         <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_name} ({property_currentItem.bank_account_number})</Text>
-                                        {(property_currentItem.bank_additional_details && property_currentItem.bank_additional_details !="undefined") && <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>}
+                                        <Text style={styles.textLabelXl(theme)}>{property_currentItem.bank_additional_details}</Text>
                                     </View>
                                     <View style={styles.bankacInfo}>
                                         <Text style={styles.banktitle(theme)}>Previous Dues</Text>

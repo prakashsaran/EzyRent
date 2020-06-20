@@ -9,7 +9,7 @@ import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
 import { PickerSelect,DropDownHolder } from '../../../components';
-import {editBank} from '../../../actions';
+import {editBank,isValidAccountNumber,isValidIfsc} from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -69,6 +69,25 @@ class EditBankAccount extends React.Component {
     });
     return valid
   }
+
+  checkValidBankDetails(){
+    const {accountNumber,crmAcNumber,ifscCode} = this.state
+    if(accountNumber !=crmAcNumber){
+      DropDownHolder.alert('error', '', 'Invalid Form. Account number mismatch!')
+      return false
+    }
+    if(isValidAccountNumber(accountNumber) && isValidIfsc(ifscCode)){
+      return true
+    }
+    if(!isValidAccountNumber(accountNumber)){
+      DropDownHolder.alert('error', '', 'Invalid Form. Please enter valid account number!')
+    }
+    if(!isValidIfsc(accountNumber)){
+      DropDownHolder.alert('error', '', 'Invalid Form. Please enter valid IFSC Code!')
+    }
+    return false
+  }
+  
   submitForm(){
     const {editBank} = this.props;
       const {bankId,nameofBank,accountNumber,crmAcNumber,acHolderName,typeOfAc,ifscCode,additionalDetails} = this.state
@@ -79,9 +98,11 @@ class EditBankAccount extends React.Component {
             this.validateAndSetAttribute(acHolderName, this._acHolderNameEntry) &
             //this.validateAndSetAttribute(typeOfAc, this._typeOfAcEntry) &
             this.validateAndSetAttribute(ifscCode, this._ifscCodeEntry);
-    if(formIsValid){
-      const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails,status:"A"}
-      editBank(bankId,formdata);
+    if(formIsValid){      
+      if(this.checkValidBankDetails()){
+        const formdata = {name:nameofBank,account_no:accountNumber,confirm_account_no:crmAcNumber,account_holder_name:acHolderName,ifsc_code:ifscCode,additional_details:additionalDetails,status:"A"}
+        editBank(bankId,formdata);
+          }
       //NavigationService.navigate(NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH);
     }else{
       DropDownHolder.alert('error', '', 'Invalid Form. Please fill valid data!')
@@ -195,7 +216,7 @@ class EditBankAccount extends React.Component {
                           <View style={styles.fieldWrapp(theme)}>
                           <Text style={theme.typography.tooltip}>IFSC Code/Swift Code *</Text>
                               <TextInput onFocus={()=>this.onFocusInput(this._ifscCodeEntry)} onBlur={()=>this.onBlurInput(this._ifscCodeEntry)}  ref={(ref) => this._ifscCodeEntry = ref} onChangeText={(ifscCode) =>{this.setState({ifscCode})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={ifscCode}
-                               placeholder={'IFSC Code/Sort Code'}
+                               placeholder={'IFSC Code/Swift Code'}
                                returnKeyLabel={"next"}
                                returnKeyType={"next"}
                                onSubmitEditing={() => { this._additionalDetailsEntry.focus() }}

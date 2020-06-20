@@ -270,8 +270,8 @@ getMoneyFormat(amount, decimalCount = 2, decimal = ".", thousands = ",") {
   }
 };
 getBankCharge(amount,percentage){
-  const amountClt = amount*(percentage/100);
-  return  Math.round(amountClt+(amountClt*18/100));
+  return amount*(percentage/100);
+  //return  Math.round(amountClt+(amountClt*18/100));
 }
 getBankChargeMoneyFormat(amount,percentage){
   const totalBnkCharge = this.getBankCharge(amount,percentage);
