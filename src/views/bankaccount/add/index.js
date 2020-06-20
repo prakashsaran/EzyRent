@@ -5,7 +5,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import NavigationService from '../../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../../theme';
 import styles from './style';
-import { PickerSelect,DropDownHolder } from '../../../components';
+import { PickerSelect,DropDownHolder,Spinner } from '../../../components';
 import {addBank,isValidAccountNumber,isValidIfsc} from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -209,6 +209,7 @@ submitForm(){
                           <View style={styles.spacing}></View>
                   </View>
                 </View>
+                {this.props.loading && <Spinner style={{position:"absolute",alignSelf:'center',top:"40%"}}/>}
               </ScrollView>
               {this.reanderButton()}
           </SafeAreaView>

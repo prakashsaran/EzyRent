@@ -8,7 +8,7 @@ import styles from './style';
 import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
-import { PickerSelect,DropDownHolder } from '../../../components';
+import { PickerSelect,DropDownHolder,Spinner } from '../../../components';
 import {editBank,isValidAccountNumber,isValidIfsc} from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -233,6 +233,7 @@ class EditBankAccount extends React.Component {
 
                   </View>
                 </View>
+                {this.props.loading && <Spinner style={{position:"absolute",alignSelf:'center',top:"40%"}}/>}
               </ScrollView>
               {this.reanderButton()}
           </SafeAreaView>

@@ -22,6 +22,7 @@ class ViewPropertyTenant extends React.Component {
         property:{}
       }
     }
+
     UNSAFE_componentWillMount(){
         const {navigation,getPropertyById} = this.props
         const property = navigation.getParam("property");
@@ -156,7 +157,7 @@ class ViewPropertyTenant extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
-                                        <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>
+                                        {property_currentItem.property_status !="A"? <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>:null}
                                     </View>
                                     {property_currentItem.property_status =="A"?
                                     <TouchableOpacity onPress={()=>{this.confirmProperty(property_currentItem)}} style={styles.primaryBtn(theme)}>

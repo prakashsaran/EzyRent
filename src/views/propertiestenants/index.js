@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList, ActivityIndicator } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList, ActivityIndicator,Animated } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FloatingAction } from "react-native-floating-action";
 import NavigationService from '../../navigation/NavigationService';
@@ -402,7 +402,7 @@ goToPropertyOwnerDetail(landlord_id){
     const {propertiesTenant} = this.props    
     if(propertiesTenant.items.length >0 ){
      return (
-      <View style={styles.properties(theme)}>
+      <Animated.View style={styles.properties(theme)}>
         <FlatList
           style={{minHeight:Dimensions.get('window').height,paddingHorizontal:1}}
           data={propertiesTenant.items}
@@ -410,8 +410,8 @@ goToPropertyOwnerDetail(landlord_id){
           keyExtractor={item => item.id}
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
-        {propertiesTenant.loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
-      </View>
+        {propertiesTenant.loading && <Spinner style={{position:"absolute",alignSelf:'center',top:"27%"}}/>}
+      </Animated.View>
      )
     }
     return this.renderPlaceHolder();
@@ -419,9 +419,9 @@ goToPropertyOwnerDetail(landlord_id){
 
   renderPayingItems(item,indx){
       return (
-        <View key={indx} style={styles.loopitem}>
+        <Animated.View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
-            <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
+            <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
             <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
@@ -433,7 +433,7 @@ goToPropertyOwnerDetail(landlord_id){
                   <View style={styles.propInforowright}>
                     <View style={styles.propInfoAttrb}>
                       <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/user_ellipse.png')}></Image>
-                      <Text style={styles.propItemattrLocation(theme)}>Not Available</Text>
+                      <Text style={styles.propItemattrLocation(theme)}>{item.landlord_name}</Text>
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
@@ -460,14 +460,14 @@ goToPropertyOwnerDetail(landlord_id){
                </View>
             </ImageBackground>
           </ImageBackground>
-        </View>
+        </Animated.View>
       )
   }
   renderCollectingItems(item,inx){
       return (
-        <View key={inx} style={styles.loopitem}>
+        <Animated.View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
-            <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
+            <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
             <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
@@ -477,7 +477,7 @@ goToPropertyOwnerDetail(landlord_id){
                   <View style={styles.propInforowright}>
                     <View style={styles.propInfoAttrb}>
                       <Image style={styles.map_icon} resizeMode={'contain'} source={require('../../assets/images/user_ellipse.png')}></Image>
-                      <Text style={styles.propItemattrLocation(theme)}>Not Available</Text>
+                      <Text style={styles.propItemattrLocation(theme)}>{item.tenant_name}</Text>
                     </View>
                     <View style={styles.propInfoAttrb}>
                       <Image style={{width:30,height:30}} resizeMode={'contain'} source={require('../../assets/images/calendar_ellipse.png')}></Image>
@@ -504,7 +504,7 @@ goToPropertyOwnerDetail(landlord_id){
                </View>
             </ImageBackground>
           </ImageBackground>
-        </View>
+        </Animated.View>
       )
   }
   fasterImageRender(item){
@@ -517,7 +517,7 @@ goToPropertyOwnerDetail(landlord_id){
     const {propertiesLandlord} = this.props        
     if(propertiesLandlord.items.length >0 ){
      return (
-      <View style={styles.properties(theme)}>
+      <Animated.View style={styles.properties(theme)}>
         <FlatList
           style={{minHeight:Dimensions.get('window').height,paddingHorizontal:1}}
           data={propertiesLandlord.items}
@@ -526,7 +526,7 @@ goToPropertyOwnerDetail(landlord_id){
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
         {propertiesLandlord.loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
-      </View>
+      </Animated.View>
      )
     }
     return this.renderPlaceHolder();

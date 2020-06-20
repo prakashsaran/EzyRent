@@ -148,7 +148,7 @@ class ViewPropertyTenant extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property.rent_period_id)}</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time}</Text>
+                                        {property.property_status !="A"? <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time}</Text>:null}
                                     </View>
                                     {property.user_role ==2 &&
                                     <TouchableOpacity onPress={()=>{this.confirmProperty(property)}} style={styles.primaryBtn(theme)}>

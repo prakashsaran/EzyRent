@@ -302,7 +302,7 @@ class ViewPropertyById extends React.Component {
                                             <Text style={styles.pageTitle(theme)}>{property_currentItem.total_amount_display}</Text>
                                             <Text style={[styles.textLabel(theme),styles.textLabel2(theme),{color:'#878787',paddingTop:5,}]}> {this.renderPayPeriod(property_currentItem.rent_period_id)}</Text>
                                         </View>
-                                        <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>
+                                        {property_currentItem.property_status !="A"? <Text style={styles.payTime(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>:null}
                                     </View>
                                     {this.renderbuttonsRole(property_currentItem)}
                                 </View>

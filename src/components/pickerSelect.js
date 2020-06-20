@@ -37,7 +37,7 @@ class PickerSelect extends PureComponent {
         if(currentSelection){
             return currentSelection.label;
         }
-        return defaultValue
+        return null;
     }
     render(){
         const {style,pickerStyle,selectedLabelStyle,placeholder,placeholderStyle,isdisabled,defaultValue} = this.props;
