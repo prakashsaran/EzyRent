@@ -108,7 +108,7 @@ class EditMyProfile extends React.Component {
       },
       maxWidth: 500,
       maxHeight: 500,
-      quality: 0.7
+      quality: 0.9
     };
     
     ImagePicker.showImagePicker(options, (response) => {

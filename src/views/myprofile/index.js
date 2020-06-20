@@ -109,6 +109,7 @@ renderFastImage(customer){
     const { navigation } = this.props
     const backscreen = navigation.getParam('goBack');
     if(backscreen){
+      NavigationService.goBack();
       NavigationService.navigate(backscreen);
     } else{
        NavigationService.navigate(NAVIGATION_MORE_INIT_VIEW_PATH);

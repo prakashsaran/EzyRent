@@ -495,7 +495,7 @@ renderContactList(){
       },
       maxWidth: 700,
       maxHeight: 700,
-      quality: 0.7
+      quality: 0.9
     };
 
     ImagePicker.showImagePicker(options, (response) => {

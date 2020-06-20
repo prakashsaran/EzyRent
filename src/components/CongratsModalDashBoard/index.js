@@ -127,16 +127,35 @@ class CongratsModalDashBoard extends PureComponent {
             return null;
         }
       }
-  
+      
+      renderPayPeriodHead(period){
+        switch(period){
+          case "1":
+            return "Weekly";
+            break;
+          case "2":
+            return "Bi Weekly";
+            break;
+          case "3":
+            return "Monthly";
+            break;
+          case "4":
+            return "Annually";
+            break;
+          default:
+            return null;
+        }
+      }
+    
        descriptionBankCharge(bankCharges){
         return(
          <View>
            <Text style={styles.payTime(theme)}>{bankCharges.net_banking.amount}</Text>
-           <Text style={styles.timePeriodExtra(theme)}>INR {bankCharges.net_banking.rate} on using Net Banking/UPI</Text>
+           <Text style={styles.timePeriodExtra(theme)}>On using Net Banking/UPI</Text>
            <Text style={styles.payTime(theme)}>{bankCharges.debit_card.amount}</Text>
-           <Text style={styles.timePeriodExtra(theme)}>{bankCharges.debit_card.rate}% on using Debit Card (1.25% of A includes 18% GST)</Text>
+           <Text style={styles.timePeriodExtra(theme)}>On using Debit Card (1.25% of A includes 18% GST)</Text>
            <Text style={styles.payTime(theme)}>{bankCharges.credit_card.amount}</Text>
-           <Text style={styles.timePeriodExtra(theme)}>{bankCharges.credit_card.rate}% on using Credit Card (1.95% of A, includes 18% GST)</Text>
+           <Text style={styles.timePeriodExtra(theme)}>On using Credit Card (1.95% of A, includes 18% GST)</Text>
          </View>
         )
        }
@@ -167,7 +186,7 @@ class CongratsModalDashBoard extends PureComponent {
                           <Text style={[styles.light_color,{fontWeight:'bold'}]}> ({getCountryCodeFormat(property_currentItem.landlord_details[0].landlord_ccd)}-{property_currentItem.landlord_details[0].landlord_mobile})</Text>
                         </View>
                         <View style={styles.congrats_content(theme)}>
-                          <Text style={styles.light_color}>Please confirm the Total Amount Payable monthly</Text>
+                          <Text style={styles.light_color}>Please confirm the Total Amount Payable {this.renderPayPeriodHead(property_currentItem.rent_period_id)}</Text>
                         </View>
                       <Image style={styles.dash_bar_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/dash-bar-line.png')}/>
                         <View style={styles.bankacInfo}>
@@ -189,7 +208,7 @@ class CongratsModalDashBoard extends PureComponent {
                                 titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
                                 descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
                                 data={[
-                                    {time: '05:34', title: 'Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.rent_split_up.rent_amount,property_currentItem.rent_period_id), icon: require('../../assets/images/step-round.png')},
+                                    {time: '05:34', title: 'Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.total_amount_display,property_currentItem.rent_period_id), icon: require('../../assets/images/step-round.png')},
                                     {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../assets/images/step-round.png')},
                                     {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../assets/images/step-round.png')},
                                 ]}

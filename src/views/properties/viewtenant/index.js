@@ -36,6 +36,7 @@ class ViewPropertyTenant extends React.Component {
         const { navigation } = this.props
         const backscreen = navigation.getParam('goBack');
         if(backscreen){
+          NavigationService.goBack();
           NavigationService.navigate(backscreen);
         } else{
             NavigationService.goBack()
@@ -122,7 +123,6 @@ class ViewPropertyTenant extends React.Component {
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
-          console.log("property_currentItem",JSON.stringify(property_currentItem))
         return (
             <ImageBackground style={{width:'100%',height:'100%'}}
              resizeMode={'cover'} imageStyle={{width:'100%',height:300}} 

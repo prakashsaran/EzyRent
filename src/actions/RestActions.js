@@ -117,7 +117,6 @@ export const getMyProfile = (user) => async (dispatch) =>{
     const userId = user.id;
     const userData = await getUserData();
     const response = await EzyRent.admin.getMyProfile(userId);
-    console.log("response getMyProfile",JSON.stringify(response))
       if(response && response.data){
        const userUpdatedata = {...user, ...response.data};
         userData.user = userUpdatedata;
@@ -348,20 +347,19 @@ export const deleteProperty = (propId,data,user=null) => async (dispatch) => {
     if(response && response.success){
       refreshPropertiesForLandlord(dispatch)
       refreshMyProfile(user,dispatch);
-      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
+      NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH,{ativeTab:2});
+     //NavigationService.goBack();
       DropDownHolder.alert('success', '', response.message)
     }
 }
 
 export const editProperty = (propId,data,media=null) => async (dispatch) => {
-  console.log("editProperty data",propId,data,media)
   dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
   try{
 
     if(media){
       const formData = formMultipartData("property_image",media,data);
       const response = await EzyRent.admin.editPropertyWithImage(propId,formData);
-      console.log("response editProperty",response)
       if(response && response.success){
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         refreshPropertiesForLandlord(dispatch);
@@ -373,7 +371,6 @@ export const editProperty = (propId,data,media=null) => async (dispatch) => {
     } else {
       const formData = formUrlencodedData(data);
       const response = await EzyRent.admin.editPropertyNoneImage(propId,formData);
-      console.log("response editProperty",response)
       if(response && response.success){
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         refreshPropertiesForLandlord(dispatch);

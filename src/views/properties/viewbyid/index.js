@@ -125,6 +125,7 @@ class ViewPropertyById extends React.Component {
         const { navigation } = this.props
         const backscreen = navigation.getParam('goBack');
         if(backscreen){
+          NavigationService.goBack()
           NavigationService.navigate(backscreen);
         } else{
             NavigationService.goBack()

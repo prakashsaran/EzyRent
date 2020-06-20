@@ -410,7 +410,7 @@ getTotalAmount(amount,type){
       },
       maxWidth: 700,
       maxHeight: 700,
-      quality: 0.7
+      quality: 0.9
     };
     
     ImagePicker.showImagePicker(options, (response) => {
@@ -428,6 +428,7 @@ getTotalAmount(amount,type){
     const { navigation } = this.props
     const backscreen = navigation.getParam('goBack');
     if(backscreen){
+      NavigationService.goBack();
       NavigationService.navigate(backscreen);
     } else{
       NavigationService.goBack();

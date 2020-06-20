@@ -35,17 +35,18 @@ class DateMonthPicker extends PureComponent {
         }
     }
     onSeleteItem(data){
-        const chooseMonth = new Date(data).getMonth();
-        const chooseDay = new Date(data).getDate();
-        const currentMonth = parseInt(chooseMonth)+1;
-        const { onSeleteItem } = this.props;
-        if(onSeleteItem){
-            const SelectedDay = (chooseDay<10)?"0"+chooseDay:chooseDay;
-            const SelectedMonth = (currentMonth<10)?"0"+currentMonth:currentMonth;
-            const returnValue = SelectedMonth+"-"+SelectedDay;
-            console.log("returnValue",returnValue)
-            onSeleteItem(returnValue);
-        }
+        setTimeout(() => {
+            const chooseMonth = new Date(data).getMonth();
+            const chooseDay = new Date(data).getDate();
+            const currentMonth = parseInt(chooseMonth)+1;
+            const { onSeleteItem } = this.props;
+            if(onSeleteItem){
+                const SelectedDay = (chooseDay<10)?"0"+chooseDay:chooseDay;
+                const SelectedMonth = (currentMonth<10)?"0"+currentMonth:currentMonth;
+                const returnValue = SelectedMonth+"-"+SelectedDay;
+                onSeleteItem(returnValue);
+            }
+        }, 200);
         
     }
     onConfirmItem(data){
@@ -72,6 +73,8 @@ class DateMonthPicker extends PureComponent {
         return selectLable;
     }
     renderModeView(){
+        const {defaultValue} = this.props
+        const defaultDate =  defaultValue?"2020-"+defaultValue:new Date();
         return(
             <Modal onBackdropPress={()=>this.setState({modelVisible:false})} isVisible={this.state.modelVisible}>
                 <View style={{flex:1,justifyContent:'center'}}>
@@ -79,6 +82,8 @@ class DateMonthPicker extends PureComponent {
                     style={{ backgroundColor: 'white', height: 215,borderBottomWidth:1,borderColor:'red'}} 
                     // android not support width
                     onDateChange={date => {this.onSeleteItem(date)}}
+                    mode="date"
+                    date={new Date(defaultDate)}
                     itemSpace={30}
                     textSize={16}
                     />

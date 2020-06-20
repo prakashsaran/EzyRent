@@ -34,6 +34,7 @@ class ViewPropertyTenant extends React.Component {
       const { navigation } = this.props
       const backscreen = navigation.getParam('goBack');
       if(backscreen){
+        NavigationService.goBack();
         NavigationService.navigate(backscreen);
       } else{
           NavigationService.goBack()
@@ -149,7 +150,6 @@ class ViewPropertyTenant extends React.Component {
       );
     }
     renderTenantDetails(property_currentItem){
-      console.log("property_currentItem",JSON.stringify(property_currentItem))
       if(property_currentItem.tenant_id){
         return(
           <View style={styles.ownerInfo}>
