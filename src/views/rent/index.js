@@ -330,8 +330,10 @@ class RentList extends React.Component {
           <View key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number}</Text>
-                 <Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text>
+                  <View style={styles.itemNameWrap(theme)}>
+                    <Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text>
+                    <Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text>
+                  </View>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.status_text=="DUE"?

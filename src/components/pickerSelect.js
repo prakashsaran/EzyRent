@@ -52,7 +52,6 @@ class PickerSelect extends PureComponent {
         )
     }
     renderItem(item,index){
-        console.log("item of popuo",item)
         const {itemStyle,itemLabelStyle} = this.props;
         if(item.value=="add_new"){
             return(
@@ -138,9 +137,8 @@ const styles = StyleSheet.create({
     paddingHorizontal:30,
   },
   modelTitle:{
-      fontFamily:'Montserrat-Bold',
-      fontSize:16,
-      marginVertical:10,
+      fontFamily:'Oxygen-Bold',
+      fontSize:18,
   },
   renderItem:{
       marginVertical:6,
@@ -152,6 +150,7 @@ const styles = StyleSheet.create({
   itemlabelnew:{
       fontFamily:'Montserrat-Regular',
       fontSize:16,
+      color:'#3059DD',
   },
   selectedLabel:{
       fontSize:16,

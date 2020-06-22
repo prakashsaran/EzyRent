@@ -40,16 +40,16 @@ class ViewPropertyById extends React.Component {
     // ================= ================= =========================
     AcceptProperty(item){
         const {tenantSubmissionOnProperty,customer} = this.props
-        tenantSubmissionOnProperty(item.id,"A",customer);
         this.setState({isTenantconfirmModalVisible:false});
-        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
+        tenantSubmissionOnProperty(item.id,"A",customer);
+        NavigationService.goBack();
       }
     
       RejectProperty(item){
         const {tenantSubmissionOnProperty,customer,} = this.props
-        tenantSubmissionOnProperty(item.id,"R",customer);
         this.setState({isTenantconfirmModalVisible:false})
-        NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
+        tenantSubmissionOnProperty(item.id,"R",customer);
+        NavigationService.goBack();
       }
 
     PayRent(property){

@@ -398,6 +398,7 @@ getTotalAmount(amount,type){
     if(formIsValid){
       this.setState({isModalVisible:false});
       addNewBuilding(fromdata)
+      this.setState({add_building_name:"",add_building_location:""});
     }
   }
   /* comman using function current page */
