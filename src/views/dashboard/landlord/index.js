@@ -7,8 +7,8 @@ import styles from '../style';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
-  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
+  NAVIGATION_DASHBOARD_ADD_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_DASHBOARD_MY_PROFILE_VIEW_PATH,
   NAVIGATION_DASHBOARD_INIT_VIEW_PATH,
 } from '../../../navigation/routes';
 import CongratsModalDashBoard from '../../../components/CongratsModalDashBoard';
@@ -23,11 +23,11 @@ class LandlordDashboard extends React.Component {
     const {customer,status}=this.props
   }
   addPropertyTenant(){
-    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
+    NavigationService.navigate(NAVIGATION_DASHBOARD_ADD_PROPERTIES_TENANTS_VIEW_PATH);
 
   }
   gotToProfile(){
-    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
+    NavigationService.navigate(NAVIGATION_DASHBOARD_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_DASHBOARD_INIT_VIEW_PATH});
   }
 
   //======================================================//

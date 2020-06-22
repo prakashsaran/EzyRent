@@ -52,7 +52,15 @@ class PickerSelect extends PureComponent {
         )
     }
     renderItem(item,index){
+        console.log("item of popuo",item)
         const {itemStyle,itemLabelStyle} = this.props;
+        if(item.value=="add_new"){
+            return(
+                <TouchableOpacity style={[styles.renderItem,itemStyle]} key={index} onPress={()=>this.onChooseItem(item)}>
+                    <Text style={[styles.itemlabelnew,itemLabelStyle]} numberOfLines={1}>{item.label}</Text>
+                </TouchableOpacity>
+            )
+        }
         return(
             <TouchableOpacity style={[styles.renderItem,itemStyle]} key={index} onPress={()=>this.onChooseItem(item)}>
                 <Text style={[styles.itemlabel,itemLabelStyle]} numberOfLines={1}>{item.label}</Text>
@@ -126,7 +134,8 @@ const styles = StyleSheet.create({
     maxHeight:300,
     backgroundColor:'#fff',
     borderRadius:5,
-    padding:10,
+    padding:30,
+    paddingHorizontal:30,
   },
   modelTitle:{
       fontFamily:'Montserrat-Bold',
@@ -137,6 +146,10 @@ const styles = StyleSheet.create({
       marginVertical:6,
   },
   itemlabel:{
+      fontFamily:'Montserrat-Regular',
+      fontSize:16,
+  },
+  itemlabelnew:{
       fontFamily:'Montserrat-Regular',
       fontSize:16,
   },

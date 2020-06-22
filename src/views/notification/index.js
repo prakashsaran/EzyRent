@@ -9,10 +9,10 @@ import {
   NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_RENT_TRANSACTION_DETAIL_VIEW_PATH,
   NAVIGATION_DETAIL_PROPERTIES_DETAIL_VIEW_PATH,
-  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
-  NAVIGATION_TENANT_PROFILE_VIEW_PATH,
-  NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
-  NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,
+  NAVIGATION_NOTIFICATION_MY_PROFILE_VIEW_PATH,
+  NAVIGATION_NOTIFICATION_TENANT_PROFILE_VIEW_PATH,
+  NAVIGATION_NOTIFICATION_LANDLORD_PROFILE_VIEW_PATH,
+  NAVIGATION_NOTIFICATION_DETAIL_PROPERTY_BY_ID_VIEW_PATH,
   NAVIGATION_NOTIFICATION_INIT_VIEW_PATH,
 } from '../../navigation/routes';
 import { connect } from 'react-redux';
@@ -50,7 +50,7 @@ class NotificationList extends React.Component {
   }
   goToTennatViewPath(item){
     if(item.initiated_user_id){
-      NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
+      NavigationService.navigate(NAVIGATION_NOTIFICATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
     }
     this.readMarkNotification(item)
   }
@@ -63,13 +63,13 @@ class NotificationList extends React.Component {
   }
   goToLandlordViewPath(item){
     if(item.initiated_user_id){
-      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
+      NavigationService.navigate(NAVIGATION_NOTIFICATION_LANDLORD_PROFILE_VIEW_PATH,{landlord_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
     }
     this.readMarkNotification(item)
   }
   
   goToMyProfileViewPath(item){
-    NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
+    NavigationService.navigate(NAVIGATION_NOTIFICATION_MY_PROFILE_VIEW_PATH,{goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
     this.readMarkNotification(item)
   }
   fasterImageRender(item){
@@ -98,7 +98,7 @@ class NotificationList extends React.Component {
   }
   goToPropertyViewPath(item){
     if(item.module_data[0].id){
-      NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_BY_ID_VIEW_PATH,{propery_id:item.module_data[0].id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
+      NavigationService.navigate(NAVIGATION_NOTIFICATION_DETAIL_PROPERTY_BY_ID_VIEW_PATH,{propery_id:item.module_data[0].id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH});
     }
     this.readMarkNotification(item)
   }

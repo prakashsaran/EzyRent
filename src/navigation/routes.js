@@ -24,6 +24,15 @@ export const NAVIGATION_SIGN_IN_MOBILE_OTP_PATH ='signin-mobile-otp';
 export const NAVIGATION_SIGN_IN_MAIL_ID_PATH ='signin-mail-id';
 export const NAVIGATION_SIGN_IN_MAIL_OTP_PATH ='signin-mail-otp';
 
+// DASHBOARD CONTROLLER LIST
+export const NAVIGATION_DASHBOARD_MY_PROFILE_VIEW_PATH = 'my-profile-dashboard-view';
+export const NAVIGATION_DASHBOARD_ADD_PROPERTIES_TENANTS_VIEW_PATH = 'add-properties-tenants-dashboard';
+export const NAVIGATION_MORE_TENANT_PROFILE_VIEW_PATH = 'tenant-profile-more-view';
+export const NAVIGATION_NOTIFICATION_TENANT_PROFILE_VIEW_PATH = 'tenant-profile-notification-view';
+export const NAVIGATION_NOTIFICATION_LANDLORD_PROFILE_VIEW_PATH = 'landlord-profile-notification-view';
+export const NAVIGATION_NOTIFICATION_MY_PROFILE_VIEW_PATH = 'my-profile-notification-view';
+export const NAVIGATION_NOTIFICATION_DETAIL_PROPERTY_BY_ID_VIEW_PATH = 'notification-detail-property-by-id';
+
 
 export const NAVIGATION_SPLASH_SCREEN_PATH = 'splash-screen-view';
 export const NAVIGATION_DASHBOARD_STACK_PATH = 'dashboard-view';

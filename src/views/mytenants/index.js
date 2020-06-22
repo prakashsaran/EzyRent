@@ -6,7 +6,7 @@ import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
-  NAVIGATION_TENANT_PROFILE_VIEW_PATH,
+  NAVIGATION_MORE_TENANT_PROFILE_VIEW_PATH,
   NAVIGATION_MORE_MY_TENANTS_VIEW_PATH,
 } from '../../navigation/routes';
 import {getMyTenant,getCountryCodeFormat} from '../../actions';
@@ -91,7 +91,7 @@ class MyTenants extends React.Component {
     const {items} = this.props
     return items.map((item,inx)=>{
       return(
-              <TouchableOpacity onPress={()=>NavigationService.navigate(NAVIGATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.tenant_id,goBack:NAVIGATION_MORE_MY_TENANTS_VIEW_PATH})} style={styles.shadow} key={inx}>
+              <TouchableOpacity onPress={()=>NavigationService.navigate(NAVIGATION_MORE_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.tenant_id,goBack:NAVIGATION_MORE_MY_TENANTS_VIEW_PATH})} style={styles.shadow} key={inx}>
                   <View style={styles.MoreLinkswrap}>
                   <Image style={styles.User_image}
                    //source={{uri:`${EzyRent.getMediaUrl()}${item.profile_pic}`}}
