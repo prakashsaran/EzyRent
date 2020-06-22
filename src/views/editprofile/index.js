@@ -484,7 +484,7 @@ class EditMyProfile extends React.Component {
                 {this.renderPopupEmailPopupChange()}
                 {this.renderPopupMobilePopupChange()}
               </ScrollView>
-              {loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              {!loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
         </ImageBackground>
       );

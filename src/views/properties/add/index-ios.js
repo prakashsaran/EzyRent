@@ -596,12 +596,12 @@ renderHeader(){
                        <View style={styles.spacing}></View>
                     </View>
                   </ScrollView>
-                  {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
                   {this.renderModalView()}
                 </View>
               </View>
             </KeyboardAvoidingView>
             {this.reanderButton()}
+            {loading && <Spinner style={theme.typography.spinnerStyle}/>}
         </SafeAreaView>
       );
   }

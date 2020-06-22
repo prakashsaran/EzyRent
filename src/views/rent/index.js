@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EzyRent } from '../../ezyrent';
 import {  getRentsForLandlord,getRentsForTenant } from '../../actions';
+import { Spinner} from '../../components';
 
 class RentList extends React.Component {
   static contextType = ThemeContext;
@@ -273,11 +274,14 @@ class RentList extends React.Component {
   render(){
     const theme = this.context;
     const {activeTab} = this.state
+    const {tenant_loading,landlord_loading} = this.props
       return (
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
                 {this.renderTabBar()}
                 {this.renderProperties()}
+                {tenant_loading && <Spinner style={theme.typography.spinnerStyle}/>}
+                {landlord_loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
       );
   }

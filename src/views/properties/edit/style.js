@@ -202,7 +202,7 @@ export default StyleSheet.create({
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
-      paddingTop:normalize(9),
+      //paddingTop:normalize(9),
       //height:normalize(30),
       //backgroundColor:'red',
       //paddingBottom:normalize(1),
@@ -228,7 +228,7 @@ export default StyleSheet.create({
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
-      height:normalize(30),
+      //height:normalize(30),
     }),
     dropdownPicker:theme=>({
 	      borderWidth:0,
@@ -367,7 +367,8 @@ export default StyleSheet.create({
       currencyLabel:{
         flexDirection:'row',
         justifyContent:'flex-start',
-        alignItems:'stretch'
+        alignItems:'center',
+        alignContent:'center'
       },
       pickerSelected: theme=>({
         width:'100%',
@@ -404,6 +405,9 @@ export default StyleSheet.create({
       },
       font_16:{
         fontSize:normalize(16),
+      },
+      font_15:{
+        fontSize:normalize(14),
       },
       popOver:{
         height:130,

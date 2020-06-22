@@ -7,16 +7,18 @@ import {Spinner} from '../../components';
 import styles from './style';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {getMyProfile} from '../../actions'
+import {getMyProfile,getActiveRoute} from '../../actions'
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
-  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH
+  NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
+  NAVIGATION_DASHBOARD_INIT_VIEW_PATH,
 } from '../../navigation/routes';
 // IMPORT DESHBOARD TYPES
 import LandlordDashboard from './landlord';
 import LesseeDashboard from './lessee';
 import TenantDashboard from './tenant';
 import NewDashboard from './new';
+import Modal from 'react-native-modal';
 
 class myDashBoard extends React.Component {
   static contextType = ThemeContext;
@@ -32,9 +34,6 @@ class myDashBoard extends React.Component {
     const {customer,getMyProfile} = this.props
     getMyProfile(customer);
     
-  }
-  componentDidMount(){
-    BackHandler.removeEventListener('hardwareBackPress', function() {return true});
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
@@ -68,6 +67,10 @@ class myDashBoard extends React.Component {
     } else{
       this.setState({dashboardType:"U"});
     }
+    // START BACK HANDLER PROCESS
+    BackHandler.removeEventListener('hardwareBackPress', function() {return true});
+    BackHandler.addEventListener('hardwareBackPress', function() {return false})
+
   }
   addPropertyTenant(){
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);

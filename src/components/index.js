@@ -6,3 +6,4 @@ export * from './RightIconTextbox';
 export * from './normalize';
 export * from './pickerSelect';
 export * from './DateMonthPicker';
+export * from './ContainLoader';

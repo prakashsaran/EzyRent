@@ -238,7 +238,6 @@ export default StyleSheet.create({
     }),
     markwrap:{alignItems:'flex-end',width:'50%',alignSelf:'flex-end',marginRight:20,flexWrap:'wrap'},
     marktext:theme =>({
-      backgroundColor:'red',
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyOxygenBold,
       fontWeight:theme.typography.fontWeightSemiBold,

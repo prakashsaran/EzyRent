@@ -136,7 +136,7 @@ class NotificationList extends React.Component {
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
             {this.renderNotifications()}
-            {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
+            {loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
       );
   }

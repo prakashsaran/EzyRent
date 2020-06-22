@@ -9,7 +9,7 @@ import {
     NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,
     NAVIGATION_DASHBOARD_INIT_VIEW_PATH,
   } from '../../navigation/routes';
-  
+import moment from 'moment';
 import {getCountryCodeFormat,getPropertiesForTenant,getPropertyById,tenantSubmissionOnProperty,getMyProfile,getActiveRoute} from '../../actions';
 import styles from './style';
 import { ThemeContext, theme } from '../../theme';
@@ -57,10 +57,7 @@ class CongratsModalDashBoard extends PureComponent {
       }
     
       getPopupTimeFormat(datestring){
-    
-        const dateFull = new Date(datestring);
-        const mpam = (dateFull.getHours() >= 12) ? "PM" : "AM";
-        return dateFull.getUTCHours()+":"+dateFull.getMinutes()+ ""+mpam;
+        return moment(datestring).format("hh:mm A");
       }
     
       rejectConfirm(property_currentItem){

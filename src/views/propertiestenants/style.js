@@ -305,9 +305,11 @@ export default StyleSheet.create({
     PopupbtnWrapper:{
       flexDirection:'row',
       justifyContent:'space-between',
-      paddingVertical:20,
+      paddingVertical:15,
       paddingHorizontal:20,
-      marginBottom:isIphoneX()?20:0,
+      marginBottom:isIphoneX()?30:0,
+      borderTopWidth:.5,
+      borderColor:'#1944d7',
     },
     PopupContainer:{
       //flexDirection:'column',
@@ -336,8 +338,9 @@ export default StyleSheet.create({
       color:'#6e6e6e',
       fontFamily:'Oxygen',
       textAlign:'center',
-      lineHeight:20,
+      lineHeight:normalize(20),
       alignSelf:'center',
+      fontSize:normalize(14),
     },
     blue_color:{
       color:'#315add',
@@ -443,5 +446,19 @@ export default StyleSheet.create({
     },
     timeline:{
       height:380,width:'100%',paddingHorizontal:20,marginVertical:10
+    },
+    landDetail:{
+      color:'#315add',
+      fontFamily:'Oxygen-Bold',
+      lineHeight:normalize(18),
+      alignSelf:'center',
+      textAlign:'center',
+    },
+    selfCenter:{
+      //backgroundColor:'red',
+      //width:'auto',
+      //flexDirection:'column',
+      alignSelf:'center',
+      textAlign:'center',
     },
   });

@@ -233,9 +233,9 @@ class EditBankAccount extends React.Component {
 
                   </View>
                 </View>
-                {this.props.loading && <Spinner style={{position:"absolute",alignSelf:'center',top:"40%"}}/>}
               </ScrollView>
               {this.reanderButton()}
+              {this.props.loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
         </ImageBackground>
       );

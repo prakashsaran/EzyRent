@@ -5,6 +5,7 @@ import { FloatingAction } from "react-native-floating-action";
 import NavigationService from '../../navigation/NavigationService';
 import SampleData from '../../config/sample-data';
 import Timeline from 'react-native-timeline-flatlist';
+import moment from 'moment';
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
@@ -272,10 +273,7 @@ goToPropertyOwnerDetail(landlord_id){
   }
 
   getPopupTimeFormat(datestring){
-
-    const dateFull = new Date(datestring);
-    const mpam = (dateFull.getHours() >= 12) ? "PM" : "AM";
-    return dateFull.getUTCHours()+":"+dateFull.getMinutes()+ ""+mpam;
+    return moment(datestring).format("hh:mm A");
   }
 
   onSearchProperties(searchQuery){
@@ -367,6 +365,7 @@ goToPropertyOwnerDetail(landlord_id){
   render(){
     const theme = this.context;
     const {activeTab} = this.state
+    const {propertiesTenant,propertiesLandlord} = this.props    
       return (
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
@@ -374,7 +373,8 @@ goToPropertyOwnerDetail(landlord_id){
                 {this.renderProperties()}
                 {this.renderModelView()}
               <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addPropertyTenant()} showBackground={false} visible={activeTab==2?true:false} color={theme.colors.primary} position={'right'}/>
-
+              {propertiesTenant.loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              {propertiesLandlord.loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
       );
   }
@@ -418,7 +418,6 @@ goToPropertyOwnerDetail(landlord_id){
           keyExtractor={item => item.id}
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
-        {propertiesTenant.loading && <Spinner style={{position:"absolute",alignSelf:'center',top:"27%"}}/>}
       </Animated.View>
      )
     }
@@ -533,7 +532,6 @@ goToPropertyOwnerDetail(landlord_id){
           keyExtractor={item => item.id}
           ListFooterComponent={<View style={{paddingBottom:200}}></View>}
         />
-        {propertiesLandlord.loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
       </Animated.View>
      )
     }
@@ -589,7 +587,7 @@ goToPropertyOwnerDetail(landlord_id){
     }
   }
 
-
+ 
   descriptionBankCharge(bankCharges){
    return(
     <View>
@@ -640,9 +638,9 @@ renderModelView()
                   <ScrollView style={{height:theme.dimens.popupHeight}}>
                     <View style={styles.congrats_content(theme)}>
                       <Text style={styles.light_color}>You have been added as Tenant of </Text>
-                      <TouchableOpacity onPress={()=>this.goToPropertyDetail(property_currentItem)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}> {property_currentItem.house_number}</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.selfCenter} onPress={()=>this.goToPropertyDetail(property_currentItem)}><Text style={styles.landDetail}> {property_currentItem.house_number}</Text></TouchableOpacity>
                       <Text style={styles.light_color}> in Building {property_currentItem.building_name} by Landlord  </Text>
-                      <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.landlord_id)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.selfCenter} onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.landlord_id)}><Text style={styles.landDetail}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
                       <Text style={[styles.light_color,{fontWeight:'bold'}]}> ({getCountryCodeFormat(property_currentItem.landlord_details[0].landlord_ccd)}-{property_currentItem.landlord_details[0].landlord_mobile})</Text>
                     </View>
                     <View style={styles.congrats_content(theme)}>

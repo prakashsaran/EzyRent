@@ -230,10 +230,8 @@ class PropertiesTenants extends React.Component {
   }
 
   getPopupTimeFormat(datestring){
-
     const dateFull = new Date(datestring);
-    const mpam = (dateFull.getHours() >= 12) ? "PM" : "AM";
-    return dateFull.getUTCHours()+":"+dateFull.getMinutes()+ ""+mpam;
+    return dateFull.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})
   }
 
 

@@ -233,7 +233,7 @@ componentDidMount(){
 
   availableBuildings.push({label:"+ Add New Building",value:"add_new"})
 
-  availableBankAccounts.push({label:"+ Add New Bank Account",value:"add_new"})
+  availableBankAccounts.push({label:"+ Add Bank Account",value:"add_new"})
   
   this.setState({availableBuildings,availableBankAccounts})
   this.renderEditData();
@@ -569,7 +569,7 @@ renderHeader(){
         ref={ref => { this._rentDueEntry = ref;}}
         pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
         onChooseItem={({label,value}) => this.setState({rentDue:value})}
-        itemLabelStyle={styles.font_16}
+        itemLabelStyle={styles.font_15}
       />
     )
   }
@@ -687,7 +687,7 @@ renderHeader(){
                                     onChooseItem={({label,value}) => this.onChooseBuilding(value)}
                                     placeholderStyle={styles.font_16}
                                     items={availableBuildings}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                   />
                           </View>
 
@@ -711,7 +711,7 @@ renderHeader(){
                                         { label: 'Weekly', value: '1' },                                       
                                         { label: 'Annually', value: '4' },
                                     ]}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                   />
                             </View>
 
@@ -743,7 +743,7 @@ renderHeader(){
                                     pickerStyle={bankAccount?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     items={availableBankAccounts}
                                     placeholderStyle={styles.font_16}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                     selectedLabelStyle={styles.font_16}
                                    placeholder="Choose Bank Account"/>
                           </View>
@@ -786,12 +786,12 @@ renderHeader(){
                        <View style={styles.spacing}></View>
                     </View>
                   </ScrollView>
-                  {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
                   {this.renderModalView()}
                 </View>
               </View>
             </KeyboardAvoidingView>
             {this.reanderButton()}
+            {loading && <Spinner style={theme.typography.spinnerStyle}/>}
         </SafeAreaView>
       );
   }

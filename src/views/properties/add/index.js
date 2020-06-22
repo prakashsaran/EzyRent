@@ -149,7 +149,7 @@ setBankPickerData(bankData){
   const availableBankAccounts = allBankAccounts.map((bank,idx)=>{
     return {label:bank.name,value:bank.id}
   });
-  availableBankAccounts.push({label:"+ Add New Bank Account",value:"add_new"})
+  availableBankAccounts.push({label:"+ Add Bank Account",value:"add_new"})
   this.setState({availableBankAccounts});
 }
 componentDidMount(){  
@@ -385,7 +385,7 @@ getTotalAmount(amount,type){
       style: { borderColor: theme.colors.lightBorder }
     })
   }
-
+ 
   addBuildingSubmit(){
     const {addNewBuilding} = this.props;
     const {add_building_name,add_building_location} = this.state;
@@ -575,7 +575,7 @@ renderHeader(){
                                     onChooseItem={({label,value}) => this.onChooseBuilding(value)}
                                     items={availableBuildings}
                                     placeholderStyle={styles.font_16}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                     selectedLabelStyle={styles.font_16}
                                   />
                           </View>
@@ -599,7 +599,7 @@ renderHeader(){
                                         { label: 'Annually', value: '4' },
                                     ]}
                                     placeholderStyle={styles.font_16}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                     selectedLabelStyle={styles.font_16}
                                   />
                             </View>
@@ -627,7 +627,7 @@ renderHeader(){
                                     pickerStyle={bankAccount?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     items={availableBankAccounts}
                                     placeholderStyle={styles.font_16}
-                                    itemLabelStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_15}
                                     selectedLabelStyle={styles.font_16}
                                    placeholder="Choose Bank Account"/>
                           </View>
@@ -662,11 +662,11 @@ renderHeader(){
                        <View style={styles.spacing}></View>
                     </View>
                   </ScrollView>
-                  {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
                   {this.renderModalView()}
                 </View>
             </KeyboardAvoidingView>
             {this.reanderButton()}
+            {loading && <Spinner style={theme.typography.spinnerStyle}/>}
         </SafeAreaView>
       );
   }
@@ -694,7 +694,7 @@ renderHeader(){
         isdisabled={rentDueDisable}
         ref={ref => { this._rentDueEntry = ref;}}
         pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
-        itemLabelStyle={styles.font_16}
+        itemLabelStyle={styles.font_15}
         selectedLabelStyle={styles.font_16}
         onChooseItem={({label,value}) => this.setState({rentDue:value})}
       />
