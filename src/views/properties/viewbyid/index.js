@@ -28,6 +28,7 @@ class ViewPropertyById extends React.Component {
       super();
       this.state={
           isconfirmModalVisible:false,
+          isTenantconfirmModalVisible:false,
           mpin:undefined,
           secureTextEntry:true,
           errorMessage:null,
@@ -40,30 +41,17 @@ class ViewPropertyById extends React.Component {
     AcceptProperty(item){
         const {tenantSubmissionOnProperty,customer} = this.props
         tenantSubmissionOnProperty(item.id,"A",customer);
+        this.setState({isTenantconfirmModalVisible:false});
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
       }
     
       RejectProperty(item){
         const {tenantSubmissionOnProperty,customer,} = this.props
         tenantSubmissionOnProperty(item.id,"R",customer);
+        this.setState({isTenantconfirmModalVisible:false})
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
       }
 
-    confirmProperty(property_currentItem){
-        Alert.alert(
-            "Are you sure to Accept?",
-          "",
-          [
-            {
-              text: "REJECT",
-              onPress: () => this.RejectProperty(property_currentItem),
-              style: "cancel"
-            },
-            { text: "ACCEPT", onPress: () => this.AcceptProperty(property_currentItem) }
-          ],
-          { cancelable: false }
-        );
-    }
     PayRent(property){
          NavigationService.navigate(NAVIGATION_MORE_TRANSACTION_PAYMENT_CONFIRMATION_VIEW_PATH,{property,goBack:NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH})
     }
@@ -162,7 +150,7 @@ class ViewPropertyById extends React.Component {
             )
         } else if(property.user_role==2 && property.property_status=="A"){
             return(
-                <TouchableOpacity onPress={()=>{this.confirmProperty(property)}} style={styles.primaryBtn(theme)}>
+                <TouchableOpacity onPress={()=>this.setState({isTenantconfirmModalVisible:true})} style={styles.primaryBtn(theme)}>
                     <Text style={styles.primaryBtnText(theme)}>ACCEPT</Text>
                 </TouchableOpacity>
             )
@@ -199,6 +187,29 @@ class ViewPropertyById extends React.Component {
         return require("../../../assets/images/building_placehoder.jpg");
       }
   
+      renderTenantConfirmModal(property_currentItem){
+        const {isTenantconfirmModalVisible} = this.state
+        return (
+          <Modal onBackdropPress={()=>{this.setState({isTenantconfirmModalVisible:false})}} isVisible={isTenantconfirmModalVisible}>
+              <View style={styles.popupContainer(theme)}>
+                <Text style={styles.columntitlePop1(theme)}>Are you sure to Accept?</Text>
+                <View style={styles.fieldWrapp}>
+                </View>
+                  <View style={styles.popupBtms}>
+                    <TouchableOpacity onPress={()=>this.RejectProperty(property_currentItem)}>
+                      <Text style={styles.cancel}>REJECT</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.AcceptProperty(property_currentItem)}>
+                      <Text style={styles.ok}>ACCEPT</Text>
+                    </TouchableOpacity>
+  
+                  </View>
+              </View>
+          </Modal>
+        );
+    }
+
+
     renderConfirmModalModal(){
         const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
         return (
@@ -341,6 +352,7 @@ class ViewPropertyById extends React.Component {
                                 />*/}
                                 <View style={{height:70,width:'100%'}}></View>
                                 {this.renderConfirmModalModal()}
+                                {this.renderTenantConfirmModal(property_currentItem)}
                             </View>
                         </ScrollView>
                     </View>

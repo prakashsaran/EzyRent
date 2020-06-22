@@ -5,7 +5,7 @@ import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
-  NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
+  NAVIGATION_MORE_ADD_PROPERTIES_TENANTS_VIEW_PATH,
   NAVIGATION_MORE_MY_TENANTS_VIEW_PATH,
   NAVIGATION_MORE_MY_LANDLOADS_VIEW_PATH,
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
@@ -49,7 +49,7 @@ class MoreInit extends React.Component {
  
 
   goToAddNewProperty(){
-    NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,{goBack:NAVIGATION_MORE_INIT_VIEW_PATH});
+    NavigationService.navigate(NAVIGATION_MORE_ADD_PROPERTIES_TENANTS_VIEW_PATH,{goBack:NAVIGATION_MORE_INIT_VIEW_PATH});
   }
   goToMyTenants(){
     NavigationService.navigate(NAVIGATION_MORE_MY_TENANTS_VIEW_PATH);

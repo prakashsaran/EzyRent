@@ -13,6 +13,7 @@ import {EzyRent} from '../../../ezyrent';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {tenantSubmissionOnProperty } from '../../../actions';
+import Modal from 'react-native-modal';
 
 class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
@@ -20,7 +21,8 @@ class ViewPropertyTenant extends React.Component {
       super();
       this.state ={
           property:{},
-      }
+          isconfirmModalVisible:false
+        }
     }
 
     UNSAFE_componentWillMount(){
@@ -63,12 +65,14 @@ class ViewPropertyTenant extends React.Component {
 
     AcceptProperty(item){
         const {tenantSubmissionOnProperty,customer} = this.props
+        this.setState({isconfirmModalVisible:false})
         tenantSubmissionOnProperty(item.id,"A",customer);
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
       }
     
       RejectProperty(item){
         const {tenantSubmissionOnProperty,customer,} = this.props
+        this.setState({isconfirmModalVisible:false})
         tenantSubmissionOnProperty(item.id,"R",customer);
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH)
       }
@@ -79,22 +83,28 @@ class ViewPropertyTenant extends React.Component {
         return require("../../../assets/images/building_placehoder.jpg");
       }
   
+      renderConfirmModal(property){
+        const {isconfirmModalVisible} = this.state
+        return (
+          <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
+              <View style={styles.popupContainer(theme)}>
+                <Text style={styles.columntitlePop1(theme)}>Are you sure to Accept?</Text>
+                <View style={styles.fieldWrapp}>
+                </View>
+                  <View style={styles.popupBtms}>
+                    <TouchableOpacity onPress={()=>this.RejectProperty(property)}>
+                      <Text style={styles.cancel}>REJECT</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.AcceptProperty(property)}>
+                      <Text style={styles.ok}>ACCEPT</Text>
+                    </TouchableOpacity>
   
-    confirmProperty(property_currentItem){
-        Alert.alert(
-            "Are you sure to Accept?",
-          "",
-          [
-            {
-              text: "REJECT",
-              onPress: () => this.RejectProperty(property_currentItem),
-              style: "cancel"
-            },
-            { text: "ACCEPT", onPress: () => this.AcceptProperty(property_currentItem) }
-          ],
-          { cancelable: false }
+                  </View>
+              </View>
+          </Modal>
         );
-    }
+      }
+
     renderPayPeriod(period){
         switch(period){
           case "1":
@@ -151,7 +161,7 @@ class ViewPropertyTenant extends React.Component {
                                         {property.property_status !="A"? <Text style={styles.payTime(theme)}>{property.rent_due_text} {property.rent_date_time}</Text>:null}
                                     </View>
                                     {property.user_role ==2 &&
-                                    <TouchableOpacity onPress={()=>{this.confirmProperty(property)}} style={styles.primaryBtn(theme)}>
+                                    <TouchableOpacity onPress={()=>{this.setState({isconfirmModalVisible:true})}} style={styles.primaryBtn(theme)}>
                                         <Text style={styles.primaryBtnText(theme)}>ACCEPT</Text>
                                     </TouchableOpacity>}
                                 </View>
@@ -189,6 +199,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={{height:70,width:'100%'}}></View>
                             </View>
                         </ScrollView>
+                        {this.renderConfirmModal(property)}
                     </View>
                     </View>
                 </SafeAreaView>

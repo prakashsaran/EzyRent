@@ -12,6 +12,7 @@ import {
   } from '../../../navigation/routes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Modal from 'react-native-modal';
 import {getPropertyById,tenantSubmissionOnProperty } from '../../../actions';
 import { EzyRent } from '../../../ezyrent';   
 class ViewPropertyTenant extends React.Component {
@@ -19,7 +20,8 @@ class ViewPropertyTenant extends React.Component {
     constructor(props){
       super();
       this.state ={
-        property:{}
+        property:{},
+        isconfirmModalVisible:false
       }
     }
 
@@ -29,6 +31,19 @@ class ViewPropertyTenant extends React.Component {
         this.setState({property})
         getPropertyById(property.id);
     }
+    componentDidMount(){
+      console.log("ok data componentDidMount")
+    }
+    UNSAFE_componentWillReceiveProps(penextProps){
+      const {property_currentItem} = this.props
+      if(penextProps.property_currentItem !=property_currentItem){
+        const {property_currentItem} = penextProps;
+        this.setState({property:property_currentItem})
+         // console.log("property_currentItem UNSAFE_componentWillReceiveProps",JSON.stringify(penextProps.property_currentItem))
+      }
+
+    }
+
     goToPropertyOwnerDetail(landlord_id){
         NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_OWNER_VIEW_PATH,{landlord_id})
     }
@@ -84,31 +99,41 @@ class ViewPropertyTenant extends React.Component {
 
       AcceptProperty(item){
         const {tenantSubmissionOnProperty,customer} = this.props
+        this.setState({isconfirmModalVisible:false})
         tenantSubmissionOnProperty(item.id,"A",customer);
         NavigationService.goBack();
       }
     
       RejectProperty(item){
         const {tenantSubmissionOnProperty,customer,} = this.props
+        this.setState({isconfirmModalVisible:false})
         tenantSubmissionOnProperty(item.id,"R",customer);
         NavigationService.goBack();
       }
-    
-    confirmProperty(property_currentItem){
-        Alert.alert(
-            "Are you sure to Accept?",
-          "",
-          [
-            {
-              text: "REJECT",
-              onPress: () => this.RejectProperty(property_currentItem),
-              style: "cancel"
-            },
-            { text: "ACCEPT", onPress: () => this.AcceptProperty(property_currentItem) }
-          ],
-          { cancelable: false }
+
+      
+    renderConfirmModal(property_currentItem){
+        const {isconfirmModalVisible} = this.state
+        return (
+          <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
+              <View style={styles.popupContainer(theme)}>
+                <Text style={styles.columntitlePop1(theme)}>Are you sure to Accept?</Text>
+                <View style={styles.fieldWrapp}>
+                </View>
+                  <View style={styles.popupBtms}>
+                    <TouchableOpacity onPress={()=>this.RejectProperty(property_currentItem)}>
+                      <Text style={styles.cancel}>REJECT</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.AcceptProperty(property_currentItem)}>
+                      <Text style={styles.ok}>ACCEPT</Text>
+                    </TouchableOpacity>
+  
+                  </View>
+              </View>
+          </Modal>
         );
-    }
+      }
+  
 
     renderFastImage(property_image){
       if(property_image && property_image !=""){
@@ -121,6 +146,7 @@ class ViewPropertyTenant extends React.Component {
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         const {property} = this.state
+        console.log("property_loading",property_loading)
         if(property_loading || !Object.keys(property_currentItem).length){
             return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
           }
@@ -160,7 +186,7 @@ class ViewPropertyTenant extends React.Component {
                                         {property_currentItem.property_status !="A"? <Text style={styles.payTimebld(theme)}>{property_currentItem.rent_due_text} {property_currentItem.rent_date_time}</Text>:null}
                                     </View>
                                     {property_currentItem.property_status =="A"?
-                                    <TouchableOpacity onPress={()=>{this.confirmProperty(property_currentItem)}} style={styles.primaryBtn(theme)}>
+                                    <TouchableOpacity onPress={()=>{this.setState({isconfirmModalVisible:true})}} style={styles.primaryBtn(theme)}>
                                         <Text style={styles.primaryBtnText(theme)}>ACCEPT</Text>
                                     </TouchableOpacity>
                                      :
@@ -203,6 +229,7 @@ class ViewPropertyTenant extends React.Component {
                                 <View style={{height:70,width:'100%'}}></View>
                             </View>
                         </ScrollView>
+                        {this.renderConfirmModal(property_currentItem)}
                     </View>
                     </View>
                 </SafeAreaView>

@@ -19,6 +19,7 @@ import {
   EZYRENT_ADD_BANK_ACCOUNTS,
   EZYRENT_GET_PROPERTIES_AS_TENANT,
   EZYRENT_GET_SINGLE_PROPERTY,
+  EZYRENT_SINGLE_PROPERTY_LOADING,
   EZYRENT_GET_RENTS_AS_LANDLORD_LOADING,
   EZYRENT_GET_RENTS_AS_LANDLORD,
   EZYRENT_GET_RENTS_AS_TENANT,
@@ -494,15 +495,15 @@ export const refreshPropertiesForTenant  = async (dispatch) => {
 }
 
 export const getPropertyById = (propId) => async (dispatch) => {
-    dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : true});
+    dispatch({type:EZYRENT_SINGLE_PROPERTY_LOADING,payload : true});
     try{
     const response =  await EzyRent.admin.getPropertyById(propId);
     if(response && response.data){
       dispatch({type:EZYRENT_GET_SINGLE_PROPERTY,payload : response.data[0]});
     }
-    dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : false});
+    dispatch({type:EZYRENT_SINGLE_PROPERTY_LOADING,payload : false});
   }catch(e){
-    dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : false});
+    dispatch({type:EZYRENT_SINGLE_PROPERTY_LOADING,payload : false});
     console.log(e)
   }
 }
