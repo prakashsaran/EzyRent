@@ -326,6 +326,7 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
       const response = await EzyRent.admin.addPropertyNoneImage(formData);
       if(response && response.success){
         refreshPropertiesForLandlord(dispatch);
+        NavigationService.goBack();
         NavigationService.navigate(NAVIGATION_PROPERTIES_TENANTS_VIEW_PATH);
         if(user){
           refreshMyProfile(user,dispatch);
