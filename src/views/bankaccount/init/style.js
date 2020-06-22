@@ -5,9 +5,11 @@ import { normalize } from "../../../components";
 export default StyleSheet.create({
     container: {
       flex: 1,
+      paddingBottom:0,
     },
     rectviewcustom:{
       paddingTop:0,
+      paddingBottom:90,
     },
     titleWrapper:{
       width:'90%',
@@ -163,7 +165,7 @@ export default StyleSheet.create({
       width:150,
       padding:10,
       elevation:5,
-
+      zIndex:90,
   },
     edit:{
       color:theme.colors.propertyHeading,
@@ -175,4 +177,14 @@ export default StyleSheet.create({
     delete:{
 
     },
+    editDelete:{
+      paddingVertical:5,
+      paddingHorizontal:10,
+      height:40,
+      //marginTop:7,
+      flexDirection:'row',
+      zIndex:9,
+      //backgroundColor:'red',
+      width:'100%',
+    }
   });

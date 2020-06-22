@@ -69,7 +69,7 @@ class MyBankaccount extends React.Component {
     return bankData.map((item,inx)=>{
       
       return(
-            <View key={inx} style={[styles.shadow,{zIndex:100-inx}]}>
+            <View key={inx} style={[styles.shadow,{zIndex:200-inx}]}>
                 <View style={styles.MoreLinkswrap}>
                   <View style={{flexDirection:'row',justifyContent:'flex-start',width:'87%',overflow:'hidden'}}>
                     <Image style={styles.User_image} source={require('../../../assets/images/bank-account-icon.png')}></Image>
@@ -88,10 +88,10 @@ class MyBankaccount extends React.Component {
                        <Image style={activeAction==item.id?styles.active_three_dots_light:styles.three_dots_light} source={require('../../../assets/images/three-dot-light.png')}></Image>
                     </TouchableOpacity>
                     {activeAction==item.id && <View style={styles.hideShow}>
-                      <TouchableOpacity onPress={()=>this.editBankAccount(item)} style={{paddingVertical:5,paddingHorizontal:10,height:40}}>
+                      <TouchableOpacity onPress={()=>this.editBankAccount(item)} style={styles.editDelete}>
                         <Text style={styles.edit}>Edit</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={()=>this.deleteBankAccount(item.id)} style={{paddingVertical:5,paddingHorizontal:10,height:40}}>
+                      <TouchableOpacity onPress={()=>this.deleteBankAccount(item.id)} style={styles.editDelete}>
                         <Text style={styles.edit}>Delete</Text>
                       </TouchableOpacity>
                     </View>}
@@ -104,8 +104,16 @@ class MyBankaccount extends React.Component {
   renderPlaceHolder(){
     const {DeviceHeight} = this.state
     return(
-      <ImageBackground source={require("../../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
-    );
+        <View style={{width:"100%",minHeight:DeviceHeight-140,backgroundColor:'#f8f8f8',alignItems:'center',flexDirection:'row',justifyContent:'center',}}>
+          <View style={{alignSelf:'center',flexDirection:'column',}}>
+            <Image resizeMode={'contain'} source={require("../../../assets/images/no-data.png")}> 
+            </Image>
+            <Text style={{alignSelf:'center',width:'100%',textAlign:'center',color:'#bfbfbf',marginTop:5,}}>
+              No data available
+            </Text>
+          </View>
+        </View>
+      );
   }
 
   render(){

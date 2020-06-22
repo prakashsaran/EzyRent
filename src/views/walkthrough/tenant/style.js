@@ -13,7 +13,12 @@ export default StyleSheet.create({
   container: theme => ({
     flex: 1,
     backgroundColor:theme.colors.primBackgroundColor,
+    position:'relative',
+    height:'100%',
   }),
+  ScrollView:{
+    height:'100%',
+  },
   skipwalkthrough:{
     alignItems:'flex-start',
     padding:10,
@@ -33,6 +38,7 @@ export default StyleSheet.create({
   },
   itemcontainer: theme =>({
     flexDirection:'column',
+    position:'relative',
     marginTop:theme.spacing.extraLarge*2,
   }),
   landlordProperties: theme =>({
@@ -90,6 +96,8 @@ export default StyleSheet.create({
     marginVertical:theme.spacing.extraLarge*3,
     width:50,
     alignSelf:'center',
+    position:'absolute',
+    bottom:normalize(79),
   })
 
 });

@@ -59,14 +59,14 @@ const onChangePhoneNumber = (number) =>{
     return (
       <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
             <View style={styles.popupContainer(theme)}>
-              <Text style={styles.columntitlePop1(theme)}>YOUR ACCOUNT SETUP IS PENDING. DO YOU WISH TO COMPLETE?</Text>
+              <Text style={styles.columntitlePop1(theme)}>Complete Account</Text>
+              <Text style={styles.columntitlePopDesc(theme)}>Your account setup is pending. Do you wish to complete?</Text>
                 <View style={styles.popupBtms}>
                   <TouchableOpacity onPress={()=>{setConfirmModalVisible(false)}}>
-                    <Text style={styles.cancel}>CANCEL</Text>
+                    <Text style={styles.cancel}>Cancel</Text>
                   </TouchableOpacity>
-
                   <TouchableOpacity onPress={()=>{reStartSignUp()}}>
-                    <Text style={{color:'#315add'}}>OK</Text>
+                    <Text style={styles.ok}>Ok</Text>
                   </TouchableOpacity>
 
                 </View>

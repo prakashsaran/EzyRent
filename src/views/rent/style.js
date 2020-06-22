@@ -111,17 +111,20 @@ export default StyleSheet.create({
       borderColor:theme.colors.secondry,
       width:'50%',
     }),
+    itemNameWrap:theme =>({
+      flexDirection:'column',
+      marginTop:theme.spacing.large,
+      paddingRight:10,
+    }),
     itemNameAct:theme =>({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
       fontSize:normalize(16),
-      width:'50%',
+      lineHeight:normalize(19),
+      width:'51%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
-      marginTop:theme.spacing.large,
       paddingLeft:20,
-      //alignSelf:'flex-end',
-      //paddingRight:30,
     }),
     properties:theme =>({
       backgroundColor:theme.colors.thirdBackgrounColor,
@@ -132,7 +135,8 @@ export default StyleSheet.create({
     loopitem:{
       width:'100%',
       marginVertical:5,
-      borderRadius:9,
+      borderRadius:5,
+      overflow:'hidden',
       elevation: 3,
       shadowOffset: {
         height: 0,
@@ -145,7 +149,7 @@ export default StyleSheet.create({
     loopitembg:{
       width:'100%',
       minHeight:170,
-      borderRadius:2
+      borderRadius:5
     },
     loopitembgcltg:{
       width:'100%',
@@ -156,10 +160,10 @@ export default StyleSheet.create({
       fontFamily:theme.typography.fontFamilyMontserratMedium,
       fontWeight:theme.typography.fontWeightRegular,
       fontSize:normalize(16),
-      width:'75%',
+      width:'70%',
       alignSelf:'center',
       color:theme.colors.propertyHeading,
-      marginTop:theme.spacing.large,
+      //marginTop:theme.spacing.large,
       paddingLeft:20,
       alignSelf:'flex-end',
     }),
@@ -232,8 +236,9 @@ export default StyleSheet.create({
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     }),
-    markwrap:{alignItems:'flex-end',width:'50%',alignSelf:'flex-end',marginRight:20,},
+    markwrap:{alignItems:'flex-end',width:'50%',alignSelf:'flex-end',marginRight:20,flexWrap:'wrap'},
     marktext:theme =>({
+      backgroundColor:'red',
       color:theme.colors.secondry,
       fontFamily:theme.typography.fontFamilyOxygenBold,
       fontWeight:theme.typography.fontWeightSemiBold,
@@ -251,5 +256,8 @@ export default StyleSheet.create({
       position:'absolute',
       bottom:'26%',
       right:-5
+    },
+    due_label2:{
+      bottom:'1%',
     },
   });

@@ -58,10 +58,12 @@ export default StyleSheet.create({
     fontFamily:theme.typography.primaryFont,
     fontSize:theme.typography.font_13,
     color:theme.colors.lightBlack,
+    borderColor:'#3159dd',
+    borderBottomWidth:.5,
   }),
   caption:theme=>({
     color: theme.colors.primBtnTextColor,
-    fontSize: isLessMarshmallow()?normalize(18):normalize(19),
+    fontSize: isLessMarshmallow()?normalize(16):normalize(18),
     fontFamily: theme.typography.fontFamilyOxygen,
   }),
 

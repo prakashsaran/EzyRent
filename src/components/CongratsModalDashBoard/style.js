@@ -143,6 +143,8 @@ export default StyleSheet.create({
       paddingVertical:15,
       paddingHorizontal:20,
       marginBottom:isIphoneX()?30:0,
+      borderTopWidth:.5,
+      borderColor:'#1944d7',
     },
     PopupContainer:{
       //flexDirection:'column',
@@ -163,7 +165,9 @@ export default StyleSheet.create({
       textAlign:'center',
       flexDirection:'row',
       justifyContent:'center',
-      width:'100%',
+      alignItems:'center',
+      alignSelf:'center',
+      width:'auto',
       flexWrap:'wrap',
       paddingHorizontal:20,
     }),
@@ -171,8 +175,16 @@ export default StyleSheet.create({
       color:'#6e6e6e',
       fontFamily:'Oxygen',
       textAlign:'center',
-      lineHeight:20,
+      lineHeight:normalize(20),
       alignSelf:'center',
+      fontSize:normalize(14),
+    },
+    landDetail:{
+      color:'#315add',
+      fontFamily:'Oxygen-Bold',
+      lineHeight:normalize(18),
+      alignSelf:'center',
+      textAlign:'center',
     },
     alertMsg:{
       color:'#6e6e6e',
@@ -319,5 +331,12 @@ export default StyleSheet.create({
     },
     timeline:{
       minHeight:380,width:'100%',paddingHorizontal:20,marginVertical:10,
+    },
+    selfCenter:{
+      //backgroundColor:'red',
+      //width:'auto',
+      //flexDirection:'column',
+      alignSelf:'center',
+      textAlign:'center',
     },
   });

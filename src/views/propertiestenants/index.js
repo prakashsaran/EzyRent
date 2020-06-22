@@ -394,7 +394,15 @@ goToPropertyOwnerDetail(landlord_id){
   renderPlaceHolder(){
     const {DeviceHeight} = this.state
     return(
-      <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+      <View style={{width:"100%",minHeight:DeviceHeight-140,backgroundColor:'#f8f8f8',alignItems:'center',flexDirection:'row',justifyContent:'center',}}>
+        <View style={{alignSelf:'center',flexDirection:'column',}}>
+          <Image resizeMode={'contain'} source={require("../../assets/images/no-data.png")}> 
+          </Image>
+          <Text style={{alignSelf:'center',width:'100%',textAlign:'center',color:'#bfbfbf',marginTop:5,}}>
+            No data available
+          </Text>
+        </View>
+      </View>
     );
   }
 
@@ -422,7 +430,7 @@ goToPropertyOwnerDetail(landlord_id){
         <Animated.View key={indx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgIn} style={styles.loopitembgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
-            <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailTenant(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
@@ -468,7 +476,7 @@ goToPropertyOwnerDetail(landlord_id){
         <Animated.View key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembgcltg} style={styles.loopitembgcltg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembgcltgIn} style={styles.loopitembgcltgIn} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg_light.png')}>
-            <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text></View></TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)}><View style={styles.itemNameWrap(theme)}><Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text><Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text></View></TouchableOpacity>
                <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} style={styles.nextscreen(theme)}><Image style={styles.arrow_right} source={require('../../assets/images/arrow_right.png')}></Image></TouchableOpacity>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>

@@ -180,9 +180,9 @@ class CongratsModalDashBoard extends PureComponent {
                       <ScrollView style={{height:theme.dimens.popupHeight}}>
                         <View style={styles.congrats_content(theme)}>
                           <Text style={styles.light_color}>You have been added as Tenant of </Text>
-                          <TouchableOpacity onPress={()=>this.goToPropertyDetail(property_currentItem)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}> {property_currentItem.house_number}</Text></TouchableOpacity>
+                          <TouchableOpacity style={styles.selfCenter}  onPress={()=>this.goToPropertyDetail(property_currentItem)}><Text style={styles.landDetail}> {property_currentItem.house_number}</Text></TouchableOpacity>
                           <Text style={styles.light_color}> in Building {property_currentItem.building_name} by Landlord  </Text>
-                          <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.landlord_id)}><Text style={{color:'#315add',fontFamily:'Oxygen-Bold',}}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
+                          <TouchableOpacity onPress={()=>this.goToPropertyOwnerDetail(property_currentItem.landlord_id)}><Text style={styles.landDetail}>{property_currentItem.landlord_details[0].landlord_name}</Text></TouchableOpacity>
                           <Text style={[styles.light_color,{fontWeight:'bold'}]}> ({getCountryCodeFormat(property_currentItem.landlord_details[0].landlord_ccd)}-{property_currentItem.landlord_details[0].landlord_mobile})</Text>
                         </View>
                         <View style={styles.congrats_content(theme)}>

@@ -38,29 +38,29 @@ const appStart = () =>{
   	    <TouchableOpacity style={styles.skipwalkthrough} onPress={()=>{appStart()}}>
           <Text style={styles.skipText(theme)}>Skip</Text>
         </TouchableOpacity>
-        <View style={styles.itemcontainer}>
-        <Image
-          source={require('../../../assets/images/walkthrough_landloard.png')}
-          resizeMode="contain"
-          style={styles.landloardimage}
-        />
-        <Text style={styles.landlordProperties(theme)}>
-            As Landlord Add &amp; Manage Properties/Tenants
-        </Text>
-         <Text style={styles.pageInfo(theme)}>
-            Landlords can manage tenants using the EzyRent app eco-system. Add
-            tenant details like tenant mobile number, house number, building
-            name, total amount to be collected from tenant, and so on.
+        <View style={styles.itemcontainer(theme)}>
+          <Image
+            source={require('../../../assets/images/walkthrough_landloard.png')}
+            resizeMode="contain"
+            style={styles.landloardimage}
+          />
+          <Text style={styles.landlordProperties(theme)}>
+              As Landlord Add &amp; Manage Properties/Tenants
           </Text>
-          <View style={styles.walkIndicator}>
-            <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
-            <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
-          </View>
+           <Text style={styles.pageInfo(theme)}>
+              Landlords can manage tenants using the EzyRent app eco-system. Add
+              tenant details like tenant mobile number, house number, building
+              name, total amount to be collected from tenant, and so on.
+            </Text>
         </View>
       </ScrollView>
+        <View style={styles.walkIndicator}>
+          <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
+          <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
+        </View>
          <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>onClickBtn()}>
             <Text style={theme.typography.caption}>NEXT</Text>
-          </TouchableOpacity>
+         </TouchableOpacity>
     </SafeAreaView>
   );
 }

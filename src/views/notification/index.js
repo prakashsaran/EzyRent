@@ -144,7 +144,15 @@ class NotificationList extends React.Component {
   renderPlaceHolder(){
     const {DeviceHeight} = this.state
     return(
-      <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+      <View style={{width:"100%",minHeight:DeviceHeight-140,backgroundColor:'#f8f8f8',alignItems:'center',flexDirection:'row',justifyContent:'center',}}>
+        <View style={{alignSelf:'center',flexDirection:'column',}}>
+          <Image resizeMode={'contain'} source={require("../../assets/images/no-data.png")}> 
+          </Image>
+          <Text style={{alignSelf:'center',width:'100%',textAlign:'center',color:'#bfbfbf',marginTop:5,}}>
+            No data available
+          </Text>
+        </View>
+      </View>
     );
   }
   renderNotifications(){

@@ -297,7 +297,15 @@ class RentList extends React.Component {
   renderPlaceHolder(){
     const {DeviceHeight} = this.state
     return(
-      <ImageBackground source={require("../../assets/images/rzyrent_empty_placeholder.jpg")} resizeMode={'cover'} imageStyle={{width:"100%",height:DeviceHeight-200}} style={{width:"100%",height:DeviceHeight,backgroundColor:theme.colors.placeHolderBackgroundColor}}/>
+      <View style={{width:"100%",minHeight:DeviceHeight-180,backgroundColor:'#f8f8f8',alignItems:'center',flexDirection:'row',justifyContent:'center',}}>
+        <View style={{alignSelf:'center',flexDirection:'column',}}>
+          <Image resizeMode={'contain'} source={require("../../assets/images/no-data.png")}> 
+          </Image>
+          <Text style={{alignSelf:'center',width:'100%',textAlign:'center',color:'#bfbfbf',marginTop:5,}}>
+            No data available
+          </Text>
+        </View>
+      </View>
     );
   }
 
@@ -322,7 +330,8 @@ class RentList extends React.Component {
           <View key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-                 <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
+                 <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number}</Text>
+                 <Text style={styles.itemName(theme)} numberOfLines={1}>{item.building_name}</Text>
                  <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.status_text=="DUE"?
@@ -354,7 +363,10 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'cover'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
+               <View style={styles.itemNameWrap(theme)}>
+                <Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text>
+                <Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text>
+              </View>
                <View style={styles.propertygnInfo}>
                   <View style={styles.propInforowleft}>
                     {item.status_text=="DUE"?
@@ -371,7 +383,7 @@ class RentList extends React.Component {
 
                     <View style={styles.propInfoAttrb}>
                     {item.status_text=="DUE"?
-                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
+                     <TouchableOpacity style={{flexWrap:'wrap',width:'100%'}}><Text style={styles.propItemattrvalueError(theme)}><Text style={{fontWeight:'bold', color:theme.colors.errorColor}}>{item.total_amount}</Text> due on {item.date} <Text style={styles.marktext(theme)}>PAY&nbsp;NOW </Text><Image style={{width:13,height:13,marginLeft:6}} resizeMode={'contain'} source={require('../../assets/images/arrow_next.png')}></Image></Text></TouchableOpacity>
                     :
                       <Text style={styles.propItemattrvalue(theme)}>Paid <Text style={{fontWeight:'bold', color:theme.colors.primary}}>{item.total_amount}</Text> on {item.date}</Text>
                     }
@@ -395,14 +407,16 @@ class RentList extends React.Component {
           <TouchableOpacity onPress={()=>this.ProPertyDetailLandlord(item)} key={inx} style={styles.loopitem}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
               <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-               <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
+               <View style={styles.itemNameWrap(theme)}>
+                <Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text>
+                <Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text>
+              </View>
                 <View style={styles.propertygnInfo}>
-
                     <View style={styles.propInforowleft}>
                       {item.status_text=="DUE"?
-                      <Image style={styles.due_label} source={require("../../assets/images/dues_label.png")}></Image>
+                      <Image style={[styles.due_label,styles.due_label2]} source={require("../../assets/images/dues_label.png")}></Image>
                       :
-                      <Image style={styles.due_label} source={require("../../assets/images/paid_label.png")}></Image>
+                      <Image style={[styles.due_label,styles.due_label2]} source={require("../../assets/images/paid_label.png")}></Image>
                       }
                     </View>
 
@@ -435,7 +449,10 @@ class RentList extends React.Component {
         <TouchableOpacity onPress={()=>this.goToTransactionDetail(item)} key={inx} style={styles.loopitem}>
           <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={this.fasterImageRender(item)}>
             <ImageBackground imageStyle={styles.loopitembg} style={styles.loopitembg} resizeMode={'stretch'} source={require('../../assets/images/properties_item_bg.png')}>
-              <Text style={styles.itemName(theme)} numberOfLines={3}>{item.house_number} {item.building_name}</Text>
+              <View style={styles.itemNameWrap(theme)}>
+                <Text style={styles.itemName(theme)} numberOfLines={2}>{item.house_number}</Text>
+                <Text style={styles.itemName(theme)} numberOfLines={1}>at {item.building_name}</Text>
+              </View>
               <View style={styles.propertygnInfo}>
 
                   <View style={styles.propInforowleft}>

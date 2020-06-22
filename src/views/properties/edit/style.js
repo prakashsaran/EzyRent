@@ -14,7 +14,9 @@ export default StyleSheet.create({
       backgroundColor:theme.colors.secondry,
     }),
     headerContainer:theme=>({
-      height:theme.dimens.headerWithBannerHeight,
+      //minHeight:normalize(120),
+      position:'relative',
+      zIndex:1,
     }),
 
     headerContext:{
@@ -23,26 +25,26 @@ export default StyleSheet.create({
       alignContent:'center',
       alignItems:'flex-start',
       padding:theme.spacing.large,
-      height:theme.dimens.headerWithBannerHeight/2,
+      //height:theme.dimens.headerWithBannerHeight/2,
       //marginVertical:10,
       //marginHorizontal:20,
     },
-    headerBanner:theme=>({
-      backgroundColor:theme.colors.primBackgroundColor,
-      padding:theme.spacing.large,
+     headerBanner:theme=>({
+      //backgroundColor:theme.colors.primBackgroundColor,
+      padding:0,
       width:'100%',
-      height:theme.dimens.headerWithBannerHeight/2,
+      //height:theme.dimens.headerWithBannerHeight/2,
       //marginTop:theme.dimens.headerWithBannerHeight/4,
-      position:'relative',
     }),
     headerBannerImage : theme =>({
-      height:theme.dimens.headerWithBannerHeight-normalize(70),
-      borderRadius:9,
+      height:theme.dimens.headerWithBannerHeight-normalize(50),
+      borderRadius:5,
       width:'100%',
-      position:'absolute',
+      position:'relative',
       alignSelf:'center',
-      top:isIphoneX() ? -(theme.dimens.headerWithBannerHeight/3)+25:-(theme.dimens.headerWithBannerHeight/3)+35,
-      paddingBottom:10,
+      //top:isIphoneX() ? -(theme.dimens.headerWithBannerHeight/3)+25:-(theme.dimens.headerWithBannerHeight/3)+35,\
+      marginBottom:10,
+      zIndex:1,
     }),
    pageTitle: theme =>({
       color:theme.colors.primaryScreenTitle,
@@ -58,14 +60,17 @@ export default StyleSheet.create({
     },
     formcontainer:{
       minHeight:theme.dimens.containerHeightWithBannerHeader-70,
-      height:theme.dimens.containerHeightWithBannerHeader-70,
+      //height:theme.dimens.containerHeightWithBannerHeader-70,
       backgroundColor:theme.colors.primBackgroundColor,
+      position:'relative',
+      zIndex:0,
     },
     formColumnWrapp:{
       padding:20,
       width:'100%',
       alignItems:'center',
       flexDirection:'column',
+      paddingTop:0,
     },
     formcolumn:{
       flexDirection: "column",
@@ -170,15 +175,37 @@ export default StyleSheet.create({
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
+      //backgroundColor:'red',
     }),
-    currencySymbl:theme=>({
-      position:'absolute',
-      left:0,
-      bottom:isLessMarshmallow?normalize(6):normalize(9),
+    textInputStyle2:theme=>({
+      width:'100%',
+      borderColor:theme.colors.secondry,
+      borderBottomWidth:0.7,
       color:theme.colors.primaryTitleColor,
       fontFamily:theme.typography.secondryFont,
       fontSize:normalize(16),
       fontWeight:theme.typography.fontWeightRegular,
+      paddingVertical:5,
+      paddingHorizontal:0,
+      //height:normalize(30),
+      //lineHeight:normalize(20),
+      //backgroundColor:'red',
+    }),
+    currencySymbl:theme=>({
+      //position:'absolute',
+      //left:0,
+      //bottom:isLessMarshmallow?normalize(9):normalize(9),
+      color:theme.colors.primaryTitleColor,
+      fontFamily:theme.typography.secondryFont,
+      fontSize:normalize(16),
+      //lineHeight:normalize(20),
+      fontWeight:theme.typography.fontWeightRegular,
+      paddingVertical:5,
+      paddingHorizontal:0,
+      paddingTop:normalize(9),
+      //height:normalize(30),
+      //backgroundColor:'red',
+      //paddingBottom:normalize(1),
     }),
     textInputStyleSec:theme=>({
       width:'100%',
@@ -190,6 +217,18 @@ export default StyleSheet.create({
       fontWeight:theme.typography.fontWeightRegular,
       paddingVertical:5,
       paddingHorizontal:0,
+    }),
+    textInputStyleSec2:theme=>({
+      width:'88%',
+      borderColor:theme.colors.lightBorder,
+      borderBottomWidth:0.7,
+      color:theme.colors.primaryTitleColor,
+      fontFamily:theme.typography.secondryFont,
+      fontSize:normalize(16),
+      fontWeight:theme.typography.fontWeightRegular,
+      paddingVertical:5,
+      paddingHorizontal:0,
+      height:normalize(30),
     }),
     dropdownPicker:theme=>({
 	      borderWidth:0,
@@ -267,10 +306,12 @@ export default StyleSheet.create({
     edit_icon:{
       width:40,
       height:40,
-      padding:10,
       position:'absolute',
-      right:60,
-      top:-20,
+      right:65,
+      top:0,
+      padding:10,
+      //backgroundColor:'red',
+      zIndex:99,
     },
     delete_icon:{
       right:20,
@@ -326,6 +367,7 @@ export default StyleSheet.create({
       currencyLabel:{
         flexDirection:'row',
         justifyContent:'flex-start',
+        alignItems:'stretch'
       },
       pickerSelected: theme=>({
         width:'100%',
@@ -362,5 +404,14 @@ export default StyleSheet.create({
       },
       font_16:{
         fontSize:normalize(16),
+      },
+      popOver:{
+        height:130,
+        position:'absolute',
+        top:-60,
+        left:0,
+        backgroundColor:'#1061de',
+        width:'100%',
+        zIndex:0,
       },
 });

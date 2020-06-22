@@ -16,7 +16,7 @@ export default StyleSheet.create({
       paddingHorizontal:normalize(20),
       marginBottom:normalize(20),
     },
-    imageLeft:{
+    imageLeft:{ 
       width:normalize(100),
       height:normalize(100),
     },
@@ -148,21 +148,38 @@ export default StyleSheet.create({
       },
       shadowColor: "rgba(0,0,0,1)",
       shadowOpacity: 0.35,
-      paddingVertical:20,
-      paddingHorizontal:20,
+      paddingVertical:30,
+      paddingHorizontal:30,
     }),
     columntitlePop1:theme=>({
       marginTop:0,
+      fontFamily:'Oxygen-Bold',
+      fontSize:normalize(18),
+    }),
+    columntitlePopDesc:theme=>({
+      marginTop:20,
+      fontSize:normalize(16),
+      fontFamily:'Montserrat-Regular',
     }),
     popupBtms:{
       width:'100%',
       flexDirection:'row',
       flexWrap:'wrap',
-      justifyContent:'space-between',
+      justifyContent:'flex-end',
       paddingTop:30,
     },
     pop_wrap:{
       //backgroundColor:'#fff',
     },
-
+    cancel:{
+      color:'#315add',
+      fontSize:normalize(15),
+      fontFamily:'Montserrat-Regular',
+    },
+    ok:{
+      marginLeft:25,
+      fontSize:normalize(15),
+      color:'#315add',
+      fontFamily:'Montserrat-Regular',
+    },
   });

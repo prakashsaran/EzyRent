@@ -117,7 +117,9 @@ class ViewPropertyTenant extends React.Component {
       return (
         <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
             <View style={styles.popupContainer(theme)}>
-              <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
+              <Text style={styles.columntitlePop1(theme)}>Are you sure to delete?</Text>
+              <Text style={styles.columntitlePopDesc(theme)}>Please confirm deletion with your MPIN.</Text>
+              <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Enter MPIN</Text>
               <View style={styles.fieldWrapp}>
               <View style={styles.pincontainer(theme)}>
                 <OTPInputView
@@ -137,11 +139,10 @@ class ViewPropertyTenant extends React.Component {
               {errorMessage && <Text style={styles.errorMessage(theme)}>{errorMessage}</Text>}
                 <View style={styles.popupBtms}>
                   <TouchableOpacity onPress={()=>this.setState({isconfirmModalVisible:false,errorMessage:null,mpin:""})}>
-                    <Text style={styles.cancel}>CANCEL</Text>
+                    <Text style={styles.cancel}>Cancel</Text>
                   </TouchableOpacity>
-
                   <TouchableOpacity onPress={()=>this.deleteSubmitProperty()}>
-                    <Text style={{color:'#315add'}}>OK</Text>
+                    <Text style={styles.ok}>Ok</Text>
                   </TouchableOpacity>
 
                 </View>

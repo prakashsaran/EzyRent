@@ -115,7 +115,8 @@ signLink: theme =>({
     width:'62%',
     borderColor:theme.colors.secondry,
   }),
-  popupContainer: theme=>({
+  // popup design 
+    popupContainer: theme=>({
       width:'100%',
       backgroundColor: "rgba(230, 230, 230,1)",
       borderRadius: 5,
@@ -127,20 +128,38 @@ signLink: theme =>({
       },
       shadowColor: "rgba(0,0,0,1)",
       shadowOpacity: 0.35,
-      paddingVertical:20,
-      paddingHorizontal:10,
+      paddingVertical:30,
+      paddingHorizontal:30,
     }),
-  columntitlePop1:theme=>({
+    columntitlePop1:theme=>({
       marginTop:0,
+      fontFamily:'Oxygen-Bold',
+      fontSize:normalize(18),
     }),
-  popupBtms:{
+    columntitlePopDesc:theme=>({
+      marginTop:20,
+      fontSize:normalize(16),
+      fontFamily:'Montserrat-Regular',
+    }),
+    popupBtms:{
       width:'100%',
       flexDirection:'row',
       flexWrap:'wrap',
-      justifyContent:'space-between',
-      paddingTop:40,
+      justifyContent:'flex-end',
+      paddingTop:30,
+    },
+    pop_wrap:{
+      //backgroundColor:'#fff',
     },
     cancel:{
-      color:'#6c6c6c',
+      color:'#315add',
+      fontSize:normalize(15),
+      fontFamily:'Montserrat-Regular',
+    },
+    ok:{
+      marginLeft:25,
+      fontSize:normalize(15),
+      color:'#315add',
+      fontFamily:'Montserrat-Regular',
     },
 });

@@ -455,19 +455,6 @@ renderHeader(){
             <Text style={styles.pageTitle(theme)}>Add Property/Tenant</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.headerBanner(theme)}>
-          {propertyImage?
-            <Image style={styles.headerBannerImage(theme)} source={{uri:propertyImage.uri}}/>
-            :
-            <Image style={styles.headerBannerImage(theme)} source={require('../../../assets/images/building_placehoder.jpg')}/>
-          }
-            <TouchableOpacity style={styles.edit_icon} onPress={()=>this.browseImage()}>
-              <Image style={{width:25,height:25}} source={require('../../../assets/images/edit-transparent.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.edit_icon,styles.delete_icon]}  onPress={()=>this.setState({propertyImage:null})}>
-             <Image style={{width:25,height:25}} source={require('../../../assets/images/delete-transparent.png')}/>
-            </TouchableOpacity>
-        </View>
       </Animated.View>
     )
   }
@@ -491,15 +478,28 @@ renderHeader(){
         rentduesLabel,
         inputFocused
       } = this.state
+      const { propertyImage } = this.state
       return (
         <SafeAreaView style={styles.container(theme)}>
-        <KeyboardAvoidingView style={{flex: 1,backgroundColor:inputFocused?'#fff':'transparent'}} behavior={this.keyboardBehavior} >
-              <View>
-                {!inputFocused && this.renderHeader()}
+        <KeyboardAvoidingView style={{flex: 1,backgroundColor:inputFocused?'transparent':'transparent'}} behavior={this.keyboardBehavior} >
+                {this.renderHeader()}
                 <View style={styles.formcontainer}>
-                  <ScrollView showsVerticalScrollIndicator={false} style={{height:Dimensions.get('window').height-200}} >
+                <View style={styles.popOver}></View>
+                  <ScrollView showsVerticalScrollIndicator={false} style={{height:Dimensions.get('window').height-140,}} >
                     <View style={styles.formColumnWrapp}>
-
+                      <View style={styles.headerBanner(theme)}>
+                        {propertyImage?
+                          <Image style={styles.headerBannerImage(theme)} source={{uri:propertyImage.uri}}/>
+                          :
+                          <Image style={styles.headerBannerImage(theme)} source={require('../../../assets/images/building_placehoder.jpg')}/>
+                        }
+                          <TouchableOpacity style={styles.edit_icon} onPress={()=>this.browseImage()}>
+                            <Image style={{width:30,height:30}} source={require('../../../assets/images/edit-transparent.png')}/>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={[styles.edit_icon,styles.delete_icon]}  onPress={()=>this.setState({propertyImage:null})}>
+                           <Image style={{width:30,height:30}} source={require('../../../assets/images/delete-transparent.png')}/>
+                          </TouchableOpacity>
+                      </View>
                        <View style={styles.formcolumn}>
                           <Text style={styles.columntitle(theme)}>TENANT INFORMATION</Text>
                           <View style={styles.fieldWrapp} >
@@ -574,6 +574,8 @@ renderHeader(){
                                     onChooseItem={({label,value}) => this.onChooseBuilding(value)}
                                     items={availableBuildings}
                                     placeholderStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_16}
+                                    selectedLabelStyle={styles.font_16}
                                   />
                           </View>
 
@@ -596,6 +598,8 @@ renderHeader(){
                                         { label: 'Annually', value: '4' },
                                     ]}
                                     placeholderStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_16}
+                                    selectedLabelStyle={styles.font_16}
                                   />
                             </View>
 
@@ -608,9 +612,9 @@ renderHeader(){
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Total amount to be collected from tenant  *</Text>
                              <Text style={styles.tooltipDsc(theme)}>Includes all charges like rent, maintenance etc </Text>
-                             <View style={styles.currencyLabel}>
-                              <Text style={styles.currencySymbl(theme)}>INR -</Text>
-                              <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(35)}]} placeholder={'Ex: 10000'}/>
+                               <View style={styles.currencyLabel}>
+                                  <Text style={styles.currencySymbl(theme)}>INR -</Text>
+                                  <TextInput ref={(ref) => this._collectingAmountEntry = ref} keyboardType={'numeric'} onChangeText={(collectingAmount) =>{this.setState({collectingAmount})}} value={collectingAmount} autoCorrect={false} style={[collectingAmount?styles.textInputStyle(theme):styles.textInputStyleSec(theme),{paddingLeft:normalize(40),marginLeft:normalize(-30)}]} placeholder={'Ex: 10000'}/>
                               </View>
                           </View>
                           <View style={styles.fieldWrapp}>
@@ -622,6 +626,8 @@ renderHeader(){
                                     pickerStyle={bankAccount?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
                                     items={availableBankAccounts}
                                     placeholderStyle={styles.font_16}
+                                    itemLabelStyle={styles.font_16}
+                                    selectedLabelStyle={styles.font_16}
                                    placeholder="Choose Bank Account"/>
                           </View>
                        </View>
@@ -658,9 +664,8 @@ renderHeader(){
                   {loading && <Spinner style={{position:"absolute",alignSelf:'center',bottom:"50%"}}/>}
                   {this.renderModalView()}
                 </View>
-              </View>
             </KeyboardAvoidingView>
-            {!inputFocused && this.reanderButton()}
+            {this.reanderButton()}
         </SafeAreaView>
       );
   }
@@ -688,6 +693,8 @@ renderHeader(){
         isdisabled={rentDueDisable}
         ref={ref => { this._rentDueEntry = ref;}}
         pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
+        itemLabelStyle={styles.font_16}
+        selectedLabelStyle={styles.font_16}
         onChooseItem={({label,value}) => this.setState({rentDue:value})}
       />
     )

@@ -26,25 +26,25 @@ const startApp = () =>{
 }
   return (
     <SafeAreaView style={styles.container(theme)}>
-      <ScrollView>
+      <ScrollView style={styles.ScrollView}>
         <View style={styles.itemcontainer(theme)}>
-        <Image
-          source={require('../../../assets/images/walkthrough_tenant.png')}
-          resizeMode="contain"
-          style={styles.landloardimage}
-        />
-        <Text style={styles.landlordProperties(theme)}>
-            As Tenants Pay Rent
-        </Text>
-         <Text style={styles.pageInfo(theme)}>
-            Tenants can pay rent using the EzyRent app eco-system.
+          <Image
+            source={require('../../../assets/images/walkthrough_tenant.png')}
+            resizeMode="contain"
+            style={styles.landloardimage}
+          />
+          <Text style={styles.landlordProperties(theme)}>
+              As Tenants Pay Rent
           </Text>
-          <View style={styles.walkIndicator(theme)}>
-          <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
-          <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
-          </View>
+           <Text style={styles.pageInfo(theme)}>
+              Tenants can pay rent using the EzyRent app eco-system.
+            </Text>
         </View>
       </ScrollView>
+          <View style={styles.walkIndicator(theme)}>
+            <Image style={{width:15,height:15}} source={require("../../../assets/images/indicator_inactive.png")}></Image>
+            <Image style={{width:15,height:15}} source={require("../../../assets/images/round.png")}></Image>
+          </View>
           <TouchableOpacity style={styles.btncontainer(theme)} onPress={()=>startApp()}>
             <Text style={theme.typography.caption}>LET`S START</Text>
           </TouchableOpacity>

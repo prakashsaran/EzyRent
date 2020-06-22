@@ -254,8 +254,10 @@ class EditMyProfile extends React.Component {
     }
     return(
       <Modal isVisible={this.state.mpinPopup} style={styles.pop_wrap}>
-        <View style={styles.popupContainer(theme)}>
-          <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MOBILE OTP</Text>
+        <View style={styles.popupContainer(theme)}>          
+        <Text style={styles.columntitlePop1(theme)}>Confirm Your Mobile OTP</Text>
+          <Text style={styles.columntitlePopDesc(theme)}>We have sent you an OTP on your registered mobile. Please enter the OTP below.</Text>
+
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
               <OTPInputView
@@ -269,10 +271,10 @@ class EditMyProfile extends React.Component {
           </View>
           <View style={styles.popupBtms}>
             <TouchableOpacity onPress={()=>this.setState({mpinPopup:false,appPin:""})}>
-                <Text style={styles.cancel}>CANCEL</Text>
+                <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.mpinVerify()}>
-                <Text style={{color:'#315add'}}>SAVE</Text>
+                <Text style={styles.ok}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -288,7 +290,8 @@ class EditMyProfile extends React.Component {
     return(
       <Modal isVisible={this.state.emailPopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
-          <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
+          <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
+          <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile OTP</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
              <View style={styles.pincontainer(theme)}>
@@ -306,7 +309,7 @@ class EditMyProfile extends React.Component {
                 </TouchableOpacity>
               </View>
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR MOBILE OTP</Text>
+          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Mobile OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -319,10 +322,10 @@ class EditMyProfile extends React.Component {
           </View>
           <View style={styles.popupBtms}>
             <TouchableOpacity onPress={()=>this.setState({emailPopup:false})}>
-                <Text style={styles.cancel}>CANCEL</Text>
+                <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.emailAddressVerify()}>
-                <Text style={{color:'#315add'}}>SAVE</Text>
+                <Text style={styles.ok}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -338,7 +341,9 @@ class EditMyProfile extends React.Component {
     return(
       <Modal isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
-          <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
+          <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
+          <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile & email OTP</Text>
+          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Enter MPIN</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
              <View style={styles.pincontainer(theme)}>
@@ -356,7 +361,7 @@ class EditMyProfile extends React.Component {
                 </TouchableOpacity>
               </View>
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR MOBILE OTP</Text>
+          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Mobile OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -367,7 +372,7 @@ class EditMyProfile extends React.Component {
                 codeInputFieldStyle={styles.underlineStyleBase(theme)}
               />
           </View>
-          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>CONFIRM YOUR EMAIL OTP</Text>
+          <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Email OTP</Text>
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -380,10 +385,10 @@ class EditMyProfile extends React.Component {
           </View>
           <View style={styles.popupBtms}>
             <TouchableOpacity onPress={()=>this.setState({mobilePopup:false})}>
-                <Text style={styles.cancel}>CANCEL</Text>
+                <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.mobileNumberVerify()}>
-                <Text style={{color:'#315add'}}>SAVE</Text>
+                <Text style={styles.ok}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -14,10 +14,14 @@ export default StyleSheet.create({
   container: theme => ({
     flex: 1,
     backgroundColor:theme.colors.primBackgroundColor,
+    height:'100%',
   }),
   skipwalkthrough:{
     alignItems:'flex-start',
     padding:10,
+    position:'absolute',
+    left:0,
+    top:15,
   },
   ScrollView:{
     //height:'100%',
@@ -35,12 +39,13 @@ export default StyleSheet.create({
     height:isLessMarshmallow()?200:330,
     alignSelf:'center',
   },
-  itemcontainer:{
+  itemcontainer:theme =>({
     flexDirection:'column',
     position:'relative',
     //height:'90%',
     overflow:'visible',
-  },
+    marginTop:theme.spacing.extraLarge*2,
+  }),
   landlordProperties: theme =>({
     color:theme.colors.secondry,
     textAlign:'center',
@@ -96,7 +101,8 @@ export default StyleSheet.create({
     marginVertical:normalize(20),
     width:50,
     alignSelf:'center',
-
+    position:'absolute',
+    bottom:normalize(120),
   }
 
 });
