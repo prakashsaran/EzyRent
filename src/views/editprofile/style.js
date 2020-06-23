@@ -164,6 +164,11 @@ export default StyleSheet.create({
       right:0,
       top:0,
     },
+    visibilityPopupIconWrapp:{
+      position:'absolute',
+      right:0,
+      top:-10,
+    },
     visibilityIcon:{
       width:25,
       height:20,

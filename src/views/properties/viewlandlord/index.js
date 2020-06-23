@@ -16,6 +16,7 @@ import {getPropertyById,getCountryCodeFormat,deleteProperty,getMoneyFormat } fro
 import Modal from 'react-native-modal';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { EzyRent } from '../../../ezyrent';   
+import {Spinner} from '../../../components';
 const secureTextHidden = '../../../assets/images/securetext_hidden.png';
 const secureTextShow = '../../../assets/images/securetext_show.png';
 
@@ -173,7 +174,7 @@ class ViewPropertyTenant extends React.Component {
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         if(property_loading || !Object.keys(property_currentItem).length){
-            return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
+          return (<SafeAreaView style={styles.container(theme)}><Spinner style={theme.typography.spinnerStyle}/></SafeAreaView>)
           }
         return (
             <ImageBackground style={{width:'100%',height:'100%'}}

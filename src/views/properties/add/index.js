@@ -275,7 +275,7 @@ getBankCharge(amount,percentage){
 }
 getBankChargeMoneyFormat(amount,percentage){
   const totalBnkCharge = this.getBankCharge(amount,percentage);
-  return this.getMoneyFormat(totalBnkCharge,0);
+  return this.getMoneyFormat(totalBnkCharge,2);
 }
 getTotalAmount(amount,type){
   const serviceCharge = 28;
@@ -283,17 +283,17 @@ getTotalAmount(amount,type){
   switch(type){
     case 1: 
     const totalAmountInc1c =  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(Netbankingcharge));
-    return this.getMoneyFormat(totalAmountInc1c,0);
+    return this.getMoneyFormat(totalAmountInc1c,2);
     break;
     case 2: 
     const b2getBankCharge = this.getBankCharge(amount,1.25);
     const totalAmountInc2c =  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(b2getBankCharge));
-    return this.getMoneyFormat(totalAmountInc2c,0);
+    return this.getMoneyFormat(totalAmountInc2c,2);
     break;
     case 3: 
     const b3getBankCharge = this.getBankCharge(amount,1.95);
     const totalAmountInc3c =  Math.round(parseInt(amount)+parseInt(serviceCharge)+parseInt(b3getBankCharge));
-    return this.getMoneyFormat(totalAmountInc3c,0);
+    return this.getMoneyFormat(totalAmountInc3c,2);
     break;
   }
 }
@@ -636,7 +636,7 @@ renderHeader(){
                           <Text style={styles.columntitle(theme)}>PAYMENT INFORMATION</Text>
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>A. Total Amount to be Collected from Tenant</Text>
-                             <Text style={styles.responseValue(theme)}>INR {this.getMoneyFormat(collectingAmount.replace(",",""),0)}</Text>
+                             <Text style={styles.responseValue(theme)}>INR {this.getMoneyFormat(collectingAmount.replace(",",""),2)}</Text>
                           </View>
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>B. Bank Charges</Text>

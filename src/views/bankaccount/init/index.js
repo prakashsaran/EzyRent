@@ -11,7 +11,7 @@ import {
   NAVIGATION_MORE_INIT_VIEW_PATH,
 } from '../../../navigation/routes';
 import { FloatingAction } from "react-native-floating-action";
-
+import {Spinner} from '../../../components';
 import { getBanks,deleteBank } from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -119,9 +119,6 @@ class MyBankaccount extends React.Component {
   render(){
     const theme = this.context;
     const {bankData,loading} = this.props;
-    if(loading){
-      return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={'#315ADD'} size={'large'} /></View>)
-    }
     if(!Object.keys(bankData).length){
       return(
         <ImageBackground style={{width:'100%',height:'100%',backgroundColor:'#fff'}}>
@@ -136,6 +133,7 @@ class MyBankaccount extends React.Component {
            {this.renderPlaceHolder()}
            <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
            </SafeAreaView>
+           {loading && <Spinner style={theme.typography.spinnerStyle}/>}
         </ImageBackground>
       )
     }
@@ -159,6 +157,7 @@ class MyBankaccount extends React.Component {
                 </TouchableWithoutFeedback>
               </ScrollView>
               <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
+              {loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
         </ImageBackground>
       );

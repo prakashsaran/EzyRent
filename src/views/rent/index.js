@@ -319,11 +319,13 @@ class RentList extends React.Component {
       return this.renderPlaceHolder();
     }
     return(
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.properties(theme)}>
-          {this.renderPayingItems(tenant_items)}
-        </View>
-      </ScrollView>
+      <View style={{width:'100%',height:'100%'}}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.properties(theme)}>
+            {this.renderPayingItems(tenant_items)}
+          </View>
+        </ScrollView>
+      </View>
     )
   }
 
@@ -420,9 +422,9 @@ class RentList extends React.Component {
                 <View style={styles.propertygnInfo}>
                     <View style={styles.propInforowleft}>
                       {item.status_text=="DUE"?
-                      <Image style={[styles.due_label,styles.due_label2]} source={require("../../assets/images/dues_label.png")}></Image>
+                      <Image style={[styles.due_label]} source={require("../../assets/images/dues_label.png")}></Image>
                       :
-                      <Image style={[styles.due_label,styles.due_label2]} source={require("../../assets/images/paid_label.png")}></Image>
+                      <Image style={[styles.due_label]} source={require("../../assets/images/paid_label.png")}></Image>
                       }
                     </View>
 
@@ -508,11 +510,13 @@ class RentList extends React.Component {
       return this.renderPlaceHolder();
     }
     return(
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.properties(theme)}>
-          {this.renderCollectingItems(landlord_items)}
-        </View>
-      </ScrollView>
+      <View style={{width:'100%',height:'100%'}}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.properties(theme)}>
+            {this.renderCollectingItems(landlord_items)}
+          </View>
+        </ScrollView>
+      </View>
     )
   }
 

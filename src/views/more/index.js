@@ -180,14 +180,14 @@ class MoreInit extends React.Component {
     return(
       <Modal isVisible={this.state.isVisibleConfirmDialog} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
-          <Text style={styles.columntitlePop1(theme)}>Logout Confirmation</Text>
-          <Text style={styles.columntitlePopDesc(theme)}>Are you sure you want to logout?</Text>
+          <Text style={styles.columntitlePop1(theme)}>Logout</Text>
+          <Text style={styles.columntitlePopDesc(theme)}>Are you sure want to logout?</Text>
           <View style={styles.popupBtms}>
             <TouchableOpacity onPress={()=>this.setState({isVisibleConfirmDialog:false})}>
                 <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>{this.setState({isVisibleConfirmDialog:false}),logout()}}>
-                <Text style={styles.ok}>Ok</Text>
+                <Text style={styles.ok}>Logout</Text>
             </TouchableOpacity>
           </View>
         </View>

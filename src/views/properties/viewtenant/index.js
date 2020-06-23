@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import {getPropertyById,tenantSubmissionOnProperty } from '../../../actions';
 import { EzyRent } from '../../../ezyrent';   
+import {Spinner} from '../../../components';
 class ViewPropertyTenant extends React.Component {
     static contextType = ThemeContext;
     constructor(props){
@@ -148,9 +149,10 @@ class ViewPropertyTenant extends React.Component {
         const {property} = this.state
         console.log("property_loading",property_loading)
         if(property_loading || !Object.keys(property_currentItem).length){
-            return (<View style={{alignSelf:'center',justifyContent:'center',width:'100%',height:'100%'}}><ActivityIndicator color={theme.colors.secondry} size={'large'} /></View>)
-          }
-        return (
+          return (<SafeAreaView style={styles.container(theme)}><Spinner style={theme.typography.spinnerStyle}/></SafeAreaView>)
+        }
+          
+          return (
             <ImageBackground style={{width:'100%',height:'100%'}}
              resizeMode={'cover'} imageStyle={{width:'100%',height:300}} 
              //source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}

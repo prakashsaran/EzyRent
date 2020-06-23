@@ -39,6 +39,7 @@ import {
   EZYRENT_SET_CURRENT_LANDLORD_PROFILE,
   EZYRENT_BUILDING_SET_SELECTED,
   EZYRENT_AUTHENTICATION_LOADING,
+  EZYRENT_PROPERTIES_AS_LANDLORD_RESET_LIST,
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -318,6 +319,7 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
           refreshMyProfile(user,dispatch);
         }
         DropDownHolder.alert('success', '', response.message)
+        dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_RESET_LIST,payload : new Date()});
       }
       if(response.error && response.error_message){
         DropDownHolder.alert('error', '', response.error_message)
@@ -333,6 +335,7 @@ export const addProperty = (data,media=null,user=null) => async (dispatch) => {
           refreshMyProfile(user,dispatch);
         }
         DropDownHolder.alert('success', '', response.message)
+        dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_RESET_LIST,payload : new Date()});
       }
     }
     dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : false});

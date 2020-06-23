@@ -54,7 +54,7 @@ class PropertiesTenants extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
-    const {customer,getPropertiesForLandlord} = this.props;
+    const {customer,getPropertiesForLandlord,propertiesLandlord} = this.props;
     const {searchQuery} = this.state
     if(nextProps.customer!==customer){
       const updatedUser = nextProps.customer;
@@ -69,6 +69,9 @@ class PropertiesTenants extends React.Component {
           this.setState({AccountType:"U"});
         }
         getPropertiesForLandlord(searchQuery,0,10);
+    }
+    if(nextProps.propertiesLandlord.resetListview != propertiesLandlord.resetListview && propertiesLandlord.items.length > 0 && this.state.activeTab ==2){
+      this.refs.componentCollectingRef.scrollToOffset({x: 0, y: 0, animated: true})
     }
   }
   componentDidUpdate(prevProps, prevState, snapshot){
@@ -526,6 +529,7 @@ goToPropertyOwnerDetail(landlord_id){
      return (
       <Animated.View style={styles.properties(theme)}>
         <FlatList
+          ref={"componentCollectingRef"} 
           style={{minHeight:Dimensions.get('window').height,paddingHorizontal:1}}
           data={propertiesLandlord.items}
           renderItem={({ item,index }) => this.renderCollectingItems(item,index)}
@@ -666,7 +670,7 @@ renderModelView()
                             titleStyle={[styles.banktitle(theme),{marginTop:-14,marginLeft:0}]}
                             descriptionStyle={[styles.payTime(theme),{marginTop:0}]}
                             data={[
-                                {time: '05:34', title: 'Amount (Includes Rent, Maintenace etc)', description:this.descriptionLoopItem(property_currentItem.total_amount_display,property_currentItem.rent_period_id), icon: require('../../assets/images/step-round.png')},
+                                {time: '05:34', title: 'Amount (Includes Rent, Maintenance etc)', description:this.descriptionLoopItem(property_currentItem.total_amount_display,property_currentItem.rent_period_id), icon: require('../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Bank charges', description: this.descriptionBankCharge(property_currentItem.rent_split_up.bank_charges), icon: require('../../assets/images/step-round.png')},
                                 {time: '07:17', title: 'Service Charges', description: property_currentItem.rent_split_up.service_charge, icon: require('../../assets/images/step-round.png')},
                             ]}
@@ -681,7 +685,7 @@ renderModelView()
                       <Text style={styles.paymType}>on using Debit Card </Text>
                       <Text style={styles.total_amount_price}>{property_currentItem.rent_split_up.total_amount.credit_card.amount}</Text>
                       <Text style={styles.paymType}>on using Credit Card </Text>
-                      <Text style={styles.total_amount_light}>(Rent Amount + Bank charge + Service Charge)</Text>
+                      <Text style={styles.total_amount_light}>(Amount + Bank charge + Service Charge)</Text>
                     </View>
                   </ScrollView>
                   <View style={styles.PopupbtnWrapper}>
@@ -735,7 +739,7 @@ PropertiesTenants.defaultProps = {
   loading: false,
   status:false,
   customer:null,
-  propertiesLandlord:{items: [],refreshing: false,error: "",success: "",loading: false,},
+  propertiesLandlord:{items: [],refreshing: false,error: "",success: "",loading: false,resetListview:""},
   propertiesTenant:{items: [],refreshing: false,error: "",success: "",loading: false,},
   property_currentItem: {},
   property_loading: false,

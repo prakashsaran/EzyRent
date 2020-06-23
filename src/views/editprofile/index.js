@@ -62,7 +62,7 @@ class EditMyProfile extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { customer,updating } = this.props
     if(nextProps.updating!==updating){
-      currentData = nextProps.updating || {}
+     const currentData = nextProps.updating || {}
       if(currentData.hasOwnProperty("email")){
         this.setState({emailPopup:true});
       }
@@ -270,7 +270,7 @@ class EditMyProfile extends React.Component {
               />
           </View>
           <View style={styles.popupBtms}>
-            <TouchableOpacity onPress={()=>this.setState({mpinPopup:false,appPin:""})}>
+            <TouchableOpacity onPress={()=>{this.setState({mpinPopup:false,appPin:"",errorValue:null})}}>
                 <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.mpinVerify()}>
@@ -304,7 +304,7 @@ class EditMyProfile extends React.Component {
                   onCodeFilled = {(code => {this.setState({verifyMpin:code})})}
                   codeInputFieldStyle={styles.underlineStyleBase(theme)}
                 />
-                <TouchableOpacity style={styles.visibilityIconWrapp} onPress={()=>{this.setState({secureTextEntry:!secureTextEntry})}}>
+                <TouchableOpacity style={styles.visibilityPopupIconWrapp} onPress={()=>{this.setState({secureTextEntry:!secureTextEntry})}}>
                   <Image style={styles.visibilityIcon} source={secureTextEntry?require(secureTextHidden):require(secureTextShow)}/>
                 </TouchableOpacity>
               </View>
@@ -321,7 +321,7 @@ class EditMyProfile extends React.Component {
               />
           </View>
           <View style={styles.popupBtms}>
-            <TouchableOpacity onPress={()=>this.setState({emailPopup:false})}>
+            <TouchableOpacity onPress={()=>{this.setState({emailPopup:false,errorValue:null})}}>
                 <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.emailAddressVerify()}>
@@ -333,7 +333,7 @@ class EditMyProfile extends React.Component {
     )
   }
 
-  renderPopupMobilePopupChange(){
+  renderPopupMobileNumberChange(){
     const {mobilePopup,secureTextEntry,errorValue} = this.state
     if(!mobilePopup){
       return null;
@@ -356,7 +356,7 @@ class EditMyProfile extends React.Component {
                   onCodeFilled = {(code => {this.setState({verifyMpin:code})})}
                   codeInputFieldStyle={styles.underlineStyleBase(theme)}
                 />
-                <TouchableOpacity style={styles.visibilityIconWrapp} onPress={()=>{this.setState({secureTextEntry:!secureTextEntry})}}>
+                <TouchableOpacity style={styles.visibilityPopupIconWrapp} onPress={()=>{this.setState({secureTextEntry:!secureTextEntry})}}>
                   <Image style={styles.visibilityIcon} source={secureTextEntry?require(secureTextHidden):require(secureTextShow)}/>
                 </TouchableOpacity>
               </View>
@@ -384,7 +384,7 @@ class EditMyProfile extends React.Component {
               />
           </View>
           <View style={styles.popupBtms}>
-            <TouchableOpacity onPress={()=>this.setState({mobilePopup:false})}>
+            <TouchableOpacity onPress={()=>{this.setState({mobilePopup:false,errorValue:null})}}>
                 <Text style={styles.cancel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>this.mobileNumberVerify()}>
@@ -482,9 +482,9 @@ class EditMyProfile extends React.Component {
                 </View>
                 {this.renderPopupMpinChange()}
                 {this.renderPopupEmailPopupChange()}
-                {this.renderPopupMobilePopupChange()}
+                {this.renderPopupMobileNumberChange()}
               </ScrollView>
-              {!loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              {loading && <Spinner style={theme.typography.spinnerStyle}/>}
           </SafeAreaView>
         </ImageBackground>
       );

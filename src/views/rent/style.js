@@ -131,6 +131,7 @@ export default StyleSheet.create({
       width:'100%',
       minHeight:dvcHeight-150,
       padding:10,
+      paddingBottom:100,
     }),
     loopitem:{
       width:'100%',

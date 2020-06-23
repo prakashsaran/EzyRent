@@ -37,6 +37,7 @@ export const EZYRENT_BUILDING_SET_SELECTED = 'ezyrent-building-set-selected';
 // PROPERTIES AS LANDLORD CONTROLLERS
 export const EZYRENT_PROPERTIES_AS_LANDLORD_LOADING = 'ezyrent-properties-as-landlord-loading';
 export const EZYRENT_GET_PROPERTIES_AS_LANDLORD = 'ezyrent-get-properties-as-landlord';
+export const EZYRENT_PROPERTIES_AS_LANDLORD_RESET_LIST = 'ezyrent-get-properties-as-landlord-reset-list';
 
 // PROPERTIES AS TENANT CONTROLLERS
 export const EZYRENT_PROPERTIES_AS_TENANT_LOADING = 'ezyrent-properties-as-tenant-loading';

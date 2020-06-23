@@ -62,7 +62,7 @@ class EditMyProfile extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { customer,updating } = this.props
     if(nextProps.updating!==updating){
-      currentData = nextProps.updating || {}
+     const currentData = nextProps.updating || {}
       if(currentData.hasOwnProperty("email")){
         this.setState({emailPopup:true});
       }
