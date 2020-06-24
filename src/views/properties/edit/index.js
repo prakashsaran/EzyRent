@@ -553,6 +553,8 @@ renderHeader(){
           placeholder={rentduesLabel}
           defaultValue={rentDue}
           ref={ref => { this._rentDueEntry = ref;}}
+          placeholderStyle={styles.font_16}
+          selectedLabelStyle={styles.font_16}
           pickerStyle={rentDue?styles.pickerSelected(theme):styles.pickerUnSelected(theme)}
           onSeleteItem={(rentDue) =>this.setState({rentDue})}
           />

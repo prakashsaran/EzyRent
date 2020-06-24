@@ -40,7 +40,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>To access your contact list for auto fiel tenant information</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MONTSERRAT-BLACK_0.TTF</string>

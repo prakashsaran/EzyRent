@@ -102,7 +102,7 @@ export default StyleSheet.create({
     width:50,
     alignSelf:'center',
     position:'absolute',
-    bottom:normalize(120),
+    bottom:normalize(100),
   }
 
 });

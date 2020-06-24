@@ -14,6 +14,7 @@
 		0611A38487F544EDA3FDE171 /* ezyrent-footer-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */; };
 		065C21D92F1E4A6796F1C33C /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D23C093E15F3455499C6B09D /* right-arrow.png */; };
 		07E9683ACC3A4406BD1EB67F /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EF792FCF0694F13BF5DDB36 /* Montserrat-Medium.ttf */; };
+		0ABA869438BF40419915690B /* user_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = 171C272A74324DF9800BEEEC /* user_ellipse.png */; };
 		0AE67EDA60BE409683D08291 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = C68843B218E3470081D142EB /* arrow_left.png */; };
 		0BBD8A5DEEE04864BEE4058F /* sample_image_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D33B979C2246DEA4700C42 /* sample_image_2.png */; };
 		0C61F2D13DDC4B18B0F1AFE8 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4B3C560A61C4647B07C027C /* Montserrat-SemiBoldItalic.ttf */; };
@@ -67,6 +68,7 @@
 		57730604C3184C5EBDF96FEE /* james.png in Resources */ = {isa = PBXBuildFile; fileRef = 86D3F5DB657A42B5BA5892D5 /* james.png */; };
 		57FE4396D4F042C2A85AE4C0 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C1D9576C4EE1A8367A39 /* Montserrat-Bold.ttf */; };
 		5BB185A85D424F188901CEBE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5CD6D5DC0694BEAABA3392A /* Montserrat-Regular.ttf */; };
+		5FD51BB64E004FE09735E79A /* rzyrent_empty_placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */; };
 		61F5E8B809A9BE412204B960 /* libPods-EzyRent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF21C216D617409F70D66C6 /* libPods-EzyRent.a */; };
 		6553D6B2072B491795914760 /* edit-white.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D53D4F6DE4586987B04EA /* edit-white.png */; };
 		65BA1C25DC904009932BCBD8 /* sample_image_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7DAA0612774D60B4D99E8F /* sample_image_3.png */; };
@@ -101,6 +103,7 @@
 		9FF6C68B1B90449BB68BA159 /* dash-bar-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E8055FCD2E4CB1A10CC58B /* dash-bar-line.png */; };
 		A620625F9D8F4CBBA8F0594F /* property_view_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FE7086420B9A41838280B9CB /* property_view_bg.png */; };
 		AC5B36F4FBA743A29030460A /* three-dot-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 031A3F79FFB1491AB92CCD68 /* three-dot-light.png */; };
+		AD350D8BDDCD4A5F97D7FA5F /* building_placehoder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */; };
 		AFC72E064267410FA738D6EA /* log-out.png in Resources */ = {isa = PBXBuildFile; fileRef = B5A3BC3BBB474B7CBE4E1569 /* log-out.png */; };
 		B3ACF9805ADC4EDCB5F61B4A /* paid_label.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DFD79879764BFEB8E45FDA /* paid_label.png */; };
 		B6617B1DD3CE47B1A09A1169 /* add_properties.png in Resources */ = {isa = PBXBuildFile; fileRef = 04628F43674547E2AAF9B23A /* add_properties.png */; };
@@ -139,9 +142,6 @@
 		FC39690C9CC94280829F3E2B /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 202630596B1E48B7B89C2590 /* address.png */; };
 		FC6AA41FA4F340B98DA71B73 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A5129BBE37154612A2B9CF76 /* download.png */; };
 		FF2ABB91B37F43E8B9A7C7B5 /* nav_notifications_active.png in Resources */ = {isa = PBXBuildFile; fileRef = F563B397FA964D17BB550EFD /* nav_notifications_active.png */; };
-		AD350D8BDDCD4A5F97D7FA5F /* building_placehoder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */; };
-		5FD51BB64E004FE09735E79A /* rzyrent_empty_placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */; };
-		0ABA869438BF40419915690B /* user_ellipse.png in Resources */ = {isa = PBXBuildFile; fileRef = 171C272A74324DF9800BEEEC /* user_ellipse.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +188,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EzyRent/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EzyRent/main.m; sourceTree = "<group>"; };
 		15FA79BF09F145B8BADA9EBC /* nav_property_inactive.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = nav_property_inactive.png; path = ../src/assets/images/nav_property_inactive.png; sourceTree = "<group>"; };
+		171C272A74324DF9800BEEEC /* user_ellipse.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = user_ellipse.png; path = ../src/assets/images/user_ellipse.png; sourceTree = "<group>"; };
 		18656544246E462200DC7015 /* EzyRent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = EzyRent.entitlements; path = EzyRent/EzyRent.entitlements; sourceTree = "<group>"; };
 		18656545246E465300DC7015 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		189F228F60AA4003A9DD8B55 /* search.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = search.png; path = ../src/assets/images/search.png; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 		2CA7B4CC73CA4A9DBEFB4298 /* bkp_double_tick.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bkp_double_tick.png; path = ../src/assets/images/bkp_double_tick.png; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* EzyRent-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EzyRent-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* EzyRent-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EzyRent-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = rzyrent_empty_placeholder.jpg; path = ../src/assets/images/rzyrent_empty_placeholder.jpg; sourceTree = "<group>"; };
 		2DF0293ACDFD4FF68E7B7A31 /* ezyrent-footer-icon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "ezyrent-footer-icon.png"; path = "../src/assets/images/ezyrent-footer-icon.png"; sourceTree = "<group>"; };
 		2F957FD415B9437282B6017A /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-LightItalic.ttf"; path = "../src/assets/fonts/Montesrrat/Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
 		323EC4A453D54EA3801BBA31 /* MONTSERRAT-BOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-BOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-BOLDITALIC_0.TTF"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		364DDA48BFD948F3AFF751CC /* MONTSERRAT-EXTRALIGHTITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRALIGHTITALIC_0.TTF"; sourceTree = "<group>"; };
 		3C058C24F82B43BFA4DDE1BF /* dashboard_add_properties.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = dashboard_add_properties.png; path = ../src/assets/images/dashboard_add_properties.png; sourceTree = "<group>"; };
 		3D0EBCF4753544BD80D6357B /* MONTSERRAT-THINITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-THINITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-THINITALIC_0.TTF"; sourceTree = "<group>"; };
+		3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = building_placehoder.jpg; path = ../src/assets/images/building_placehoder.jpg; sourceTree = "<group>"; };
 		3FA6B984B8D24E519835BBA9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		410DA23F7CC30B794BECAF3E /* libPods-EzyRent-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EzyRent-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4185ABE599106F560864CF4E /* Pods-EzyRent-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EzyRent-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EzyRent-tvOSTests/Pods-EzyRent-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -349,9 +352,6 @@
 		FB7A8E6B0E514ED2BC547CA8 /* arrowdown_picker.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = arrowdown_picker.png; path = ../src/assets/images/arrowdown_picker.png; sourceTree = "<group>"; };
 		FE7086420B9A41838280B9CB /* property_view_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = property_view_bg.png; path = ../src/assets/images/property_view_bg.png; sourceTree = "<group>"; };
 		FF07DAD081BB41F6BFF67C20 /* MONTSERRAT-EXTRABOLDITALIC_0.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MONTSERRAT-EXTRABOLDITALIC_0.TTF"; path = "../src/assets/fonts/Montserrat/MONTSERRAT-EXTRABOLDITALIC_0.TTF"; sourceTree = "<group>"; };
-		3E0E4477FEB64D2C99A12302 /* building_placehoder.jpg */ = {isa = PBXFileReference; name = "building_placehoder.jpg"; path = "../src/assets/images/building_placehoder.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2D6033F27297494C823D3317 /* rzyrent_empty_placeholder.jpg */ = {isa = PBXFileReference; name = "rzyrent_empty_placeholder.jpg"; path = "../src/assets/images/rzyrent_empty_placeholder.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		171C272A74324DF9800BEEEC /* user_ellipse.png */ = {isa = PBXFileReference; name = "user_ellipse.png"; path = "../src/assets/images/user_ellipse.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1306,7 +1306,7 @@
 				CODE_SIGN_ENTITLEMENTS = EzyRent/EzyRent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = HMZ9APRZAU;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1315,7 +1315,7 @@
 				);
 				INFOPLIST_FILE = EzyRent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1340,11 +1340,11 @@
 				CODE_SIGN_ENTITLEMENTS = EzyRent/EzyRent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = HMZ9APRZAU;
 				INFOPLIST_FILE = EzyRent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
