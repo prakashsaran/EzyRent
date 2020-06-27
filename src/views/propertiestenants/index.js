@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList, ActivityIndicator,Animated } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions,Alert,FlatList, ActivityIndicator,Animated,TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FloatingAction } from "react-native-floating-action";
 import NavigationService from '../../navigation/NavigationService';
 import SampleData from '../../config/sample-data';
 import Timeline from 'react-native-timeline-flatlist';
+import NetInfo from "@react-native-community/netinfo";
+import Spinner from 'react-native-loading-spinner-overlay';
 import moment from 'moment';
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
@@ -23,12 +25,13 @@ import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { EzyRent } from '../../ezyrent';
 import {  getPropertiesForLandlord, getPropertiesForTenant,getPropertyById,getCountryCodeFormat,tenantSubmissionOnProperty } from '../../actions';
-import { Spinner} from '../../components';
+import { DropDownHolder} from '../../components';
 class PropertiesTenants extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
     super();
     this.state={
+      networkAvailable:true,
       visibleSearch:false,
       payingRent:[],
       collectingRent:[],
@@ -54,7 +57,7 @@ class PropertiesTenants extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
-    const {customer,getPropertiesForLandlord,propertiesLandlord} = this.props;
+    const {customer,getPropertiesForLandlord,propertiesLandlord,isnetConnection} = this.props;
     const {searchQuery} = this.state
     if(nextProps.customer!==customer){
       const updatedUser = nextProps.customer;
@@ -147,7 +150,29 @@ class PropertiesTenants extends React.Component {
     } else{
       this.setState({activeTab:1})
     }
+    NetInfo.addEventListener(({isConnected})=> this._handleConnectionChange(isConnected));
   }
+  networkWarning(){
+    DropDownHolder.alert('error', '', "Please check your network connection.");
+  }
+
+  _handleConnectionChange = (isConnected) => { 
+    const {isnetConnection,propertiesTenant,propertiesLandlord,customer} = this.props
+    const {networkAvailable} = this.state
+    if(isConnected !=networkAvailable){
+      this.setState({networkAvailable:isConnected})
+    }
+    if (isConnected && !isnetConnection) {
+      this.loadUserDataAccordingAccountType(customer);
+    } else if(isConnected && !propertiesTenant.items.length) {
+      this.loadUserDataAccordingAccountType(customer)
+    } else if(isConnected && !propertiesLandlord.items.length) {
+      this.loadUserDataAccordingAccountType(customer)
+    } else {
+     return true
+    }
+  };
+  
   reRenderActiveTab(AccountType){
     const {activeTab} = this.state
     if(AccountType=="U"){
@@ -172,6 +197,11 @@ class PropertiesTenants extends React.Component {
   }
 
   modifyPropertyTenant(property){
+    const {networkAvailable} = this.state
+    if(!networkAvailable){
+      this.networkWarning();
+      return true
+    }
     NavigationService.navigate(NAVIGATION_MODIFY_PROPERTIES_VIEW_PATH,{property});
   }
 
@@ -191,9 +221,19 @@ class PropertiesTenants extends React.Component {
     }
   };
   ProPertyDetailTenant(property){
+    const {networkAvailable} = this.state
+    if(!networkAvailable){
+      this.networkWarning();
+      return true
+    }
     NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_TENANTS_VIEW_PATH,{property});
   }
   ProPertyDetailLandlord(property){
+    const {networkAvailable} = this.state
+    if(!networkAvailable){
+      this.networkWarning();
+      return true
+    }
     NavigationService.navigate(NAVIGATION_DETAIL_PROPERTIES_LANDLORD_VIEW_PATH,{property});
   }
   /* *
@@ -368,18 +408,25 @@ goToPropertyOwnerDetail(landlord_id){
   render(){
     const theme = this.context;
     const {activeTab} = this.state
-    const {propertiesTenant,propertiesLandlord} = this.props    
       return (
+        <TouchableWithoutFeedback onPress={() => {this.setState({visibleSearch:false})}}>
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
                 {this.renderTabBar()}
                 {this.renderProperties()}
                 {this.renderModelView()}
               <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addPropertyTenant()} showBackground={false} visible={activeTab==2?true:false} color={theme.colors.primary} position={'right'}/>
-              {propertiesTenant.loading && <Spinner style={theme.typography.spinnerStyle}/>}
-              {propertiesLandlord.loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              {this.renderLoaderView()}
           </SafeAreaView>
+        </TouchableWithoutFeedback>
       );
+  }
+
+  renderLoaderView(){
+    const {propertiesTenant,propertiesLandlord} = this.props    
+    return(
+      <Spinner visible={propertiesTenant.loading || propertiesLandlord.loading} textContent={'Loading...'} textStyle={styles.spinnerTextStyle}/>
+    )
   }
 
   renderProperties(){
@@ -711,10 +758,11 @@ PropertiesTenants.navigationOptions = ({ navigation }) => ({
   title: 'Properties/Tenants',
 })
 
-const mapStateToProps = ({ account,propertiesLandlord,propertiesTenant,properties }) => {
+const mapStateToProps = ({ account,propertiesLandlord,propertiesTenant,properties,appinfo }) => {
   const { error, success, loading,status,customer } = account;
   const {property_currentItem,property_loading} = properties
-  return { error, success, loading, status, customer,propertiesLandlord,propertiesTenant,property_currentItem,property_loading };
+  const {isnetConnection} = appinfo
+  return { error, success, loading, status, customer,propertiesLandlord,propertiesTenant,property_currentItem,property_loading,isnetConnection };
 };
 
 PropertiesTenants.propTypes = {
@@ -731,6 +779,7 @@ PropertiesTenants.propTypes = {
   propertiesTenant: PropTypes.object,
   property_currentItem: PropTypes.object,
   property_loading: PropTypes.bool,
+  isnetConnection: PropTypes.bool,
 };
 
 PropertiesTenants.defaultProps = {
@@ -743,6 +792,7 @@ PropertiesTenants.defaultProps = {
   propertiesTenant:{items: [],refreshing: false,error: "",success: "",loading: false,},
   property_currentItem: {},
   property_loading: false,
+  isnetConnection: true,
 
 };
 

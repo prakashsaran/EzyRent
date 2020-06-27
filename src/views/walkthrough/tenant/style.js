@@ -97,7 +97,7 @@ export default StyleSheet.create({
     width:50,
     alignSelf:'center',
     position:'absolute',
-    bottom:normalize(60),
+    bottom:normalize(40),
   })
 
 });

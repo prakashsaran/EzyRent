@@ -16,7 +16,8 @@ import {getPropertyById,getCountryCodeFormat,deleteProperty,getMoneyFormat } fro
 import Modal from 'react-native-modal';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import { EzyRent } from '../../../ezyrent';   
-import {Spinner} from '../../../components';
+import {isIphoneX} from '../../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 const secureTextHidden = '../../../assets/images/securetext_hidden.png';
 const secureTextShow = '../../../assets/images/securetext_show.png';
 
@@ -174,11 +175,11 @@ class ViewPropertyTenant extends React.Component {
         const theme = this.context;
         const {property_loading,property_currentItem} = this.props;
         if(property_loading || !Object.keys(property_currentItem).length){
-          return (<SafeAreaView style={styles.container(theme)}><Spinner style={theme.typography.spinnerStyle}/></SafeAreaView>)
+          return (<SafeAreaView style={styles.container(theme)}><Spinner visible={property_loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/></SafeAreaView>)
           }
         return (
             <ImageBackground style={{width:'100%',height:'100%'}}
-             resizeMode={'cover'} imageStyle={{width:'100%',height:300}}
+             resizeMode={'cover'} imageStyle={{width:'100%',height:isIphoneX()?350:300}}
               //source={{uri:`${EzyRent.getMediaUrl()}${property_currentItem.property_image}`}}
               source={this.renderFastImage(property_currentItem.property_image)}
               >

@@ -20,7 +20,7 @@ function SignInMobile(props) {
   const [mobilenumber, setMobileNumber] = useState('');
   const [enablebtn, setEnableButton] = useState(false);
   const [isconfirmModalVisible, setConfirmModalVisible] = useState(false);
-
+  console.log("props.loading",props.loading)
 const theme = useContext(ThemeContext);
 const onChangePhoneNumber = (number) =>{
   setMobileNumber(number);
@@ -125,8 +125,9 @@ const onChangePhoneNumber = (number) =>{
   );
 }
 
-const mapStateToProps = ({ signin }) => {
-  const {warndata, error, success, loading } = signin;
+const mapStateToProps = ({ signin,account }) => {
+  const {warndata, error, success } = signin;
+  const { loading } = account;
 
   return { warndata,error, success, loading };
 };

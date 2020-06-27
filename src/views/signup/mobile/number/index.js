@@ -85,9 +85,9 @@ function SignUpMobile(props) {
   );
 }
 
-const mapStateToProps = ({ signup }) => {
-  const { error, success, loading,mobile } = signup;
-
+const mapStateToProps = ({ signup,account }) => {
+  const { error, success,mobile } = signup;
+  const { loading } = account;
   return { error, success, loading,mobile };
 };
 

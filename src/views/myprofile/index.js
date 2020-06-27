@@ -6,7 +6,9 @@ import { ThemeContext, theme } from '../../theme';
 import {EzyRent} from '../../ezyrent';
 import {normalize} from '../../components';
 // swiper
-import Swiper from 'react-native-swiper';
+//import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-page-swiper';
+
 import styles from './style';
 import {
   NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH,
@@ -180,13 +182,7 @@ renderFastImage(customer){
     }
     return(
       <Swiper
-        style={styles.slider1}
-        height={220}
-        dot={<View style={theme.typography.Dots}/>}
-        activeDot={<View style={theme.typography.activeDots} />}
-        //paginationStyle={theme.typography.pagination}
-        loop={false}
-        showsPagination={false}
+      pager={false}
       >
         <View style={styles.shadow}>
           <View style={styles.quick_stats}>
@@ -277,14 +273,7 @@ renderFastImage(customer){
     else if(AccountType=="B"){
         return(
           <Swiper
-            style={styles.slider}
-            height={normalize(190)}
-            onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
-            dot={<View style={theme.typography.Dots}/>}
-            activeDot={<View style={theme.typography.activeDots} />}
-            //paginationStyle={theme.typography.pagination}
-            loop={false}
-            showsPagination={false}
+          pager={false}
           >
             <View style={styles.shadow}>
               <View style={styles.quick_stats}>
@@ -350,7 +339,7 @@ renderFastImage(customer){
                   <View style={styles.detail}>
                     <Text style={styles.detail_inner}><Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}</Text>
                   </View>
-                  <View>
+                  <View style={{marginTop:10}}>
                     {this.renderQuickState()}
                   </View>
                   <View>

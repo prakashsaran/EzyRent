@@ -163,7 +163,7 @@ export default StyleSheet.create({
       width:'100%',
       textAlign:'center',
       color:'#333',
-      fontSize:normalize(12),
+      fontSize:normalize(10),
       fontFamily:theme.typography.secondaryFont,
       fontWeight:theme.typography.fontWeightRegular,
     },

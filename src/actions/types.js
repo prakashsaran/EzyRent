@@ -1,3 +1,5 @@
+export const EZYRENT_NETWORK_CONNECTION_INFO = 'ezyrent_network_connection';
+
 export const EZYRENT_SIGN_UP_ACCOUNT = 'ezyrent_signup_account';
 export const EZYRENT_SIGN_UP_SUCCESS = 'ezyrent_signup_success';
 export const EZYRENT_SIGN_IN_ACCOUNT = 'ezyrent_signin_account';

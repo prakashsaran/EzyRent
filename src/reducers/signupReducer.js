@@ -1,5 +1,4 @@
 import {
-  EZYRENT_AUTHENTICATION_LOADING,
   EZYRENT_SIGN_UP_SUCCESS,
   EZYRENT_SIGN_UP_MOBILE_NUMBER,
   EZYRENT_SIGN_UP_EMAIL_ID,
@@ -21,9 +20,6 @@ export default (state = INITIAL_STATE, action) => {
     }
     case EZYRENT_SIGN_UP_EMAIL_ID: {
       return {...state,mail: action.payload,};
-    }
-    case EZYRENT_AUTHENTICATION_LOADING: {
-      return {...state,loading: action.payload,};
     }
     default:
       return state;

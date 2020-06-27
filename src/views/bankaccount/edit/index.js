@@ -8,7 +8,8 @@ import styles from './style';
 import {
   NAVIGATION_MORE_MY_BANKACCOUNT_VIEW_PATH,
 } from '../../../navigation/routes';
-import { PickerSelect,DropDownHolder,Spinner } from '../../../components';
+import { PickerSelect,DropDownHolder } from '../../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 import {editBank,isValidAccountNumber,isValidIfsc} from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -235,7 +236,7 @@ class EditBankAccount extends React.Component {
                 </View>
               </ScrollView>
               {this.reanderButton()}
-              {this.props.loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              <Spinner visible={this.props.loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
           </SafeAreaView>
         </ImageBackground>
       );

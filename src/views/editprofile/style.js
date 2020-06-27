@@ -267,6 +267,12 @@ export default StyleSheet.create({
       fontSize:normalize(16),
       fontFamily:'Montserrat-Regular',
     }),
+    errorValue:theme=>({
+      marginTop:10,
+      fontSize:normalize(14),
+      fontFamily:'Montserrat-Regular',
+      color:theme.colors.errorColor,
+    }),
     popupBtms:{
       width:'100%',
       flexDirection:'row',

@@ -11,7 +11,7 @@ import {
   NAVIGATION_MORE_INIT_VIEW_PATH,
 } from '../../../navigation/routes';
 import { FloatingAction } from "react-native-floating-action";
-import {Spinner} from '../../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { getBanks,deleteBank } from '../../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -133,7 +133,7 @@ class MyBankaccount extends React.Component {
            {this.renderPlaceHolder()}
            <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
            </SafeAreaView>
-           {loading && <Spinner style={theme.typography.spinnerStyle}/>}
+           <Spinner visible={loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
         </ImageBackground>
       )
     }
@@ -157,7 +157,7 @@ class MyBankaccount extends React.Component {
                 </TouchableWithoutFeedback>
               </ScrollView>
               <FloatingAction floatingIcon={<Text style={{fontSize:26,color:'#fff'}}>+</Text>} onPressMain={()=>this.addNewBankAccount()} showBackground={false} color={theme.colors.primary} position={'right'}/>
-              {loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              <Spinner visible={loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
           </SafeAreaView>
         </ImageBackground>
       );

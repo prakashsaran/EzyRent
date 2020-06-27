@@ -1,7 +1,7 @@
 //import {  AsyncStorage } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { EzyRent } from '../ezyrent';
-import SampleData from '../config/sample-data';
+import { isNetWorkAvailable } from './UiActions';
 import {
   EZYRENT_SIGN_UP_ACCOUNT,
   EZYRENT_SIGN_IN_ACCOUNT,
@@ -170,6 +170,7 @@ export const resendMobileOtp = (user,type) => async (dispatch) => {
     
     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   } catch (e) {
+    dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
     console.error(e)
     authFail(dispatch, e.message);
   }
@@ -422,22 +423,27 @@ const authSuccess = async (dispatch, userData) => {
 
 
 export const setCurrentCustomer = (userData) => async (dispatch, getState) => {
-  const currentAc = userData.user;
-  dispatch({ type: EZYRENT_SIGN_IN_SUCCESS, payload: currentAc });
-  dispatch({ type: EZYRENT_SIGN_UP_SETUP_COMPLETE_ACCOUNT, payload: userData });
-  EzyRent.setCurrentAccount(currentAc);
-  if(userData.hasOwnProperty("access_token")){
-    EzyRent.setAccessToken(userData.access_token);
-    EzyRent.setTokenType(userData.token_type);
-    dispatch({ type: EZYRENT_AUTHENTICATION_ACCESS_TOKEN, payload: userData.access_token });
+   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: true });
+  try {
+    const currentAc = userData.user;
+    dispatch({ type: EZYRENT_SIGN_IN_SUCCESS, payload: currentAc });
+    dispatch({ type: EZYRENT_SIGN_UP_SETUP_COMPLETE_ACCOUNT, payload: userData });
+    EzyRent.setCurrentAccount(currentAc);
+    if(userData.hasOwnProperty("access_token")){
+      EzyRent.setAccessToken(userData.access_token);
+      EzyRent.setTokenType(userData.token_type);
+      dispatch({ type: EZYRENT_AUTHENTICATION_ACCESS_TOKEN, payload: userData.access_token });
+    }
+    if(userData.hasOwnProperty("refresh_token")){
+      dispatch({ type: EZYRENT_AUTHENTICATION_REFRESH_TOKEN, payload: userData.refresh_token });
+    }
+    if(userData.hasOwnProperty("token_type")){
+      dispatch({ type: EZYRENT_AUTHENTICATION_TOKEN_TYPE, payload: userData.token_type });
+    }
+   dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
+  } catch (e) {
+     dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
   }
-  if(userData.hasOwnProperty("refresh_token")){
-    dispatch({ type: EZYRENT_AUTHENTICATION_REFRESH_TOKEN, payload: userData.refresh_token });
-  }
-  if(userData.hasOwnProperty("token_type")){
-    dispatch({ type: EZYRENT_AUTHENTICATION_TOKEN_TYPE, payload: userData.token_type });
-  }
-  dispatch({ type: EZYRENT_AUTHENTICATION_LOADING, payload: false });
 };
 
 

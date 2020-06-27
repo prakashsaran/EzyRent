@@ -98,7 +98,6 @@ export default StyleSheet.create({
     shadow:{
       backgroundColor: "#fff",
       flexDirection: "row",
-      alignItems: "center",
       justifyContent: "center",
       paddingRight: 16,
       paddingLeft: 16,
@@ -115,7 +114,7 @@ export default StyleSheet.create({
       borderRadius: 10,
       marginVertical:5,
       width:'98%',
-      alignSelf:'center',
+      marginHorizontal:5,
     },
     slider1:{
       overflow:'visible',

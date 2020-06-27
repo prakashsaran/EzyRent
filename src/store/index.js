@@ -25,12 +25,19 @@ const buildingBlacklistFilter = createBlacklistFilter(
 );
 
 
+const appInfoBlacklistFilter = createBlacklistFilter(
+  'appinfo',
+  ['isnetConnection'],
+);
+
+
 const persistConfig = {
   key: 'root',
   transforms: [
     accountBlacklistFilter,
     signInBlacklistFilter,
     buildingBlacklistFilter,
+    appInfoBlacklistFilter,
   ],
   storage: AsyncStorage,
 };

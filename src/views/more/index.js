@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import {logout,getCountryCodeFormat} from '../../actions';
 import {EzyRent} from '../../ezyrent';
 import Modal from 'react-native-modal';
-
+import {isIphoneX} from '../../components';
 class MoreInit extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -103,7 +103,7 @@ class MoreInit extends React.Component {
                           <Text style={styles.textSub(theme)}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/call.png')}></Image> {getCountryCodeFormat(customer.mobile_country_code)}-{customer.mobile}
                           </Text>
-                          <Text style={styles.textSub(theme)} numberOfLines={2}>
+                          <Text style={styles.textSub(theme)} numberOfLines={1}>
                             <Image style={styles.gps_dark_icon} source={require('../../assets/images/email.png')}></Image> {customer.email}
                           </Text>
                         </View>
@@ -148,7 +148,7 @@ class MoreInit extends React.Component {
                                 <Text style={styles.MoreLinksItem(theme)}>Logout</Text>
                               </TouchableOpacity>
                             </View>
-                            <View style={{width:'100%',height:this.isLessMarshmallow()}}></View>
+                            <View style={{width:'100%',height:40}}></View>
                           </ScrollView>
                         </View>
                       {/* commming==== */}

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
-import SampleData from '../../config/sample-data';
+import NetInfo from "@react-native-community/netinfo";
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EzyRent } from '../../ezyrent';
 import {  getRentsForLandlord,getRentsForTenant } from '../../actions';
-import { Spinner} from '../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class RentList extends React.Component {
   static contextType = ThemeContext;
@@ -153,8 +153,21 @@ class RentList extends React.Component {
     } else{
       this.setState({activeTab:1})
     }
-
+    NetInfo.addEventListener(({isConnected})=> this._handleConnectionChange(isConnected));
   }
+  
+  _handleConnectionChange = (isConnected) => {
+    const {isnetConnection,landlord_items,tenant_items,customer} = this.props
+    if (isConnected && !isnetConnection) {
+      this.loadUserDataAccordingAccountType(customer);
+    } else if(isConnected && !landlord_items.length) {
+      this.loadUserDataAccordingAccountType(customer)
+    } else if(isConnected && !tenant_items.length) {
+      this.loadUserDataAccordingAccountType(customer)
+    } else {
+     return true
+    }
+  };
 
   addPropertyTenant(){
     NavigationService.navigate(NAVIGATION_ADD_PROPERTIES_TENANTS_VIEW_PATH);
@@ -276,13 +289,14 @@ class RentList extends React.Component {
     const {activeTab} = this.state
     const {tenant_loading,landlord_loading} = this.props
       return (
+        <TouchableWithoutFeedback onPress={() => {this.setState({visibleSearch:false})}}>
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
-            {this.renderHeader()}
+                {this.renderHeader()}
                 {this.renderTabBar()}
                 {this.renderProperties()}
-                {tenant_loading && <Spinner style={theme.typography.spinnerStyle}/>}
-                {landlord_loading && <Spinner style={theme.typography.spinnerStyle}/>}
-          </SafeAreaView>
+                <Spinner visible={landlord_loading || tenant_loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
       );
   }
 
@@ -527,15 +541,17 @@ RentList.navigationOptions = ({ navigation }) => ({
 })
 
 
-const mapStateToProps = ({ account,rentLandlord ,rentTenant}) => {
+const mapStateToProps = ({ account,rentLandlord ,rentTenant,appinfo}) => {
   const { error, success, loading,status,customer } = account;
 
   const {landlord_items,landlord_loading} = rentLandlord
   const {tenant_items,tenant_loading} = rentTenant
-  return { error, success, loading, status, customer,landlord_items,landlord_loading,tenant_items,tenant_loading };
+  const {isnetConnection} = appinfo
+  return { error, success, loading, status, customer,landlord_items,landlord_loading,tenant_items,tenant_loading,isnetConnection };
 };
 
 RentList.propTypes = {
+  isnetConnection: PropTypes.bool,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
@@ -548,6 +564,7 @@ RentList.propTypes = {
 };
 
 RentList.defaultProps = {
+  isnetConnection: true,
   error: null,
   success: null,
   loading: false,

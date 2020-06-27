@@ -1,5 +1,4 @@
 import {
-    EZYRENT_AUTHENTICATION_LOADING,
     EZYRENT_SIGN_IN_SUCCESS,
     EZYRENT_SIGN_IN_MOBILE_NUMBER,
     EZYRENT_SIGN_IN_EMAIL_ID,
@@ -26,9 +25,6 @@ import {
       }
       case EZYRENT_SIGN_IN_WERN_DATA: {
         return {...state,warndata: action.payload,};
-      }
-      case EZYRENT_AUTHENTICATION_LOADING: {
-        return {...state,loading: action.payload,};
       }
       default:
         return state;

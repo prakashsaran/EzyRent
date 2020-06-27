@@ -14,8 +14,10 @@ import tenantsReducer from './tenantsReducer';
 import myTenantsReducer from './myTenantsReducer';
 import myLandlordsReducer from './myLandlordsReducer';
 import landlordReducer from './landlordReducer';
+import appInfoReducer from './appInfoReducer';
 
 export default combineReducers({
+  appinfo:appInfoReducer,
   account: accountReducer,
   signup: signupReducer,
   signin: signinReducer,

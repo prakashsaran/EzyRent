@@ -4,12 +4,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import NavigationService from '../../navigation/NavigationService';
+import NetInfo from "@react-native-community/netinfo";
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
   NAVIGATION_MORE_MY_PROFILE_VIEW_PATH,
 } from '../../navigation/routes';
-import {RightIconTextbox,DropDownHolder,Spinner} from '../../components'
+import {RightIconTextbox,DropDownHolder} from '../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {EzyRent} from '../../ezyrent';
@@ -31,6 +33,7 @@ class EditMyProfile extends React.Component {
   constructor(props){
     super();
     this.state ={
+      networkAvailable:true,
       mobile_country_code:"0091",
       default_full_name:undefined,
       default_mobileNumber:undefined,
@@ -89,6 +92,16 @@ class EditMyProfile extends React.Component {
       mobileNumber:customer.mobile,
       acEmail:customer.email,
     })
+    NetInfo.addEventListener(({isConnected})=> this._handleConnectionChange(isConnected));
+  }
+  _handleConnectionChange = (isConnected) => {
+    const {networkAvailable} = this.state
+    if(isConnected !=networkAvailable){
+      this.setState({networkAvailable:isConnected})
+    }
+  };
+  networkWarning(){
+    DropDownHolder.alert('error', '', "Please check your network connection.");
   }
   submitForm(){
     NavigationService.navigate(NAVIGATION_MORE_MY_PROFILE_VIEW_PATH);
@@ -100,6 +113,7 @@ class EditMyProfile extends React.Component {
    */
   pickupImage(){
     const {updateUserProfle,customer} = this.props
+    const {networkAvailable} = this.state
     const options = {
       title: 'Profile Photo',
       storageOptions: {
@@ -116,6 +130,10 @@ class EditMyProfile extends React.Component {
       } else if (response.error) {
         DropDownHolder.alert('error', '', response.error);
       } else {
+        if(!networkAvailable){
+          this.networkWarning();
+          return true
+        }
         updateUserProfle(customer,response);
       }
     });
@@ -123,7 +141,12 @@ class EditMyProfile extends React.Component {
 
   removeProfileImage(){
    const {customer,deleteProfileImage} = this.props
-   deleteProfileImage(customer)
+   const {networkAvailable} = this.state
+    if(!networkAvailable){
+      this.networkWarning();
+      return true
+    }
+    deleteProfileImage(customer)
   }
   
   /**
@@ -170,16 +193,25 @@ class EditMyProfile extends React.Component {
 
   isUserNameChanged(){
     const {changeProfileName,customer} = this.props
-    const {default_full_name,full_name} = this.state
+    const {default_full_name,full_name,networkAvailable} = this.state
+    if(!networkAvailable && default_full_name !=full_name){
+      this.networkWarning();
+      this.setState({full_name:default_full_name})
+      return true
+    }
     if(default_full_name !=full_name){
       changeProfileName(customer,full_name);
-
     }
   }
 
   isEmailAddressChanged(){
     const {changeEmailAddress,customer} = this.props
-    const {default_acEmail,acEmail} = this.state
+    const {default_acEmail,acEmail,networkAvailable} = this.state
+    if(!networkAvailable && default_acEmail !=acEmail){
+      this.networkWarning();
+      this.setState({acEmail:default_acEmail})
+      return true
+    }
     if(default_acEmail !=acEmail && acEmail !=""){
       changeEmailAddress(customer,acEmail);
     }
@@ -188,7 +220,12 @@ class EditMyProfile extends React.Component {
   
   isMobileNumberChanged(){
     const {changeMobileNumber,customer} = this.props
-    const {default_mobileNumber,mobileNumber,mobile_country_code} = this.state
+    const {default_mobileNumber,mobileNumber,mobile_country_code,networkAvailable} = this.state
+    if(!networkAvailable && default_mobileNumber !=mobileNumber){
+      this.networkWarning();
+      this.setState({mobileNumber:default_mobileNumber})
+      return true
+    }
     if(default_mobileNumber !=mobileNumber && mobileNumber !=""){
       const formdata = {mobile_country_code,mobile:mobileNumber}
       changeMobileNumber(customer,formdata);
@@ -198,7 +235,12 @@ class EditMyProfile extends React.Component {
   
   isMpinChanged(code){
     const {changeMobilePin,customer} = this.props
-    const {appPin} = this.state
+    const {appPin,networkAvailable} = this.state
+    if(!networkAvailable){
+      this.networkWarning();
+      this.setState({appPin:""})
+      return true
+    }
     if(appPin !=code && code !=""){
       changeMobilePin(customer,code);
     }
@@ -258,7 +300,7 @@ class EditMyProfile extends React.Component {
         <Text style={styles.columntitlePop1(theme)}>Confirm Your Mobile OTP</Text>
           <Text style={styles.columntitlePopDesc(theme)}>We have sent you an OTP on your registered mobile. Please enter the OTP below.</Text>
 
-          {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
+          {errorValue && <Text style={styles.errorValue(theme)}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
               <OTPInputView
                 pinCount={4}
@@ -292,7 +334,7 @@ class EditMyProfile extends React.Component {
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
           <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile OTP</Text>
-          {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
+          {errorValue && <Text style={styles.errorValue(theme)}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
              <View style={styles.pincontainer(theme)}>
                 <OTPInputView
@@ -343,8 +385,8 @@ class EditMyProfile extends React.Component {
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
           <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile & email OTP</Text>
+          {errorValue && <Text style={styles.errorValue(theme)}>{errorValue}</Text>}
           <Text style={styles.columntitlePop1(theme),{marginTop:30,}}>Enter MPIN</Text>
-          {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
           <View style={styles.fieldWrapp}>
              <View style={styles.pincontainer(theme)}>
                 <OTPInputView
@@ -433,7 +475,7 @@ class EditMyProfile extends React.Component {
 
                           <View style={styles.fieldWrapp}>
                              <Text style={theme.typography.tooltip}>Your Full Name *</Text>
-                              <TextInput onFocus={()=>this.onFocusInput(this._fullNameEntry)} onBlur={()=>{this.onBlurInput(this._fullNameEntry),this.isUserNameChanged()}} ref={(ref) => this._fullNameEntry = ref} onChangeText={(full_name) =>{this.setState({full_name})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={full_name} placeholder={'Name Of Tenant'}/>
+                              <TextInput onFocus={()=>this.onFocusInput(this._fullNameEntry)} onBlur={()=>{this.onBlurInput(this._fullNameEntry),this.isUserNameChanged()}} ref={(ref) => this._fullNameEntry = ref} onChangeText={(full_name) =>{this.setState({full_name})}} autoCorrect={false} style={styles.textInputStyleSec(theme)} value={full_name} placeholder={'Your Full Name'}/>
                           </View>
 
                           <View style={styles.fieldWrapp}>
@@ -484,7 +526,7 @@ class EditMyProfile extends React.Component {
                 {this.renderPopupEmailPopupChange()}
                 {this.renderPopupMobileNumberChange()}
               </ScrollView>
-              {loading && <Spinner style={theme.typography.spinnerStyle}/>}
+              <Spinner visible={loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
           </SafeAreaView>
         </ImageBackground>
       );

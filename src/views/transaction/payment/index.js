@@ -30,6 +30,7 @@ class PaymentConfirmation extends React.Component {
   goToPrevious(){
     const {goBack} = this.state
     if(goBack){
+      NavigationService.goBack();
       NavigationService.navigate(goBack);
     } else{
       NavigationService.goBack();

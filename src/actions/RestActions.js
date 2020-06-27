@@ -1,11 +1,13 @@
 //import {  AsyncStorage } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from "@react-native-community/netinfo";
 import _ from 'lodash';
 import { EzyRent } from '../ezyrent';
 import { ezyrentOptions } from '../config/ezyrent';
 import { getUserData,updateUserData } from './AsyncData';
 import {
   EZYRENT_INIT,
+  EZYRENT_NETWORK_CONNECTION_INFO,
   EZYRENT_INIT_ERROR,
   EZYRENT_BUILDING_LOADING,
   EZYRENT_BUILDING_SET_LIST_VIEW,
@@ -398,9 +400,10 @@ export const editProperty = (propId,data,media=null) => async (dispatch) => {
  * @param {*} limit
  */
 export const getPropertiesForLandlord = (keyword,offset,limit=10) => async (dispatch) => {
-
   dispatch({type:EZYRENT_PROPERTIES_AS_LANDLORD_LOADING,payload : true});
   try{
+    // CHECK NETWORK IS AVAILABLE
+    isNetWorkAvailable(dispatch);
     // set params for filtring
     const params = {offset,limit};
     if(keyword){
@@ -454,6 +457,8 @@ export const refreshPropertiesForLandlord =  async (dispatch) => {
 export const getPropertiesForTenant = (keyword,offset,limit=10) => async (dispatch) => {
   dispatch({type:EZYRENT_PROPERTIES_AS_TENANT_LOADING,payload : true});
   try{
+    // CHECK NETWORK IS AVAILABLE
+    isNetWorkAvailable(dispatch);
     // set params for filtring
     const params = {offset,limit};
     if(keyword){
@@ -665,6 +670,8 @@ export const bankVerify = (bankdata,data) => async (dispatch) =>{
 export const getRentsForLandlord = (user,keyword,offset=0,limit=10) => async (dispatch) => {
   dispatch({type:EZYRENT_GET_RENTS_AS_LANDLORD_LOADING,payload : true});
   try{
+    // CHECK NETWORK IS AVAILABLE
+    isNetWorkAvailable(dispatch);
     // set params for filtring
     const params = {offset,limit};
     if(keyword){
@@ -697,6 +704,8 @@ export const getRentsForLandlord = (user,keyword,offset=0,limit=10) => async (di
 export const getRentsForTenant = (user,keyword,offset,limit=10) => async (dispatch) => {
   dispatch({type:EZYRENT_GET_RENTS_AS_TENANT_LOADING,payload : true});
   try{
+    // CHECK NETWORK IS AVAILABLE
+    isNetWorkAvailable(dispatch);
     // set params for filtring
     const params = {offset,limit};
     if(keyword){
@@ -732,6 +741,8 @@ export const getRentsForTenant = (user,keyword,offset,limit=10) => async (dispat
 export const getNotifications = () => async (dispatch) => {
   dispatch({type:EZYRENT_GET_NOTIFICATION_LOADING,payload : true});
   try{
+    // CHECK NETWORK IS AVAILABLE
+    isNetWorkAvailable(dispatch);
     // request to server
     const response = await EzyRent.admin.getNotifications();
     if(response && response.data){
@@ -912,3 +923,9 @@ const formUrlencodedData = (data)=>{
   formBody = formBody.join("&");
   return formBody;
 }
+
+const isNetWorkAvailable = async(dispatch) => {
+  await NetInfo.fetch().then(state => {
+    dispatch({ type: EZYRENT_NETWORK_CONNECTION_INFO, payload: state.isConnected });
+  });
+};

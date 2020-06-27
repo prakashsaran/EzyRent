@@ -161,9 +161,9 @@ function SignUpProfile(props) {
   );
 }
 
-const mapStateToProps = ({ signup }) => {
-  const { error, success, loading,mobile,mail } = signup;
-
+const mapStateToProps = ({ signup,account }) => {
+  const { error, success,mobile,mail } = signup;
+  const { loading } = account;
   return { error, success, loading,mobile,mail };
 };
 

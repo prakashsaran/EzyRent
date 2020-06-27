@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground, TextInput,Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavigationService from '../../navigation/NavigationService';
+import NetInfo from "@react-native-community/netinfo";
 import { ThemeContext, theme } from '../../theme';
 import styles from './style';
 import {
@@ -19,7 +20,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EzyRent } from '../../ezyrent';
 import { getNotifications,updateNotification } from '../../actions';
-import {Spinner} from '../../components';
+import Spinner from 'react-native-loading-spinner-overlay';
 class NotificationList extends React.Component {
   static contextType = ThemeContext;
   constructor(props){
@@ -48,6 +49,21 @@ class NotificationList extends React.Component {
     getNotifications();
 
   }
+  componentDidMount(){
+    NetInfo.addEventListener(({isConnected})=> this._handleConnectionChange(isConnected));
+  }
+  
+  _handleConnectionChange = (isConnected) => {
+    const {isnetConnection,getNotifications,items} = this.props
+    if (isConnected && !isnetConnection) {
+      getNotifications();
+    } else if(isConnected && !items.length) {
+      getNotifications();
+    } else {
+     return true
+    }
+  };
+
   goToTennatViewPath(item){
     if(item.initiated_user_id){
       NavigationService.navigate(NAVIGATION_NOTIFICATION_TENANT_PROFILE_VIEW_PATH,{tenant_id:item.initiated_user_id,goBack:NAVIGATION_NOTIFICATION_INIT_VIEW_PATH})
@@ -136,7 +152,7 @@ class NotificationList extends React.Component {
           <SafeAreaView onLayout={this.onLayout} style={styles.container(theme)}>
             {this.renderHeader()}
             {this.renderNotifications()}
-            {loading && <Spinner style={theme.typography.spinnerStyle}/>}
+            <Spinner visible={loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
           </SafeAreaView>
       );
   }

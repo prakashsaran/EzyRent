@@ -124,9 +124,9 @@ function SignInMail(props) {
   );
 }
 
-const mapStateToProps = ({ signin }) => {
-  const {warndata, error, success, loading } = signin;
-
+const mapStateToProps = ({ signin,account }) => {
+  const {warndata, error, success } = signin;
+  const { loading } = account;
   return {warndata, error, success, loading };
 };
 

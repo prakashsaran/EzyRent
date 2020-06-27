@@ -86,6 +86,8 @@ target 'EzyRent' do
 
   pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
   target 'EzyRentTests' do
     inherit! :complete
     # Pods for testing
