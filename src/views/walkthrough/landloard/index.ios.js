@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import Svg, { Ellipse } from "react-native-svg";
 import SvgUri from 'react-native-svg-uri';
 import {ActiveEllipse,InActiveEllipse} from '../../../components';
-import styles from './style';
+import styles from './style.ios';
 import { ThemeContext } from '../../../theme';
 import NavigationService from '../../../navigation/NavigationService';
 import {NAVIGATION_WALKTHROUGH_TENANT_PATH,NAVIGATION_SIGN_UP_MOBILE_NUMBER_PATH} from '../../../navigation/routes';

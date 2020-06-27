@@ -178,7 +178,7 @@ class MoreInit extends React.Component {
   renderLogoutConfirm(){
     const {logout} = this.props;
     return(
-      <Modal isVisible={this.state.isVisibleConfirmDialog} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.isVisibleConfirmDialog} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>Logout</Text>
           <Text style={styles.columntitlePopDesc(theme)}>Are you sure want to logout?</Text>

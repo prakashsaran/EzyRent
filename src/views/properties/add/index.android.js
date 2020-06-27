@@ -714,7 +714,7 @@ renderHeader(){
 renderModalView(){
   const {add_building_name,add_building_location} = this.state;
   return(
-    <Modal isVisible={this.state.isModalVisible} style={styles.pop_wrap}>
+    <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.isModalVisible} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitle(theme)}>ADD YOUR BUILDING DETAILS</Text>
           <View style={styles.fieldWrapp}>

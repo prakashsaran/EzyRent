@@ -676,7 +676,7 @@ renderModelView()
       }
       
       return(
-        <Modal onBackdropPress={()=>{this.setState({visiblemodal:false})}} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
+        <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{this.setState({visiblemodal:false})}} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
 
             {property_loading ?
             <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>

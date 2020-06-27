@@ -1,5 +1,5 @@
 import React, { Component,useContext ,useState,useEffect} from "react";
-import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity } from "react-native";
+import {View, Image, Text,ScrollView,SafeAreaView,TouchableOpacity,Dimensions } from "react-native";
 import styles from './style';
 import { ThemeContext } from '../../../../theme';
 import PhoneInput from 'react-native-phone-input'
@@ -57,7 +57,7 @@ const onChangePhoneNumber = (number) =>{
   }
   renderConfirmModal =() =>{
     return (
-      <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
+      <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
             <View style={styles.popupContainer(theme)}>
               <Text style={styles.columntitlePop1(theme)}>Complete Account</Text>
               <Text style={styles.columntitlePopDesc(theme)}>Your account setup is pending. Do you wish to complete?</Text>

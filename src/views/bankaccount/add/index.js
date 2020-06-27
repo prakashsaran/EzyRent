@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TextInput } from "react-native";
+import { StyleSheet,StatusBar,ScrollView,TouchableOpacity, View,Image, Text, ImageBackground,TextInput,KeyboardAvoidingView,Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
 import NavigationService from '../../../navigation/NavigationService';
@@ -35,7 +35,13 @@ class AddBankAccount extends React.Component {
     this._typeOfAcEntry = undefined;
     this._ifscCodeEntry = undefined;
     this._additionalDetailsEntry = undefined;
+    this.keyboardBehavior = 'padding';
   }
+componentDidMount(){
+  if (Platform.OS == 'android') {
+    this.keyboardBehavior = 'height'
+  }
+}
 /* Common Functions*/
 onFocusInput(elementSlected){
   elementSlected.setNativeProps({
@@ -120,6 +126,7 @@ submitForm(){
       return (
         <ImageBackground style={{width:'100%',height:'100%'}} resizeMode={'cover'} source={require('../../../assets/images/dashboard_bg.png')}>
           <SafeAreaView style={styles.container}>
+          <KeyboardAvoidingView behavior={this.keyboardBehavior} >
             {this.renderHeader()}
               <ScrollView
               showsVerticalScrollIndicator={false}
@@ -213,6 +220,7 @@ submitForm(){
               </ScrollView>
               {this.reanderButton()}
               <Spinner visible={this.props.loading} textContent={'Loading...'} textStyle={{color: '#FFF'}}/>
+            </KeyboardAvoidingView>
           </SafeAreaView>
         </ImageBackground>
       );

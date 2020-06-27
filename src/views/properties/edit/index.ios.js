@@ -617,7 +617,8 @@ renderHeader(){
                                     }}
                                     value={buildingName}
                                     style={pickerSelectStyles}
-                                    onDonePress={()=>this.onDonePressBuilding()}
+                                    //onDonePress={()=>this.onDonePressBuilding()}
+                                    onClose={()=>this.onDonePressBuilding()}
                                     onValueChange={(buildingName) => this.setState({buildingName})}
                                     //onValueChange={(buildingName) => this.onChooseBuilding(buildingName)}
                                     items={availableBuildings}
@@ -708,7 +709,8 @@ renderHeader(){
                                       }}
                                       value={bankAccount}
                                       style={pickerSelectStyles}
-                                      onDonePress={()=>this.onDonePressBank()}
+                                      //onDonePress={()=>this.onDonePressBank()}
+                                      onClose={()=>this.onDonePressBank()}
                                       onValueChange={(bankAccount) => this.setState({bankAccount})}
                                       items={availableBankAccounts}
                                       Icon={() => {
@@ -779,7 +781,7 @@ renderHeader(){
 renderModalView(){
   const {add_building_name,add_building_location} = this.state;
   return(
-    <Modal isVisible={this.state.isModalVisible} style={styles.pop_wrap}>
+    <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.isModalVisible} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitle(theme)}>ADD YOUR BUILDING DETAILS</Text>
           <View style={styles.fieldWrapp}>

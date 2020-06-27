@@ -76,7 +76,7 @@ class DateMonthPicker extends PureComponent {
         const {defaultValue} = this.props
         const defaultDate =  defaultValue?"2020-"+defaultValue:new Date();
         return(
-            <Modal onBackdropPress={()=>this.setState({modelVisible:false})} isVisible={this.state.modelVisible}>
+            <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>this.setState({modelVisible:false})} isVisible={this.state.modelVisible}>
                 <View style={{flex:1,justifyContent:'center'}}>
                 <DatePicker
                     style={{ backgroundColor: 'white', height: 215,borderBottomWidth:1,borderColor:'red'}} 

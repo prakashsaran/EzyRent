@@ -86,7 +86,7 @@ class ViewPropertyTenant extends React.Component {
       renderConfirmModal(property){
         const {isconfirmModalVisible} = this.state
         return (
-          <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
+          <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
               <View style={styles.popupContainer(theme)}>
                 <Text style={styles.columntitlePop1(theme)}>Are you sure to Accept?</Text>
                 <View style={styles.fieldWrapp}>

@@ -318,7 +318,7 @@ class PropertiesTenants extends React.Component {
 renderModelView()
     {
       return(
-        <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
+        <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
             <View style={styles.PopupContainer}>
             <Image style={styles.congrats_img(theme)} resizeMode={'stretch'} source={require('../../assets/images/congrats.png')}/>
               <Text style={styles.congrats_head}>Congrats!</Text>

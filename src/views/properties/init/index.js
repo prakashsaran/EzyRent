@@ -511,7 +511,7 @@ renderModelView()
       }
       
       return(
-        <Modal isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
+        <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.visiblemodal} style={styles.visiblemodal}>
 
             {property_loading ?
             <View style={[styles.PopupContainer,{minHeight:theme.dimens.popupHeight}]}>

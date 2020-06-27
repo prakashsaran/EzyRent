@@ -192,7 +192,7 @@ class ViewPropertyById extends React.Component {
       renderTenantConfirmModal(property_currentItem){
         const {isTenantconfirmModalVisible} = this.state
         return (
-          <Modal onBackdropPress={()=>{this.setState({isTenantconfirmModalVisible:false})}} isVisible={isTenantconfirmModalVisible}>
+          <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{this.setState({isTenantconfirmModalVisible:false})}} isVisible={isTenantconfirmModalVisible}>
               <View style={styles.popupContainer(theme)}>
                 <Text style={styles.columntitlePop1(theme)}>Are you sure to Accept?</Text>
                 <View style={styles.fieldWrapp}>
@@ -215,7 +215,7 @@ class ViewPropertyById extends React.Component {
     renderConfirmModalModal(){
         const {secureTextEntry,isconfirmModalVisible,errorMessage} = this.state
         return (
-          <Modal onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
+          <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{this.setState({isconfirmModalVisible:false})}} isVisible={isconfirmModalVisible}>
               <View style={styles.popupContainer(theme)}>
                <Text style={styles.columntitlePop1(theme)}>Are you sure to delete?</Text>
                 <Text style={styles.columntitlePopDesc(theme)}>Please confirm deletion with your MPIN.</Text>

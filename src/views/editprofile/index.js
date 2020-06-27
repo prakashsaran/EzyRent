@@ -295,7 +295,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.mpinPopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.mpinPopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>          
         <Text style={styles.columntitlePop1(theme)}>Confirm Your Mobile OTP</Text>
           <Text style={styles.columntitlePopDesc(theme)}>We have sent you an OTP on your registered mobile. Please enter the OTP below.</Text>
@@ -330,7 +330,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.emailPopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.emailPopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
           <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile OTP</Text>
@@ -381,7 +381,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>OTP & MPIN Confirmation</Text>
           <Text style={styles.columntitlePopDesc(theme)}>Please confirm your change with MPIN and mobile & email OTP</Text>

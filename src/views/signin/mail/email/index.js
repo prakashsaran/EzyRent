@@ -48,7 +48,7 @@ function SignInMail(props) {
 
   renderConfirmModal =() =>{
     return (
-      <Modal onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
+      <Modal animationInTiming={600} animationOutTiming={600} onBackdropPress={()=>{setConfirmModalVisible(false)}} isVisible={isconfirmModalVisible}>
             <View style={styles.popupContainer(theme)}>
               <Text style={styles.columntitlePop1(theme)}>YOUR ACCOUNT SETUP IS PENDING. DO YOU WISH TO COMPLETE?</Text>
                 <View style={styles.popupBtms}>

@@ -248,7 +248,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.mpinPopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.mpinPopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MOBILE OTP</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
@@ -281,7 +281,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.emailPopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.emailPopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={styles.columntitlePop1(theme)}>CONFIRM YOUR MPIN</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
@@ -331,7 +331,7 @@ class EditMyProfile extends React.Component {
       return null;
     }
     return(
-      <Modal isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
+      <Modal animationInTiming={600} animationOutTiming={600} isVisible={this.state.mobilePopup} style={styles.pop_wrap}>
         <View style={styles.popupContainer(theme)}>
           <Text style={[styles.columntitlePop(theme),styles.columntitlePop1(theme)]}>CONFIRM YOUR MPIN</Text>
           {errorValue && <Text style={{color:'red'}}>{errorValue}</Text>}
